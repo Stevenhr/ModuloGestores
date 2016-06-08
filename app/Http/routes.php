@@ -27,6 +27,8 @@ Route::get('/personas/service/buscar/{key}', '\Idrd\Usuarios\Controllers\Persona
 Route::get('/personas/service/ciudad/{id_pais}', '\Idrd\Usuarios\Controllers\LocalizacionController@buscarCiudades');
 Route::post('/personas/service/procesar/', '\Idrd\Usuarios\Controllers\PersonaController@procesar');
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
