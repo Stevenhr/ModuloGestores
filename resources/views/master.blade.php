@@ -15,7 +15,8 @@
           <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
           <link rel="stylesheet" href="{{ asset('public/Css/jquery-ui.css') }}" media="screen">    
           <link rel="stylesheet" href="{{ asset('public/Css/bootstrap.min.css') }}" media="screen">    
-          <link rel="stylesheet" href="{{ asset('public/Css/sticky-footer.css') }}" media="screen">    
+          <link rel="stylesheet" href="{{ asset('public/Css/sticky-footer.css') }}" media="screen">   
+          <link rel="icon" type="image/png" href="{{ asset('public/Img/Icono.png') }}" /> 
       @show
 
       @section('script')
@@ -25,11 +26,10 @@
           <script src="{{ asset('public/Js/main.js') }}"></script>
       @show
 
-      <title>Nombre Módulo</title>
+      <title>Módulo Campaña Cultura Ciudadana</title>
   </head>
 
   <body>
-      
        <!-- Menu Módulo -->
        <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
@@ -43,6 +43,7 @@
           </div>
           <div class="navbar-collapse collapse" id="navbar-main">
             <ul class="nav navbar-nav">
+              
               <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Administración<span class="caret"></span></a>
                 <ul class="dropdown-menu" aria-labelledby="themes">
@@ -53,28 +54,33 @@
                   
                 </ul>
               </li>
-              <li>
-                <a href="#">Opción 2</a>
-              </li>
+
               <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Opción 3 <span class="caret"></span></a>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Gestión Social<span class="caret"></span></a>
                 <ul class="dropdown-menu" aria-labelledby="download">
-                  <li><a href="#">Default</a></li>
+                  <li><a href="#" style="color:#1995dc">CONFIGURACIÓN ACTIVIDADES</a></li>
                   <li class="divider"></li>
-                  <li><a href="#">Sub-Item 1</a></li>
-                  <li><a href="#">Sub-Item 2</a></li>
-                  <li><a href="#">Sub-Item 3</a></li>
-                  <li><a href="#">Sub-Item 4</a></li>
+                  <li class=”{{ Request::is( 'CrearActividad') ? 'active' : '' }}”><a href="{{ URL::to( 'CrearActividad') }}">Registro de actividad</a></li>
+                   <li class=”{{ Request::is( 'personas') ? 'active' : '' }}”><a href="{{ URL::to( 'personas') }}">Mis programaciones</a></li>
+
+                   <li><a href="#" style="color:#1995dc">REPORTES</a></li>
+                  <li class="divider"></li>
+                  <li class=”{{ Request::is( 'personas') ? 'active' : '' }}”><a href="{{ URL::to( 'personas') }}">Reporte 1</a></li>
+                   <li class=”{{ Request::is( 'personas') ? 'active' : '' }}”><a href="{{ URL::to( 'personas') }}">Reporte 2</a></li>
+
                 </ul>
               </li>
-            </ul>
 
-            <form class="navbar-form navbar-left" role="search">
-                <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Buscar">
-                </div>                
-                <button type="submit" class="btn btn-default">Ir</button>
-            </form>
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Promotores<span class="caret"></span></a>
+                <ul class="dropdown-menu" aria-labelledby="download">
+                  <li><a href="#" style="color:#1995dc">ACTIVIDADES</a></li>
+                  <li class="divider"></li>
+                  <li class=”{{ Request::is( 'personas') ? 'active' : '' }}”><a href="{{ URL::to( 'personas') }}">Mis actividades</a></li>
+                </ul>
+              </li>
+
+            </ul>
 
             <ul class="nav navbar-nav navbar-right">
               <li><a href="http://www.idrd.gov.co/sitio/idrd/" target="_blank">I.D.R.D</a></li>
@@ -92,7 +98,7 @@
           <div class="page-header" id="banner">
             <div class="row">
               <div class="col-lg-8 col-md-7 col-sm-6">
-                <h1>MÓDULO GESTORES PARQUES</h1>
+                <h1>MÓDULO CAMPAÑA CULTURA CIUDADANA </h1>
                 <p class="lead"><h1>Área de parques</h1></p>
               </div>
               <div class="col-lg-4 col-md-5 col-sm-6">

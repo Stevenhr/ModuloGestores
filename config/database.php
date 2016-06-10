@@ -47,11 +47,11 @@ return [
     'connections' => [
         'mysql' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE22', 'Deportista'),
-            'username' => env('DB_USERNAME', 'root'),
-            'password' => env('DB_PASSWORD', ''),
+            'host' => env('DB_HOST1', '127.0.0.1'),
+            'port' => env('DB_PORT1', '3306'),
+            'database' => env('DB_DATABASE22'),
+            'username' => env('DB_USERNAME1','root'),
+            'password' => env('DB_PASSWORD1',''),
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix' => '',
@@ -61,11 +61,11 @@ return [
        
         'db_principal' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST', 'www.idrd.gov.co'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'idrdgov_simgeneral_prueba'),
-            'username' => env('DB_USERNAME', 'idrdgov_modpru'),
-            'password' => env('DB_PASSWORD', 'modulopruebas156'),
+            'host' => env('DB_HOST'),
+            'port' => env('DB_PORT'),
+            'database' => env('DB_PRINCIPAL'),
+            'username' => env('DB_USERNAME'),
+            'password' => env('DB_PASSWORD'),
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix' => '',
