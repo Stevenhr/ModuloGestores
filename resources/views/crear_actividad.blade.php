@@ -10,7 +10,7 @@
 @section('content') 
         
               
-<div class="content" id="main_actividad" class="row" data-url="{{ url(config('usuarios.prefijo_ruta_modulo')) }}">
+<div class="content" id="main_actividad" class="row" data-url="actividad">
             <br>
               <h3 id="navbar">PROGRAMACIÓN DE ACTIVIDADES</h3>
             <br><br>
@@ -204,7 +204,7 @@
 							        		<div class="col-xs-12 col-md-6">
 							        			<div class="form-group">
 							        				<label class="control-label" for="Cedula">* Parque </label>
-							        				<select name="Id_TipoDocumento" id="" class="form-control">
+							        				<select name="Parque" id="" class="form-control">
 							        					<option value="">Seleccionar</option>
 							        					
 							        				</select>
@@ -214,26 +214,26 @@
 							        		<div class="col-xs-12 col-md-6">
 							        			<div class="form-group">
 							        				<label class="control-label" for="Id_TipoDocumento">* Caracteristica Lugar </label>
-							        				<textarea class="form-control" rows="3" id="ta_Caracteristica_Lugar"></textarea>
+							        				<textarea class="form-control" rows="3" id="Caracteristica_Lugar"></textarea>
 							        			</div>
 							        		</div>
 							        		<div class="col-xs-12 col-md-6">
 							        			<div class="form-group">
 							        			    <label class="control-label" for="Id_TipoDocumento">* Institución, grupo, comunidad</label>
-							        				<input type="text" name="Segundo_Apellido" class="form-control">
+							        				<input type="text" name="Institucion_Grupo" class="form-control">
 							        			</div>
 							        		</div>
 
 							        		<div class="col-xs-12 col-md-6">
 							        			<div class="form-group">
 							        				<label class="control-label" for="Id_TipoDocumento">* Caracteristica de la población </label>
-							        				<textarea class="form-control" rows="3" id="ta_Caracteristica_Lugar"></textarea>
+							        				<textarea class="form-control" rows="3" id="Caracteristica_Lugar"></textarea>
 							        			</div>
 							        		</div>
 							        		<div class="col-xs-12 col-md-6">
 							        			<div class="form-group">
 							        			    <label class="control-label" for="Id_TipoDocumento">* Numero de asistentes</label>
-							        				<input type="text" name="Segundo_Apellido" class="form-control">
+							        				<input type="text" name="Numero_Asistentes" class="form-control">
 							        			</div>
 							        		</div>
 							       		</fieldset>
@@ -253,26 +253,30 @@
 							        		<div class="col-xs-12 col-md-6">
 							        			<div class="form-group">
 							        				<label class="control-label" for="Id_TipoDocumento">* Hora implementación</label>
-							        				<input type="text" name="Hora_Implementacion" class="form-control">
+							        				<div class='input-group date' id='datetimepicker3'>
+														<input type='text' name="Hora_Implementacion" class="form-control" value=""  />
+														<span class="input-group-addon"><span class="glyphicon glyphicon-time"></span>
+														</span>
+													</div>
 							        			</div>
 							        		</div>
 							        		<div class="col-xs-12 col-md-6">
 							        			<div class="form-group">
 							        				<label class="control-label" for="Cedula">* Nombre persona contacto </label>
-							        				<input type="text" name="Segundo_Apellido" class="form-control">
+							        				<input type="text" name="Persona_Contacto" class="form-control">
 							        			</div>
 							        		</div>
 
 							        		<div class="col-xs-12 col-md-6">
 							        			<div class="form-group">
 							        				<label class="control-label" for="Id_TipoDocumento">* Roll de la comunidad </label>
-							        				<input type="text" name="Segundo_Apellido" class="form-control">
+							        				<input type="text" name="Roll_Comunidad" class="form-control">
 							        			</div>
 							        		</div>
 							        		<div class="col-xs-12 col-md-6">
 							        			<div class="form-group">
 							        				<label class="control-label" for="Id_TipoDocumento">* Telefono</label>
-							        				<input type="text" name="Segundo_Apellido" class="form-control">
+							        				<input type="text" name="Telefono" class="form-control">
 							        			</div>
 							        		</div>
 							       		</fieldset>

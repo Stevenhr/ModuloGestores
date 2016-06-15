@@ -25,4 +25,28 @@ class ConfiguracionActividadController extends Controller
 
 		return response()->json($actividad->actividad);
 	}
+
+	public function buscarEje(Request $request, $id_eje)
+	{
+		$eje_model = app()->make('App\Eje');
+		$eje = $eje_model->find($id_eje);
+
+		return response()->json($eje);
+	}
+
+	public function buscarTematica(Request $request, $id_tematica)
+	{
+		$eje_model = app()->make('App\Tematica');
+		$eje = $eje_model->find($id_tematica);
+
+		return response()->json($eje);
+	}
+
+	public function buscarActividad(Request $request, $id_actividad)
+	{
+		$eje_model = app()->make('App\Actividad');
+		$eje = $eje_model->find($id_actividad);
+
+		return response()->json($eje);
+	}
 }

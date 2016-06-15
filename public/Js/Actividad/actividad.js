@@ -255,8 +255,10 @@ vector_datos_actividades = new Array();
 			var html = '';
 					if(vector_datos_actividades.length > 0)
 					{
+						var num=1;
 						$.each(vector_datos_actividades, function(i, e){
-							html += '<tr><th scope="row">'+i+'</th><td>'+e['id_eje']+'</td><td>'+e['id_tematica']+'</td><td>'+e['id_act']+'</td><td>Eliminar</td></tr>';
+							html += '<tr><th scope="row" class="text-center">'+num+'</th><td>'+Buscar_Eje(e['id_eje'])+'</td><td>'+Buscar_Tematica(e['id_tematica'])+'</td><td>'+Buscar_Actividad(e['id_act'])+'</td><td class="text-center"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td></tr>';
+							num++;
 						});
 					}
 					$('#registros').html(html);
@@ -350,11 +352,79 @@ vector_datos_actividades = new Array();
 
 
 
+	function Buscar_Eje(id)
+	{ 
+		var nombre_eje="";
+			
+			$.ajax({
+				url: URL+'/service/Eje/'+id,
+				data: {},
+				dataType: 'json',
+				async: false,
+				success: function(data)
+				{
+					
+					nombre_eje = String(data['Nombre_Eje']);
+					
+				}
+			});
+
+			return nombre_eje;
+	};
+
+
+	function Buscar_Tematica(id)
+	{ 
+		var Nombre_Temat="";
+			
+			$.ajax({
+				url: URL+'/service/Tematica/'+id,
+				data: {},
+				dataType: 'json',
+				async: false,
+				success: function(data)
+				{
+					
+					Nombre_Temat = String(data['Nombre_Tematica']);
+					
+				}
+			});
+
+			return Nombre_Temat;
+	};
+
+
+
+	function Buscar_Actividad(id)
+	{ 
+		var Nombre_Temat="";
+			
+			$.ajax({
+				url: URL+'/service/Actividad/'+id,
+				data: {},
+				dataType: 'json',
+				async: false,
+				success: function(data)
+				{
+					
+					Nombre_Temat = String(data['Nombre_Actividad']);
+					
+				}
+			});
+
+			return Nombre_Temat;
+	};
+
+
+
 
 		$('#datetimepicker1').datetimepicker({
                      format: 'LT'
                 });
 		$('#datetimepicker2').datetimepicker({
+                     format: 'LT'
+                });
+		$('#datetimepicker3').datetimepicker({
                      format: 'LT'
                 });
 
