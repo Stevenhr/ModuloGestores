@@ -24,6 +24,10 @@
           <script src="{{ asset('public/Js/jquery-ui.js') }}"></script>
           <script src="{{ asset('public/Js/bootstrap.min.js') }}"></script>
           <script src="{{ asset('public/Js/main.js') }}"></script>
+          <script src="{{ asset('public/Js/bootstrap-datetimepicker.min.js') }}"></script>
+          <script src="{{ asset('public/Js/moment-with-locales.js') }}"></script>
+          <script src="{{ asset('public/Js/bootstrap-datetimepicker.js') }}"></script>
+
       @show
 
       <title>Módulo Campaña Cultura Ciudadana</title>

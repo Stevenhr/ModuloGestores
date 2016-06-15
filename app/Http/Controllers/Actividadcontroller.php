@@ -10,14 +10,16 @@ class Actividadcontroller extends Controller
 {
     public function index(){
 
-    	$eje = app()->make(config('usuarios.modelo_eje'));
-		$tematica = app()->make(config('usuarios.modelo_tematica'));
-		$actividad = app()->make(config('usuarios.modelo_actividad'));
+    	$eje = app()->make('App\Eje');
+		$tematica = app()->make('App\Tematica');
+		$actividad = app()->make('App\Actividad');
+		$Localidad = app()->make('App\Localidad');
 
 		$datos = [
 	        'eje' => $eje->all(),
 	        'tematica' => $tematica->all(),
 	        'actividad' => $actividad->all(),
+	        'localidad' => $Localidad->all(),
 			'status' => session('status')
 		];
 

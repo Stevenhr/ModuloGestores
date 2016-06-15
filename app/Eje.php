@@ -17,4 +17,9 @@ class Eje extends Model
 		$this->connection = config('connections.mysql');
 	}
 
+	public function tematica()
+	{
+		return $this->hasMany('App\Tematica', 'Id_Eje');
+	}
+
 }
