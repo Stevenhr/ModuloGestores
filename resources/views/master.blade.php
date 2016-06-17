@@ -17,6 +17,7 @@
           <link rel="stylesheet" href="{{ asset('public/Css/bootstrap.min.css') }}" media="screen">    
           <link rel="stylesheet" href="{{ asset('public/Css/sticky-footer.css') }}" media="screen">   
           <link rel="icon" type="image/png" href="{{ asset('public/Img/Icono.png') }}" /> 
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
       @show
 
       @section('script')
@@ -27,7 +28,8 @@
           <script src="{{ asset('public/Js/bootstrap-datetimepicker.min.js') }}"></script>
           <script src="{{ asset('public/Js/moment-with-locales.js') }}"></script>
           <script src="{{ asset('public/Js/bootstrap-datetimepicker.js') }}"></script>
-
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/i18n/defaults-*.min.js"></script>
       @show
 
       <title>Módulo Campaña Cultura Ciudadana</title>

@@ -70,7 +70,7 @@
 													        <h4 class="modal-title" id="myModalLabel">Datos de la actividad</h4>
 													     </div>
 													     <div class="modal-body">
-												      			<table class="table table-bordered"> 
+												      			<table class="table table-bordered" id="datos_actividad"> 
 																<thead>
 																<tr>
 																<th>#</th>
@@ -83,9 +83,10 @@
 																<tbody id="registros"> 
 																</tbody> 
 																</table>
+																<div id="mensaje_eliminar"></div>
 														  </div>
 													      <div class="modal-footer">
-													        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+													        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 													      </div>
 												    </div>
 												  </div>
@@ -118,9 +119,11 @@
 							        		<div class="col-xs-12 col-md-6">
 							        			<div class="form-group">
 							        				<label class="control-label" for="Id_TipoDocumento">* Responsable </label>
-							        				<select name="Id_TipoDocumento" id="" class="form-control">
+							        				<select name="Id_Responsable" id="" class="form-control">
 							        					<option value="">Seleccionar</option>
-							        					
+							        					@foreach($Tipo->personas as $Tipo)
+							        						<option value="{{ $Tipo['Id_Persona'] }}">{{ $Tipo['Primer_Apellido'].' '.$Tipo['Segundo_Apellido'].' '.$Tipo['Primer_Nombre'].' '.$Tipo['Segundo_Nombre'] }}</option>
+							        					@endforeach
 							        				</select>
 							        			</div>
 							        		</div>
@@ -204,9 +207,11 @@
 							        		<div class="col-xs-12 col-md-6">
 							        			<div class="form-group">
 							        				<label class="control-label" for="Cedula">* Parque </label>
-							        				<select name="Parque" id="" class="form-control">
+							        				<select name="Parque" id="" class="selectpicker form-control" data-live-search="true">
 							        					<option value="">Seleccionar</option>
-							        					
+							        					@foreach($tipoparques->parques as $tipoparques)
+							        						<option value="{{ $tipoparques['Id'] }}">{{ $tipoparques['Nombre'].'   '.$tipoparques['Id_IDRD'] }}</option>
+							        					@endforeach
 							        				</select>
 							        			</div>
 							        		</div>

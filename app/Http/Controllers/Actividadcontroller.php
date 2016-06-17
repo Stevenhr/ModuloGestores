@@ -14,15 +14,21 @@ class Actividadcontroller extends Controller
 		$tematica = app()->make('App\Tematica');
 		$actividad = app()->make('App\Actividad');
 		$Localidad = app()->make('App\Localidad');
+		$Tipo = app()->make('App\Tipo');
+		//$Parque = app()->make('App\Parque');
+		$TipoParque = app()->make('App\TipoParque');
 
 		$datos = [
 	        'eje' => $eje->all(),
 	        'tematica' => $tematica->all(),
 	        'actividad' => $actividad->all(),
 	        'localidad' => $Localidad->all(),
+	        'Tipo' => $Tipo->find(46),
+	        'tipoparques' => $TipoParque->find(3),
 			'status' => session('status')
 		];
 
     	return view('crear_actividad', $datos);
     }
 }
+
