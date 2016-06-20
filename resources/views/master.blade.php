@@ -68,12 +68,6 @@
                   <li class="divider"></li>
                   <li class=”{{ Request::is( 'CrearActividad') ? 'active' : '' }}”><a href="{{ URL::to( 'CrearActividad') }}">Registro de actividad</a></li>
                    <li class=”{{ Request::is( 'personas') ? 'active' : '' }}”><a href="{{ URL::to( 'personas') }}">Mis programaciones</a></li>
-
-                   <li><a href="#" style="color:#1995dc">REPORTES</a></li>
-                  <li class="divider"></li>
-                  <li class=”{{ Request::is( 'personas') ? 'active' : '' }}”><a href="{{ URL::to( 'personas') }}">Reporte 1</a></li>
-                   <li class=”{{ Request::is( 'personas') ? 'active' : '' }}”><a href="{{ URL::to( 'personas') }}">Reporte 2</a></li>
-
                 </ul>
               </li>
 

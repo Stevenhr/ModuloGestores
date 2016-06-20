@@ -141,7 +141,7 @@
 							        			<div class="form-group">
 							        				<label class="control-label" for="Cedula">* Hora Final </label>
 							        				<div class='input-group date' id='datetimepicker2'>
-														<input type='text' name="Hora_Inicio" class="form-control" value=""  />
+														<input type='text' name="Hora_Fin" class="form-control" value=""  />
 														<span class="input-group-addon"><span class="glyphicon glyphicon-time"></span>
 														</span>
 													</div>
@@ -160,7 +160,7 @@
 													        <h4 class="modal-title" id="myModalLabel">Acompañantes de la actividad</h4>
 													     </div>
 													     <div class="modal-body">
-												      			<table class="table table-bordered"> 
+												      			<table class="table table-bordered" id="datos_acopañante"> 
 																<thead>
 																<tr>
 																<th>Usuario</th>
@@ -292,7 +292,7 @@
 			<div class="form-group">
 		      <div class="col-lg-12">
 		        <button type="reset" class="btn btn-default">Cancel</button>
-		        <button type="submit" class="btn btn-info">Crear</button>
+		        <button type="submit" id="crear" class="btn btn-info">Crear</button>
 		      </div>
 		    </div>
 		    <br><br> 

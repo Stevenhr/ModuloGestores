@@ -5,6 +5,7 @@ $(function()
 
 
 vector_datos_actividades = new Array();
+vector_acompañantes = new Array();
 	
 	$('#agregar_actividad').on('click', function(e)
 	{
@@ -37,7 +38,7 @@ vector_datos_actividades = new Array();
 	{
 			
 			var html = '';
-			console.log(vector_datos_actividades);
+			//console.log(vector_datos_actividades);
 					if(vector_datos_actividades.length > 0)
 					{
 						var num=1;
@@ -89,7 +90,7 @@ vector_datos_actividades = new Array();
 						{
 							var html = '';
 							$.each(data, function(i, e){
-								html += '<tr><th scope="row">'+e['Primer_Apellido']+' '+e['Segundo_Apellido']+' '+e['Primer_Nombre']+' '+e['Segundo_Nombre']+'</th><td> <div class="checkbox text-center"><label ><input type="checkbox"></label></div></td><td class="text-center"><span class="glyphicon glyphicon-calendar " aria-hidden="true"></span></td></tr>';
+								html += '<tr><th scope="row">'+e['Primer_Apellido']+' '+e['Segundo_Apellido']+' '+e['Primer_Nombre']+' '+e['Segundo_Nombre']+'</th><td> <div class="checkbox text-center"><label ><input data-rel="'+e['Id_Persona']+'" data-funcion="agregar" type="checkbox"></label></div></td><td class="text-center"><span class="glyphicon glyphicon-calendar " aria-hidden="true"></span></td></tr>';
 							});
 							$('#div_acompañante').html(html);
 						}
@@ -100,6 +101,25 @@ vector_datos_actividades = new Array();
 			);
 			return false;		
 	});
+
+
+
+	$('#datos_acopañante').delegate('input[data-funcion="agregar"]','click',function (e) {   
+		
+		var id = $(this).data('rel'); 
+		if($(this).is(':checked')) {  
+			vector_acompañantes.push({"acompa": id});
+		}else {  
+			
+			arr = jQuery.grep(vector_acompañantes, function( a,i ) {
+			   return a.acompa==id;
+			},true);
+			vector_acompañantes=arr;
+        } 
+
+     }); 
+
+
 
 	$('select[name="Id_Eje"]').on('change', function(e){
 		select_tematicas($(this).val());
@@ -241,5 +261,73 @@ vector_datos_actividades = new Array();
                      format: 'LT'
                 });
 
+
+
+	$('#form_actividad').on('submit', function(e){
+		$.post(
+			URL+'/service/procesar',
+			$(this).serialize(),
+			function(data){
+				if(data.status == 'error')
+				{
+					popular_errores_modal(data.errors);
+				} else {
+					$('#alerta').show();
+					$('#modal_form_persona').modal('hide');
+
+					setTimeout(function(){
+						$('#alerta').hide();
+					}, 4000)
+				}
+			},
+			'json'
+		);
+
+		e.preventDefault();
+	});
+
+	var popular_errores_modal = function(data)
+	{
+		$('#form_actividad .form-group').removeClass('has-error');
+		var selector = '';
+		for (var error in data){
+		    if (typeof data[error] !== 'function') {
+		        switch(error)
+		        {
+		        	case 'Id_Eje':
+		        	case 'Id_Tematica':
+		        	case 'Id_Actividad':
+		        		selector = 'select';
+		        	break;
+
+		        	case 'Fecha_Ejecución':
+		        	case 'Hora_Inicio':
+		        	case 'Hora_Fin':
+		        	case 'Institucion_Grupo':
+		        	case 'Numero_Asistentes':
+		        		selector = 'input';
+		        	break;
+		        }
+		        $('#form_actividad '+selector+'[name="'+error+'"]').closest('.form-group').addClass('has-error');
+		    }
+		}
+	}
+
+
+	$('#crear').on('click', function(e)
+	{
+		var persona = {
+			Id_Eje: '',
+			Id_Tematica: '',
+			Id_Actividad: '',
+			Fecha_Ejecución: '',
+			Hora_Inicio: '',
+			Hora_Fin: '',
+			Institucion_Grupo: '',
+			Numero_Asistentes: ''
+		}
+
+		popular_modal_persona(persona);
+	});
 
 });
