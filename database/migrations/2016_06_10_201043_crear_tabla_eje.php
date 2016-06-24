@@ -13,9 +13,9 @@ class CrearTablaEje extends Migration
     public function up()
     {
         //
-        Schema::create('tematica', function (Blueprint $table) {
-            $table->increments('Id_Tematica');
-            $table->string('Nombre_Tematica');
+        Schema::create('eje', function (Blueprint $table) {
+            $table->increments('Id_Eje');
+            $table->string('Nombre_Eje');
   
         });
     }
@@ -28,6 +28,6 @@ class CrearTablaEje extends Migration
     public function down()
     {
         //
-          Schema::drop('tematica');
+          Schema::drop('eje');
     }
 }

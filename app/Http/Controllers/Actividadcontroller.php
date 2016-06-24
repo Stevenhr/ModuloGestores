@@ -30,5 +30,9 @@ class Actividadcontroller extends Controller
 
     	return view('crear_actividad', $datos);
     }
+
+
+   
+
 }
 

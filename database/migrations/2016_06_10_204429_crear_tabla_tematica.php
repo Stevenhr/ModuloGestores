@@ -16,6 +16,8 @@ class CrearTablaTematica extends Migration
         Schema::create('tematica', function (Blueprint $table) {
             $table->increments('Id_Tematica');
             $table->string('Nombre_Tematica');
+            $table->integer('Id_Eje')->unsigned();
+            $table->foreign('Id_Eje')->references('Id_Eje')->on('eje')->onDelete('cascade');
   
         });
     }

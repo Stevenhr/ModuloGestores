@@ -29,7 +29,7 @@
           <script src="{{ asset('public/Js/moment-with-locales.js') }}"></script>
           <script src="{{ asset('public/Js/bootstrap-datetimepicker.js') }}"></script>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/i18n/defaults-*.min.js"></script>
+          <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/i18n/defaults-*.min.js"></script>-->
       @show
 
       <title>Módulo Campaña Cultura Ciudadana</title>

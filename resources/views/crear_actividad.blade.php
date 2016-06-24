@@ -15,13 +15,14 @@
               <h3 id="navbar">PROGRAMACIÓN DE ACTIVIDADES</h3>
             <br><br>
            
+<form action="" id="form_actividad">
 
 			<div class="panel panel-primary">
 			  <div class="panel-heading">
 			    <h3 class="panel-title">PASO 1: Datos basicos de la actividad</h3>
 			  </div>
 			  <div class="panel-body">
-			    				<form action="" id="form_actividad">
+			    				
 							      		<fieldset>
 							        		<div class="col-xs-12 col-md-12">
 							        			<div class="form-group">
@@ -96,7 +97,6 @@
 							        		
 							        		</div>
 							       		</fieldset>
-							    </form>
 			  </div>
 			</div>
 
@@ -107,7 +107,6 @@
 			    <h3 class="panel-title">PASO 2: Datos de asignación y configuración horaria</h3>
 			  </div>
 			  <div class="panel-body">
-			    				<form action="" id="form_actividad">
 							      		<fieldset>
 							        		<div class="col-xs-12 col-md-6">
 							        			<div class="form-group">
@@ -180,7 +179,6 @@
 												</div>
 							        		</div>
 							       		</fieldset>
-							    </form>
 			  </div>
 			</div>
 
@@ -191,7 +189,6 @@
 			    <h3 class="panel-title">PASO 3: Datos del escenario y la comunidad</h3>
 			  </div>
 			  <div class="panel-body">
-			    				<form action="" id="form_actividad">
 							      		<fieldset>
 							        		<div class="col-xs-12 col-md-6">
 							        			<div class="form-group">
@@ -219,7 +216,7 @@
 							        		<div class="col-xs-12 col-md-6">
 							        			<div class="form-group">
 							        				<label class="control-label" for="Id_TipoDocumento">* Caracteristica Lugar </label>
-							        				<textarea class="form-control" rows="3" id="Caracteristica_Lugar"></textarea>
+							        				<textarea class="form-control" rows="3" name="Caracteristica_Lugar"></textarea>
 							        			</div>
 							        		</div>
 							        		<div class="col-xs-12 col-md-6">
@@ -232,7 +229,7 @@
 							        		<div class="col-xs-12 col-md-6">
 							        			<div class="form-group">
 							        				<label class="control-label" for="Id_TipoDocumento">* Caracteristica de la población </label>
-							        				<textarea class="form-control" rows="3" id="Caracteristica_Lugar"></textarea>
+							        				<textarea class="form-control" rows="3" name="Caracteristica_poblacion"></textarea>
 							        			</div>
 							        		</div>
 							        		<div class="col-xs-12 col-md-6">
@@ -242,7 +239,6 @@
 							        			</div>
 							        		</div>
 							       		</fieldset>
-							    </form>
 			  </div>
 			</div>
 
@@ -253,7 +249,7 @@
 			    <h3 class="panel-title">PASO 4: Datos persona contacto</h3>
 			  </div>
 			  <div class="panel-body">
-			    				<form action="" id="form_actividad">
+			    				
 							      		<fieldset>
 							        		<div class="col-xs-12 col-md-6">
 							        			<div class="form-group">
@@ -285,19 +281,38 @@
 							        			</div>
 							        		</div>
 							       		</fieldset>
-							    </form>
+							    
 			  </div>
 			</div>
 			<br>
 			<div class="form-group">
+				<div id="alerta_actividad_creada" class="col-xs-12" style="display:none;">
+					<div class="alert alert-success alert-dismissible" role="alert">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						Actividad registrada satisfactoriamente.
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div id="alerta_actividad_error" class="col-xs-12" style="display:none;">
+					<div class="alert alert-danger alert-dismissible" role="alert">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<div id="mensaje_alerta_final"></div>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
 		      <div class="col-lg-12">
+		      	<input type="hidden" name="Dato_Actividad" class="form-control">
+		      	<input type="hidden" name="Personas_Acompanates" class="form-control">
 		        <button type="reset" class="btn btn-default">Cancel</button>
-		        <button type="submit" id="crear" class="btn btn-info">Crear</button>
+		        <button type="submit" class="btn btn-primary">Crear</button>
 		      </div>
 		    </div>
 		    <br><br> 
+		   
 </div>
-       
+</form>       
             
        
 @stop

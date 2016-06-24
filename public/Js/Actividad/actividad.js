@@ -84,8 +84,7 @@ vector_acompañantes = new Array();
 				URL+'/service/persona_tipo/'+id,
 				{},
 				function(data)
-				{	
-						
+				{
 						if(data.length > 0)
 						{
 							var html = '';
@@ -252,41 +251,55 @@ vector_acompañantes = new Array();
 
 
 		$('#datetimepicker1').datetimepicker({
-                     format: 'LT'
+                      format: 'HH:mm'
                 });
 		$('#datetimepicker2').datetimepicker({
-                     format: 'LT'
+                      format: 'HH:mm'
                 });
 		$('#datetimepicker3').datetimepicker({
-                     format: 'LT'
+                      format: 'HH:mm'
                 });
 
 
 
 	$('#form_actividad').on('submit', function(e){
-		$.post(
-			URL+'/service/procesar',
-			$(this).serialize(),
-			function(data){
-				if(data.status == 'error')
-				{
-					popular_errores_modal(data.errors);
-				} else {
-					$('#alerta').show();
-					$('#modal_form_persona').modal('hide');
+		var datos_acti = JSON.stringify(vector_datos_actividades);
+		var datos_acomp = JSON.stringify(vector_acompañantes);
+		$('input[name="Dato_Actividad"]').val(datos_acti);
+		$('input[name="Personas_Acompanates"]').val(datos_acomp);
 
-					setTimeout(function(){
-						$('#alerta').hide();
-					}, 4000)
-				}
-			},
-			'json'
-		);
+		if(vector_datos_actividades.length > 0){
+
+				$.post(
+					URL+'/service/crearActividad',
+					$(this).serialize(),
+					function(data){
+						
+							if(data.status == 'error')
+							{
+								validador_errores(data.errors);
+							} else {
+								$('#alerta_actividad_creada').show();
+								setTimeout(function(){
+									$('#alerta_actividad_creada').hide();
+								}, 4000)
+							}
+					},
+					'json'
+				);
+
+		}else{
+				$('#alerta_actividad_error').show();
+				$('#mensaje_alerta_final').html('No se ha registrado ningun dato basico de la actividad. Lo puede registrar en el paso 1.');
+				setTimeout(function(){
+					$('#alerta_actividad_error').hide();
+				}, 4000)
+		}
 
 		e.preventDefault();
 	});
 
-	var popular_errores_modal = function(data)
+	var validador_errores = function(data)
 	{
 		$('#form_actividad .form-group').removeClass('has-error');
 		var selector = '';
@@ -294,9 +307,10 @@ vector_acompañantes = new Array();
 		    if (typeof data[error] !== 'function') {
 		        switch(error)
 		        {
-		        	case 'Id_Eje':
-		        	case 'Id_Tematica':
-		        	case 'Id_Actividad':
+		        	
+		        	case 'Id_Responsable':
+		        	case 'Id_Localidad':
+		        	case 'Parque':
 		        		selector = 'select';
 		        	break;
 
@@ -305,7 +319,16 @@ vector_acompañantes = new Array();
 		        	case 'Hora_Fin':
 		        	case 'Institucion_Grupo':
 		        	case 'Numero_Asistentes':
+		        	case 'Hora_Implementacion':
+		        	case 'Persona_Contacto':
+		        	case 'Roll_Comunidad':
+		        	case 'Telefono':
 		        		selector = 'input';
+		        	break;
+
+		        	case 'Caracteristica_Lugar':
+		        	case 'Caracteristica_poblacion':
+		        		selector = 'textarea';
 		        	break;
 		        }
 		        $('#form_actividad '+selector+'[name="'+error+'"]').closest('.form-group').addClass('has-error');
@@ -314,20 +337,5 @@ vector_acompañantes = new Array();
 	}
 
 
-	$('#crear').on('click', function(e)
-	{
-		var persona = {
-			Id_Eje: '',
-			Id_Tematica: '',
-			Id_Actividad: '',
-			Fecha_Ejecución: '',
-			Hora_Inicio: '',
-			Hora_Fin: '',
-			Institucion_Grupo: '',
-			Numero_Asistentes: ''
-		}
-
-		popular_modal_persona(persona);
-	});
 
 });

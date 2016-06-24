@@ -27,7 +27,9 @@ Route::get('/personas/service/ciudad/{id_pais}', '\Idrd\Usuarios\Controllers\Loc
 Route::post('/personas/service/procesar/', '\Idrd\Usuarios\Controllers\PersonaController@procesar');
 
 
+
 Route::get('/CrearActividad', 'Actividadcontroller@index');
+Route::post('/actividad/service/crearActividad/', 'ConfiguracionActividadController@procesarValidacion');
 Route::get('/actividad/service/tematica/{id_eje}', 'ConfiguracionActividadController@buscarTematicas');
 Route::get('/actividad/service/actividad/{id_tematica}', 'ConfiguracionActividadController@buscarActividades');
 Route::get('/actividad/service/persona_tipo/{id_tipo}', '\Idrd\Usuarios\Controllers\PersonaController@buscarPersonaTipo');

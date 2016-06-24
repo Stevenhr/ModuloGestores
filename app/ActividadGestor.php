@@ -1,0 +1,37 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+
+class ActividadGestor extends Model
+{
+      //
+
+	use SoftDeletes;
+	
+    protected $table = 'actividad_gestor';
+	protected $primaryKey = 'Id_Actividad_Gestor';
+	protected $fillable = ['Id_Persona','Id_Responsable','Fecha_Ejecución','Hora_Incial','Hora_Final','Localidad','Parque','Caracteristica_Lugar','Instit_Grupo_Comun','Caracteristica_Poblacion','Numero_Asistente','Hora_Implementacion','Nombre_Contacto','Rool_Comunidad','Telefono','Fecha_Registro','Estado','Estado_Ejecucion','Fecha_Registro_Ejecución'];
+	protected $connection = ''; 
+
+
+	public function __construct()
+	{
+		$this->connection = config('connections.mysql');
+	}
+
+	  public function datosActividad()
+    {
+        return $this->hasMany('App\DatosActividad','Id_Actividad');
+    }
+
+
+    public function persona()
+    {
+        return $this->belongsToMany('App\Persona','persona_acopanante');
+    }
+     
+}

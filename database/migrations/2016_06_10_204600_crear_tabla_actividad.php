@@ -16,6 +16,8 @@ class CrearTablaActividad extends Migration
         Schema::create('actividad', function (Blueprint $table) {
             $table->increments('Id_Actividad');
             $table->string('Nombre_Actividad');
+            $table->integer('Id_Tematica')->unsigned();
+            $table->foreign('Id_Tematica')->references('Id_Tematica')->on('tematica')->onDelete('cascade');
   
         });
     }
@@ -28,6 +30,6 @@ class CrearTablaActividad extends Migration
     public function down()
     {
         //
-          Schema::drop('Actividad');
+          Schema::drop('actividad');
     }
 }
