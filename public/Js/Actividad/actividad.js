@@ -279,10 +279,8 @@ vector_acompañantes = new Array();
 							{
 								validador_errores(data.errors);
 							} else {
-								$('#alerta_actividad_creada').show();
-								setTimeout(function(){
-									$('#alerta_actividad_creada').hide();
-								}, 4000)
+								$('#actividad_creada').modal('show');
+
 							}
 					},
 					'json'
@@ -335,6 +333,9 @@ vector_acompañantes = new Array();
 		    }
 		}
 	}
+
+
+	
 
 
 

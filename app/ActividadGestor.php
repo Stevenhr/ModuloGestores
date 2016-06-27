@@ -28,10 +28,15 @@ class ActividadGestor extends Model
         return $this->hasMany('App\DatosActividad','Id_Actividad');
     }
 
-
-    public function persona()
+     public function actividadgestorActividadEjeTematica()
     {
-        return $this->belongsToMany('App\Persona','persona_acopanante');
+        return $this->belongsToMany('App\ActividadGestor','actividadgestor_actividad_eje_tematica','actividad_gestor_id','eje_id','tematica_id','actividad_id');
     }
+
+
+   /* public function persona()
+    {
+        return $this->belongsToMany('App\Persona','actividadgestor_persona');
+    }*/
      
 }

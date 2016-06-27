@@ -39,6 +39,8 @@ Route::get('/actividad/service/Actividad/{id_actividad}', 'ConfiguracionActivida
 
 
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTablePersonaAcompanate extends Migration
+class AcompanantePersona extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,7 @@ class CreateTablePersonaAcompanate extends Migration
     public function up()
     {
         //
-
-        Schema::drop('persona_acopanante');
+        
     }
 
     /**
@@ -25,6 +24,5 @@ class CreateTablePersonaAcompanate extends Migration
     public function down()
     {
         //
-        Schema::drop('persona_acopanante');
     }
 }

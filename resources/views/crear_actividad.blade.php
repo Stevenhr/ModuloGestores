@@ -63,6 +63,8 @@
 							        			<div id="alert_actividad"></div>
 							        			</div>
 							        			
+
+
 							        			<div class="modal fade bs-example-modal-lg" id="ver_registros" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
 												  <div class="modal-dialog modal-lg">
 												    <div class="modal-content">
@@ -85,6 +87,27 @@
 																</tbody> 
 																</table>
 																<div id="mensaje_eliminar"></div>
+														  </div>
+													      <div class="modal-footer">
+													        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+													      </div>
+												    </div>
+												  </div>
+												</div>
+
+
+
+
+												<div class="modal fade bs-example-modal-lg" id="actividad_creada" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+												  <div class="modal-dialog modal-lg">
+												    <div class="modal-content">
+												        
+													     <div class="modal-body">
+												      			
+															<div class="alert alert-success">
+																Actividad registrada satisfactoriamente.
+															</div>
+				
 														  </div>
 													      <div class="modal-footer">
 													        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -285,14 +308,7 @@
 			  </div>
 			</div>
 			<br>
-			<div class="form-group">
-				<div id="alerta_actividad_creada" class="col-xs-12" style="display:none;">
-					<div class="alert alert-success alert-dismissible" role="alert">
-						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						Actividad registrada satisfactoriamente.
-					</div>
-				</div>
-			</div>
+			
 			<div class="form-group">
 				<div id="alerta_actividad_error" class="col-xs-12" style="display:none;">
 					<div class="alert alert-danger alert-dismissible" role="alert">

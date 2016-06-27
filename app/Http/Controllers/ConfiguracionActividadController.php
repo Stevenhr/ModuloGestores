@@ -89,11 +89,6 @@ class ConfiguracionActividadController extends Controller
 	{
 		$model_A = new ActividadGestor;
 		return $this->crear_actividad($model_A, $input);
-
-		
-		/*
-		$model_AC = new Acompanante;
-		return $this->crear_acompanante_Actividad($model_AC, $input);*/
 	}
 
 	public function crear_actividad($model, $input)
@@ -119,35 +114,24 @@ class ConfiguracionActividadController extends Controller
 		$model['Estado_Ejecucion'] = '1';
 
 		$model->save();
+		
+
+		$data0 = json_decode($input['Dato_Actividad']);
+		foreach($data0 as $obj){
+			$model->actividadgestorActividadEjeTematica()->attach($model->Id_Actividad_Gestor,['eje_id'=>$obj->id_eje,
+				'tematica_id'=>$obj->id_tematica,
+				'actividad_id'=>$obj->id_act]);
+		}
 
 		$model_P = new Persona;
-
-		/*$data = json_decode($input['Dato_Actividad']);
-		foreach($data as $obj){
-			$datosAct[] = new DatosActividad([
-				'Id_Eje' => 1,
-				'Id_Tematica' => 1,
-				'Id_Actividad_ET' => 1
-			]);
-
-			//var_dump($obj);
-		}
-		//var_dump($datosAct);
-		$model->datosActividad()->saveMany($datosAct);
-		//var_dump($tesmoddt);
-		exit();*/
-
-
 		$data1 = json_decode($input['Personas_Acompanates']);
 		foreach($data1 as $obj){
-			$model_P->actividadGestor()->attach(27,['persona_id'=>$obj->acompa]);
+			$model_P->actividadGestor()->attach($model->Id_Actividad_Gestor,['persona_id'=>$obj->acompa]);
 		}
 		
-
-		
-
 		return $model;
 	}
 
+	
 	
 }
