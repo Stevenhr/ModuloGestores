@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 
 class Actividadcontroller extends Controller
@@ -31,6 +30,13 @@ class Actividadcontroller extends Controller
     	return view('crear_actividad', $datos);
     }
 
+
+    public function MiActividad(){
+
+		$PersonaActividad = app()->make('App\Persona');
+		$datos = ['PersonaActividad' => $PersonaActividad->find(1046)];
+    	return view('mi_actividad', $datos);
+    }
 
    
 

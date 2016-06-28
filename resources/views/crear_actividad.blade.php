@@ -109,8 +109,8 @@
 															</div>
 				
 														  </div>
-													      <div class="modal-footer">
-													        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+													      <div class="modal-footer" id="cerrar_actividad">
+													        <button type="button"  data-funcion="cerrar" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 													      </div>
 												    </div>
 												  </div>

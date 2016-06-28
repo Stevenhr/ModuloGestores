@@ -18,10 +18,10 @@ class ActividadGestor extends Model
 	protected $connection = ''; 
 
 
-	public function __construct()
-	{
-		$this->connection = config('connections.mysql');
-	}
+  	public function __construct()
+  	{
+  		$this->connection = config('connections.mysql');
+  	}
 
 	  public function datosActividad()
     {
@@ -33,10 +33,17 @@ class ActividadGestor extends Model
         return $this->belongsToMany('App\ActividadGestor','actividadgestor_actividad_eje_tematica','actividad_gestor_id','eje_id','tematica_id','actividad_id');
     }
 
+    public function localidad() {
+        return $this->belongsTo('App\Localidad', 'Localidad'); 
+    }
 
-   /* public function persona()
-    {
-        return $this->belongsToMany('App\Persona','actividadgestor_persona');
-    }*/
+    public function parque() {
+        return $this->belongsTo('App\Parque', 'Parque'); 
+    }
+
+     public function persona() {
+        return $this->belongsTo('App\Persona', 'Id_Responsable'); 
+    }
+
      
 }

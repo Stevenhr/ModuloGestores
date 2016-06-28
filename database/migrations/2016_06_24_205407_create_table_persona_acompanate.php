@@ -13,8 +13,6 @@ class CreateTablePersonaAcompanate extends Migration
     public function up()
     {
         //
-
-        Schema::drop('persona_acopanante');
     }
 
     /**
@@ -25,6 +23,5 @@ class CreateTablePersonaAcompanate extends Migration
     public function down()
     {
         //
-        Schema::drop('persona_acopanante');
     }
 }

@@ -29,6 +29,7 @@ Route::post('/personas/service/procesar/', '\Idrd\Usuarios\Controllers\PersonaCo
 
 
 Route::get('/CrearActividad', 'Actividadcontroller@index');
+Route::get('/MisProgramaciones', 'Actividadcontroller@MiActividad');
 Route::post('/actividad/service/crearActividad/', 'ConfiguracionActividadController@procesarValidacion');
 Route::get('/actividad/service/tematica/{id_eje}', 'ConfiguracionActividadController@buscarTematicas');
 Route::get('/actividad/service/actividad/{id_tematica}', 'ConfiguracionActividadController@buscarActividades');

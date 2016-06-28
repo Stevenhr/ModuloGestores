@@ -79,17 +79,28 @@ vector_acompañantes = new Array();
 	{
 			var html = '';
 			var id=46;
+			var check="";
 
 			$.get(
 				URL+'/service/persona_tipo/'+id,
 				{},
 				function(data)
 				{
+
 						if(data.length > 0)
 						{
 							var html = '';
 							$.each(data, function(i, e){
-								html += '<tr><th scope="row">'+e['Primer_Apellido']+' '+e['Segundo_Apellido']+' '+e['Primer_Nombre']+' '+e['Segundo_Nombre']+'</th><td> <div class="checkbox text-center"><label ><input data-rel="'+e['Id_Persona']+'" data-funcion="agregar" type="checkbox"></label></div></td><td class="text-center"><span class="glyphicon glyphicon-calendar " aria-hidden="true"></span></td></tr>';
+								var paso=0;
+								if(vector_acompañantes.length>0){
+										$.each(vector_acompañantes, function(i, a){
+											if(a['acompa']==e['Id_Persona']){
+												paso=1;
+											}
+										});
+								}
+								if(paso==1){check="checked";}else{check="";}
+								html += '<tr><th scope="row">'+e['Primer_Apellido']+' '+e['Segundo_Apellido']+' '+e['Primer_Nombre']+' '+e['Segundo_Nombre']+'</th><td> <div class="checkbox text-center"><label ><input data-rel="'+e['Id_Persona']+'" data-funcion="agregar" type="checkbox" '+check+'></label></div></td><td class="text-center"><span class="glyphicon glyphicon-calendar " aria-hidden="true"></span></td></tr>';
 							});
 							$('#div_acompañante').html(html);
 						}
@@ -333,6 +344,14 @@ vector_acompañantes = new Array();
 		    }
 		}
 	}
+
+
+
+	$('#cerrar_actividad').delegate('button[data-funcion="cerrar"]','click',function (e) {   
+        $(".form-control").val('');
+        vector_datos_actividades.length=0;
+		vector_acompañantes.length=0;
+     }); 
 
 
 	

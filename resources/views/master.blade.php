@@ -18,16 +18,31 @@
           <link rel="stylesheet" href="{{ asset('public/Css/sticky-footer.css') }}" media="screen">   
           <link rel="icon" type="image/png" href="{{ asset('public/Img/Icono.png') }}" /> 
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
+          <!-- Data Table-->
+          <link rel="stylesheet" href="{{ asset('public/Css/css_datatable/jquery.dataTables.min.css') }}" media="screen">
+          <link rel="stylesheet" href="{{ asset('public/Css/css_datatable/buttons.dataTables.min.css') }}" media="screen">    
+              
       @show
 
+
       @section('script')
-          <script src="{{ asset('public/Js/jquery.js') }}"></script>
+          <!--<script src="{{ asset('public/Js/jquery.js') }}"></script>-->
+          <script src="{{ asset('public/Js/js_datatable/jquery-1.12.3.js') }}"></script>
           <script src="{{ asset('public/Js/jquery-ui.js') }}"></script>
           <script src="{{ asset('public/Js/bootstrap.min.js') }}"></script>
           <script src="{{ asset('public/Js/main.js') }}"></script>
           <script src="{{ asset('public/Js/bootstrap-datetimepicker.min.js') }}"></script>
           <script src="{{ asset('public/Js/moment-with-locales.js') }}"></script>
           <script src="{{ asset('public/Js/bootstrap-datetimepicker.js') }}"></script>
+          <!-- Data Table-->
+          <script src="{{ asset('public/Js/js_datatable/jquery.dataTables.min.js') }}"></script>
+          <script src="{{ asset('public/Js/js_datatable/dataTables.buttons.min.js') }}"></script>
+          <script src="{{ asset('public/Js/js_datatable/jszip.min.js') }}"></script>
+          <script type="text/javascript" language="javascript" src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js">
+  </script>
+          <script src="{{ asset('public/Js/js_datatable/vfs_fonts.js') }}"></script>
+          <script src="{{ asset('public/Js/js_datatable/buttons.html5.min.js') }}"></script>                 
+
           <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
           <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/i18n/defaults-*.min.js"></script>-->
       @show
@@ -67,7 +82,7 @@
                   <li><a href="#" style="color:#1995dc">CONFIGURACIÓN ACTIVIDADES</a></li>
                   <li class="divider"></li>
                   <li class=”{{ Request::is( 'CrearActividad') ? 'active' : '' }}”><a href="{{ URL::to( 'CrearActividad') }}">Registro de actividad</a></li>
-                   <li class=”{{ Request::is( 'personas') ? 'active' : '' }}”><a href="{{ URL::to( 'personas') }}">Mis programaciones</a></li>
+                   <li class=”{{ Request::is( 'MisProgramaciones') ? 'active' : '' }}”><a href="{{ URL::to( 'MisProgramaciones') }}">Mis programaciones</a></li>
                 </ul>
               </li>
 
