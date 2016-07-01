@@ -96,8 +96,9 @@ class ConfiguracionActividadController extends Controller
 
 	public function modificar($input)
 	{
-		$model_A = new ActividadGestor;
-		return $this->modificar_actividad($model_A, $input);
+		
+		$modelo=ActividadGestor::find($input["Id_Actividad"]);
+		return $this->modificar_actividad($modelo, $input);
 	}
 
 	public function crear_actividad($model, $input)
@@ -144,8 +145,9 @@ class ConfiguracionActividadController extends Controller
 
 	public function modificar_actividad($model, $input)
 	{
-		var_dump($input);
-		$model->find($input["Id_Actividad"]);
+
+		
+		var_dump($model);
 		$model['Fecha_Ejecucion'] = $input['Fecha_Ejecucion'];
 		$model['Hora_Incial'] = $input['Hora_Inicio'];
 		$model['Hora_Final'] = $input['Hora_Fin'];
@@ -158,7 +160,7 @@ class ConfiguracionActividadController extends Controller
 		$model['Hora_Implementacion'] = $input['Hora_Implementacion'];
 		$model['Nombre_Contacto'] = $input['Persona_Contacto'];
 		$model['Rool_Comunidad'] = $input['Roll_Comunidad'];
-		$model['Telefono'] = $input['Telefono'];
+		$model->Telefono= $input['Telefono'];
 
 		$model->save();
 		

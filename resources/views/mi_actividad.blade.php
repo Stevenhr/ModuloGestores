@@ -156,7 +156,7 @@
 										        		<div class="col-xs-12 col-md-6">
 										        			<div class="form-group">
 										        				<label class="control-label" for="Cedula">* Parque </label>
-										        				<select name="Parque" id="" class="form-control">
+										        				<select name="Parque" id="" class="selectpicker form-control" data-live-search="true">
 										        					<option value="">Seleccionar</option>
 										        					@foreach($tipoparque->parques as $parque)
 										        						<option value="{{ $parque['Id'] }}">{{ $parque['Nombre'].'   '.$parque['Id_IDRD'] }}</option>

@@ -30,14 +30,14 @@ $(function()
 
     var actividad_datos = function(datos)
     {
-        console.log(datos);
+        //console.log(datos);
         $('input[name="Id_Actividad"]').val(datos.datosActividad['Id_Actividad_Gestor']);
         $('select[name="Id_Localidad"]').val(datos.datosActividad['Localidad']);
         $('select[name="Id_Responsable"]').val(datos.datosActividad['Id_Responsable']);
         $('input[name="Hora_Inicio"]').val(datos.datosActividad['Hora_Incial']);
         $('input[name="Hora_Fin"]').val(datos.datosActividad['Hora_Final']);
         $('input[name="Fecha_Ejecucion"]').val(datos.datosActividad['Fecha_Ejecucion']);
-        $('select[name="Parque"]').val(datos.datosActividad['Parque']);
+        $('select[name="Parque"]').selectpicker('val',datos.datosActividad['Parque']);
         $('input[name="Caracteristica_Lugar"]').val(datos.datosActividad['Caracteristica_Lugar']);
         document.form_actividad_m.Caracteristica_poblacion.value = datos.datosActividad['Caracteristica_Poblacion'];
         document.form_actividad_m.Caracteristica_Lugar.value = datos.datosActividad['Caracteristica_Lugar'];
