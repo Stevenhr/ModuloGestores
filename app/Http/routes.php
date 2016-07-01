@@ -29,7 +29,9 @@ Route::post('/personas/service/procesar/', '\Idrd\Usuarios\Controllers\PersonaCo
 
 
 Route::get('/CrearActividad', 'Actividadcontroller@index');
+Route::get('/Modificar', 'Actividadcontroller@index');
 Route::get('/MisProgramaciones', 'Actividadcontroller@MiActividad');
+Route::get('/actividad/service/obtener/{id_actividad}', 'Actividadcontroller@obtenerActividad');
 Route::post('/actividad/service/crearActividad/', 'ConfiguracionActividadController@procesarValidacion');
 Route::get('/actividad/service/tematica/{id_eje}', 'ConfiguracionActividadController@buscarTematicas');
 Route::get('/actividad/service/actividad/{id_tematica}', 'ConfiguracionActividadController@buscarActividades');
@@ -37,6 +39,7 @@ Route::get('/actividad/service/persona_tipo/{id_tipo}', '\Idrd\Usuarios\Controll
 Route::get('/actividad/service/Eje/{id_eje}', 'ConfiguracionActividadController@buscarEje');
 Route::get('/actividad/service/Tematica/{id_tematica}', 'ConfiguracionActividadController@buscarTematica');
 Route::get('/actividad/service/Actividad/{id_actividad}', 'ConfiguracionActividadController@buscarActividad');
+
 
 
 

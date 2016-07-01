@@ -60,7 +60,7 @@ class ConfiguracionActividadController extends Controller
 		$validator = Validator::make($request->all(),
 		    [
 	           
-				'Fecha_Ejecución' => 'required',
+				'Fecha_Ejecucion' => 'required',
 				'Id_Responsable' => 'required',
 				'Hora_Inicio' => 'required',
 				'Hora_Fin' => 'required',
@@ -79,8 +79,11 @@ class ConfiguracionActividadController extends Controller
 
         if ($validator->fails())
             return response()->json(array('status' => 'error', 'errors' => $validator->errors()));
-        else
+
+        	if($request->input('Id_Actividad') == '0')
         	$this->guardar($request->all());
+        	else
+        	$this->modificar($request->all());
 
         return response()->json(array('status' => 'ok'));
 	}
@@ -91,11 +94,17 @@ class ConfiguracionActividadController extends Controller
 		return $this->crear_actividad($model_A, $input);
 	}
 
+	public function modificar($input)
+	{
+		$model_A = new ActividadGestor;
+		return $this->modificar_actividad($model_A, $input);
+	}
+
 	public function crear_actividad($model, $input)
 	{
 		$model['Id_Persona'] = $input['Id_Responsable'];
 		$model['Id_Responsable'] = $input['Id_Responsable'];
-		$model['Fecha_Ejecución'] = $input['Fecha_Ejecución'];
+		$model['Fecha_Ejecucion'] = $input['Fecha_Ejecucion'];
 		$model['Hora_Incial'] = $input['Hora_Inicio'];
 		$model['Hora_Final'] = $input['Hora_Fin'];
 		$model['Localidad'] = $input['Id_Localidad'];
@@ -128,6 +137,30 @@ class ConfiguracionActividadController extends Controller
 		foreach($data1 as $obj){
 			$model_P->actividadGestor()->attach($model->Id_Actividad_Gestor,['persona_id'=>$obj->acompa]);
 		}
+		
+		return $model;
+	}
+
+
+	public function modificar_actividad($model, $input)
+	{
+		var_dump($input);
+		$model->find($input["Id_Actividad"]);
+		$model['Fecha_Ejecucion'] = $input['Fecha_Ejecucion'];
+		$model['Hora_Incial'] = $input['Hora_Inicio'];
+		$model['Hora_Final'] = $input['Hora_Fin'];
+		$model['Localidad'] = $input['Id_Localidad'];
+		$model['Parque'] = $input['Parque'];
+		$model['Caracteristica_Lugar'] = $input['Caracteristica_Lugar'];
+		$model['Instit_Grupo_Comun'] = $input['Institucion_Grupo'];
+		$model['Caracteristica_Poblacion'] = $input['Caracteristica_poblacion'];
+		$model['Numero_Asistente'] = $input['Numero_Asistentes'];
+		$model['Hora_Implementacion'] = $input['Hora_Implementacion'];
+		$model['Nombre_Contacto'] = $input['Persona_Contacto'];
+		$model['Rool_Comunidad'] = $input['Roll_Comunidad'];
+		$model['Telefono'] = $input['Telefono'];
+
+		$model->save();
 		
 		return $model;
 	}

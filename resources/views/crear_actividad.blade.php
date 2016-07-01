@@ -134,7 +134,7 @@
 							        		<div class="col-xs-12 col-md-6">
 							        			<div class="form-group">
 							        				<label class="control-label" for="Id_TipoDocumento">* Fecha ejecución</label>
-							        				<input type="text" data-role="datepicker" name="Fecha_Ejecución" class="form-control">
+							        				<input type="text" data-role="datepicker" name="Fecha_Ejecucion" class="form-control">
 							        			</div>
 							        		</div>
 
@@ -319,6 +319,7 @@
 			</div>
 			<div class="form-group">
 		      <div class="col-lg-12">
+		      	
 		      	<input type="hidden" name="Dato_Actividad" class="form-control">
 		      	<input type="hidden" name="Personas_Acompanates" class="form-control">
 		        <button type="reset" class="btn btn-default">Cancel</button>
