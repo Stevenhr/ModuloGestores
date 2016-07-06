@@ -1,6 +1,5 @@
 @extends('master')                              
 
-
 @section('script')
 	@parent
 

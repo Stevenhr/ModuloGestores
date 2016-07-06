@@ -65,7 +65,7 @@ $(function()
                                 validador_errores(data.errors);
                             } else {
                                 $('#actividad_modificada').modal('show');
-
+                                
                             }
                     },
                     'json'

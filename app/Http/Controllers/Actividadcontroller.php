@@ -43,10 +43,6 @@ class Actividadcontroller extends Controller
 			'localidad' => $Localidad->all()
 
 		];
-		
-		//dd($datos);
-		//exit();
-
     	return view('mi_actividad', $datos);
     }
 

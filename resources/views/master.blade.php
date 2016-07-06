@@ -91,7 +91,7 @@
                 <ul class="dropdown-menu" aria-labelledby="download">
                   <li><a href="#" style="color:#1995dc">ACTIVIDADES</a></li>
                   <li class="divider"></li>
-                  <li class=”{{ Request::is( 'personas') ? 'active' : '' }}”><a href="{{ URL::to( 'personas') }}">Mis actividades</a></li>
+                  <li class=”{{ Request::is( 'MisActividades') ? 'active' : '' }}”><a href="{{ URL::to( 'MisActividades') }}">Mis actividades</a></li>
                 </ul>
               </li>
 

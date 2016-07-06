@@ -147,7 +147,7 @@ class ConfiguracionActividadController extends Controller
 	{
 
 		
-		var_dump($model);
+		//var_dump($model);
 		$model['Fecha_Ejecucion'] = $input['Fecha_Ejecucion'];
 		$model['Hora_Incial'] = $input['Hora_Inicio'];
 		$model['Hora_Final'] = $input['Hora_Fin'];
