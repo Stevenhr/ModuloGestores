@@ -46,9 +46,9 @@ class mis_actividades_promotores extends Controller
 		$Fecha_Fin=$input['Fecha_Fin'];
     	
     	if(empty($id_act)){
-    		$consulta=ActividadGestor::where('Id_Responsable',$id)->whereBetween('Fecha_Ejecucion',array($Fecha_Inicio, $Fecha_Fin))->get();
+    		$consulta=ActividadGestor::with('localidad','persona','parque')->where('Id_Responsable',$id)->whereBetween('Fecha_Ejecucion',array($Fecha_Inicio, $Fecha_Fin))->get();
     	}else{
-    		$consulta=ActividadGestor::where('Id_Actividad_Gestor',$id_act)->whereBetween('Fecha_Ejecucion',array($Fecha_Inicio, $Fecha_Fin))->get();
+    		$consulta=ActividadGestor::with('localidad','persona','parque')->where('Id_Actividad_Gestor',$id_act)->whereBetween('Fecha_Ejecucion',array($Fecha_Inicio, $Fecha_Fin))->get();
     	}
     	return $consulta;
 	}

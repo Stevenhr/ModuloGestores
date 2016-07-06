@@ -3,7 +3,7 @@ $(function()
 	var URL = $('#mis_actividad_gestores').data('url');
 
 	$('#form_actividad_gestor').on('submit', function(e){
-
+				$("#espera").html("<img src='public/Img/loading.gif'/>");
 				$.post(
 					URL+'/service/misActividadesGestor',
 					$(this).serialize(),
@@ -12,22 +12,37 @@ $(function()
 							{
 								validador_errores_form(data.errors);
 							} else {
+								var counter = 1;
+									
 								if(data.length > 0)
 								{
 									
 									var num=1;
 									var html="";
+									t.clear().draw();
 									$.each(data, function(i, e){
-										console.log(e['Id_Responsable']);
-										html += '<tr><th scope="row" class="text-center">'+num+'</th><td>'+e['Id_Actividad_Gestor']+'</td><td>'+e['Id_Responsable']+'</td><td>'+e['Fecha_Ejecucion']+'</td><td>'+e->localidad['Nombre_Localidad']+'</td><td>'+e['Hora_Incial']+'</td><td>'+e['Parque']+'</td><td class="text-center"><button type="button" data-rel="'+i+'" data-funcion="crear" class="eliminar_dato_actividad"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td></tr>';
+
+										t.row.add( [
+								            '<th scope="row" class="text-center">'+num+'</th>',
+								            '<td class="text-center"><h4>'+e['Id_Actividad_Gestor']+'<h4></td>',
+								            '<td>'+e.persona['Primer_Apellido']+' '+e.persona['Segundo_Apellido']+' '+e.persona['Primer_Nombre']+' '+e.persona['Segundo_Nombre']+'</td>',
+								            '<td>'+e['Fecha_Ejecucion']+'</td>',
+								            '<td>'+e.localidad['Nombre_Localidad']+'</td>',
+								            '<td>'+e['Hora_Incial']+'</td>',
+								            '<td>'+e.parque['Nombre']+'</td>',
+								            '<td style="text-align:center "><center><button type="button" data-rel="'+i+'" data-funcion="crear" class="eliminar_dato_actividad btn btn-info"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></button></td>',
+								            '<td style="text-align:center"><center><button type="button" data-rel="'+i+'" data-funcion="crear" class="eliminar_dato_actividad btn btn-success"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button></td>'
+								        ] ).draw( false );
+
 										num++;
 									});
 								}
-								$('#registros_actividades_responsable').html(html);
 							}
+							$("#espera").html("");
 					},
 					'json'
 				);
+        
 		e.preventDefault();
 	});
 
@@ -50,25 +65,32 @@ $(function()
 	}
 
 
-	function ajaxRenderSection(url) {
-		alert(url);
-        $.ajax({
-            type: 'POST',
-            url: url,
-            success: function (data) {
+     var t = $('#Tabla2').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            'copyHtml5',
+            'excelHtml5',
+            'csvHtml5',
+            'pdfHtml5'
+        ]
+    });
 
-                $('#cont_act').empty().append($(data)); 
-            },
-            error: function (data) {
-                var errors = data.responseJSON;
-                if (errors) {
-                    $.each(errors, function (i) {
-                        console.log(errors[i]);
-                    });
+	$('#Tabla2').delegate('button[data-funcion="ver"]','click',function (e) {  
+        var id = $(this).data('rel'); 
+        $.get(
+            URL+'/service/obtener/'+id,
+            {},
+            function(data)
+            {   
+                if(data)
+                {
+                    actividad_datos(data);
                 }
-            }
-        });
-    }
+            },
+            'json'
+        );
+
+    }); 
 
 
 /*	

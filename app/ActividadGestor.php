@@ -45,5 +45,7 @@ class ActividadGestor extends Model
         return $this->belongsTo('App\Persona', 'Id_Responsable'); 
     }
 
+ 
+
      
 }
