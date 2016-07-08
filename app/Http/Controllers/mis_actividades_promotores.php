@@ -41,7 +41,7 @@ class mis_actividades_promotores extends Controller
 	public function buscar($input)
 	{
 		$id=$input['id_persona'];
-		$id_act=$input['Id_Actividad'];
+		$id_act=$input['Id_Actividad_Promo'];
 		$Fecha_Inicio=$input['Fecha_Inicio'];
 		$Fecha_Fin=$input['Fecha_Fin'];
     	
@@ -52,4 +52,11 @@ class mis_actividades_promotores extends Controller
     	}
     	return $consulta;
 	}
+
+	public function obtenerActividad(Request $request, $id_actividad){
+
+		$datosActividad = ActividadGestor::with('localidad','persona','parque')->find($id_actividad);
+		$datos = ['datosActividad' => $datosActividad];
+    	return  $datos;
+    }
 }

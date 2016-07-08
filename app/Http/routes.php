@@ -43,7 +43,7 @@ Route::get('/actividad/service/Tematica/{id_tematica}', 'ConfiguracionActividadC
 Route::get('/actividad/service/Actividad/{id_actividad}', 'ConfiguracionActividadController@buscarActividad');
 
 Route::post('/gestores/service/misActividadesGestor/', 'mis_actividades_promotores@procesarValidacionGestor');
-
+Route::get('/gestores/service/obtener/{id_actividad}', 'mis_actividades_promotores@obtenerActividad');
 
 
 

@@ -30,8 +30,8 @@ $(function()
 								            '<td>'+e.localidad['Nombre_Localidad']+'</td>',
 								            '<td>'+e['Hora_Incial']+'</td>',
 								            '<td>'+e.parque['Nombre']+'</td>',
-								            '<td style="text-align:center "><center><button type="button" data-rel="'+i+'" data-funcion="crear" class="eliminar_dato_actividad btn btn-info"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></button></td>',
-								            '<td style="text-align:center"><center><button type="button" data-rel="'+i+'" data-funcion="crear" class="eliminar_dato_actividad btn btn-success"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button></td>'
+								            '<td style="text-align:center "><center><button type="button" data-rel="'+e['Id_Actividad_Gestor']+'" data-funcion="ver_inf" class="btn btn-primary btn-sm" ><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> ver</button><div id="espera'+e['Id_Actividad_Gestor']+'"></div></td>',
+								            '<td style="text-align:center"><center><button type="button" data-rel="'+e['Id_Actividad_Gestor']+'" data-funcion="ejec_ver" class="btn btn-primary btn-sm" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> ver</button><div id="espera_eje'+e['Id_Actividad_Gestor']+'"></div></td>'
 								        ] ).draw( false );
 
 										num++;
@@ -75,8 +75,9 @@ $(function()
         ]
     });
 
-	$('#Tabla2').delegate('button[data-funcion="ver"]','click',function (e) {  
+	$('#Tabla2').delegate('button[data-funcion="ver_inf"]','click',function (e) {  
         var id = $(this).data('rel'); 
+        $("#espera"+id).html("<img src='public/Img/loading.gif'/>");
         $.get(
             URL+'/service/obtener/'+id,
             {},
@@ -84,13 +85,63 @@ $(function()
             {   
                 if(data)
                 {
-                    actividad_datos(data);
+                	$("#espera"+id).html("");
+                    actividad_datos_eje(data);
                 }
             },
             'json'
         );
 
     }); 
+
+    var actividad_datos_eje = function(datos)
+    {
+        //console.log(datos);
+        $('input[name="Id_Actividad"]').val(datos.datosActividad['Id_Actividad_Gestor']);
+        $('input[name="Id_Localidad"]').val(datos.datosActividad.localidad['Nombre_Localidad']);
+        $('input[name="Id_Responsable"]').val(datos.datosActividad.persona['Primer_Apellido']+" "+datos.datosActividad.persona['Segundo_Apellido']+" "+datos.datosActividad.persona['Primer_Nombre']+" "+datos.datosActividad.persona['Segundo_Nombre']);
+        $('input[name="Hora_Inicio"]').val(datos.datosActividad['Hora_Incial']);
+        $('input[name="Hora_Fin"]').val(datos.datosActividad['Hora_Final']);
+        $('input[name="Fecha_Ejecucion"]').val(datos.datosActividad['Fecha_Ejecucion']);
+        $('input[name="Parque"]').val(datos.datosActividad.parque['Nombre']);
+        $('input[name="Caracteristica_Lugar"]').val(datos.datosActividad['Caracteristica_Lugar']);
+        document.form_actividad_m.Caracteristica_poblacion.value = datos.datosActividad['Caracteristica_Poblacion'];
+        document.form_actividad_m.Caracteristica_Lugar.value = datos.datosActividad['Caracteristica_Lugar'];
+        $('input[name="Institucion_Grupo"]').val(datos.datosActividad['Instit_Grupo_Comun']);
+        $('input[name="Numero_Asistentes"]').val(datos.datosActividad['Numero_Asistente']);
+        $('input[name="Hora_Implementacion"]').val(datos.datosActividad['Hora_Implementacion']);
+        $('input[name="Persona_Contacto"]').val(datos.datosActividad['Nombre_Contacto']);
+        $('input[name="Roll_Comunidad"]').val(datos.datosActividad['Rool_Comunidad']);
+        $('input[name="Telefono"]').val(datos.datosActividad['Telefono']);
+        $('#modal_form_act_eje').modal('show');
+    };
+
+
+    $('#Tabla2').delegate('button[data-funcion="ejec_ver"]','click',function (e) {  
+        var id = $(this).data('rel'); 
+        $("#espera_eje"+id).html("<img src='public/Img/loading.gif'/>");
+        $.get(
+            URL+'/service/obtener/'+id,
+            {},
+            function(data)
+            {   
+                if(data)
+                {
+                	$("#espera_eje"+id).html("");
+                    actividad_ejecucion(data);
+                }
+            },
+            'json'
+        );
+
+    }); 
+
+    var actividad_ejecucion = function(datos)
+    {
+    	$('input[name="Id_Actividad_ejecucion"]').val(datos.datosActividad['Id_Actividad_Gestor']);
+  		$('#titulo').text(datos.datosActividad['Id_Actividad_Gestor']);
+        $('#modal_ejecucion').modal('show');
+    };
 
 
 /*	
