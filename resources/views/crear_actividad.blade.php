@@ -22,7 +22,6 @@
 			    <h3 class="panel-title">PASO 1: Datos basicos de la actividad</h3>
 			  </div>
 			  <div class="panel-body">
-			    				
 							      		<fieldset>
 							        		<div class="col-xs-12 col-md-12">
 							        			<div class="form-group">
@@ -303,6 +302,9 @@
 							        				<input type="text" name="Telefono" class="form-control">
 							        			</div>
 							        		</div>
+
+							        		
+							        		
 							       		</fieldset>
 							    
 			  </div>
