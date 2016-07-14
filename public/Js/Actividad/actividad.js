@@ -298,6 +298,7 @@ vector_acompañantes = new Array();
 				);
 
 		}else{
+				
 				$('#alerta_actividad_error').show();
 				$('#mensaje_alerta_final').html('No se ha registrado ningun dato basico de la actividad. Lo puede registrar en el paso 1.');
 				setTimeout(function(){

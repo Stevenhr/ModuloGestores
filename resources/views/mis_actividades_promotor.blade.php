@@ -116,7 +116,7 @@
 	<div class="modal-dialog modal-lg" role="document">
 	   <div class="modal-content">
 
-			<form action="" id="form_actividad_m" name="form_actividad_m">
+			<form action="" id="form_actividad_mm" name="form_actividad_mm">
 
 						<div class="panel panel-primary">
 						  <div class="panel-heading">
@@ -259,9 +259,6 @@
 						</div>
 						<div class="form-group">
 					      <div class="col-lg-12">
-					      <input type="hidden" name="Id_Actividad" class="form-control">
-					      	<input type="hidden" name="Dato_Actividad" class="form-control">
-					      	<input type="hidden" name="Personas_Acompanates" class="form-control">
 					         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 					      </div>
 					    </div>
@@ -287,19 +284,22 @@
 
 
 
-<!-- Modal formulario  actividad -->
+<!-- Modal formulario  Ejecucion -->
 <div class="modal fade bs-example-modal-lg" id="modal_ejecucion" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
 	<div class="modal-dialog modal-lg" role="document">
 	   <div class="modal-content">
 
-			<form action="" id="form_ejecucion_actividad" name="form_actividad_m">
+			
+						
 						<input type="hidden" name="Id_Actividad_ejecucion" class="form-control">
+						
 						<div class="panel panel-primary">
 						  <div class="panel-heading text-center">
-						    <h3 class="panel-title">EJECUCIÓN DE ACTIVIDADES CAMPAÑA MASIVA</h3>
+						    <h3 class="panel-title">PASO 1: EJECUCIÓN DE ACTIVIDADES CAMPAÑA MASIVA</h3>
 						  </div>
 						  <div class="panel-body">
 										      		<fieldset>
+										      		<form action="" id="form_ejecucion_datos_actividad" name="form_ejecucion_datos_actividad">
 										      			<div class="col-xs-12 col-md-12">
 										        			<div class="form-group">
 										        				<h3>ACTIVIDAD N° <label class="control-label" for="Id_TipoDocumento" id="titulo"></label></h3>
@@ -315,31 +315,41 @@
 										        		<div class="col-xs-12 col-md-6">
 										        			<div class="form-group">
 										        				<label class="control-label" for="Id_TipoDocumento">* Localidad </label>
-										        				<input type="text"  name="Localidad_eje" class="form-control"/>
+										        				<select name="Localidad_eje" id="" class="form-control">
+										        					<option value="">Seleccionar</option>
+										        				</select>
 										        			</div>
 										        		</div>
 										        		<div class="col-xs-12 col-md-6">
 										        			<div class="form-group">
 										        				<label class="control-label" for="Cedula">* Tipo entidad </label>
-																<input type='text' name="Tipo_entidad" class="form-control"/>
+																<select name="Tipo_entidad" id="" class="form-control">
+										        					<option value="">Seleccionar</option>
+										        				</select>
 										        			</div>
 										        		</div>
 										        		<div class="col-xs-12 col-md-6">
 										        			<div class="form-group">
 										        				<label class="control-label" for="Cedula">* Tipo </label>
-																<input type='text' name="Tipo" class="form-control"/>
+																<select name="Tipo_eje" id="" class="form-control">
+										        					<option value="">Seleccionar</option>
+										        				</select>
 										        			</div>
 										        		</div>
 										        		<div class="col-xs-12 col-md-6">
 										        			<div class="form-group">
 										        				<label class="control-label" for="Cedula">* Condición </label>
-																<input type='text' name="Condicion" class="form-control"/>
+																<select name="Condicion" id="" class="form-control">
+										        					<option value="">Seleccionar</option>
+										        				</select>
 										        			</div>
 										        		</div>
 										        		<div class="col-xs-12 col-md-6">
 										        			<div class="form-group">
 										        				<label class="control-label" for="Cedula">* Situación </label>
-																<input type='text' name="Situacion" class="form-control"/>
+																<select name="Situacion" id="" class="form-control">
+										        					<option value="">Seleccionar</option>
+										        				</select>
 										        			</div>
 										        		</div>
 
@@ -386,25 +396,289 @@
 										        			</div>
 										        		</div>
 													      <div class="col-xs-12 col-md-12">
-													         <button type="button" class="btn btn-default" data-dismiss="modal">Agregar</button>
+													         <button type="button" class="btn btn-primary" id="agregar_datos_ejecucion">Agregar</button>
+													          <button type="button" class="btn btn-default" id="ver_datos_tabla_ejecucion">Ver</button>
 													      </div>
 
-															<div id="alerta_actividad_error" class="col-xs-12" style="display:none;">
-																<div class="alert alert-danger alert-dismissible" role="alert">
-																	<div id="mensaje_agregar_datos"></div>
+													        <div class="col-xs-12 col-md-12">
+																<br><br>
+															</div>
+
+
+															<div class="col-xs-12 col-md-12">
+																<div class="alert alert-success alert-dismissible" role="alert" style="display:none;" id="ejecucion_agregada">
+																	
+																</div>
+															</div>
+
+															<div class="col-xs-12 col-md-12">
+																<div class="alert alert-info alert-dismissible" role="alert" style="display:none;" id="table_ejecucion_agregada">
+																			<table class="table table-bordered" id="datos_ejecucion_tabla"> 
+																			<thead>
+																			<tr>
+																			<th>#</th>
+																			<th>Eje</th>
+																			<th>Tematica</th>
+																			<th>Actividad</th>
+																			<th>Eliminar</th>
+																			</tr>
+																			</thead>
+																			<tbody id="registros_ejecucion"> 
+																			</tbody> 
+																			</table>
+																			<div id="mensaje_eliminar"></div>
+																			<button type="button" class="btn btn-default" id="cerrar_tabla_ejecu">Cerrar</button>
 																</div>
 															</div>
 
 
-										        
+										        	</form>
 										       		</fieldset>
 						  </div>
 						</div>
 
-					
-					   
+
+
+						<div class="panel panel-primary">
+						  <div class="panel-heading text-center">
+						    <h3 class="panel-title">PASO 2: REPORTE DE NOVEDADES</h3>
+						  </div>
+						  <div class="panel-body">
+										      		<fieldset>
+										      		  <form action="" id="form_ejecucion_novedades" name="form_ejecucion_novedades">
+														<div class="col-xs-12 col-md-12">
+										        			<div class="form-group">
+										        				<label class="control-label" for="Id_TipoDocumento">Requisitos  que se incumplen</label>
+										        				<select name="Id_Requisito" id="" class="form-control">
+										        					<option value="">Seleccionar</option>
+										        				</select>
+										        			</div>
+										        		</div>										      		
+										        		<div class="col-xs-12 col-md-6">
+										        			<div class="form-group">
+										        				<label class="control-label" for="Cedula">Causas o el porque</label>
+																<input type='text' name="causa" class="form-control"/>
+										        			</div>
+										        		</div>
+										        		<div class="col-xs-12 col-md-6">
+										        			<div class="form-group">
+										        				<label class="control-label" for="Cedula">Acciones Tomadas</label>
+																<input type='text' name="accion" class="form-control"/>
+										        			</div>
+										        		</div>
+
+													    <div class="col-xs-12 col-md-12">
+													         <button type="button" class="btn btn-primary" data-dismiss="modal" id="agregar_datos_novedades">Agregar</button>
+													          <button type="button" class="btn btn-default" data-dismiss="modal" id="ver_datos_tabla_novedades">Ver</button>
+													    </div>
+
+														<div class="col-xs-12 col-md-12">
+																<br><br>
+															</div>
+
+
+															<div class="col-xs-12 col-md-12">
+																<div class="alert alert-success alert-dismissible" role="alert" style="display:none;" id="novedad_agregada">
+																	
+																</div>
+															</div>
+
+															<div class="col-xs-12 col-md-12">
+																<div class="alert alert-info alert-dismissible" role="alert" style="display:none;" id="table_novedad_agregada">
+																			<table class="table table-bordered" id="datos_novedad_tabla"> 
+																			<thead>
+																			<tr>
+																			<th>#</th>
+																			<th>Eje</th>
+																			<th>Tematica</th>
+																			<th>Actividad</th>
+																			<th>Eliminar</th>
+																			</tr>
+																			</thead>
+																			<tbody id="registros_novedad"> 
+																			</tbody> 
+																			</table>
+																			<div id="mensaje_eliminar"></div>
+																			<button type="button" class="btn btn-default" id="cerrar_tabla_novedad">Cerrar</button>
+																</div>
+															</div>
+
+										        	  </form>
+										       		</fieldset>
+						  </div>
+						</div>
+
+
+
+						<div class="panel panel-primary">
+						  <div class="panel-heading text-center">
+						    <h3 class="panel-title">PASO 3: CALIFICACIÓN DEL SERVICIO</h3>
+						  </div>
+						  <div class="panel-body">
+										      		<fieldset>
+										      		<form action="" id="form_ejecucion_servicio" name="form_ejecucion_servicio">
+										        		<div class="col-xs-12 col-md-2">
+										        			<div class="form-group">
+										        				<label class="control-label" for="Cedula">Puntualidad</label><br>
+																<select name="puntualidad" id="" class="form-control">
+										        					<option value="">Selecionar</option>
+										        					<option value="1">1</option>
+										        					<option value="2">2</option>
+										        					<option value="3">3</option>
+										        					<option value="4">4</option>
+										        					<option value="5">5</option>
+										        				</select>
+										        			</div>
+										        		</div>
+										        		<div class="col-xs-12 col-md-2">
+										        			<div class="form-group">
+										        				<label class="control-label" for="Cedula">Divulgación</label>
+																<select name="divulgacion" id="" class="form-control">
+										        					<option value="">Selecionar</option>
+										        					<option value="1">1</option>
+										        					<option value="2">2</option>
+										        					<option value="3">3</option>
+										        					<option value="4">4</option>
+										        					<option value="5">5</option>
+										        				</select>
+										        			</div>
+										        		</div>
+										        		<div class="col-xs-12 col-md-2">
+										        			<div class="form-group">
+										        				<label class="control-label" for="Cedula">Montaje</label>
+																<select name="escenarioMontaje" id="" class="form-control">
+										        					<option value="">Selecionar</option>
+										        					<option value="1">1</option>
+										        					<option value="2">2</option>
+										        					<option value="3">3</option>
+										        					<option value="4">4</option>
+										        					<option value="5">5</option>
+										        				</select>
+										        			</div>
+										        		</div>
+										        		<div class="col-xs-12 col-md-2">
+										        			<div class="form-group">
+										        				<label class="control-label" for="Cedula">Cumplimiento</label>
+																<select name="cumplimiento" id="" class="form-control">
+										        					<option value="">Selecionar</option>
+										        					<option value="1">1</option>
+										        					<option value="2">2</option>
+										        					<option value="3">3</option>
+										        					<option value="4">4</option>
+										        					<option value="5">5</option>
+										        				</select>
+										        			</div>
+										        		</div>
+										        		<div class="col-xs-12 col-md-2">
+										        			<div class="form-group">
+										        				<label class="control-label" for="Cedula">Variedad</label>
+																<select name="variedadCreatividad" id="" class="form-control">
+										        					<option value="">Selecionar</option>
+										        					<option value="1">1</option>
+										        					<option value="2">2</option>
+										        					<option value="3">3</option>
+										        					<option value="4">4</option>
+										        					<option value="5">5</option>
+										        				</select>
+										        			</div>
+										        		</div>
+										        		<div class="col-xs-12 col-md-2">
+										        			<div class="form-group">
+										        				<label class="control-label text-center" for="Cedula">Seguridad</label>
+																<select name="seguridad" id="" class="form-control">
+																	<option value="">Selecionar</option>
+										        					<option value="1">1</option>
+										        					<option value="2">2</option>
+										        					<option value="3">3</option>
+										        					<option value="4">4</option>
+										        					<option value="5">5</option>
+										        				</select>
+										        			</div>
+										        		</div>
+
+										        		<div class="col-xs-12 col-md-6">
+										        			<div class="form-group">
+										        				<label class="control-label" for="Cedula">Nombre representante de la comunidad</label>
+																<input type='text' name="nombreRepresentante" class="form-control"/>
+										        			</div>
+										        		</div>
+										        		<div class="col-xs-12 col-md-6">
+										        			<div class="form-group">
+										        				<label class="control-label" for="Cedula">Telefono</label>
+																<input type='text' name="telefonoRepresentante" class="form-control"/>
+										        			</div>
+										        		</div>
+
+										        		<div class="col-xs-12 col-md-12">
+										        			<div class="form-group">
+										        				<blockquote>
+																  <p>Archivos para la evidencia de la actividad</p>				
+																</blockquote>
+										        			</div>
+										        		</div>
+
+
+										        		<div class="col-xs-12 col-md-6">
+										        			<div class="form-group">
+															    <label for="exampleInputFile">Imagen 1</label>
+															    <input type="file" name="imagen1">
+															    <p class="help-block">Imagen en formato jpeg,jpg,png,bmp.</p>
+															 </div>
+										        		</div>
+										        		<div class="col-xs-12 col-md-6">
+										        			<div class="form-group">
+															    <label for="exampleInputFile">Imagen 2</label>
+															    <input type="file" name="imagen2">
+															    <p class="help-block">Imagen en formato jpeg,jpg,png,bmp.</p>
+															 </div>
+										        		</div>
+										        		<div class="col-xs-12 col-md-6">
+										        			<div class="form-group">
+															    <label for="exampleInputFile">Imagen 3</label>
+															    <input type="file" name="imagen3">
+															    <p class="help-block">Imagen en formato jpeg,jpg,png,bmp.</p>
+															 </div>
+										        		</div>
+										        		<div class="col-xs-12 col-md-6">
+										        			<div class="form-group">
+															    <label for="exampleInputFile">Imagen 4</label>
+															    <input type="file" name="imagen4">
+															    <p class="help-block">Imagen en formato jpeg,jpg,png,bmp.</p>
+															 </div>
+										        		</div>
+										        		<div class="col-xs-12 col-md-6">
+										        			<div class="form-group">
+															    <label for="exampleInputFile">Lista Asitencia</label>
+															    <input type="file" name="listaAsistencia">
+															    <p class="help-block">Archivo en formato pdf</p>
+															 </div>
+										        		</div>
+										        		<div class="col-xs-12 col-md-6">
+										        			<div class="form-group">
+															    <label for="exampleInputFile">Acta</label>
+															    <input type="file" name="acta">
+															    <p class="help-block">Archivo en formato pdf</p>
+															 </div>
+										        		</div>
+										        		<div class="col-xs-12 col-md-12">
+										        			<div class="form-group">
+										        				<br><br>
+										        			</div>
+										        		</div>
+													    <div class="col-xs-12 col-md-12">
+													         <center><button type="submit" class="btn btn-info" id="agregar_ejecucion">Registrar</button>
+													    </div>
+
+														<div class="col-xs-12 col-md-12">
+																<div class="alert alert-danger alert-dismissible" role="alert" style="display:none;" id="registro_agregada">
+																	
+																</div>
+														</div>
+													</form> 									        
+										       		</fieldset>
+						  </div>
+						</div>   
 			</div>
-			</form> 
 	  </div>
   	</div>
 </div> 
