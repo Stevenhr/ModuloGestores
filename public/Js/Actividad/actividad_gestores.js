@@ -125,6 +125,8 @@ $(function()
         $("#espera_eje"+id).html("<img src='public/Img/loading.gif'/>");
         vector_datos_ejecucion.length=0;
         vector_novedades.length=0;
+        $('input[name="Id_Actividad_E"]').val(id);
+
 		$('#table_ejecucion_agregada').hide();
         $.get(
             URL+'/service/obtener/'+id,

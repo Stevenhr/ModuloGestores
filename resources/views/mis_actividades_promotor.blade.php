@@ -666,6 +666,7 @@
 										        			</div>
 										        		</div>
 													    <div class="col-xs-12 col-md-12">
+													    <input type="hidden" name="Id_Actividad_E" class="form-control" value="1">
 													         <center><button type="submit" class="btn btn-info" id="agregar_ejecucion">Registrar</button>
 													    </div>
 
