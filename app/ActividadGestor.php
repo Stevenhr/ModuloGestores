@@ -45,6 +45,21 @@ class ActividadGestor extends Model
         return $this->belongsTo('App\Persona', 'Id_Responsable'); 
     }
 
+    public function ejecucion()
+    {
+        return $this->hasMany('App\Ejecucion','Id_Actividad_Gestor');
+    }
+
+    public function novedad()
+    {
+        return $this->hasMany('App\Novedad','Id_Actividad_Gestor');
+    }
+
+    public function calificaciomServicio()
+    {
+        return $this->hasMany('App\Calificacion_servicio','Id_Actividad_Gestor');
+    }
+
  
 
      

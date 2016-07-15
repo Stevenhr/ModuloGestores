@@ -13,7 +13,7 @@ class ActividadgestroActividadEjeTematica extends Migration
     public function up()
     {
         //
-        Schema::create('actividadgestor_actividad_eje_tematica', function (Blueprint $table) {
+      /*  Schema::create('actividadgestor_actividad_eje_tematica', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('actividad_gestor_id')->unsigned();
             $table->foreign('actividad_gestor_id')->references('Id_Actividad_Gestor')->on('actividad_gestor');
@@ -24,7 +24,7 @@ class ActividadgestroActividadEjeTematica extends Migration
             $table->integer('actividad_id')->unsigned();
             $table->foreign('actividad_id')->references('Id_Actividad')->on('Actividad');
             $table->timestamps();
-        });
+        });*/
     }
 
     /**

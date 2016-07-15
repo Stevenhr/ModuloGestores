@@ -7,6 +7,7 @@ use App\Http\Requests;
 use Validator;
 use App\Persona;
 use App\ActividadGestor;
+use App\Calificacion_servicio;
 
 class mis_actividades_promotores extends Controller
 {
@@ -110,7 +111,7 @@ class mis_actividades_promotores extends Controller
 
     public function procesarValidacionRegistroEjecucion(Request $request)
     {
-        //var_dump($request);
+       // var_dump($request->all());
 
 
         $validator = Validator::make($request->all(),
@@ -147,36 +148,50 @@ class mis_actividades_promotores extends Controller
 
     public function guardar($input)
     {
-        $model_A = new ActividadGestor;
+        $model_A = new Calificacion_servicio;
         return $this->crear_ejecucion($model_A, $input);
     }
 
     public function crear_ejecucion($model, $input)
     {
-        $model['Id_Persona'] = $input['Id_Responsable'];
-        $model['Id_Responsable'] = $input['Id_Responsable'];
-        $model['Fecha_Ejecucion'] = $input['Fecha_Ejecucion'];
-        $model['Hora_Incial'] = $input['Hora_Inicio'];
-        $model['Hora_Final'] = $input['Hora_Fin'];
-        $model['Localidad'] = $input['Id_Localidad'];
-        $model['Parque'] = $input['Parque'];
-        $model['Caracteristica_Lugar'] = $input['Caracteristica_Lugar'];
-        $model['Instit_Grupo_Comun'] = $input['Institucion_Grupo'];
-        $model['Caracteristica_Poblacion'] = $input['Caracteristica_poblacion'];
-        $model['Numero_Asistente'] = $input['Numero_Asistentes'];
-        $model['Hora_Implementacion'] = $input['Hora_Implementacion'];
+        $model['Id_Actividad_Gestor'] = 1;
+        /*$model['Comunidad'] = $input['Id_Responsable'];
+        $model['Localidad'] = $input['Fecha_Ejecucion'];
+        $model['TipoEntidad'] = $input['Hora_Inicio'];
+        $model['Tipo'] = $input['Hora_Fin'];
+        $model['Condicion'] = $input['Id_Localidad'];
+        $model['Situacion'] = $input['Parque'];
+        $model['F_0a5'] = $input['Caracteristica_Lugar'];
+        $model['M_0a5'] = $input['Institucion_Grupo'];
+        $model['F_6a12'] = $input['Caracteristica_poblacion'];
+        $model['M_6a12'] = $input['Numero_Asistentes'];
+        $model['F_13a17'] = $input['Hora_Implementacion'];
+        $model['M_13a17'] = $input['Persona_Contacto'];
+        $model['F_18a26'] = $input['Roll_Comunidad'];
+        $model['M_18a26'] = $input['Telefono'];
+        $model['F_27a59'] = date("Y-m-d G:i:s");
+        $model['M_27a59'] = '1';
+        $model['F_60'] = '1';
+        $model['M_60'] = '1';*/
 
-        $model['Nombre_Contacto'] = $input['Persona_Contacto'];
-        $model['Rool_Comunidad'] = $input['Roll_Comunidad'];
-        $model['Telefono'] = $input['Telefono'];
-        $model['Fecha_Registro'] = date("Y-m-d G:i:s");
-        $model['Estado'] = '1';
-        $model['Estado_Ejecucion'] = '1';
-
+        $model['Id_Puntualidad'] = $input['puntualidad'];
+        $model['Id_Divulgacion'] = $input['divulgacion'];
+        $model['Id_Montaje'] = $input['escenarioMontaje'];
+        $model['Id_Cumplimiento'] = $input['cumplimiento'];
+        $model['Id_Variedad'] = $input['variedadCreatividad'];
+        $model['Id_Seguridad'] = $input['seguridad'];
+        $model['Nombre_Representante'] = $input['nombreRepresentante'];
+        $model['Telefono'] = $input['telefonoRepresentante'];
+        $model['Url_Imagen1'] = "";
+        $model['Url_Imagen2'] = "";
+        $model['Url_Imagen3'] = "";
+        $model['Url_Imagen4'] = "";
+        $model['Url_Asistencia'] = "";
+        $model['Url_Acta'] = "";
         $model->save();
         
 
-        $data0 = json_decode($input['Dato_Actividad']);
+        /*$data0 = json_decode($input['Dato_Actividad']);
         foreach($data0 as $obj){
             $model->actividadgestorActividadEjeTematica()->attach($model->Id_Actividad_Gestor,['eje_id'=>$obj->id_eje,
                 'tematica_id'=>$obj->id_tematica,
@@ -187,7 +202,7 @@ class mis_actividades_promotores extends Controller
         $data1 = json_decode($input['Personas_Acompanates']);
         foreach($data1 as $obj){
             $model_P->actividadGestor()->attach($model->Id_Actividad_Gestor,['persona_id'=>$obj->acompa]);
-        }
+        }*/
         
         return $model;
     }
