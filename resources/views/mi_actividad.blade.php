@@ -54,7 +54,7 @@
 								        		    <td></td>
 								        		    <td class="text-center"><h4>{{ $actividad['Id_Actividad_Gestor'] }}</h4></td>
 								        		    <td>{{ $actividad->persona['Primer_Apellido'].' '.$actividad->persona['Segundo_Apellido'].' '.$actividad->persona['Primer_Nombre'].' '.$actividad->persona['Segundo_Nombre'] }}</td>
-									                <td>{{ $actividad['Fecha_Ejecución'] }}</td>
+									                <td>{{ $actividad['Fecha_Ejecucion'] }}</td>
 									                <td>{{ $actividad->localidad['Nombre_Localidad'] }}</td>
 									                <td>{{ $actividad['Hora_Incial'].' - '.$actividad['Hora_Final'] }}</td>
 									                <td>{{ $actividad->parque['Nombre'] }}</td>

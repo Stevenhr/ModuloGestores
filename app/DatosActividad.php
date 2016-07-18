@@ -19,7 +19,7 @@ class DatosActividad extends Model
 		$this->connection = config('connections.mysql');
 	}
 
-	public function actividad_gestor() {
+	public function actividad_gestor2() {
         return $this->belongsTo('App\ActividadGestor', 'Id_Actividad'); 
     }
 }

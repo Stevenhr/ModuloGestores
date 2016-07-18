@@ -337,7 +337,9 @@ $(function()
 							if(data.status == 'error')
 							{
 								validador_errores_novedades(data.errors);
-							} else {
+							} 
+							else
+							{
 								var Id_Actividad_ejecucion=$('input[name="Id_Actividad_ejecucion"]').val();
 								var Id_Requisito=$('select[name="Id_Requisito"]').val();
 								var causa=$('input[name="causa"]').val();
@@ -360,6 +362,8 @@ $(function()
 				);            
 			return false;
 	});
+
+
 
 	var validador_errores_novedades = function(data)
 	{
@@ -429,15 +433,13 @@ $(function()
 
 	  //FORMULARIO DE EJECUCION : REGISTRO DE LA EJECUCION
     
-	$('#agregar_ejecucion').on('click', function(e)
+	$('#registro_agregada').on('click', function(e)
 	{
 			if(vector_novedades.length > 0 && vector_datos_ejecucion.length > 0 )
 			{
-
 				var formData = new FormData($("#form_ejecucion_servicio")[0]);
 				formData.append("vector_novedades",vector_novedades);
 				formData.append("vector_datos_ejecucion",vector_datos_ejecucion);
-
 		        $.ajax({
 		            url: URL+'/service/registro_ejecucion',  
 		            type: 'POST',
@@ -448,17 +450,14 @@ $(function()
 						    if(data.status == 'error')
 							{
 								validador_errores_registroEjecucion(data.errors);
-							}else 
+							}
+							else 
 							{
-								
-										$('#novedad_agregada').show();
-										$('#novedad_agregada').html('Se registro los datos de la novedad.');
-										setTimeout(function(){
-											$('#novedad_agregada').hide();
-										}, 2000)
-
-
-
+								$('#registro_agregadaFin').show();
+								$('#registro_agregadaFin').html('Se registro las ejecución con exito!.');
+								setTimeout(function(){
+									$('#registro_agregadaFin').hide();
+								}, 2000)
 							}
 		            }
 		        });
@@ -474,6 +473,8 @@ $(function()
 			}           
 			return false;
 	});
+
+
 
 
 

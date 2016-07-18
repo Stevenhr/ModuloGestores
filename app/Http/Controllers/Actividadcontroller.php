@@ -22,7 +22,7 @@ class Actividadcontroller extends Controller
 	        'tematica' => $tematica->all(),
 	        'actividad' => $actividad->all(),
 	        'localidad' => $Localidad->all(),
-	        'Tipo' => $Tipo->find(46),
+	        'Tipo' => $Tipo->find(50),
 	        'tipoparques' => $TipoParque->find(3),
 			'status' => session('status')
 		];
@@ -38,7 +38,7 @@ class Actividadcontroller extends Controller
 		$TipoParque = app()->make('App\TipoParque');
 		$datos = [
 			'PersonaActividad' => $PersonaActividad->find(1046),
-			'Tipo' => $Tipo->find(46),
+			'Tipo' => $Tipo->find(50),
 			'tipoparque' => $TipoParque->with('parques')->find(3),
 			'localidad' => $Localidad->all()
 

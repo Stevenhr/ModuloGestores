@@ -12,7 +12,7 @@ vector_acompañantes = new Array();
 			
 			var id_eje=$('select[name="Id_Eje"]').val();
 			var id_tematica=$('select[name="Id_Tematica"]').val();
-			var id_act = $('select[name="Id_Actividad"]').val();
+			var id_act = $('select[name="d_actividad"]').val();
 			
 			//alert(id_eje);
 			if(id_eje===''){
@@ -78,7 +78,7 @@ vector_acompañantes = new Array();
 	$('#asignar_acompañante').on('click', function(e)
 	{
 			var html = '';
-			var id=46;
+			var id=50;
 			var check="";
 
 			$.get(
@@ -181,15 +181,15 @@ vector_acompañantes = new Array();
 					if(data.length > 0)
 					{
 						$.each(data, function(i, e){
-							html += '<option value="'+e['Id_Actividad']+'">'+e['Nombre_Actividad']+'</option>';
+							html += '<option value="'+e['d_actividad']+'">'+e['Nombre_Actividad']+'</option>';
 						});
 					}
-					$('select[name="Id_Actividad"]').html(html).val($('select[name="Id_Actividad"]').data('value'));
+					$('select[name="d_actividad"]').html(html).val($('select[name="d_actividad"]').data('value'));
 				}
 			});
 		}else{
 					var html = '<option value="">Seleccionar</option>';
-					$('select[name="Id_Actividad"]').html(html).val($('select[name="Id_Actividad"]').data('value'));
+					$('select[name="d_actividad"]').html(html).val($('select[name="d_actividad"]').data('value'));
 		}
 	};
 

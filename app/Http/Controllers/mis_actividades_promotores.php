@@ -191,13 +191,13 @@ class mis_actividades_promotores extends Controller
     }
 
 
-    public function guardar($input,$Nom_imagen1)
+    public function guardar($input,$nomarchivos)
     {
         $model_A = new Calificacion_servicio;
-        return $this->crear_ejecucion($model_A, $input,$Nom_imagen1);
+        return $this->crear_ejecucion($model_A, $input,$nomarchivos);
     }
 
-    public function crear_ejecucion($model, $input,$Nom_imagen1)
+    public function crear_ejecucion($model, $input,$nomarchivos)
     {
         $model['Id_Actividad_Gestor'] = $input['Id_Actividad_E'];
         /*$model['Comunidad'] = $input['Id_Responsable'];
@@ -219,11 +219,6 @@ class mis_actividades_promotores extends Controller
         $model['F_60'] = '1';
         $model['M_60'] = '1';*/
 
-       //obtenemos el campo file definido en el formulario
-      
-
-        
-       
 
         $model['Id_Puntualidad'] = $input['puntualidad'];
         $model['Id_Divulgacion'] = $input['divulgacion'];
@@ -233,22 +228,23 @@ class mis_actividades_promotores extends Controller
         $model['Id_Seguridad'] = $input['seguridad'];
         $model['Nombre_Representante'] = $input['nombreRepresentante'];
         $model['Telefono'] = $input['telefonoRepresentante'];
-        $model['Url_Imagen1'] = $Nom_imagen1['imagen1'];
-        $model['Url_Imagen2'] = $Nom_imagen1['imagen2'];
-        $model['Url_Imagen3'] = $Nom_imagen1['imagen3'];
-        $model['Url_Imagen4'] = $Nom_imagen1['imagen4'];
-        $model['Url_Asistencia'] = $Nom_imagen1['listaAsistencia'];
-        $model['Url_Acta'] = $Nom_imagen1['acta'];
+        $model['Url_Imagen1'] = $nomarchivos['imagen1'];
+        $model['Url_Imagen2'] = $nomarchivos['imagen2'];
+        $model['Url_Imagen3'] = $nomarchivos['imagen3'];
+        $model['Url_Imagen4'] = $nomarchivos['imagen4'];
+        $model['Url_Asistencia'] = $nomarchivos['listaAsistencia'];
+        $model['Url_Acta'] = $nomarchivos['acta'];
         $model->save();
         
 
-        /*$data0 = json_decode($input['Dato_Actividad']);
+        $data0 = json_decode($input['vector_novedades']);
         foreach($data0 as $obj){
             $model->actividadgestorActividadEjeTematica()->attach($model->Id_Actividad_Gestor,['eje_id'=>$obj->id_eje,
                 'tematica_id'=>$obj->id_tematica,
                 'actividad_id'=>$obj->id_act]);
         }
-
+        
+        /*
         $model_P = new Persona;
         $data1 = json_decode($input['Personas_Acompanates']);
         foreach($data1 as $obj){
