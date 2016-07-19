@@ -77,7 +77,7 @@
               </li>
 
               <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Gestión Social<span class="caret"></span></a>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Programación<span class="caret"></span></a>
                 <ul class="dropdown-menu" aria-labelledby="download">
                   <li><a href="#" style="color:#1995dc">CONFIGURACIÓN ACTIVIDADES</a></li>
                   <li class="divider"></li>
@@ -86,10 +86,20 @@
                 </ul>
               </li>
 
+
               <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Promotores<span class="caret"></span></a>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Aprobación<span class="caret"></span></a>
                 <ul class="dropdown-menu" aria-labelledby="download">
-                  <li><a href="#" style="color:#1995dc">ACTIVIDADES</a></li>
+                  <li><a href="#" style="color:#1995dc">APROBACIÓN Y MODIFICACIÓN</a></li>
+                  <li class="divider"></li>
+                  <li class=”{{ Request::is( 'ActividadesAprobar') ? 'active' : '' }}”><a href="{{ URL::to( 'ActividadesAprobar') }}">Aprobar actividades</a></li>
+                </ul>
+              </li>
+
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Ejecución<span class="caret"></span></a>
+                <ul class="dropdown-menu" aria-labelledby="download">
+                  <li><a href="#" style="color:#1995dc">EJECUCIÓN ACTIVIDADES</a></li>
                   <li class="divider"></li>
                   <li class=”{{ Request::is( 'MisActividades') ? 'active' : '' }}”><a href="{{ URL::to( 'MisActividades') }}">Mis actividades</a></li>
                 </ul>

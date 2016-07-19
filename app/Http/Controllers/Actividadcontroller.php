@@ -41,7 +41,6 @@ class Actividadcontroller extends Controller
 			'Tipo' => $Tipo->find(50),
 			'tipoparque' => $TipoParque->with('parques')->find(3),
 			'localidad' => $Localidad->all()
-
 		];
     	return view('mi_actividad', $datos);
     }
