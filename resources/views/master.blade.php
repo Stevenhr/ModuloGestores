@@ -72,7 +72,7 @@
                   <li ><a href="#" style="color:#1995dc">GESTIÓN USUARIO</a></li>
                   <li class="divider"></li>
                   <li class=”{{ Request::is( 'personas') ? 'active' : '' }}”><a href="{{ URL::to( 'personas') }}">Crear usuario</a></li>
-                  
+                  <li class=”{{ Request::is( 'asignarLocalidad') ? 'active' : '' }}”><a href="{{ URL::to( 'asignarLocalidad') }}">Asignar Localidad</a></li>
                 </ul>
               </li>
 

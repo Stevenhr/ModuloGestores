@@ -12,12 +12,10 @@ class aprobacion_actividades extends Controller
 {
     //
     public function Mis_Actividad(){
-    	$PersonaActividad = app()->make('App\Persona');
 		$Tipo = app()->make('App\Tipo');
 		$Localidad = app()->make('App\Localidad');
 		$TipoParque = app()->make('App\TipoParque');
 		$datos = [
-			'PersonaActividad' => $PersonaActividad->find(1046),
 			'Tipo' => $Tipo->find(50),
 			'tipoparque' => $TipoParque->with('parques')->find(3),
 			'localidad' => $Localidad->all()
@@ -50,9 +48,19 @@ class aprobacion_actividades extends Controller
 		$Fecha_Fin=$input['Fecha_Fin'];
     	
     	if(empty($id_act)){
-    		$consulta=ActividadGestor::with('localidad','persona','parque')->where('Id_Responsable',$id)->whereBetween('Fecha_Ejecucion',array($Fecha_Inicio, $Fecha_Fin))->get();
+    		$persona=Persona::with('localidades')->find($id);
+    		
+    		$localidades_persona = [];
+    		
+    		foreach ($persona->localidades as $localidad) 
+    			$localidades_persona[] = $localidad->Id_Localidad;
+
+    		//dd($localidades_persona); exit();
+    		$consulta=ActividadGestor::with('localidad','persona','parque','personaProgramador')->whereIn('Localidad',$localidades_persona)->whereBetween('Fecha_Ejecucion',array($Fecha_Inicio, $Fecha_Fin))->get();
+
+
     	}else{
-    		$consulta=ActividadGestor::with('localidad','persona','parque')->where('Id_Actividad_Gestor',$id_act)->whereBetween('Fecha_Ejecucion',array($Fecha_Inicio, $Fecha_Fin))->get();
+    		$consulta=ActividadGestor::with('localidad','persona','parque','personaProgramador')->where('Id_Actividad_Gestor',$id_act)->whereBetween('Fecha_Ejecucion',array($Fecha_Inicio, $Fecha_Fin))->get();
     	}
     	return $consulta;
 	}

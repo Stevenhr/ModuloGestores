@@ -27,6 +27,7 @@ $(function()
 										t.row.add( [
 								            '<th scope="row" class="text-center">'+num+'</th>',
 								            '<td class="text-center"><h4>'+e['Id_Actividad_Gestor']+'<h4></td>',
+								            '<td>'+e.persona_programador['Primer_Apellido']+' '+e.persona_programador['Segundo_Apellido']+' '+e.persona_programador['Primer_Nombre']+' '+e.persona_programador['Segundo_Nombre']+'</td>',
 								            '<td>'+e.persona['Primer_Apellido']+' '+e.persona['Segundo_Apellido']+' '+e.persona['Primer_Nombre']+' '+e.persona['Segundo_Nombre']+'</td>',
 								            '<td>'+e['Fecha_Ejecucion']+'</td>',
 								            '<td>'+e.localidad['Nombre_Localidad']+'</td>',

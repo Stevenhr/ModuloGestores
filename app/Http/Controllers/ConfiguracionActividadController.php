@@ -144,9 +144,7 @@ class ConfiguracionActividadController extends Controller
 
 
 	public function modificar_actividad($model, $input)
-	{
-
-		
+	{		
 		//var_dump($model);
 		$model['Fecha_Ejecucion'] = $input['Fecha_Ejecucion'];
 		$model['Hora_Incial'] = $input['Hora_Inicio'];
@@ -167,6 +165,17 @@ class ConfiguracionActividadController extends Controller
 		return $model;
 	}
 
-	
+
+	 public function asignarLocalidad(){
+        $Tipo = app()->make('App\Tipo');
+        $Localidad = app()->make('App\Localidad');
+        $TipoParque = app()->make('App\TipoParque');
+        $datos = [
+            'Tipo' => $Tipo->find(50),
+            'tipoparque' => $TipoParque->with('parques')->find(3),
+            'localidad' => $Localidad->all()
+        ];
+        return view('aprobar_actividad', $datos);
+    }
 	
 }

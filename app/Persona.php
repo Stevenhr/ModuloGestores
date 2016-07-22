@@ -10,7 +10,13 @@ class Persona extends MPersona
 
      public function actividadGestor()
     {
-        return $this->belongsToMany('App\ActividadGestor','actividadgestor_persona', 'persona_id', 'actividad_gestor_id');
+
+        return $this->hasMany('App\ActividadGestor', 'Id_Persona', 'Id_Persona');
     }
 
+
+    public function localidades()
+    {
+       return $this->belongsToMany('App\Localidad',config('database.connections.mysql.database').'.persona_localidad','id_persona','id_localidad');
+    }
 }

@@ -77,6 +77,7 @@
 								            <tr>
 								                <th class="text-center">N°</th>
 								                <th class="text-center">Id</th>
+								                <th>Programador</th>
 								                <th>Responsable</th>
 								                <th>Fecha Ejecución</th>
 								                <th>Localidad</th>
@@ -90,6 +91,7 @@
 								            <tr>
 								                <th class="text-center">N°</th>
 								                <th class="text-center">Id</th>
+								                <th>Programador</th>
 								                <th>Responsable</th>
 								                <th>Fecha Ejecución</th>
 								                <th>Localidad</th>
