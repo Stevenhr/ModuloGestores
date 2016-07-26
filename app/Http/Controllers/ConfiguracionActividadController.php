@@ -145,7 +145,6 @@ class ConfiguracionActividadController extends Controller
 
 	public function modificar_actividad($model, $input)
 	{		
-		//var_dump($model);
 		$model['Fecha_Ejecucion'] = $input['Fecha_Ejecucion'];
 		$model['Hora_Incial'] = $input['Hora_Inicio'];
 		$model['Hora_Final'] = $input['Hora_Fin'];
@@ -159,23 +158,67 @@ class ConfiguracionActividadController extends Controller
 		$model['Nombre_Contacto'] = $input['Persona_Contacto'];
 		$model['Rool_Comunidad'] = $input['Roll_Comunidad'];
 		$model->Telefono= $input['Telefono'];
-
 		$model->save();
-		
 		return $model;
 	}
 
 
+
+
+// PERSONA LOCALIDAD
+
 	 public function asignarLocalidad(){
         $Tipo = app()->make('App\Tipo');
         $Localidad = app()->make('App\Localidad');
-        $TipoParque = app()->make('App\TipoParque');
         $datos = [
             'Tipo' => $Tipo->find(50),
-            'tipoparque' => $TipoParque->with('parques')->find(3),
             'localidad' => $Localidad->all()
         ];
-        return view('aprobar_actividad', $datos);
+        return view('perosona_localidad', $datos);
     }
+
+    public function procesarValidacionPersonaLocalidad(Request $request)
+	{
+		$validator = Validator::make($request->all(),
+		    [
+				'Id_Persona' => 'required',
+				'Id_Localidad' => 'required'
+        	]
+        );
+
+        if ($validator->fails()){
+            return response()->json(array('status' => 'error', 'errors' => $validator->errors()));
+        }else{
+        	
+        	return $this->creaRelacionLocalidad($request->all());
+        }
+
+	}
+
+	public function verPersonaLocalidad()
+	{
+		$personas = Persona::with('localidades')->has('localidades')->get();
+		return $personas;
+	}
+
+	public function creaRelacionLocalidad($input)
+	{
+		$id_persona = $input['Id_Persona'];
+		$id_localidad= $input['Id_Localidad'];
+		$model_P = Persona::with('localidades')->find($id_persona);
+		$model_P->localidades()->attach($id_localidad);
+		$personas = Persona::with('localidades')->has('localidades')->get();
+		return $personas;
+	}
+
+	public function eliminaPersonaLocalidad(Request $request)
+	{
+		$id_persona = $request->idpersona;
+		$id_localidad= $request->idlocalidad;
+		$model_P = Persona::with('localidades')->find($id_persona);
+		$model_P->localidades()->detach($id_localidad);
+		$personas = Persona::with('localidades')->has('localidades')->get();
+		return $personas;
+	}
 	
 }

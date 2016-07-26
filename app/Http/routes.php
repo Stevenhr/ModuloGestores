@@ -27,7 +27,7 @@ Route::get('/personas/service/ciudad/{id_pais}', '\Idrd\Usuarios\Controllers\Loc
 Route::post('/personas/service/procesar/', '\Idrd\Usuarios\Controllers\PersonaController@procesar');
 
 
-Route::get('/asignarLocalidad/', 'ConfiguracionActividadController@asignarLocalidad');
+Route::get('/asignarLocalidad', 'ConfiguracionActividadController@asignarLocalidad');
 Route::get('/CrearActividad', 'Actividadcontroller@index');
 Route::get('/Modificar', 'Actividadcontroller@index');
 Route::get('/MisProgramaciones', 'Actividadcontroller@MiActividad');
@@ -43,6 +43,10 @@ Route::get('/actividad/service/persona_tipo/{id_tipo}', '\Idrd\Usuarios\Controll
 Route::get('/actividad/service/Eje/{id_eje}', 'ConfiguracionActividadController@buscarEje');
 Route::get('/actividad/service/Tematica/{id_tematica}', 'ConfiguracionActividadController@buscarTematica');
 Route::get('/actividad/service/Actividad/{id_actividad}', 'ConfiguracionActividadController@buscarActividad');
+Route::post('/PersonaLocalidad/service/validacionPersonaLocalidad/', 'ConfiguracionActividadController@procesarValidacionPersonaLocalidad');
+Route::post('/PersonaLocalidad/service/eliminaPersonaLocalidad/', 'ConfiguracionActividadController@eliminaPersonaLocalidad');
+Route::post('/PersonaLocalidad/service/verPersonaLocalidad/', 'ConfiguracionActividadController@verPersonaLocalidad');
+
 
 Route::post('/gestores/service/misActividadesGestor/', 'mis_actividades_promotores@procesarValidacionGestor');
 Route::get('/gestores/service/obtener/{id_actividad}', 'mis_actividades_promotores@obtenerActividad');
