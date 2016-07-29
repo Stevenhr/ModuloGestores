@@ -3,7 +3,9 @@ $(function()
 	var URL = $('#mis_actividad_aprobar').data('url');
 	vector_datos_ejecucion = new Array();
     vector_novedades = new Array();
-
+    var estado_programacion="";
+    var estado_ejecucion="";
+    var dehabilitar="";
 	$('#form_actividad_aprobar').on('submit', function(e){
 				$("#espera1").html("<img src='public/Img/loading.gif'/>");
 				$.post(
@@ -23,6 +25,33 @@ $(function()
 									var html="";
 									t.clear().draw();
 									$.each(data, function(i, e){
+										if(e['Estado']==2){
+											estado_programacion="<center><span class='glyphicon glyphicon-ok' aria-hidden='true'></span><center>";
+											dehabilitar="";
+										}
+										if(e['Estado']==1){
+											estado_programacion="<center><span class='glyphicon glyphicon-remove aria-hidden='true'></span><center>";
+											dehabilitar="disabled";
+										}
+
+
+										if(e['Estado_Ejecucion']==4){ //Cancelado
+											estado_ejecucion="<center><span class='glyphicon glyphicon-remove aria-hidden='true'></span><center>";
+											
+										}
+										if(e['Estado_Ejecucion']==3){ //Aprobado
+											estado_ejecucion="<center><span class='glyphicon glyphicon-ok aria-hidden='true'></span><center>";
+											
+										}
+										if(e['Estado_Ejecucion']==2){  //Hay informacion
+											estado_ejecucion="<center><span class='glyphicon glyphicon-star' aria-hidden='true'></span><center>";
+											
+										}
+										if(e['Estado_Ejecucion']==1){  //No hay informacion
+											estado_ejecucion="<center><span class='glyphicon glyphicon-star-empty aria-hidden='true'></span><center>";
+											
+										}
+
 
 										t.row.add( [
 								            '<th scope="row" class="text-center">'+num+'</th>',
@@ -34,7 +63,9 @@ $(function()
 								            '<td>'+e['Hora_Incial']+'</td>',
 								            '<td>'+e.parque['Nombre']+'</td>',
 								            '<td style="text-align:center "><center><button type="button" data-rel="'+e['Id_Actividad_Gestor']+'" data-funcion="ver_inf" class="btn btn-primary btn-sm" ><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> ver</button><div id="espera'+e['Id_Actividad_Gestor']+'"></div></td>',
-								            '<td style="text-align:center"><center><button type="button" data-rel="'+e['Id_Actividad_Gestor']+'" data-funcion="ejec_ver" class="btn btn-primary btn-sm" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> ver</button><div id="espera_eje'+e['Id_Actividad_Gestor']+'"></div></td>'
+								            '<td>'+estado_programacion+'</td>',
+								            '<td style="text-align:center"><center><button type="button" data-rel="'+e['Id_Actividad_Gestor']+'" data-funcion="ejec_ver" class="btn btn-primary btn-sm" '+dehabilitar+'><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> ver</button><div id="espera_eje'+e['Id_Actividad_Gestor']+'"></div></td>',
+								            '<td>'+estado_ejecucion+'</td>'
 								        ] ).draw( false );
 
 										num++;
@@ -45,9 +76,6 @@ $(function()
 					},
 					'json'
 				);
-        
-				
-        
 		e.preventDefault();
 	});
 
@@ -156,23 +184,25 @@ $(function()
         $('#modal_ejecucion').modal('show');
     };
 
-
-
-    $('#form_actividad_mm').on('submit', function(e){
+    $('#Modificar_').on('click', function(e){
                 $.post(
                     URL+'/service/ModificarActividad',
-                    $(this).serialize(),
+                    $("#form_actividad_mm").serialize(),
                     function(data){
                             if(data.status == 'error')
                             {
                                 validador_errores(data.errors);
                             } else {
+
+                            	$('#form_actividad_mm .form-group').removeClass('has-error');
 								$('#mensajeModifica').html('<div class="alert alert-dismissible alert-success" ><strong>Exito!</strong> Dato modificado de la actividad con exito. </div>');
 								$('#modalMensaj').modal('show');
 								setTimeout(function(){
 									$('#modal_form_act_eje').modal('hide');
 									$('#modalMensaj').modal('hide');
-								}, 3000)
+								}, 3000)      
+
+								actulaizarTabla();                     	
                             }
                     },
                     'json'
@@ -180,6 +210,192 @@ $(function()
 
         e.preventDefault();
         return false;
+    });
+
+
+    function actulaizarTabla(){
+    	$("#espera1").html("<img src='public/Img/loading.gif'/>");
+								$.post(
+									URL+'/service/misActividadesGestor',
+									$("#form_actividad_aprobar").serialize(),
+									function(data){
+											if(data.status == 'error')
+											{
+												validador_errores_form(data.errors);
+											} else {
+												var counter = 1;
+													
+												if(data.length > 0)
+												{
+													
+													var num=1;
+													var html="";
+													t.clear().draw();
+													$.each(data, function(i, e){
+														if(e['Estado']==2){
+															estado_programacion="<center><span class='glyphicon glyphicon-ok' aria-hidden='true'></span><center>";
+															dehabilitar="";
+														}
+														if(e['Estado']==1){
+															estado_programacion="<center><span class='glyphicon glyphicon-remove aria-hidden='true'></span><center>";
+															dehabilitar="disabled";
+														}
+
+
+														if(e['Estado_Ejecucion']==4){ //Cancelado
+															estado_ejecucion="<center><span class='glyphicon glyphicon-remove aria-hidden='true'></span><center>";
+															
+														}
+														if(e['Estado_Ejecucion']==3){ //Aprobado
+															estado_ejecucion="<center><span class='glyphicon glyphicon-ok aria-hidden='true'></span><center>";
+															
+														}
+														if(e['Estado_Ejecucion']==2){  //Hay informacion
+															estado_ejecucion="<center><span class='glyphicon glyphicon-star' aria-hidden='true'></span><center>";
+															
+														}
+														if(e['Estado_Ejecucion']==1){  //No hay informacion
+															estado_ejecucion="<center><span class='glyphicon glyphicon-star-empty aria-hidden='true'></span><center>";
+														
+														}
+
+														t.row.add( [
+												            '<th scope="row" class="text-center">'+num+'</th>',
+												            '<td class="text-center"><h4>'+e['Id_Actividad_Gestor']+'<h4></td>',
+												            '<td>'+e.persona_programador['Primer_Apellido']+' '+e.persona_programador['Segundo_Apellido']+' '+e.persona_programador['Primer_Nombre']+' '+e.persona_programador['Segundo_Nombre']+'</td>',
+												            '<td>'+e.persona['Primer_Apellido']+' '+e.persona['Segundo_Apellido']+' '+e.persona['Primer_Nombre']+' '+e.persona['Segundo_Nombre']+'</td>',
+												            '<td>'+e['Fecha_Ejecucion']+'</td>',
+												            '<td>'+e.localidad['Nombre_Localidad']+'</td>',
+												            '<td>'+e['Hora_Incial']+'</td>',
+												            '<td>'+e.parque['Nombre']+'</td>',
+												            '<td style="text-align:center "><center><button type="button" data-rel="'+e['Id_Actividad_Gestor']+'" data-funcion="ver_inf" class="btn btn-primary btn-sm" ><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> ver</button><div id="espera'+e['Id_Actividad_Gestor']+'"></div></td>',
+												            '<td>'+estado_programacion+'</td>',
+												            '<td style="text-align:center"><center><button type="button" data-rel="'+e['Id_Actividad_Gestor']+'" data-funcion="ejec_ver" class="btn btn-primary btn-sm" '+dehabilitar+'><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> ver</button><div id="espera_eje'+e['Id_Actividad_Gestor']+'"></div></td>',
+												            '<td>Espera</td>'
+												        ] ).draw( false );
+
+														num++;
+													});
+												}
+											}
+											$("#espera1").html("");
+									},
+									'json'
+								);
+    }
+
+    var validador_errores = function(data)
+	{
+		$('#form_actividad_mm .form-group').removeClass('has-error');
+		var selector = '';
+		for (var error in data){
+		    if (typeof data[error] !== 'function') {
+		        switch(error)
+		        {
+		        	
+		        	case 'Id_Responsable':
+		        	case 'Id_Localidad':
+		        	case 'Parque':
+		        		selector = 'select';
+		        	break;
+
+		        	case 'Fecha_Ejecución':
+		        	case 'Hora_Inicio':
+		        	case 'Hora_Fin':
+		        	case 'Institucion_Grupo':
+		        	case 'Numero_Asistentes':
+		        	case 'Hora_Implementacion':
+		        	case 'Persona_Contacto':
+		        	case 'Roll_Comunidad':
+		        	case 'Telefono':
+		        		selector = 'input';
+		        	break;
+
+		        	case 'Caracteristica_Lugar':
+		        	case 'Caracteristica_poblacion':
+		        		selector = 'textarea';
+		        	break;
+		        }
+		        $('#form_actividad_mm '+selector+'[name="'+error+'"]').closest('.form-group').addClass('has-error');
+		    }
+		}
+	}
+
+    $('#Cerrar_c').on('click', function(e){
+                $('#modal_form_act_eje').modal('hide');
+        		e.preventDefault();
+    });
+
+    $('#Aprobar_').on('click', function(e){
+    			var id= $('input[name="Id_Actividad"]').val();
+    			$.get(
+		            URL+'/service/activar/'+id,
+		            {},
+		            function(data)
+		            {   	
+		               			$('#mensajeModifica').html("<div class='alert alert-success' role='alert'> <strong>Bien!</strong> La actividad ha sido aprobada.. </div>");
+								$('#modalMensaj').modal('show');
+								setTimeout(function(){
+									$('#modal_form_act_eje').modal('hide');
+									$('#modalMensaj').modal('hide');
+								}, 3000)
+								actulaizarTabla();
+		            }
+		        );
+
+		        e.preventDefault();
+    });
+
+
+
+    $('#Cancelar_').on('click', function(e){
+                var id= $('input[name="Id_Actividad"]').val();
+    			$.get(
+		            URL+'/service/cancelar/'+id,
+		            {},
+		            function(data)
+		            {   
+		               			$('#mensajeModifica').html("<div class='alert alert-success' role='alert'> <strong>Bien!</strong> La actividad ha sido cancelada.. </div>");
+								$('#modalMensaj').modal('show');
+								setTimeout(function(){
+									$('#modal_form_act_eje').modal('hide');
+									$('#modalMensaj').modal('hide');
+								}, 3000)
+								actulaizarTabla();
+		            }
+		        );
+
+		        e.preventDefault();
+    });
+
+
+
+
+    $('#Cerrar_e').on('click', function(e){
+                $('#modal_ejecucion').modal('hide');
+        		e.preventDefault();
+    });
+
+    $('#Aprobar_e').on('click', function(e){
+    			var id= $('input[name="Id_Actividad"]').val();
+    			alert(id);
+
+    			/*$.get(
+		            URL+'/service/activar/'+id,
+		            {},
+		            function(data)
+		            {   	
+		               			$('#mensajeModifica').html("<div class='alert alert-success' role='alert'> <strong>Bien!</strong> La actividad ha sido aprobada.. </div>");
+								$('#modalMensaj').modal('show');
+								setTimeout(function(){
+									$('#modal_form_act_eje').modal('hide');
+									$('#modalMensaj').modal('hide');
+								}, 3000)
+								actulaizarTabla();
+		            }
+		        );*/
+
+		        e.preventDefault();
     });
 
 

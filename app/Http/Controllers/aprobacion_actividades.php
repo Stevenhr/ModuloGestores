@@ -71,6 +71,19 @@ class aprobacion_actividades extends Controller
     	return  $datos;
     }
 
+    public function activarProgramacion(Request $request, $id_actividad){
+
+		ActividadGestor::where('Id_Actividad_Gestor', $id_actividad)->update(array('Estado' => 2));
+    	return  "ok";
+    }
+
+
+    public function cancelarProgramacion(Request $request, $id_actividad){
+
+		ActividadGestor::where('Id_Actividad_Gestor', $id_actividad)->update(array('Estado' => 1));
+    	return  "ok";
+    }
+
 
 
     public function procesarModificacionValidacion(Request $request)

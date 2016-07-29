@@ -82,7 +82,7 @@
 	   <div class="modal-content">
 
 			<form action="" id="form_actividad_m" name="form_actividad_m">
-
+						<h3>ACTIVIDAD N° <label class="control-label" for="Id_TipoDocumento" id="titulo_id_1"></label></h3><br>
 						<div class="panel panel-primary">
 						  <div class="panel-heading">
 						    <h3 class="panel-title">Datos de asignación y configuración horaria</h3>
@@ -252,7 +252,7 @@
 					      <input type="hidden" name="Id_Actividad" class="form-control">
 					      	<input type="hidden" name="Dato_Actividad" class="form-control">
 					      	<input type="hidden" name="Personas_Acompanates" class="form-control">
-					        <button type="close" class="btn btn-default">Cancel</button>
+					        <button type="submit" id ="Cerrar_modal" class="btn btn-default">Cancel</button>
 					      </div>
 					    </div>
 					    <br><br> 

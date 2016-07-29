@@ -433,11 +433,12 @@ $(function()
 
 	  //FORMULARIO DE EJECUCION : REGISTRO DE LA EJECUCION
     
-	$('#registro_agregada').on('click', function(e)
+	$('#agregar_ejecucion').on('click', function(e)
 	{
 			if(vector_novedades.length > 0 && vector_datos_ejecucion.length > 0 )
 			{
 				var formData = new FormData($("#form_ejecucion_servicio")[0]);
+				console.log(vector_novedades);
 				formData.append("vector_novedades",vector_novedades);
 				formData.append("vector_datos_ejecucion",vector_datos_ejecucion);
 		        $.ajax({

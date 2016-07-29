@@ -31,6 +31,7 @@ $(function()
     var actividad_datos = function(datos)
     {
         //console.log(datos);
+        $("#titulo_id_1").text(datos.datosActividad['Id_Actividad_Gestor']);
         $('input[name="Id_Actividad"]').val(datos.datosActividad['Id_Actividad_Gestor']);
         $('select[name="Id_Localidad"]').val(datos.datosActividad['Localidad']);
         $('select[name="Id_Responsable"]').val(datos.datosActividad['Id_Responsable']);
@@ -70,6 +71,13 @@ $(function()
                     },
                     'json'
                 );
+
+        e.preventDefault();
+    });
+
+    $('#Cerrar_modal').on('click', function(e){
+      
+               $('#modal_form_actividades').modal('hide');
 
         e.preventDefault();
     });

@@ -238,6 +238,7 @@ class mis_actividades_promotores extends Controller
         
 
         $data0 = json_decode($input['vector_novedades']);
+        var_dump($data0);
         foreach($data0 as $obj){
             $model->actividadgestorActividadEjeTematica()->attach($model->Id_Actividad_Gestor,['eje_id'=>$obj->id_eje,
                 'tematica_id'=>$obj->id_tematica,

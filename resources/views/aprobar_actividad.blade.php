@@ -28,7 +28,7 @@
 										        			<div class="form-group">
 										        			    <label class="control-label" for="Id_TipoDocumento">Id actividad</label>
 										        				<input type="text" name="Id_Actividad_Promo" class="form-control">
-										        				<input type="hidden" name="id_persona" class="form-control" value="1">
+										        				<input type="hidden" name="id_persona" class="form-control" value="1046">
 										        			</div>
 										        		</div>
 
@@ -71,7 +71,7 @@
 			    <h3 class="panel-title">ACTIVIDAD: Registro del estado de las actividades.</h3>
 			  </div>
 			  <div class="panel-body">
-			    				
+			    				<div class="table-responsive">
 							      		<table id="Tabla3" class="display" width="100%" cellspacing="0">
 								        <thead>
 								            <tr>
@@ -84,7 +84,9 @@
 								                <th>Hora</th>
 								                <th>Parque</th>
 								                <th>Programación</th>
+								                <th>Estado P</th>
 								                <th>Ejecución</th>
+								                <th>Estado E</th>
 								            </tr>
 								        </thead>
 								        <tfoot>
@@ -98,15 +100,15 @@
 								                <th>Hora</th>
 								                <th>Parque</th>
 								                <th>Programación</th>
+								                <th>Estado P</th>
 								                <th>Ejecución</th>
+								                <th>Estado E</th>
 								            </tr>
 								        </tfoot>
 								        <tbody id="registros_actividades_responsable">
-								            
-								           
-								   
 								        </tbody>
 								    </table>
+								</div>
 			  </div>
 			</div>
 
@@ -290,11 +292,14 @@
 						</div>
 						<div class="form-group">
 					      <div class="col-lg-12">
-					      <input type="hidden" name="Id_Actividad" class="form-control">
+					        <input type="hidden" name="Id_Actividad" class="form-control">
 					      	<input type="hidden" name="Dato_Actividad" class="form-control">
 					      	<input type="hidden" name="Personas_Acompanates" class="form-control">
-					        <button type="reset" class="btn btn-default">Cancel</button>
-					        <button type="submit" class="btn btn-primary">Modificar</button>
+					        <button type="submit" id="Cancelar_" class="btn btn-danger">Cancelar</button>
+					        <button type="submit" id="Modificar_" class="btn btn-primary">Modificar</button>
+					        <button type="submit" id="Aprobar_" class="btn btn-success">Aprobar</button>
+					        <button type="submit" id="Cerrar_c" class="btn btn-default">Cerrar</button>
+					        <div "Mensaje_estado"></div>
 					      </div>
 					    </div>
 					    <br><br> 
@@ -706,12 +711,14 @@
 										        		</div>
 													    <div class="col-xs-12 col-md-12">
 													    <input type="hidden" name="Id_Actividad_E" class="form-control" value="1">
-													         <center><button type="submit" class="btn btn-info" id="agregar_ejecucion">Registrar</button>
+													         <button type="submit" id="Cancelar_e" class="btn btn-danger">Cancelar</button>
+													        <button type="submit" id="Modificar_e" class="btn btn-primary">Modificar</button>
+													        <button type="submit" id="Aprobar_e" class="btn btn-success">Aprobar</button>
+													        <button type="submit" id="Cerrar_e" class="btn btn-default">Cerrar</button>
 													    </div>
 
 														<div class="col-xs-12 col-md-12">
 																<div class="alert alert-danger alert-dismissible" role="alert" style="display:none;" id="registro_agregada">
-																	
 																</div>
 														</div>
 													</form> 									        
