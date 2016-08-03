@@ -51,12 +51,13 @@ class ActividadGestor extends Model
 
     public function ejecucion()
     {
-        return $this->hasMany('App\Ejecucion','Id_Actividad_Gestor');
+
+        return $this->belongsToMany('App\ActividadGestor','ejecucion','Id_Actividad_Gestor','Comunidad','Localidad','TipoEntidad','Tipo','Condicion','Situacion','F_0a5','M_0a5','F_6a12','M_6a12','F_13a17','M_13a17','F_18a26','M_18a26','F_27a59','M_27a59','F_60','M_60');
     }
 
     public function novedad()
     {
-        return $this->hasMany('App\Novedad','Id_Actividad_Gestor');
+        return $this->belongsToMany('App\ActividadGestor','novedad','Id_Actividad_Gestor','Id_novedad','Causa','Accion');
     }
 
     public function calificaciomServicio()

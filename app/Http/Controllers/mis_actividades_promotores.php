@@ -8,16 +8,35 @@ use Validator;
 use App\Persona;
 use App\ActividadGestor;
 use App\Calificacion_servicio;
+use App\TipoEntidad;
+use App\TipoPersona;
+use App\Condicion;
+use App\Situacion;
+use App\Localidad;
+use App\ListaNovedad;
+
 
 class mis_actividades_promotores extends Controller
 {
     //
     public function Mis_Actividad(){
     	$PersonaActividad = new Persona;
+        $TipoEntidad = new TipoEntidad;
+        $TipoPersona = new TipoPersona;
+        $Condicion = new Condicion;
+        $Situacion = new Situacion;
+        $Localidad = new Localidad;
+        $ListaNovedad = new ListaNovedad;
+
     	$datos = [
-	        'PersonaActividad' => $PersonaActividad,
+            'TipoEntidad' => $TipoEntidad->all(),
+            'TipoPersona' => $TipoPersona->all(),
+            'Condicion' => $Condicion->all(),
+            'Situacion' => $Situacion->all(),
+            'Localidad' => $Localidad->all(),
+            'ListaNovedad' => $ListaNovedad->all()
 		];
-    	//print_r($datos);
+    	//dd($datos);
 	    return view('mis_actividades_promotor', $datos);
     }
 
@@ -65,12 +84,12 @@ class mis_actividades_promotores extends Controller
     {
         $validator = Validator::make($request->all(),
             [
-               /* 'Inst_grupo_comu' => 'required',
+                'Inst_grupo_comu' => 'required',
                 'Localidad_eje' => 'required',
                 'Tipo_entidad' => 'required',
                 'Tipo_eje' => 'required',
                 'Condicion' => 'required',
-                'Situacion' => 'required',*/
+                'Situacion' => 'required',
                 'M_0_5' => 'numeric',
                 'F_0_5' => 'numeric',
                 'M_6_12' => 'numeric',
@@ -97,7 +116,7 @@ class mis_actividades_promotores extends Controller
     {
         $validator = Validator::make($request->all(),
             [
-                //'Id_Requisito' => 'required',
+                'Id_Requisito' => 'required',
                 'causa' => 'required:alpha',
                 'accion' => 'required:alpha'
             ]
@@ -182,7 +201,7 @@ class mis_actividades_promotores extends Controller
                 'acta'=> $Nom_Acta);
 
 
-
+         //   dd($request->all());
             $this->guardar($request->all(),$nomarchivos);
         }
 
@@ -200,24 +219,7 @@ class mis_actividades_promotores extends Controller
     public function crear_ejecucion($model, $input,$nomarchivos)
     {
         $model['Id_Actividad_Gestor'] = $input['Id_Actividad_E'];
-        /*$model['Comunidad'] = $input['Id_Responsable'];
-        $model['Localidad'] = $input['Fecha_Ejecucion'];
-        $model['TipoEntidad'] = $input['Hora_Inicio'];
-        $model['Tipo'] = $input['Hora_Fin'];
-        $model['Condicion'] = $input['Id_Localidad'];
-        $model['Situacion'] = $input['Parque'];
-        $model['F_0a5'] = $input['Caracteristica_Lugar'];
-        $model['M_0a5'] = $input['Institucion_Grupo'];
-        $model['F_6a12'] = $input['Caracteristica_poblacion'];
-        $model['M_6a12'] = $input['Numero_Asistentes'];
-        $model['F_13a17'] = $input['Hora_Implementacion'];
-        $model['M_13a17'] = $input['Persona_Contacto'];
-        $model['F_18a26'] = $input['Roll_Comunidad'];
-        $model['M_18a26'] = $input['Telefono'];
-        $model['F_27a59'] = date("Y-m-d G:i:s");
-        $model['M_27a59'] = '1';
-        $model['F_60'] = '1';
-        $model['M_60'] = '1';*/
+       
 
 
         $model['Id_Puntualidad'] = $input['puntualidad'];
@@ -236,21 +238,51 @@ class mis_actividades_promotores extends Controller
         $model['Url_Acta'] = $nomarchivos['acta'];
         $model->save();
         
-
-        $data0 = json_decode($input['vector_novedades']);
-        var_dump($data0);
-        foreach($data0 as $obj){
-            $model->actividadgestorActividadEjeTematica()->attach($model->Id_Actividad_Gestor,['eje_id'=>$obj->id_eje,
-                'tematica_id'=>$obj->id_tematica,
-                'actividad_id'=>$obj->id_act]);
-        }
+        //dd($input['vector_novedades']);
         
-        /*
-        $model_P = new Persona;
-        $data1 = json_decode($input['Personas_Acompanates']);
-        foreach($data1 as $obj){
-            $model_P->actividadGestor()->attach($model->Id_Actividad_Gestor,['persona_id'=>$obj->acompa]);
-        }*/
+        $id_Activi= $input['Id_Actividad_E'];
+        $model_A = ActividadGestor::find($id_Activi);
+
+        
+        //  $model_P->calificaciomServicio()->attach($id_localidad);
+       $data0 = json_decode($input['vector_novedades']);
+       foreach($data0 as $obj){
+                 $model_A->novedad()->attach($model_A->Id_Actividad_Gestor,['Id_novedad'=>2,
+                'Causa'=>$obj->causa,
+                'Accion'=>$obj->accion]);
+        }
+
+
+        $data01 = json_decode($input['vector_datos_ejecucion']);
+
+    
+        foreach($data01 as $obj1){
+                 $model_A->ejecucion()->attach($model_A->Id_Actividad_Gestor,[
+                'Comunidad'=>$obj1->Inst_grupo_comu,
+                'Localidad'=>$obj1->Localidad_eje,
+                'TipoEntidad'=>$obj1->Tipo_entidad,
+                'Tipo'=>$obj1->Tipo_eje,
+                'Condicion'=>$obj1->Condicion,
+                'Situacion'=>$obj1->Situacion,
+                'F_0a5'=>$obj1->F_0_5,
+                'M_0a5'=>$obj1->M_0_5,
+                'F_6a12'=>$obj1->F_6_12,
+                'M_6a12'=>$obj1->M_6_12,
+                'F_13a17'=>$obj1->F_13_17,
+                'M_13a17'=>$obj1->M_13_17,
+                'F_18a26'=>$obj1->F_18_26,
+                'M_18a26'=>$obj1->M_18_26,
+                'F_27a59'=>$obj1->F_27_59,
+                'M_27a59'=>$obj1->M_27_59,
+                'F_60'=>$obj1->M_60,
+                'M_60'=>$obj1->F_60
+                ]);
+        }
+
+        $hoy = date("Y-m-d");  
+        $model_A['Estado_Ejecucion'] = 2;
+        $model_A['Fecha_Registro_Ejecución'] = $hoy;
+        $model_A->save();
 
 
         return $model;

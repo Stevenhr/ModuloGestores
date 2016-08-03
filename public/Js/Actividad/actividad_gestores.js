@@ -434,19 +434,25 @@ $(function()
 	  //FORMULARIO DE EJECUCION : REGISTRO DE LA EJECUCION
     
 	$('#agregar_ejecucion').on('click', function(e)
-	{
+	{		
+
+			$("#espera_eje").html("<img src='public/Img/loading.gif'/>");
 			if(vector_novedades.length > 0 && vector_datos_ejecucion.length > 0 )
 			{
 				var formData = new FormData($("#form_ejecucion_servicio")[0]);
-				console.log(vector_novedades);
-				formData.append("vector_novedades",vector_novedades);
-				formData.append("vector_datos_ejecucion",vector_datos_ejecucion);
+				var json_vector_novedades = JSON.stringify(vector_novedades);
+				formData.append("vector_novedades",json_vector_novedades);
+
+				var json_vector_datos_ejecucion = JSON.stringify(vector_datos_ejecucion);
+				formData.append("vector_datos_ejecucion",json_vector_datos_ejecucion);
+				//console.log(formData);
 		        $.ajax({
 		            url: URL+'/service/registro_ejecucion',  
 		            type: 'POST',
 		            data: formData,
 		            contentType: false,
 		            processData: false,
+		            dataType: "json",
 		            success: function(data){
 						    if(data.status == 'error')
 							{
@@ -454,10 +460,12 @@ $(function()
 							}
 							else 
 							{
-								$('#registro_agregadaFin').show();
-								$('#registro_agregadaFin').html('Se registro las ejecución con exito!.');
+								$("#espera_eje").html("");
+								$('#registro_agregada_eje_b').show();
+								$('#registro_agregada_eje_b').html('Se registro las ejecución con exito!.');
 								setTimeout(function(){
-									$('#registro_agregadaFin').hide();
+									$('#registro_agregada_eje_b').hide();
+									$('#modal_ejecucion').modal('hide');
 								}, 2000)
 							}
 		            }
@@ -465,16 +473,22 @@ $(function()
 			}
 			else
 			{
-				$('#registro_agregada').show();
-				$('#registro_agregada').html('Los pasos 1 y 2 son obligatorios, por favor ingresar los datos.');
+				$("#espera_eje").html("");
+				$('#registro_agregada_eje').show();
+				$('#registro_agregada_eje').html('Los pasos 1 y 2 son obligatorios, por favor ingresar los datos.');
 					setTimeout(function(){
-							$('#registro_agregada').hide();
+							$('#registro_agregada_eje').hide();
 					}, 2000)
 
 			}           
 			return false;
 	});
 
+	$('#Cerrar_eje').on('click', function(e)
+	{	
+		$('#modal_ejecucion').modal('hide');
+		return false;
+	});
 
 
 

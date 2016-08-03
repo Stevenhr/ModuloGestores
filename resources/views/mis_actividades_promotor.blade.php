@@ -259,7 +259,7 @@
 						</div>
 						<div class="form-group">
 					      <div class="col-lg-12">
-					         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 					      </div>
 					    </div>
 					    <br><br> 
@@ -317,6 +317,9 @@
 										        				<label class="control-label" for="Id_TipoDocumento">* Localidad </label>
 										        				<select name="Localidad_eje" id="" class="form-control">
 										        					<option value="">Seleccionar</option>
+										        					@foreach($Localidad as $localida)
+										        						<option value="{{ $localida['Id_Localidad'] }}">{{ $localida['Nombre_Localidad'] }}</option>
+										        					@endforeach
 										        				</select>
 										        			</div>
 										        		</div>
@@ -325,6 +328,9 @@
 										        				<label class="control-label" for="Cedula">* Tipo entidad </label>
 																<select name="Tipo_entidad" id="" class="form-control">
 										        					<option value="">Seleccionar</option>
+										        					@foreach($TipoEntidad as $tipoEntida)
+										        						<option value="{{ $tipoEntida['Id'] }}">{{ $tipoEntida['Nombre'] }}</option>
+										        					@endforeach
 										        				</select>
 										        			</div>
 										        		</div>
@@ -333,6 +339,9 @@
 										        				<label class="control-label" for="Cedula">* Tipo </label>
 																<select name="Tipo_eje" id="" class="form-control">
 										        					<option value="">Seleccionar</option>
+										        					@foreach($TipoPersona as $tipoPerson)
+										        						<option value="{{ $tipoPerson['Id'] }}">{{ $tipoPerson['Nombre'] }}</option>
+										        					@endforeach
 										        				</select>
 										        			</div>
 										        		</div>
@@ -341,6 +350,9 @@
 										        				<label class="control-label" for="Cedula">* Condición </label>
 																<select name="Condicion" id="" class="form-control">
 										        					<option value="">Seleccionar</option>
+										        					@foreach($Condicion as $condicio)
+										        						<option value="{{ $condicio['Id'] }}">{{ $condicio['Nombre'] }}</option>
+										        					@endforeach
 										        				</select>
 										        			</div>
 										        		</div>
@@ -349,6 +361,9 @@
 										        				<label class="control-label" for="Cedula">* Situación </label>
 																<select name="Situacion" id="" class="form-control">
 										        					<option value="">Seleccionar</option>
+										        					@foreach($Situacion as $situacio)
+										        						<option value="{{ $situacio['Id'] }}">{{ $situacio['Nombre'] }}</option>
+										        					@endforeach
 										        				</select>
 										        			</div>
 										        		</div>
@@ -451,6 +466,9 @@
 										        				<label class="control-label" for="Id_TipoDocumento">Requisitos  que se incumplen</label>
 										        				<select name="Id_Requisito" id="" class="form-control">
 										        					<option value="">Seleccionar</option>
+										        					@foreach($ListaNovedad as $listaNoveda)
+										        						<option value="{{ $listaNoveda['Id'] }}">{{ $listaNoveda['Nombre'] }}</option>
+										        					@endforeach
 										        				</select>
 										        			</div>
 										        		</div>										      		
@@ -665,16 +683,25 @@
 										        				<br><br>
 										        			</div>
 										        		</div>
-													    <div class="col-xs-12 col-md-12">
-													    <input type="hidden" name="Id_Actividad_E" class="form-control" value="1">
-													         <center><button type="submit" class="btn btn-info" id="agregar_ejecucion">Registrar</button>
-													    </div>
+										        		<div class="col-xs-12 col-md-12">
+																<div id="espera_eje"></div>
+																<div class="alert alert-success alert-dismissible" role="alert" style="display:none;" id="registro_agregada_eje_b">
+																	
+																</div>
 
-														<div class="col-xs-12 col-md-12">
-																<div class="alert alert-danger alert-dismissible" role="alert" style="display:none;" id="registro_agregada">
+																<div class="alert alert-danger alert-dismissible" role="alert" style="display:none;" id="registro_agregada_eje">
 																	
 																</div>
 														</div>
+													    <div class="col-xs-12 col-md-12">
+													    <input type="hidden" name="Id_Actividad_E" class="form-control" value="1">
+													         <center>
+													         <button type="button" class="btn btn-default" data-dismiss="modal" id="Cerrar_eje">Cerrar</button>
+													         <button type="submit" class="btn btn-info" id="agregar_ejecucion">Registrar</button>
+													         </center>
+													    </div>
+
+
 													</form> 									        
 										       		</fieldset>
 						  </div>
