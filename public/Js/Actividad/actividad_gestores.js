@@ -176,7 +176,7 @@ $(function()
 							{
 								validador_errores_datos_eje(data.errors);
 							} else {
-
+								validador_errores_datos_eje(data.errors);
 								var Id_Actividad_ejecucion=$('input[name="Id_Actividad_ejecucion"]').val();
 								var Inst_grupo_comu=$('input[name="Inst_grupo_comu"]').val();
 								
@@ -340,6 +340,7 @@ $(function()
 							} 
 							else
 							{
+								validador_errores_novedades(data.errors);
 								var Id_Actividad_ejecucion=$('input[name="Id_Actividad_ejecucion"]').val();
 								var Id_Requisito=$('select[name="Id_Requisito"]').val();
 								var causa=$('input[name="causa"]').val();
@@ -460,6 +461,10 @@ $(function()
 							}
 							else 
 							{
+								$('#form_ejecucion_datos_actividad')[0].reset();
+								$('#form_ejecucion_novedades')[0].reset();
+								$('#form_ejecucion_servicio')[0].reset();
+								
 								$("#espera_eje").html("");
 								$('#registro_agregada_eje_b').show();
 								$('#registro_agregada_eje_b').html('Se registro las ejecución con exito!.');
