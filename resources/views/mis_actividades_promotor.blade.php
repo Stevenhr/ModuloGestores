@@ -24,6 +24,7 @@
 			  <div class="panel-body">
 										<fieldset>
 												<form action="" id="form_actividad_gestor">
+														<input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
 										        		<div class="col-xs-12 col-md-4">
 										        			<div class="form-group">
 										        			    <label class="control-label" for="Id_TipoDocumento">Id actividad</label>

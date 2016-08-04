@@ -16,7 +16,7 @@
             <br><br>
            
 <form action="" id="form_actividad">
-
+			<input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
 			<div class="panel panel-primary">
 			  <div class="panel-heading">
 			    <h3 class="panel-title">PASO 1: Datos basicos de la actividad</h3>
