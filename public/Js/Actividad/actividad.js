@@ -12,9 +12,8 @@ vector_acompañantes = new Array();
 			
 			var id_eje=$('select[name="Id_Eje"]').val();
 			var id_tematica=$('select[name="Id_Tematica"]').val();
-			var id_act = $('select[name="d_actividad"]').val();
+			var id_act = $('select[name="d_Actividad"]').val();
 			
-			//alert(id_eje);
 			if(id_eje===''){
 				$('#alert_actividad').html('<div class="alert alert-dismissible alert-danger" ><strong>Error!</strong> Debe seleccionar un eje para poder realizar el registro.</div>');
 				$('#mensaje_actividad').show(60);
@@ -181,15 +180,15 @@ vector_acompañantes = new Array();
 					if(data.length > 0)
 					{
 						$.each(data, function(i, e){
-							html += '<option value="'+e['d_actividad']+'">'+e['Nombre_Actividad']+'</option>';
+							html += '<option value="'+e['Id_Actividad']+'">'+e['Nombre_Actividad']+'</option>';
 						});
 					}
-					$('select[name="d_actividad"]').html(html).val($('select[name="d_actividad"]').data('value'));
+					$('select[name="d_Actividad"]').html(html).val($('select[name="d_Actividad"]').data('value'));
 				}
 			});
 		}else{
 					var html = '<option value="">Seleccionar</option>';
-					$('select[name="d_actividad"]').html(html).val($('select[name="d_actividad"]').data('value'));
+					$('select[name="d_Actividad"]').html(html).val($('select[name="d_Actividad"]').data('value'));
 		}
 	};
 

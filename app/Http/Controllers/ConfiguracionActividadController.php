@@ -98,6 +98,7 @@ class ConfiguracionActividadController extends Controller
 	{
 		
 		$modelo=ActividadGestor::find($input["Id_Actividad"]);
+		var_dump($modelo);
 		return $this->modificar_actividad($modelo, $input);
 	}
 
@@ -115,7 +116,6 @@ class ConfiguracionActividadController extends Controller
 		$model['Caracteristica_Poblacion'] = $input['Caracteristica_poblacion'];
 		$model['Numero_Asistente'] = $input['Numero_Asistentes'];
 		$model['Hora_Implementacion'] = $input['Hora_Implementacion'];
-
 		$model['Nombre_Contacto'] = $input['Persona_Contacto'];
 		$model['Rool_Comunidad'] = $input['Roll_Comunidad'];
 		$model['Telefono'] = $input['Telefono'];
@@ -124,21 +124,26 @@ class ConfiguracionActividadController extends Controller
 		$model['Estado_Ejecucion'] = '1';
 
 		$model->save();
-		
-
+		$id_act_gest=$model->Id_Actividad_Gestor;
 		$data0 = json_decode($input['Dato_Actividad']);
 		foreach($data0 as $obj){
-			$model->actividadgestorActividadEjeTematica()->attach($model->Id_Actividad_Gestor,['eje_id'=>$obj->id_eje,
+			$model->actividadgestorActividadEjeTematica()->attach($id_act_gest,[
+				'eje_id'=>$obj->id_eje,
 				'tematica_id'=>$obj->id_tematica,
 				'actividad_id'=>$obj->id_act]);
 		}
 
-		$model_P = new Persona;
+		
 		$data1 = json_decode($input['Personas_Acompanates']);
-		foreach($data1 as $obj){
-			$model_P->actividadGestor()->attach($model->Id_Actividad_Gestor,['persona_id'=>$obj->acompa]);
+		//var_dump($data1);
+		foreach($data1 as $obj1){
+			$idPerosna=$obj1->acompa;
+			$model_P = Persona::with('actividadGestor')->find($idPerosna);
+			$model_P->actividadGestor()->attach($id_act_gest);
 		}
 		
+
+
 		return $model;
 	}
 
@@ -157,7 +162,8 @@ class ConfiguracionActividadController extends Controller
 		$model['Hora_Implementacion'] = $input['Hora_Implementacion'];
 		$model['Nombre_Contacto'] = $input['Persona_Contacto'];
 		$model['Rool_Comunidad'] = $input['Roll_Comunidad'];
-		$model->Telefono= $input['Telefono'];
+		$model['Telefono']= $input['Telefono'];
+
 		$model->save();
 		return $model;
 	}

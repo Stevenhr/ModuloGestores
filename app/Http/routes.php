@@ -11,15 +11,15 @@
 |
 */
 
-Route::get('/', function () {                
-    return view('welcome');
-});
+Route::any('/', 'Actividadcontroller@show');
 
-Route::get('uno', function () {                
+Route::any('uno', function () {                
     return 'welcome';
 });
 
  
+
+
 Route::get('/personas', '\Idrd\Usuarios\Controllers\PersonaController@index');
 Route::get('/personas/service/obtener/{id}', '\Idrd\Usuarios\Controllers\PersonaController@obtener');
 Route::get('/personas/service/buscar/{key}', '\Idrd\Usuarios\Controllers\PersonaController@buscar');
@@ -61,19 +61,7 @@ Route::post('/aprobar/service/ModificarActividad/', 'aprobacion_actividades@proc
 Route::get('/aprobar/service/activar/{id_actividad}', 'aprobacion_actividades@activarProgramacion');
 Route::get('/aprobar/service/cancelar/{id_actividad}', 'aprobacion_actividades@cancelarProgramacion');
 
-
-
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| This route group applies the "web" middleware group to every route
-| it contains. The "web" middleware group is defined in your HTTP
-| kernel and includes session state, CSRF protection, and more.
-|
-*/
-
 Route::group(['middleware' => ['web']], function () {
-    //
+
+    
 });

@@ -4,9 +4,52 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use Idrd\Usuarios\Repo\PersonaInterface;
 
 class Actividadcontroller extends Controller
 {
+
+
+   protected $Usuario;
+   protected $repositorio_personas;
+   
+   public function __construct(PersonaInterface $repositorio_personas){
+       if (isset($_SESSION['Usuario']))
+           $this->Usuario = $_SESSION['Usuario'];
+           $this->repositorio_personas = $repositorio_personas;
+   }
+
+   public function show(Request $request){
+   	/*if ($request->has('vector_modulo'))
+        {   
+            $vector = urldecode($request->input('vector_modulo'));
+            $user_array = unserialize($vector);
+
+        
+            $_SESSION['Usuario'] = $user_array;
+            $persona = $this->repositorio_personas->obtener($_SESSION['Usuario'][0]);
+            $_SESSION['Usuario']['Persona'] = $persona;
+            $this->Usuario = $_SESSION['Usuario'];
+        } else {
+            if(!isset($_SESSION['Usuario']))
+                $_SESSION['Usuario'] = '';
+        }
+        
+        if ($_SESSION['Usuario'] == '')
+            return redirect()->away('http://www.idrd.gov.co/SIM_Prueba/Presentacion/');
+
+
+        $deportista = $_SESSION['Usuario']['Persona'];*/
+
+        return view('welcome');
+
+   }
+
+
+
+
+   
+
     public function index(){
 
     	$eje = app()->make('App\Eje');
@@ -52,6 +95,8 @@ class Actividadcontroller extends Controller
 		$datos = ['datosActividad' => $datosActividad->find($id_actividad)];
     	return  $datos;
     }
+
+     
 
 }
 

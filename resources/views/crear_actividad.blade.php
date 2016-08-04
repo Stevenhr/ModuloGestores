@@ -17,6 +17,7 @@
            
 <form action="" id="form_actividad">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+			<input type="hidden" name="Id_Actividad" value="0"></input>
 			<div class="panel panel-primary">
 			  <div class="panel-heading">
 			    <h3 class="panel-title">PASO 1: Datos basicos de la actividad</h3>
@@ -44,8 +45,8 @@
 							        		</div>
 							        		<div class="col-xs-12 col-md-12">
 							        			<div class="form-group">
-							        				<label class="control-label" for="Id_Actividad">* Actividad </label>
-							        				<select name="Id_Actividad" id="" class="form-control">
+							        				<label class="control-label" for="d_Actividad">* Actividad </label>
+							        				<select name="d_Actividad" id="" class="form-control">
 							        					<option value="">Seleccionar</option>
 							        				</select>
 							        			</div>
