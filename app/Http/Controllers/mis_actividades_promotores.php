@@ -16,9 +16,18 @@ use App\Localidad;
 use App\ListaNovedad;
 
 
+
 class mis_actividades_promotores extends Controller
 {
     //
+   protected $Usuario;
+   
+   public function __construct(){
+           if (isset($_SESSION['Usuario']))
+           $Usuario = $_SESSION['Usuario'];
+   }
+
+
     public function Mis_Actividad(){
     	$PersonaActividad = new Persona;
         $TipoEntidad = new TipoEntidad;
@@ -36,7 +45,6 @@ class mis_actividades_promotores extends Controller
             'Localidad' => $Localidad->all(),
             'ListaNovedad' => $ListaNovedad->all()
 		];
-    	//dd($datos);
 	    return view('mis_actividades_promotor', $datos);
     }
 
@@ -60,11 +68,12 @@ class mis_actividades_promotores extends Controller
 
 	public function buscar($input)
 	{
-		$id=$input['id_persona'];
+		$id=$_SESSION['Usuario'][0];
+       
 		$id_act=$input['Id_Actividad_Promo'];
 		$Fecha_Inicio=$input['Fecha_Inicio'];
 		$Fecha_Fin=$input['Fecha_Fin'];
-    	
+    	//echo "Id-> ".$id;
     	if(empty($id_act)){
     		$consulta=ActividadGestor::with('localidad','persona','parque')->where('Id_Responsable',$id)->whereBetween('Fecha_Ejecucion',array($Fecha_Inicio, $Fecha_Fin))->get();
     	}else{

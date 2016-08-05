@@ -48,10 +48,11 @@
 										            </tr>
 										        </tfoot>
 										        <tbody>
-								            
-								           @foreach($PersonaActividad->actividadGestor as $actividad)
+								           <?php $var =1; ?>
+											
+								           @foreach($datosActividad as $actividad)
 								               <tr>
-								        		    <td></td>
+								        		    <td>{{ $var }}</td>
 								        		    <td class="text-center"><h4>{{ $actividad['Id_Actividad_Gestor'] }}</h4></td>
 								        		    <td>{{ $actividad->persona['Primer_Apellido'].' '.$actividad->persona['Segundo_Apellido'].' '.$actividad->persona['Primer_Nombre'].' '.$actividad->persona['Segundo_Nombre'] }}</td>
 									                <td>{{ $actividad['Fecha_Ejecucion'] }}</td>
@@ -62,6 +63,7 @@
 									                <button type="button" data-rel="{{ $actividad['Id_Actividad_Gestor'] }}" data-funcion="ver" class="eliminar_dato_actividad">Ver</button>
 									                </td>
 								                </tr>
+								                 <?php $var++; ?>
 							        		@endforeach
 								   
 								        </tbody>

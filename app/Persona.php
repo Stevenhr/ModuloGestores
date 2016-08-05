@@ -11,7 +11,7 @@ class Persona extends MPersona
      public function actividadGestor()
     {
 
-        //return $this->hasMany('App\ActividadGestor', 'Id_Persona', 'Id_Persona');
+        
         return $this->belongsToMany('App\ActividadGestor','actividadgestor_persona','actividad_gestor_id','persona_id');
     }
 

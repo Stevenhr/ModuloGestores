@@ -29,7 +29,7 @@
 										        			<div class="form-group">
 										        			    <label class="control-label" for="Id_TipoDocumento">Id actividad</label>
 										        				<input type="text" name="Id_Actividad_Promo" class="form-control">
-										        				<input type="hidden" name="id_persona" class="form-control" value="1">
+										        				
 										        			</div>
 										        		</div>
 

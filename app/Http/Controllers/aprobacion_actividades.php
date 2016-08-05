@@ -11,6 +11,13 @@ use App\ActividadGestor;
 class aprobacion_actividades extends Controller
 {
     //
+   protected $Usuario;
+   
+   public function __construct(){
+       if (isset($_SESSION['Usuario']))
+           $Usuario = $_SESSION['Usuario'];           
+   }
+
     public function Mis_Actividad(){
 		$Tipo = app()->make('App\Tipo');
 		$Localidad = app()->make('App\Localidad');
@@ -42,7 +49,7 @@ class aprobacion_actividades extends Controller
 
 	public function buscar($input)
 	{
-		$id=$input['id_persona'];
+		$id=$_SESSION['Usuario'][0];
 		$id_act=$input['Id_Actividad_Promo'];
 		$Fecha_Inicio=$input['Fecha_Inicio'];
 		$Fecha_Fin=$input['Fecha_Fin'];

@@ -14,6 +14,12 @@ use Validator;
 class ConfiguracionActividadController extends Controller
 {
     //
+
+    public function __construct(){
+       if (isset($_SESSION['Usuario']))
+           $this->Usuario = $_SESSION['Usuario'];
+   }
+
 	public function buscarTematicas(Request $request, $id_eje)
 	{
 		$eje_model = app()->make('App\Eje');
@@ -98,13 +104,13 @@ class ConfiguracionActividadController extends Controller
 	{
 		
 		$modelo=ActividadGestor::find($input["Id_Actividad"]);
-		var_dump($modelo);
+		//var_dump($modelo);
 		return $this->modificar_actividad($modelo, $input);
 	}
 
 	public function crear_actividad($model, $input)
 	{
-		$model['Id_Persona'] = $input['Id_Responsable'];
+		$model['Id_Persona'] = $_SESSION['Usuario'][0];
 		$model['Id_Responsable'] = $input['Id_Responsable'];
 		$model['Fecha_Ejecucion'] = $input['Fecha_Ejecucion'];
 		$model['Hora_Incial'] = $input['Hora_Inicio'];
