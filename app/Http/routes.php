@@ -56,7 +56,7 @@ Route::post('/gestores/service/registro_ejecucion/', 'mis_actividades_promotores
 
 
 Route::post('/aprobar/service/misActividadesGestor/', 'aprobacion_actividades@procesarValidacionGestor');
-Route::get('/aprobar/service/obtener/{id_actividad}', 'aprobacion_actividades@obtenerActividad');
+Route::get('/aprobar/service/obtener/{id_actividad}', 'aprobacion_actividades@obtenerEjecucion');
 Route::post('/aprobar/service/ModificarActividad/', 'aprobacion_actividades@procesarModificacionValidacion');
 Route::get('/aprobar/service/activar/{id_actividad}', 'aprobacion_actividades@activarProgramacion');
 Route::get('/aprobar/service/cancelar/{id_actividad}', 'aprobacion_actividades@cancelarProgramacion');

@@ -674,7 +674,7 @@
 										        		</div>
 										        		<div class="col-xs-12 col-md-6">
 										        			<div class="form-group">
-															    <label for="exampleInputFile">Acta</label>
+															    <label for="exampleInputFile">Archivo</label>
 															    <input type="file" name="acta">
 															    <p class="help-block">Archivo en formato pdf</p>
 															 </div>

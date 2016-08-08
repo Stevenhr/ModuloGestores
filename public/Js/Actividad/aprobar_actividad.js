@@ -178,9 +178,30 @@ $(function()
     }); 
 
     var actividad_ejecucion = function(datos)
-    {
+    {	
     	$('input[name="Id_Actividad_ejecucion"]').val(datos.datosActividad['Id_Actividad_Gestor']);
   		$('#titulo').text(datos.datosActividad['Id_Actividad_Gestor']);
+  		$('#FechaRegistro').text(datos.datosActividad['Fecha_Registro_Ejecución']);
+  		tablaEjecucion
+  		                                  /*  '<th scope="row" class="text-center">'+num+'</th>',
+								            '<td class="text-center"><h4>'+e['Id_Actividad_Gestor']+'<h4></td>',
+								            '<td>'+e.persona_programador['Primer_Apellido']+' '+e.persona_programador['Segundo_Apellido']+' '+e.persona_programador['Primer_Nombre']+' '+e.persona_programador['Segundo_Nombre']+'</td>',
+								            '<td>'+e.persona['Primer_Apellido']+' '+e.persona['Segundo_Apellido']+' '+e.persona['Primer_Nombre']+' '+e.persona['Segundo_Nombre']+'</td>',
+								            '<td>'+e['Fecha_Ejecucion']+'</td>',
+								            '<td>'+e.localidad['Nombre_Localidad']+'</td>',
+								            '<td>'+e['Hora_Incial']+'</td>',
+								            '<td>'+e.parque['Nombre']+'</td>',
+								            '<td style="text-align:center "><center><button type="button" data-rel="'+e['Id_Actividad_Gestor']+'" data-funcion="ver_inf" class="btn btn-primary btn-sm" ><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> ver</button><div id="espera'+e['Id_Actividad_Gestor']+'"></div></td>',
+								            '<td>'+estado_programacion+'</td>',
+								            '<td style="text-align:center"><center><button type="button" data-rel="'+e['Id_Actividad_Gestor']+'" data-funcion="ejec_ver" class="btn btn-primary btn-sm" '+dehabilitar+'><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> ver</button><div id="espera_eje'+e['Id_Actividad_Gestor']+'"></div></td>',
+								            '<td>'+estado_ejecucion+'</td>'*/
+		
+		var fila=" <tr><th scope='row'>1</th><td>Table cell</td><td>Table cell</td><td>Table cell</td><td>Table cell</td><td>Table cell</td><td>Table cell</td></tr>"								            
+		$('.tablaEjecucion').append(fila);					            
+								            
+								         
+								           
+
         $('#modal_ejecucion').modal('show');
     };
 

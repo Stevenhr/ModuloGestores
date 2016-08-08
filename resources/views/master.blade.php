@@ -68,11 +68,17 @@
               <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Administración<span class="caret"></span></a>
                 <ul class="dropdown-menu" aria-labelledby="themes">
-                  
+              
                   <li ><a href="#" style="color:#1995dc">GESTIÓN USUARIO</a></li>
                   <li class="divider"></li>
-                  <li class=”{{ Request::is( 'personas') ? 'active' : '' }}”><a href="{{ URL::to( 'personas') }}">Crear usuario</a></li>
-                  <li class=”{{ Request::is( 'asignarLocalidad') ? 'active' : '' }}”><a href="{{ URL::to( 'asignarLocalidad') }}">Asignar Localidad</a></li>
+
+                  @if($_SESSION['Usuario'][1] == 1) 
+                      <li class=”{{ Request::is( 'personas') ? 'active' : '' }}”><a href="{{ URL::to( 'personas') }}">Crear usuario</a></li>
+                  @endif
+
+                  @if($_SESSION['Usuario'][2] == 1) 
+                      <li class=”{{ Request::is( 'asignarLocalidad') ? 'active' : '' }}”><a href="{{ URL::to( 'asignarLocalidad') }}">Asignar Localidad</a></li>
+                  @endif
                 </ul>
               </li>
 
@@ -81,8 +87,15 @@
                 <ul class="dropdown-menu" aria-labelledby="download">
                   <li><a href="#" style="color:#1995dc">CONFIGURACIÓN ACTIVIDADES</a></li>
                   <li class="divider"></li>
-                  <li class=”{{ Request::is( 'CrearActividad') ? 'active' : '' }}”><a href="{{ URL::to( 'CrearActividad') }}">Registro de actividad</a></li>
-                   <li class=”{{ Request::is( 'MisProgramaciones') ? 'active' : '' }}”><a href="{{ URL::to( 'MisProgramaciones') }}">Mis programaciones</a></li>
+
+                   @if($_SESSION['Usuario'][3] == 1)  
+                      <li class=”{{ Request::is( 'CrearActividad') ? 'active' : '' }}”><a href="{{ URL::to( 'CrearActividad') }}">Registro de actividad</a></li>
+                  @endif
+
+                  @if($_SESSION['Usuario'][4] == 1) 
+                      <li class=”{{ Request::is( 'MisProgramaciones') ? 'active' : '' }}”><a href="{{ URL::to( 'MisProgramaciones') }}">Mis programaciones</a></li>
+                  @endif
+
                 </ul>
               </li>
 
@@ -92,7 +105,11 @@
                 <ul class="dropdown-menu" aria-labelledby="download">
                   <li><a href="#" style="color:#1995dc">APROBACIÓN Y MODIFICACIÓN</a></li>
                   <li class="divider"></li>
-                  <li class=”{{ Request::is( 'ActividadesAprobar') ? 'active' : '' }}”><a href="{{ URL::to( 'ActividadesAprobar') }}">Aprobar actividades</a></li>
+
+                 @if($_SESSION['Usuario'][5] == 1) 
+                    <li class=”{{ Request::is( 'ActividadesAprobar') ? 'active' : '' }}”><a href="{{ URL::to( 'ActividadesAprobar') }}">Aprobar actividades</a></li>
+                 @endif
+
                 </ul>
               </li>
 
@@ -101,7 +118,12 @@
                 <ul class="dropdown-menu" aria-labelledby="download">
                   <li><a href="#" style="color:#1995dc">EJECUCIÓN ACTIVIDADES</a></li>
                   <li class="divider"></li>
-                  <li class=”{{ Request::is( 'MisActividades') ? 'active' : '' }}”><a href="{{ URL::to( 'MisActividades') }}">Mis actividades</a></li>
+
+                  @if($_SESSION['Usuario'][6] == 1) 
+                      <li class=”{{ Request::is( 'MisActividades') ? 'active' : '' }}”><a href="{{ URL::to( 'MisActividades') }}">Mis actividades</a></li>
+                  @endif
+
+
                 </ul>
               </li>
 
@@ -123,7 +145,8 @@
           <div class="page-header" id="banner">
             <div class="row">
               <div class="col-lg-8 col-md-7 col-sm-6">
-                <h1>MÓDULO CAMPAÑA CULTURA CIUDADANA </h1>
+                <h1>MÓDULO CAMPAÑA CULTURA CIUDADANA 
+                </h1>
                 <p class="lead"><h1>Área de parques</h1></p>
               </div>
               <div class="col-lg-4 col-md-5 col-sm-6">
@@ -139,6 +162,7 @@
       <!-- Contenedor panel principal -->
       <div class="container">
           @yield('content')
+
       </div>        
       <!-- FIN Contenedor panel principal -->
   </body>

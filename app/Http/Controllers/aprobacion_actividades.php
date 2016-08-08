@@ -7,6 +7,7 @@ use App\Persona;
 use App\Http\Requests;
 use Validator;
 use App\ActividadGestor;
+use App\Ejecucion;
 
 class aprobacion_actividades extends Controller
 {
@@ -72,9 +73,19 @@ class aprobacion_actividades extends Controller
     	return $consulta;
 	}
 	public function obtenerActividad(Request $request, $id_actividad){
-
+		
 		$datosActividad = ActividadGestor::with('localidad','persona','parque')->find($id_actividad);
 		$datos = ['datosActividad' => $datosActividad];
+    	return  $datos;
+    }
+
+
+    public function obtenerEjecucion(Request $request, $id_actividad){
+    	
+    	$Ejecucion = Ejecucion::find($id_actividad);
+		$datosActividad = ActividadGestor::with('ejecucion','novedad','calificaciomServicio')->find($id_actividad);
+		
+		$datos = ['datosActividad' => $datosActividad,'Ejecucion'=>$Ejecucion];
     	return  $datos;
     }
 

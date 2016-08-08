@@ -22,48 +22,43 @@ class ActividadGestor extends Model
   	{
   		$this->connection = config('connections.mysql');
   	}
-
 	  public function datosActividad()
     {
         return $this->hasMany('App\DatosActividad','Id_Actividad');
     }
-
-     public function actividadgestorActividadEjeTematica()
+    public function actividadgestorActividadEjeTematica()
     {
         return $this->belongsToMany('App\ActividadGestor','actividadgestor_actividad_eje_tematica','actividad_gestor_id','eje_id','tematica_id','actividad_id');
     }
-
-    public function localidad() {
+    public function localidad() 
+    {
         return $this->belongsTo('App\Localidad', 'Localidad'); 
     }
 
-    public function parque() {
+    public function parque() 
+    {
         return $this->belongsTo('App\Parque', 'Parque'); 
     }
 
-     public function persona() {
+    public function persona() 
+    {
         return $this->belongsTo('App\Persona', 'Id_Responsable'); 
     }
 
-    public function personaProgramador() {
+    public function personaProgramador() 
+    {
         return $this->belongsTo('App\Persona', 'Id_Persona'); 
     }
-
     public function ejecucion()
     {
-
-        return $this->belongsToMany('App\ActividadGestor','ejecucion','Id_Actividad_Gestor','Comunidad','Localidad','TipoEntidad','Tipo','Condicion','Situacion','F_0a5','M_0a5','F_6a12','M_6a12','F_13a17','M_13a17','F_18a26','M_18a26','F_27a59','M_27a59','F_60','M_60');
+        return $this->belongsToMany('App\ActividadGestor','ejecucion','Id_Actividad_Gestor','Id_Actividad_Gestor','Comunidad','Localidad','TipoEntidad','Tipo','Condicion','Situacion','F_0a5','M_0a5','F_6a12','M_6a12','F_13a17','M_13a17','F_18a26','M_18a26','F_27a59','M_27a59','F_60','M_60');
     }
-
     public function novedad()
     {
         return $this->belongsToMany('App\ActividadGestor','novedad','Id_Actividad_Gestor','Id_novedad','Causa','Accion');
     }
-
     public function calificaciomServicio()
     {
         return $this->hasMany('App\Calificacion_servicio','Id_Actividad_Gestor');
-    }
-
-     
+    }     
 }

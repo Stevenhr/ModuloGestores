@@ -344,137 +344,38 @@
 						  <div class="panel-body">
 										      		<fieldset>
 										      		<form action="" id="form_ejecucion_datos_actividad" name="form_ejecucion_datos_actividad">
-										      			<div class="col-xs-12 col-md-12">
+										      			<div class="col-xs-12 col-md-6">
 										        			<div class="form-group">
 										        				<h3>ACTIVIDAD N° <label class="control-label" for="Id_TipoDocumento" id="titulo"></label></h3>
 										        			</div>
 										        		</div>
 										        		<div class="col-xs-12 col-md-6">
 										        			<div class="form-group">
-										        				<label class="control-label" for="Id_TipoDocumento">* Institucion, grupo, comunidad</label>
-										        				<input type="text" name="Inst_grupo_comu" class="form-control">
+										        				<h3>FECHA REGISTRO° <label class="control-label" for="Id_TipoDocumento" id="FechaRegistro"></label></h3>
 										        			</div>
 										        		</div>
 
-										        		<div class="col-xs-12 col-md-6">
+										        		<div class="col-xs-12 col-md-12">
 										        			<div class="form-group">
-										        				<label class="control-label" for="Id_TipoDocumento">* Localidad </label>
-										        				<select name="Localidad_eje" id="" class="form-control">
-										        					<option value="">Seleccionar</option>
-										        				</select>
-										        			</div>
-										        		</div>
-										        		<div class="col-xs-12 col-md-6">
-										        			<div class="form-group">
-										        				<label class="control-label" for="Cedula">* Tipo entidad </label>
-																<select name="Tipo_entidad" id="" class="form-control">
-										        					<option value="">Seleccionar</option>
-										        				</select>
-										        			</div>
-										        		</div>
-										        		<div class="col-xs-12 col-md-6">
-										        			<div class="form-group">
-										        				<label class="control-label" for="Cedula">* Tipo </label>
-																<select name="Tipo_eje" id="" class="form-control">
-										        					<option value="">Seleccionar</option>
-										        				</select>
-										        			</div>
-										        		</div>
-										        		<div class="col-xs-12 col-md-6">
-										        			<div class="form-group">
-										        				<label class="control-label" for="Cedula">* Condición </label>
-																<select name="Condicion" id="" class="form-control">
-										        					<option value="">Seleccionar</option>
-										        				</select>
-										        			</div>
-										        		</div>
-										        		<div class="col-xs-12 col-md-6">
-										        			<div class="form-group">
-										        				<label class="control-label" for="Cedula">* Situación </label>
-																<select name="Situacion" id="" class="form-control">
-										        					<option value="">Seleccionar</option>
-										        				</select>
-										        			</div>
-										        		</div>
-
-										        		<div class="col-xs-12 col-md-2">
-										        			<div class="form-group">
-										        				<label class="control-label" for="Cedula">0 a 5</label>
-																<input type='text' name="M_0_5" placeholder="Masculino" class="form-control"/>
-																<input type='text' name="F_0_5" placeholder="Femenino"  class="form-control"/>
-										        			</div>
-										        		</div>
-										        		<div class="col-xs-12 col-md-2">
-										        			<div class="form-group">
-										        				<label class="control-label" for="Cedula">6 a 12 </label>
-																<input type='text' name="M_6_12" placeholder="Masculino" class="form-control"/>
-																<input type='text' name="F_6_12" placeholder="Femenino"  class="form-control"/>
-										        			</div>
-										        		</div>
-										        		<div class="col-xs-12 col-md-2">
-										        			<div class="form-group">
-										        				<label class="control-label" for="Cedula">13 a 17</label>
-																<input type='text' name="M_13_17" placeholder="Masculino" class="form-control"/>
-																<input type='text' name="F_13_17" placeholder="Femenino"  class="form-control"/>
-										        			</div>
-										        		</div>
-										        		<div class="col-xs-12 col-md-2">
-										        			<div class="form-group">
-										        				<label class="control-label" for="Cedula">18 a 26 </label>
-																<input type='text' name="M_18_26" placeholder="Masculino" class="form-control"/>
-																<input type='text' name="F_18_26" placeholder="Femenino"  class="form-control"/>
-										        			</div>
-										        		</div>
-										        		<div class="col-xs-12 col-md-2">
-										        			<div class="form-group">
-										        				<label class="control-label" for="Cedula">27 a 59</label>
-																<input type='text' name="M_27_59" placeholder="Masculino" class="form-control"/>
-																<input type='text' name="F_27_59" placeholder="Femenino"  class="form-control"/>
-										        			</div>
-										        		</div>
-										        		<div class="col-xs-12 col-md-2">
-										        			<div class="form-group">
-										        				<label class="control-label text-center" for="Cedula">60 o mas </label>
-																<input type='text' name="M_60" placeholder="Masculino" class="form-control"/>
-																<input type='text' name="F_60" placeholder="Femenino"  class="form-control"/>
-										        			</div>
-										        		</div>
-													      <div class="col-xs-12 col-md-12">
-													         <button type="button" class="btn btn-primary" id="agregar_datos_ejecucion">Agregar</button>
-													          <button type="button" class="btn btn-default" id="ver_datos_tabla_ejecucion">Ver</button>
-													      </div>
-
-													        <div class="col-xs-12 col-md-12">
-																<br><br>
-															</div>
-
-
-															<div class="col-xs-12 col-md-12">
-																<div class="alert alert-success alert-dismissible" role="alert" style="display:none;" id="ejecucion_agregada">
-																	
+										        				<div class="table-responsive">
+																  <table class="table tablaEjecucion" >
+																  <thead> 
+														            <tr> 
+														            <th>#</th> <th>Table heading</th> 
+														            <th>Table heading</th> 
+														            <th>Table heading</th> 
+														            <th>Table heading</th> 
+														            <th>Table heading</th> 
+														            <th>Table heading</th> 
+														            </tr> 
+														            </thead> 
+														            <tbody id="tablaEjecucion"> 
+														            </tbody> 
+																  </table>
 																</div>
-															</div>
-
-															<div class="col-xs-12 col-md-12">
-																<div class="alert alert-info alert-dismissible" role="alert" style="display:none;" id="table_ejecucion_agregada">
-																			<table class="table table-bordered" id="datos_ejecucion_tabla"> 
-																			<thead>
-																			<tr>
-																			<th>#</th>
-																			<th>Eje</th>
-																			<th>Tematica</th>
-																			<th>Actividad</th>
-																			<th>Eliminar</th>
-																			</tr>
-																			</thead>
-																			<tbody id="registros_ejecucion"> 
-																			</tbody> 
-																			</table>
-																			<div id="mensaje_eliminar"></div>
-																			<button type="button" class="btn btn-default" id="cerrar_tabla_ejecu">Cerrar</button>
-																</div>
-															</div>
-
+										        			</div>
+										        		</div>
+										        		
 
 										        	</form>
 										       		</fieldset>
@@ -516,36 +417,6 @@
 													          <button type="button" class="btn btn-default" data-dismiss="modal" id="ver_datos_tabla_novedades">Ver</button>
 													    </div>
 
-														<div class="col-xs-12 col-md-12">
-																<br><br>
-															</div>
-
-
-															<div class="col-xs-12 col-md-12">
-																<div class="alert alert-success alert-dismissible" role="alert" style="display:none;" id="novedad_agregada">
-																	
-																</div>
-															</div>
-
-															<div class="col-xs-12 col-md-12">
-																<div class="alert alert-info alert-dismissible" role="alert" style="display:none;" id="table_novedad_agregada">
-																			<table class="table table-bordered" id="datos_novedad_tabla"> 
-																			<thead>
-																			<tr>
-																			<th>#</th>
-																			<th>Eje</th>
-																			<th>Tematica</th>
-																			<th>Actividad</th>
-																			<th>Eliminar</th>
-																			</tr>
-																			</thead>
-																			<tbody id="registros_novedad"> 
-																			</tbody> 
-																			</table>
-																			<div id="mensaje_eliminar"></div>
-																			<button type="button" class="btn btn-default" id="cerrar_tabla_novedad">Cerrar</button>
-																</div>
-															</div>
 
 										        	  </form>
 										       		</fieldset>

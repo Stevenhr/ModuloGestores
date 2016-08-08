@@ -37,7 +37,7 @@
 							        		</div>
 							        		<div class="col-xs-12 col-md-12">
 							        			<div class="form-group">
-							        				<label class="control-label" for="Id_Tematica">* Tematica </label>
+							        				<label class="control-label" for="Id_Tematica">* Componente </label>
 							        				<select name="Id_Tematica" id="" class="form-control">
 							        					<option value="">Seleccionar</option>¿
 							        				</select>
@@ -45,7 +45,7 @@
 							        		</div>
 							        		<div class="col-xs-12 col-md-12">
 							        			<div class="form-group">
-							        				<label class="control-label" for="d_Actividad">* Actividad </label>
+							        				<label class="control-label" for="d_Actividad">* Estrategia </label>
 							        				<select name="d_Actividad" id="" class="form-control">
 							        					<option value="">Seleccionar</option>
 							        				</select>
@@ -293,7 +293,7 @@
 
 							        		<div class="col-xs-12 col-md-6">
 							        			<div class="form-group">
-							        				<label class="control-label" for="Id_TipoDocumento">* Roll de la comunidad </label>
+							        				<label class="control-label" for="Id_TipoDocumento">* Roll  </label>
 							        				<input type="text" name="Roll_Comunidad" class="form-control">
 							        			</div>
 							        		</div>
