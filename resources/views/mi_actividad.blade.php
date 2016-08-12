@@ -55,7 +55,7 @@
 
 								           <?php 
 								           				$fecha_actual = date('Y-m-d'); 
-								                       if($actividad['Estado']==2 || $actividad['Fecha_Ejecucion']>$fecha_actual){  //No hay informacion
+								                       if($actividad['Estado']==2 || $actividad['Fecha_Ejecucion']<$fecha_actual){  //No hay informacion
                                                             $clase="btn btn-default";
                                                         }else{
                                                             $clase="btn btn-success";

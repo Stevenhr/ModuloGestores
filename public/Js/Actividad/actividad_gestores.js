@@ -24,6 +24,24 @@ $(function()
 									t.clear().draw();
 									$.each(data, function(i, e){
 
+										if(e.parque==null){  //No hay informacion
+                                            Nomparque="Otro: "+e['Otro'];
+                                        }else{
+                                            Nomparque=e.parque['Nombre'];
+                                        }
+
+
+                                        var f = new Date();
+                                        var fechaActual = new Date(f.getFullYear()+ "," + (f.getMonth() +1) + "," + f.getDate());
+                                        var tmp = e['Fecha_Ejecucion'].split('-');
+                                        var F_ejecucion = new Date(tmp[0]+ "," + tmp[1]+ "," + tmp[2]);
+
+                                        if(e['Estado']==2 && F_ejecucion<fechaActual){  //No hay informacion
+                                            clase="btn btn-success";
+                                        }else{
+                                            clase="btn btn-default";
+                                        }
+
 										t.row.add( [
 								            '<th scope="row" class="text-center">'+num+'</th>',
 								            '<td class="text-center"><h4>'+e['Id_Actividad_Gestor']+'<h4></td>',
@@ -31,9 +49,9 @@ $(function()
 								            '<td>'+e['Fecha_Ejecucion']+'</td>',
 								            '<td>'+e.localidad['Nombre_Localidad']+'</td>',
 								            '<td>'+e['Hora_Incial']+'</td>',
-								            '<td>'+e.parque['Nombre']+'</td>',
-								            '<td style="text-align:center "><center><button type="button" data-rel="'+e['Id_Actividad_Gestor']+'" data-funcion="ver_inf" class="btn btn-primary btn-sm" ><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> ver</button><div id="espera'+e['Id_Actividad_Gestor']+'"></div></td>',
-								            '<td style="text-align:center"><center><button type="button" data-rel="'+e['Id_Actividad_Gestor']+'" data-funcion="ejec_ver" class="btn btn-primary btn-sm" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> ver</button><div id="espera_eje'+e['Id_Actividad_Gestor']+'"></div></td>'
+								            '<td>'+Nomparque+'</td>',
+								            '<td style="text-align:center "><center><button type="button" data-rel="'+e['Id_Actividad_Gestor']+'" data-funcion="ver_inf" class="btn btn-primary btn-sm '+clase+'" ><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> ver</button><div id="espera'+e['Id_Actividad_Gestor']+'"></div></td>',
+								            '<td style="text-align:center"><center><button type="button" data-rel="'+e['Id_Actividad_Gestor']+'" data-funcion="ejec_ver" class="btn btn-primary btn-sm '+clase+'" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> ver</button><div id="espera_eje'+e['Id_Actividad_Gestor']+'"></div></td>'
 								        ] ).draw( false );
 
 										num++;
@@ -145,8 +163,29 @@ $(function()
 
     var actividad_ejecucion = function(datos)
     {
+    	console.log(datos);
     	$('input[name="Id_Actividad_ejecucion"]').val(datos.datosActividad['Id_Actividad_Gestor']);
   		$('#titulo').text(datos.datosActividad['Id_Actividad_Gestor']);
+
+  		
+
+  		var f = new Date();
+        var fechaActual = new Date(f.getFullYear()+ "," + (f.getMonth() +1) + "," + f.getDate());
+        var tmp = datos.datosActividad['Fecha_Ejecucion'].split('-');
+        var F_ejecucion = new Date(tmp[0]+ "," + tmp[1]+ "," + tmp[2]);
+
+
+        if(datos.datosActividad['Estado']==2 && F_ejecucion<fechaActual){
+            $("#agregar_datos_ejecucion").show();
+            $("#agregar_datos_novedades").show();
+            $("#agregar_ejecucion").show();
+            //$( "#Cerrar_Act" ).removeClass( "btn btn-success" ).addClass( "btn btn-default" );            
+        }else{
+            $("#agregar_datos_ejecucion").hide();
+            $("#agregar_datos_novedades").hide();
+            $("#agregar_ejecucion").hide();
+        }
+
         $('#modal_ejecucion').modal('show');
     };
 

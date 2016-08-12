@@ -84,7 +84,7 @@ class mis_actividades_promotores extends Controller
 
 	public function obtenerActividad(Request $request, $id_actividad){
 
-		$datosActividad = ActividadGestor::with('localidad','persona','parque')->find($id_actividad);
+		$datosActividad = ActividadGestor::with('localidad','persona','parque','ejecucion')->find($id_actividad);
 		$datos = ['datosActividad' => $datosActividad];
     	return  $datos;
     }
@@ -195,9 +195,15 @@ class mis_actividades_promotores extends Controller
             $Nom_listaAsistencia = date('Y-m-d-H:i:s')."-listaAsistencia-".$id_act;
             $file_listaAsistencia->move(public_path().'/Img/EvidenciaArchivo/', $Nom_listaAsistencia);
 
-            $file_acta=$request->file('acta');
-            $Nom_Acta = date('Y-m-d-H:i:s')."-"."-acta-".$id_act;
-            $file_acta->move(public_path().'/Img/EvidenciaArchivo/', $Nom_Acta);
+
+            if ($request->hasFile('acta')) {
+                $file_acta=$request->file('acta');
+                $Nom_Acta = date('Y-m-d-H:i:s')."-"."-acta-".$id_act;
+                $file_acta->move(public_path().'/Img/EvidenciaArchivo/', $Nom_Acta);
+            }else{
+                $Nom_Acta="";
+            }
+            
 
 
             $nomarchivos= array(

@@ -11,6 +11,10 @@ class Localidad extends MLocalidad
     {
        return $this->belongsToMany('App\ActividadGestor','persona_localidad','id_localidad','id_persona');
     }
+    public function ejecucion()
+	{
+		return $this->hasMany('App\Ejecucion', 'id_localidad');
+	}
 
 
 }

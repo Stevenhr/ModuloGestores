@@ -82,7 +82,7 @@
 								                <th>Fecha Ejecución</th>
 								                <th>Localidad</th>
 								                <th>Hora</th>
-								                <th>Parque</th>
+								                <th>Parque / Otro</th>
 								                <th>Programación</th>
 								                <th>Ejecución</th>
 								            </tr>
@@ -95,7 +95,7 @@
 								                <th>Fecha Ejecución</th>
 								                <th>Localidad</th>
 								                <th>Hora</th>
-								                <th>Parque</th>
+								                <th>Parque / Otro</th>
 								                <th>Programación</th>
 								                <th>Ejecución</th>
 								            </tr>

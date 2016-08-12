@@ -11,7 +11,7 @@ $(function()
         ]
     });
 
-	$('#example').delegate('button[data-funcion="ver"]','click',function (e) {  
+    $('#example').delegate('button[data-funcion="ver"]','click',function (e) {  
         var id = $(this).data('rel'); 
         $("#espera_3_"+id).html("<img src='public/Img/loading.gif'/>");
         $.get(
@@ -65,7 +65,13 @@ $(function()
         $('input[name="Roll_Comunidad"]').val(datos.datosActividad['Rool_Comunidad']);
         $('input[name="Telefono"]').val(datos.datosActividad['Telefono']);
 
-        if(datos.datosActividad['Estado']==2){
+        var f = new Date();
+        var fechaActual = new Date(f.getFullYear()+ "," + (f.getMonth() +1) + "," + f.getDate());
+        var tmp = datos.datosActividad['Fecha_Ejecucion'].split('-');
+        var F_ejecucion = new Date(tmp[0]+ "," + tmp[1]+ "," + tmp[2]);
+
+
+        if(datos.datosActividad['Estado']==2 || F_ejecucion<fechaActual){
             $("#Modificar_Act").hide();
             //$( "#Cerrar_Act" ).removeClass( "btn btn-default" ).addClass( "btn btn-success" );
         }else{
@@ -200,7 +206,7 @@ $(function()
                                                             var F_ejecucion = new Date(tmp[0]+ "," + tmp[1]+ "," + tmp[2]);
 
 
-                                                        if(e['Estado']==2 || F_ejecucion>fechaActual){  //No hay informacion
+                                                        if(e['Estado']==2 || F_ejecucion<fechaActual){  //No hay informacion
                                                             clase="btn btn-default";
                                                         }else{
                                                             clase="btn btn-success";

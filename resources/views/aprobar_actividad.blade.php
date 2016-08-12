@@ -369,18 +369,20 @@
 										        		<div class="col-xs-12 col-md-12">
 										        			<div class="form-group">
 										        				<div class="table-responsive">
-																  <table class="table tablaEjecucion" >
+																  <table class="table table-bordered" >
 																  <thead> 
 														            <tr> 
-														            <th>#</th> <th>Table heading</th> 
-														            <th>Table heading</th> 
-														            <th>Table heading</th> 
-														            <th>Table heading</th> 
-														            <th>Table heading</th> 
-														            <th>Table heading</th> 
+														            <th>#</th> 
+														            <th>INSTITUCIÓN/ GRUPO/ COMUNIDAD</th> 
+														            <th>Localidad</th> 
+														            <th>Entidad</th> 
+														            <th>Tipo</th> 
+														            <th>Condición</th> 
+														            <th>Situación</th> 
 														            </tr> 
 														            </thead> 
 														            <tbody id="tablaEjecucion"> 
+
 														            </tbody> 
 																  </table>
 																</div>

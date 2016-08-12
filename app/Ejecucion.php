@@ -21,4 +21,20 @@ class Ejecucion extends Model
 	public function actividad_gestor() {
         return $this->belongsTo('App\ActividadGestor', 'Id_Actividad_Gestor'); 
     }
+
+    public function tipoEntidad() {
+    	return $this->belongsTo('App\TipoEntidad','TipoEntidad');
+    }
+    public function tipoPersona() {
+    	return $this->belongsTo('App\TipoPersona','Tipo');
+    }
+    public function condicion() {
+    	return $this->belongsTo('App\Condicion','Condicion');
+    }
+    public function situacion() {
+    	return $this->belongsTo('App\Situacion','Situacion');
+    }
+    public function localidad() {
+        return $this->belongsTo('App\Localidad','Localidad');
+    }
 }

@@ -8,6 +8,7 @@ use App\Http\Requests;
 use Validator;
 use App\ActividadGestor;
 use App\Ejecucion;
+use App\Novedad;
 
 class aprobacion_actividades extends Controller
 {
@@ -82,11 +83,13 @@ class aprobacion_actividades extends Controller
 
     public function obtenerEjecucion(Request $request, $id_actividad){
     	
-    	$Ejecucion = Ejecucion::find($id_actividad);
-		$datosActividad = ActividadGestor::with('ejecucion','novedad','calificaciomServicio')->find($id_actividad);
+ 
+		$Ejecucion = Ejecucion::where('Id_Actividad_Gestor',$id_actividad)->with('tipoEntidad','tipoPersona','condicion','situacion','localidad')->get();
+    	$Novedad = Novedad::where('Id_Actividad_Gestor',$id_actividad)->get();
+		$datosActividad = ActividadGestor::with('calificaciomServicio')->find($id_actividad);
 		
-		$datos = ['datosActividad' => $datosActividad,'Ejecucion'=>$Ejecucion];
-    	return  $datos;
+		$datos = ['datosActividad' => $datosActividad,'Ejecucion'=>$Ejecucion,'Novedad'=>$Novedad];
+    	return  response()->json($datos);
     }
 
     public function activarProgramacion(Request $request, $id_actividad){
