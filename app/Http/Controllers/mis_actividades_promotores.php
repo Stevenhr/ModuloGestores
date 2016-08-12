@@ -156,8 +156,7 @@ class mis_actividades_promotores extends Controller
                 'imagen2' => 'required|mimes:jpeg,jpg,png,bmp',
                 'imagen3' => 'mimes:jpeg,jpg,png,bmp',
                 'imagen4' => 'mimes:jpeg,jpg,png,bmp',
-                'listaAsistencia' => 'required|mimes:pdf',
-                'acta' => 'required|mimes:pdf'
+                'listaAsistencia' => 'required|mimes:pdf'
 
             ]
         );

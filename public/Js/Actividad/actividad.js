@@ -9,10 +9,10 @@ vector_acompañantes = new Array();
 	
 	$('#agregar_actividad').on('click', function(e)
 	{
-			
 			var id_eje=$('select[name="Id_Eje"]').val();
 			var id_tematica=$('select[name="Id_Tematica"]').val();
 			var id_act = $('select[name="d_Actividad"]').val();
+			var otro_actividad = $('input[name="otro_Actividad"]').val();
 			
 			if(id_eje===''){
 				$('#alert_actividad').html('<div class="alert alert-dismissible alert-danger" ><strong>Error!</strong> Debe seleccionar un eje para poder realizar el registro.</div>');
@@ -23,26 +23,22 @@ vector_acompañantes = new Array();
 				$('#alert_actividad').html('<div class="alert alert-dismissible alert-success" ><strong>Exito!</strong> Dato de la actividad registrado con exito. </div>');
 				$('#mensaje_actividad').show(60);
 				$('#mensaje_actividad').delay(1500).hide(600);
-				vector_datos_actividades.push({"id_eje": id_eje, "id_tematica": id_tematica, "id_act": id_act});
+				vector_datos_actividades.push({"id_eje": id_eje, "id_tematica": id_tematica, "id_act": id_act,"otro_actividad":otro_actividad});
 			}
-
-            
 			return false;
-		
 	});
 
 
 
 	$('#ver_datos_actividad').on('click', function(e)
 	{
-			
 			var html = '';
 			//console.log(vector_datos_actividades);
 					if(vector_datos_actividades.length > 0)
 					{
 						var num=1;
 						$.each(vector_datos_actividades, function(i, e){
-							html += '<tr><th scope="row" class="text-center">'+num+'</th><td>'+Buscar_Eje(e['id_eje'])+'</td><td>'+Buscar_Tematica(e['id_tematica'])+'</td><td>'+Buscar_Actividad(e['id_act'])+'</td><td class="text-center"><button type="button" data-rel="'+i+'" data-funcion="crear" class="eliminar_dato_actividad"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td></tr>';
+							html += '<tr><th scope="row" class="text-center">'+num+'</th><td>'+Buscar_Eje(e['id_eje'])+'</td><td>'+Buscar_Tematica(e['id_tematica'])+'</td><td>'+Buscar_Actividad(e['id_act'])+'</td><td>'+e['otro_actividad']+'</td><td class="text-center"><button type="button" data-rel="'+i+'" data-funcion="crear" class="eliminar_dato_actividad"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td></tr>';
 							num++;
 						});
 					}
@@ -50,7 +46,6 @@ vector_acompañantes = new Array();
 
 			$('#ver_registros').modal('show');
 			return false;
-		
 	});
 
 	$('#datos_actividad').delegate('button[data-funcion="crear"]','click',function (e) {   
@@ -135,6 +130,28 @@ vector_acompañantes = new Array();
 	});
 	$('select[name="Id_Tematica"]').on('change', function(e){
 		select_actividades($(this).val());
+	});
+	$('select[name="d_Actividad"]').on('change', function(e){
+		var act=$('select[name="d_Actividad"]').val();
+		if(act==4 || act==13 || act==19 || act==20){
+			$('#div_otro').show(100);
+		}
+		else{
+			$('#div_otro').hide(100);
+			$('input[name="otro_Actividad"]').val("");
+		}
+	
+	});
+	$('select[name="Parque"]').on('change', function(e){
+		var act=$('select[name="Parque"]').val();
+		if(act=='Otro'){
+			$('.div_otro_parque').show(100);
+		}
+		else{
+			$('.div_otro_parque').hide(100);
+			$('input[name="otro_Parque"]').val("");
+		}
+	
 	});
 
 	var select_tematicas = function(id)

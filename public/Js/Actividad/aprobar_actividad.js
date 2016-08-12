@@ -12,6 +12,7 @@ $(function()
 					URL+'/service/misActividadesGestor',
 					$(this).serialize(),
 					function(data){
+							//console.log(data);
 							if(data.status == 'error')
 							{
 								validador_errores_form(data.errors);
@@ -23,6 +24,7 @@ $(function()
 									
 									var num=1;
 									var html="";
+									var Nomparque="";
 									t.clear().draw();
 									$.each(data, function(i, e){
 										if(e['Estado']==2){
@@ -51,6 +53,11 @@ $(function()
 											estado_ejecucion="<center><span class='glyphicon glyphicon-star-empty aria-hidden='true'></span><center>";
 											
 										}
+										if(jQuery.isEmptyObject(e.parque)){  //No hay informacion
+															Nomparque="Otro: "+e['Otro'];
+														}else{
+															Nomparque=e.parque['Nombre'];
+														}
 
 
 										t.row.add( [
@@ -61,7 +68,7 @@ $(function()
 								            '<td>'+e['Fecha_Ejecucion']+'</td>',
 								            '<td>'+e.localidad['Nombre_Localidad']+'</td>',
 								            '<td>'+e['Hora_Incial']+'</td>',
-								            '<td>'+e.parque['Nombre']+'</td>',
+								            '<td>'+Nomparque+'</td>',
 								            '<td style="text-align:center "><center><button type="button" data-rel="'+e['Id_Actividad_Gestor']+'" data-funcion="ver_inf" class="btn btn-primary btn-sm" ><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> ver</button><div id="espera'+e['Id_Actividad_Gestor']+'"></div></td>',
 								            '<td>'+estado_programacion+'</td>',
 								            '<td style="text-align:center"><center><button type="button" data-rel="'+e['Id_Actividad_Gestor']+'" data-funcion="ejec_ver" class="btn btn-primary btn-sm" '+dehabilitar+'><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> ver</button><div id="espera_eje'+e['Id_Actividad_Gestor']+'"></div></td>',
@@ -139,7 +146,9 @@ $(function()
         $('input[name="Hora_Inicio"]').val(datos.datosActividad['Hora_Incial']);
         $('input[name="Hora_Fin"]').val(datos.datosActividad['Hora_Final']);
         $('input[name="Fecha_Ejecucion"]').val(datos.datosActividad['Fecha_Ejecucion']);
-        $('select[name="Parque"]').selectpicker('val',datos.datosActividad['Parque']);
+        if(datos.datosActividad['Parque']==0){$parque="Otro"}else{$parque=datos.datosActividad['Parque'];}
+        $('select[name="Parque"]').selectpicker('val',$parque);
+        $('input[name="otro_Parque"]').val(datos.datosActividad['Otro']);
         $('input[name="Caracteristica_Lugar"]').val(datos.datosActividad['Caracteristica_Lugar']);
         $('textarea[name="Caracteristica_poblacion"]').val(datos.datosActividad['Caracteristica_Poblacion']);
         $('textarea[name="Caracteristica_Lugar"]').val(datos.datosActividad['Caracteristica_Lugar']);
@@ -152,6 +161,18 @@ $(function()
 
         $('#modal_form_act_eje').modal('show');
     };
+
+    $('select[name="Parque"]').on('change', function(e){
+		var act=$('select[name="Parque"]').val();
+		if(act=='Otro'){
+			$('.div_otro_parque').show(100);
+		}
+		else{
+			$('.div_otro_parque').hide(100);
+			$('input[name="otro_Parque"]').val("");
+		}
+	
+	});
 
 
     $('#Tabla3').delegate('button[data-funcion="ejec_ver"]','click',function (e) {  
@@ -251,6 +272,7 @@ $(function()
 													
 													var num=1;
 													var html="";
+													var Nomparque="";
 													t.clear().draw();
 													$.each(data, function(i, e){
 														if(e['Estado']==2){
@@ -279,6 +301,11 @@ $(function()
 															estado_ejecucion="<center><span class='glyphicon glyphicon-star-empty aria-hidden='true'></span><center>";
 														
 														}
+														if(e.parque==null){  //No hay informacion
+															Nomparque="Otro: "+e['Otro'];
+														}else{
+															Nomparque=e.parque['Nombre'];
+														}
 
 														t.row.add( [
 												            '<th scope="row" class="text-center">'+num+'</th>',
@@ -288,7 +315,7 @@ $(function()
 												            '<td>'+e['Fecha_Ejecucion']+'</td>',
 												            '<td>'+e.localidad['Nombre_Localidad']+'</td>',
 												            '<td>'+e['Hora_Incial']+'</td>',
-												            '<td>'+e.parque['Nombre']+'</td>',
+												            '<td>'+Nomparque+'</td>',
 												            '<td style="text-align:center "><center><button type="button" data-rel="'+e['Id_Actividad_Gestor']+'" data-funcion="ver_inf" class="btn btn-primary btn-sm" ><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> ver</button><div id="espera'+e['Id_Actividad_Gestor']+'"></div></td>',
 												            '<td>'+estado_programacion+'</td>',
 												            '<td style="text-align:center"><center><button type="button" data-rel="'+e['Id_Actividad_Gestor']+'" data-funcion="ejec_ver" class="btn btn-primary btn-sm" '+dehabilitar+'><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> ver</button><div id="espera_eje'+e['Id_Actividad_Gestor']+'"></div></td>',
@@ -775,7 +802,6 @@ $(function()
 		        	case 'imagen3':
 		        	case 'imagen4':
 		        	case 'listaAsistencia':
-		        	case 'acta':
 		        		selector = 'input';
 		        	break;
 		        }

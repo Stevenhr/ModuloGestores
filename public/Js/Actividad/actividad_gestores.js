@@ -458,9 +458,11 @@ $(function()
 						    if(data.status == 'error')
 							{
 								validador_errores_registroEjecucion(data.errors);
+								$("#espera_eje").html("");
 							}
 							else 
 							{
+								validador_errores_registroEjecucion(data.errors);
 								$('#form_ejecucion_datos_actividad')[0].reset();
 								$('#form_ejecucion_novedades')[0].reset();
 								$('#form_ejecucion_servicio')[0].reset();
@@ -526,7 +528,6 @@ $(function()
 		        	case 'imagen3':
 		        	case 'imagen4':
 		        	case 'listaAsistencia':
-		        	case 'acta':
 		        		selector = 'input';
 		        	break;
 		        }

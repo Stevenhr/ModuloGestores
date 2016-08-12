@@ -82,7 +82,7 @@
 								                <th>Fecha Ejecución</th>
 								                <th>Localidad</th>
 								                <th>Hora</th>
-								                <th>Parque</th>
+								                <th>Parque / Otro</th>
 								                <th>Programación</th>
 								                <th>Estado P</th>
 								                <th>Ejecución</th>
@@ -98,7 +98,7 @@
 								                <th>Fecha Ejecución</th>
 								                <th>Localidad</th>
 								                <th>Hora</th>
-								                <th>Parque</th>
+								                <th>Parque / Otro</th>
 								                <th>Programación</th>
 								                <th>Estado P</th>
 								                <th>Ejecución</th>
@@ -199,10 +199,21 @@
 										        				<label class="control-label" for="Cedula">* Parque </label>
 										        				<select name="Parque" id="" class="selectpicker form-control" data-live-search="true">
 										        					<option value="">Seleccionar</option>
+										        					<option value="Otro">OTRO</option>
 										        					@foreach($tipoparque->parques as $parque)
 										        						<option value="{{ $parque['Id'] }}">{{ $parque['Nombre'].'   '.$parque['Id_IDRD'] }}</option>
 										        					@endforeach
 										        				</select>
+										        			</div>
+										        		</div>
+										        		<div class="col-xs-12 col-md-6 div_otro_parque"  >
+										        			<div class="form-group" >
+										        			</div>
+										        		</div>
+										        		<div class="col-xs-12 col-md-6 div_otro_parque">
+										        			<div class="form-group" >
+										        				<label class="control-label" for="d_Actividad">* Otro</label>
+										        				<input type="text" name="otro_Parque" value="" class="form-control">
 										        			</div>
 										        		</div>
 
@@ -563,14 +574,14 @@
 										        		</div>
 										        		<div class="col-xs-12 col-md-6">
 										        			<div class="form-group">
-															    <label for="exampleInputFile">Lista Asitencia</label>
+															    <label for="exampleInputFile">Formato Evaluación</label>
 															    <input type="file" name="listaAsistencia">
 															    <p class="help-block">Archivo en formato pdf</p>
 															 </div>
 										        		</div>
 										        		<div class="col-xs-12 col-md-6">
 										        			<div class="form-group">
-															    <label for="exampleInputFile">Acta</label>
+															    <label for="exampleInputFile">Listado Entraga de Kits</label>
 															    <input type="file" name="acta">
 															    <p class="help-block">Archivo en formato pdf</p>
 															 </div>

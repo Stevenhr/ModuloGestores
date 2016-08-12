@@ -40,12 +40,14 @@ Route::post('/actividad/service/crearActividad/', 'ConfiguracionActividadControl
 Route::get('/actividad/service/tematica/{id_eje}', 'ConfiguracionActividadController@buscarTematicas');
 Route::get('/actividad/service/actividad/{id_tematica}', 'ConfiguracionActividadController@buscarActividades');
 Route::get('/actividad/service/persona_tipo/{id_tipo}', '\Idrd\Usuarios\Controllers\PersonaController@buscarPersonaTipo');
+Route::get('/actividad/MisProgramaciones', 'Actividadcontroller@MiActividad2');
 Route::get('/actividad/service/Eje/{id_eje}', 'ConfiguracionActividadController@buscarEje');
 Route::get('/actividad/service/Tematica/{id_tematica}', 'ConfiguracionActividadController@buscarTematica');
 Route::get('/actividad/service/Actividad/{id_actividad}', 'ConfiguracionActividadController@buscarActividad');
 Route::post('/PersonaLocalidad/service/validacionPersonaLocalidad/', 'ConfiguracionActividadController@procesarValidacionPersonaLocalidad');
 Route::post('/PersonaLocalidad/service/eliminaPersonaLocalidad/', 'ConfiguracionActividadController@eliminaPersonaLocalidad');
 Route::post('/PersonaLocalidad/service/verPersonaLocalidad/', 'ConfiguracionActividadController@verPersonaLocalidad');
+Route::post('/actividad/service/ModificarActividad/', 'ConfiguracionActividadController@procesarModificacionValidacion');
 
 
 Route::post('/gestores/service/misActividadesGestor/', 'mis_actividades_promotores@procesarValidacionGestor');

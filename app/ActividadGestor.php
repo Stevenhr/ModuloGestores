@@ -14,7 +14,7 @@ class ActividadGestor extends Model
 	
   protected $table = 'actividad_gestor';
 	protected $primaryKey = 'Id_Actividad_Gestor';
-	protected $fillable = ['Id_Persona','Id_Responsable','Fecha_Ejecucion','Hora_Incial','Hora_Final','Localidad','Parque','Caracteristica_Lugar','Instit_Grupo_Comun','Caracteristica_Poblacion','Numero_Asistente','Hora_Implementacion','Nombre_Contacto','Rool_Comunidad','Telefono','Fecha_Registro','Estado','Estado_Ejecucion','Fecha_Registro_Ejecución'];
+	protected $fillable = ['Id_Persona','Id_Responsable','Fecha_Ejecucion','Hora_Incial','Hora_Final','Localidad','Parque','Caracteristica_Lugar','Instit_Grupo_Comun','Caracteristica_Poblacion','Numero_Asistente','Hora_Implementacion','Nombre_Contacto','Rool_Comunidad','Telefono','Fecha_Registro','Estado','Estado_Ejecucion','Fecha_Registro_Ejecución','Otro'];
 	protected $connection = ''; 
 
 
@@ -28,7 +28,7 @@ class ActividadGestor extends Model
     }
     public function actividadgestorActividadEjeTematica()
     {
-        return $this->belongsToMany('App\ActividadGestor','actividadgestor_actividad_eje_tematica','actividad_gestor_id','eje_id','tematica_id','actividad_id');
+        return $this->belongsToMany('App\ActividadGestor','actividadgestor_actividad_eje_tematica','actividad_gestor_id','eje_id','tematica_id','actividad_id','Otro');
     }
     public function localidad() 
     {

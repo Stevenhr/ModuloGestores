@@ -151,6 +151,7 @@ class aprobacion_actividades extends Controller
 		$model['Hora_Final'] = $input['Hora_Fin'];
 		$model['Localidad'] = $input['Id_Localidad'];
 		$model['Parque'] = $input['Parque'];
+		$model['Otro'] = $input['otro_Parque'];
 		$model['Caracteristica_Lugar'] = $input['Caracteristica_Lugar'];
 		$model['Instit_Grupo_Comun'] = $input['Institucion_Grupo'];
 		$model['Caracteristica_Poblacion'] = $input['Caracteristica_poblacion'];

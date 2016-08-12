@@ -11,6 +11,7 @@ use Validator;
 
 
 
+
 class ConfiguracionActividadController extends Controller
 {
     //
@@ -117,6 +118,7 @@ class ConfiguracionActividadController extends Controller
 		$model['Hora_Final'] = $input['Hora_Fin'];
 		$model['Localidad'] = $input['Id_Localidad'];
 		$model['Parque'] = $input['Parque'];
+		$model['Otro'] = $input['otro_Parque'];
 		$model['Caracteristica_Lugar'] = $input['Caracteristica_Lugar'];
 		$model['Instit_Grupo_Comun'] = $input['Institucion_Grupo'];
 		$model['Caracteristica_Poblacion'] = $input['Caracteristica_poblacion'];
@@ -132,11 +134,13 @@ class ConfiguracionActividadController extends Controller
 		$model->save();
 		$id_act_gest=$model->Id_Actividad_Gestor;
 		$data0 = json_decode($input['Dato_Actividad']);
+		//var_dump($data0);
 		foreach($data0 as $obj){
 			$model->actividadgestorActividadEjeTematica()->attach($id_act_gest,[
 				'eje_id'=>$obj->id_eje,
 				'tematica_id'=>$obj->id_tematica,
-				'actividad_id'=>$obj->id_act]);
+				'actividad_id'=>$obj->id_act,
+				'Otro'=>$obj->otro_actividad]);
 		}
 
 		
@@ -161,6 +165,7 @@ class ConfiguracionActividadController extends Controller
 		$model['Hora_Final'] = $input['Hora_Fin'];
 		$model['Localidad'] = $input['Id_Localidad'];
 		$model['Parque'] = $input['Parque'];
+		$model['Otro'] = $input['otro_Parque'];
 		$model['Caracteristica_Lugar'] = $input['Caracteristica_Lugar'];
 		$model['Instit_Grupo_Comun'] = $input['Institucion_Grupo'];
 		$model['Caracteristica_Poblacion'] = $input['Caracteristica_poblacion'];
@@ -232,5 +237,68 @@ class ConfiguracionActividadController extends Controller
 		$personas = Persona::with('localidades')->has('localidades')->get();
 		return $personas;
 	}
+
+
+	 public function procesarModificacionValidacion(Request $request)
+  {
+    $validator = Validator::make($request->all(),
+        [
+             
+        'Fecha_Ejecucion' => 'required',
+        'Id_Responsable' => 'required',
+        'Hora_Inicio' => 'required',
+        'Hora_Fin' => 'required',
+        'Id_Localidad' => 'required',
+        'Parque' => 'required',
+        'Caracteristica_Lugar' => 'required',
+        'Caracteristica_poblacion' => 'required',
+        'Institucion_Grupo' => 'required',
+        'Numero_Asistentes' => 'required|numeric',
+        'Hora_Implementacion' => 'required',
+        'Persona_Contacto' => 'required',
+        'Roll_Comunidad' => 'required',
+        'Telefono' => 'required',
+          ]
+        );
+
+        if ($validator->fails())
+            return response()->json(array('status' => 'error', 'errors' => $validator->errors()));
+
+          if($request->input('Id_Actividad') != '0')
+          $this->modificar_act($request->all());
+
+        return response()->json(array('status' => 'ok'));
+  }
+
+  public function modificar_act($input)
+  {
+    $modelo=ActividadGestor::find($input["Id_Actividad"]);
+    return $this->modificar_actividad_2($modelo, $input);
+  }
+  public function modificar_actividad_2($model, $input)
+  {
+
+    
+    //var_dump($model);
+    $model['Id_Responsable'] = $input['Id_Responsable'];
+    $model['Fecha_Ejecucion'] = $input['Fecha_Ejecucion'];
+    $model['Hora_Incial'] = $input['Hora_Inicio'];
+    $model['Hora_Final'] = $input['Hora_Fin'];
+    $model['Localidad'] = $input['Id_Localidad'];
+    $model['Parque'] = $input['Parque'];
+    $model['Otro'] = $input['otro_Parque'];
+    $model['Caracteristica_Lugar'] = $input['Caracteristica_Lugar'];
+    $model['Instit_Grupo_Comun'] = $input['Institucion_Grupo'];
+    $model['Caracteristica_Poblacion'] = $input['Caracteristica_poblacion'];
+    $model['Numero_Asistente'] = $input['Numero_Asistentes'];
+    $model['Hora_Implementacion'] = $input['Hora_Implementacion'];
+    $model['Nombre_Contacto'] = $input['Persona_Contacto'];
+    $model['Rool_Comunidad'] = $input['Roll_Comunidad'];
+    $model->Telefono= $input['Telefono'];
+
+    $model->save();
+    
+    return $model;
+  }
 	
 }

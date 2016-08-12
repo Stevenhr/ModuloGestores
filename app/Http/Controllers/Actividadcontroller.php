@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Idrd\Usuarios\Repo\PersonaInterface;
+use App\ActividadGestor;
 
 class Actividadcontroller extends Controller
 {
@@ -54,14 +55,9 @@ class Actividadcontroller extends Controller
 
    }
 
-
-
-
-   
-
     public function index(){
 
-    	$eje = app()->make('App\Eje');
+    $eje = app()->make('App\Eje');
 		$tematica = app()->make('App\Tematica');
 		$actividad = app()->make('App\Actividad');
 		$Localidad = app()->make('App\Localidad');
@@ -83,29 +79,38 @@ class Actividadcontroller extends Controller
     }
 
     public function MiActividad(){
-
-    $datosActividad = app()->make('App\ActividadGestor');
-		$PersonaActividad = app()->make('App\Persona');
-		$Tipo = app()->make('App\Tipo');
-		$Localidad = app()->make('App\Localidad');
-		$TipoParque = app()->make('App\TipoParque');
-		$datos = [
-      'datosActividad' => $datosActividad->with('persona')->where('Id_Persona',$_SESSION['Usuario'][0])->get(),
-			'PersonaActividad' => $PersonaActividad->find($_SESSION['Usuario'][0]),
-			'Tipo' => $Tipo->find(50),
-			'tipoparque' => $TipoParque->with('parques')->find(3),
-			'localidad' => $Localidad->all()
-		];
-		
+      $datosActividad = app()->make('App\ActividadGestor');
+  		$PersonaActividad = app()->make('App\Persona');
+  		$Tipo = app()->make('App\Tipo');
+  		$Localidad = app()->make('App\Localidad');
+  		$TipoParque = app()->make('App\TipoParque');
+  		$datos = [
+        'datosActividad' => $datosActividad->with('persona')->where('Id_Persona',$_SESSION['Usuario'][0])->get(),
+  			'PersonaActividad' => $PersonaActividad->find($_SESSION['Usuario'][0]),
+  			'Tipo' => $Tipo->find(50),
+  			'tipoparque' => $TipoParque->with('parques')->find(3),
+  			'localidad' => $Localidad->all()
+  		];
     	return view('mi_actividad', $datos);
     }
 
-    public function obtenerActividad(Request $request, $id_actividad){
+    public function MiActividad2(){
+   
+      $consulta=ActividadGestor::with('localidad','persona','parque')->where('Id_Persona',$_SESSION['Usuario'][0])->get();
+      return response()->json($consulta);
+    }
 
-		$datosActividad = app()->make('App\ActividadGestor');
-		$datos = ['datosActividad' => $datosActividad->find($id_actividad)];
+    public function obtenerActividad(Request $request, $id_actividad){
+      
+    $datosActividad = ActividadGestor::find($id_actividad);
+    
+    $datos = ['datosActividad' => $datosActividad];
+
     	return  $datos;
     }
+
+
+
 
      
 

@@ -45,10 +45,16 @@
 							        		</div>
 							        		<div class="col-xs-12 col-md-12">
 							        			<div class="form-group">
-							        				<label class="control-label" for="d_Actividad">* Estrategia </label>
+							        				<label class="control-label" for="d_Actividad">* Estrategia... </label>
 							        				<select name="d_Actividad" id="" class="form-control">
 							        					<option value="">Seleccionar</option>
 							        				</select>
+							        			</div>
+							        		</div>
+							        		<div class="col-xs-12 col-md-6" style="display: none;" id="div_otro">
+							        			<div class="form-group" >
+							        				<label class="control-label" for="d_Actividad">* Otro</label>
+							        				<input type="text" name="otro_Actividad" value="" class="form-control">
 							        			</div>
 							        		</div>
 							        		<div class="col-xs-12 col-md-12">
@@ -80,6 +86,7 @@
 																<th>Eje</th>
 																<th>Tematica</th>
 																<th>Actividad</th>
+																<th>Otro</th>
 																<th>Eliminar</th>
 																</tr>
 																</thead>
@@ -229,10 +236,21 @@
 							        				<label class="control-label" for="Cedula">* Parque </label>
 							        				<select name="Parque" id="" class="selectpicker form-control" data-live-search="true">
 							        					<option value="">Seleccionar</option>
+							        					<option value="Otro">OTRO</option>
 							        					@foreach($tipoparques->parques as $tipoparques)
 							        						<option value="{{ $tipoparques['Id'] }}">{{ $tipoparques['Nombre'].'   '.$tipoparques['Id_IDRD'] }}</option>
 							        					@endforeach
 							        				</select>
+							        			</div>
+							        		</div>
+							        		<div class="col-xs-12 col-md-6 div_otro_parque" style="display: none;" >
+							        			<div class="form-group" >
+							        			</div>
+							        		</div>
+							        		<div class="col-xs-12 col-md-6 div_otro_parque" style="display: none;">
+							        			<div class="form-group" >
+							        				<label class="control-label" for="d_Actividad">* Otro</label>
+							        				<input type="text" name="otro_Parque" value="" class="form-control">
 							        			</div>
 							        		</div>
 
