@@ -1,6 +1,6 @@
 $(function()
 {
-    var URL = $('#main_mis_actividad').data('url');
+   var URL = $('#main_mis_actividad').data('url');
    var t =  $('#example').DataTable({
         dom: 'Bfrtip',
         buttons: [
@@ -27,7 +27,6 @@ $(function()
             },
             'json'
         );
-
     }); 
 
     $('select[name="Parque"]').on('change', function(e){
@@ -39,7 +38,6 @@ $(function()
             $('.div_otro_parque').hide(100);
             $('input[name="otro_Parque"]').val("");
         }
-    
     });
 
     var actividad_datos = function(datos)

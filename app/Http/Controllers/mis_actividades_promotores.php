@@ -147,9 +147,6 @@ class mis_actividades_promotores extends Controller
                 'puntualidad' => 'required',
                 'divulgacion' => 'required',
                 'escenarioMontaje' => 'required',
-                'cumplimiento' => 'required',
-                'variedadCreatividad' => 'required',
-                'seguridad' => 'required',
                 'nombreRepresentante' => 'required',
                 'telefonoRepresentante' => 'required',
                 'imagen1' => 'required|mimes:jpeg,jpg,png,bmp',
@@ -169,37 +166,46 @@ class mis_actividades_promotores extends Controller
             $id_act = $request->input('Id_Actividad_E');
             
             $file1=$request->file('imagen1');
+            $extension1=$file1->getClientOriginalExtension();
             $Nom_imagen1 = date('Y-m-d-H:i:s')."-imagen1-".$id_act;
-            $file1->move(public_path().'/Img/EvidenciaFotografica/', $Nom_imagen1);
+            $file1->move(public_path().'/Img/EvidenciaFotografica/', $Nom_imagen1.'.'.$extension1);
 
             $file2=$request->file('imagen2');
+            $extension2=$file2->getClientOriginalExtension();
             $Nom_imagen2 = date('Y-m-d-H:i:s')."-imagen2-".$id_act;
-            $file2->move(public_path().'/Img/EvidenciaFotografica/', $Nom_imagen2);
+            $file2->move(public_path().'/Img/EvidenciaFotografica/', $Nom_imagen2.'.'.$extension2);
+
 
             if ($request->hasFile('imagen3')) {
                 $file3=$request->file('imagen3');
+                $extension3=$file3->getClientOriginalExtension();
                 $Nom_imagen3 = date('Y-m-d-H:i:s')."-imagen3-".$id_act;
-                $file3->move(public_path().'/Img/EvidenciaFotografica/', $Nom_imagen3);
+                $file3->move(public_path().'/Img/EvidenciaFotografica/', $Nom_imagen3.'.'.$extension3);
+
             }else{
                 $Nom_imagen3="";
             }
 
             if ($request->hasFile('imagen4')) {
                 $file4=$request->file('imagen4');
+                $extension4=$file4->getClientOriginalExtension();
                 $Nom_imagen4 = date('Y-m-d-H:i:s')."-imagen4-".$id_act;
-                $file4->move(public_path().'/Img/EvidenciaFotografica/', $Nom_imagen4);
+                $file4->move(public_path().'/Img/EvidenciaFotografica/', $Nom_imagen4.'.'.$extension4);
+
             }else{
                 $Nom_imagen4="";
             }
             $file_listaAsistencia=$request->file('listaAsistencia');
+            $extensionFile1=$file_listaAsistencia->getClientOriginalExtension();
             $Nom_listaAsistencia = date('Y-m-d-H:i:s')."-listaAsistencia-".$id_act;
-            $file_listaAsistencia->move(public_path().'/Img/EvidenciaArchivo/', $Nom_listaAsistencia);
+            $file_listaAsistencia->move(public_path().'/Img/EvidenciaArchivo/', $Nom_listaAsistencia.'.'.$extensionFile1);
 
 
             if ($request->hasFile('acta')) {
                 $file_acta=$request->file('acta');
+                $extensionFile2=$file_acta->getClientOriginalExtension();
                 $Nom_Acta = date('Y-m-d-H:i:s')."-"."-acta-".$id_act;
-                $file_acta->move(public_path().'/Img/EvidenciaArchivo/', $Nom_Acta);
+                $file_acta->move(public_path().'/Img/EvidenciaArchivo/',$Nom_Acta.'.'.$extensionFile2);
             }else{
                 $Nom_Acta="";
             }

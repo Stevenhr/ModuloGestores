@@ -536,9 +536,9 @@
 						  <div class="panel-body">
 										      		<fieldset>
 										      		<form action="" id="form_ejecucion_servicio" name="form_ejecucion_servicio">
-										        		<div class="col-xs-12 col-md-2">
+										        		<div class="col-xs-12 col-md-4">
 										        			<div class="form-group">
-										        				<label class="control-label" for="Cedula">Puntualidad</label><br>
+										        				<label class="control-label" for="Cedula">Manejo del tema</label><br>
 																<select name="puntualidad" id="" class="form-control">
 										        					<option value="">Selecionar</option>
 										        					<option value="1">1</option>
@@ -549,9 +549,9 @@
 										        				</select>
 										        			</div>
 										        		</div>
-										        		<div class="col-xs-12 col-md-2">
+										        		<div class="col-xs-12 col-md-4">
 										        			<div class="form-group">
-										        				<label class="control-label" for="Cedula">Divulgación</label>
+										        				<label class="control-label" for="Cedula">Material utilizado</label>
 																<select name="divulgacion" id="" class="form-control">
 										        					<option value="">Selecionar</option>
 										        					<option value="1">1</option>
@@ -562,9 +562,9 @@
 										        				</select>
 										        			</div>
 										        		</div>
-										        		<div class="col-xs-12 col-md-2">
+										        		<div class="col-xs-12 col-md-4">
 										        			<div class="form-group">
-										        				<label class="control-label" for="Cedula">Montaje</label>
+										        				<label class="control-label" for="Cedula">Conocimiento adquirido</label>
 																<select name="escenarioMontaje" id="" class="form-control">
 										        					<option value="">Selecionar</option>
 										        					<option value="1">1</option>
@@ -575,7 +575,7 @@
 										        				</select>
 										        			</div>
 										        		</div>
-										        		<div class="col-xs-12 col-md-2">
+										        		<div class="col-xs-12 col-md-2" style="display:none">
 										        			<div class="form-group">
 										        				<label class="control-label" for="Cedula">Cumplimiento</label>
 																<select name="cumplimiento" id="" class="form-control">
@@ -588,7 +588,7 @@
 										        				</select>
 										        			</div>
 										        		</div>
-										        		<div class="col-xs-12 col-md-2">
+										        		<div class="col-xs-12 col-md-2" style="display:none">
 										        			<div class="form-group">
 										        				<label class="control-label" for="Cedula">Variedad</label>
 																<select name="variedadCreatividad" id="" class="form-control">
@@ -601,7 +601,7 @@
 										        				</select>
 										        			</div>
 										        		</div>
-										        		<div class="col-xs-12 col-md-2">
+										        		<div class="col-xs-12 col-md-2" style="display:none">
 										        			<div class="form-group">
 										        				<label class="control-label text-center" for="Cedula">Seguridad</label>
 																<select name="seguridad" id="" class="form-control">

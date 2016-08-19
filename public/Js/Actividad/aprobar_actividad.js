@@ -27,37 +27,34 @@ $(function()
 									var Nomparque="";
 									t.clear().draw();
 									$.each(data, function(i, e){
+										
 										if(e['Estado']==2){
 											estado_programacion="<center><span class='glyphicon glyphicon-ok' aria-hidden='true'></span><center>";
-											dehabilitar="";
 										}
 										if(e['Estado']==1){
 											estado_programacion="<center><span class='glyphicon glyphicon-remove aria-hidden='true'></span><center>";
-											dehabilitar="disabled";
 										}
-
-
 										if(e['Estado_Ejecucion']==4){ //Cancelado
 											estado_ejecucion="<center><span class='glyphicon glyphicon-remove aria-hidden='true'></span><center>";
-											
+											dehabilitar="";
 										}
 										if(e['Estado_Ejecucion']==3){ //Aprobado
 											estado_ejecucion="<center><span class='glyphicon glyphicon-ok aria-hidden='true'></span><center>";
-											
+											dehabilitar="";
 										}
 										if(e['Estado_Ejecucion']==2){  //Hay informacion
 											estado_ejecucion="<center><span class='glyphicon glyphicon-star' aria-hidden='true'></span><center>";
-											
+											dehabilitar="";
 										}
 										if(e['Estado_Ejecucion']==1){  //No hay informacion
 											estado_ejecucion="<center><span class='glyphicon glyphicon-star-empty aria-hidden='true'></span><center>";
-											
+											dehabilitar="disabled";
 										}
 										if(jQuery.isEmptyObject(e.parque)){  //No hay informacion
-															Nomparque="Otro: "+e['Otro'];
-														}else{
-															Nomparque=e.parque['Nombre'];
-														}
+											Nomparque="Otro: "+e['Otro'];
+										}else{
+											Nomparque=e.parque['Nombre'];
+										}
 
 
 										t.row.add( [
@@ -181,7 +178,6 @@ $(function()
         vector_datos_ejecucion.length=0;
         vector_novedades.length=0;
         $('input[name="Id_Actividad_E"]').val(id);
-
 		$('#table_ejecucion_agregada').hide();
         $.get(
             URL+'/service/obtener/'+id,
@@ -198,6 +194,9 @@ $(function()
         );
     }); 
 
+
+
+
     var actividad_ejecucion = function(datos)
     {	
     	$('input[name="Id_Actividad_ejecucion"]').val(datos.datosActividad['Id_Actividad_Gestor']);
@@ -207,12 +206,71 @@ $(function()
 		var num=1;
 		$('.tablaEjecucion').empty();
 		console.log(datos);
-  		var fila=""
+  		var fila="";
+  		var TotalMujer=0;
+  		var TotalHombre=0;
+  		var TotalParcial=0;
+  		var T_F_0a5=0;
+  		var T_M_0a5=0;
+  		var T_F_6a12=0;
+  		var T_M_6a12=0;
+  		var T_F_13a17=0;
+  		var T_M_13a17=0;
+  		var T_F_18a26=0;
+  		var T_M_18a26=0;
+  		var T_F_27a59=0;
+  		var T_M_27a59=0;
+  		var T_F_60=0;
+  		var T_M_60=0;
+  		var TotalMujerT=0;
+  		var TotalHombreT=0;
+  		var Total=0;
+
   		$.each(datos.Ejecucion, function(i, e){		
-			fila +="<tr><th scope='row'>"+num+"</th><td>"+e.localidad['Nombre_Localidad']+"</td><td>localidad</td><td>"+e.tipo_entidad['Nombre']+"</td><td>"+e.tipo_persona['Nombre']+"</td><td>"+e.condicion['Nombre']+"</td><td>"+e.situacion['Nombre']+"</td></tr>"								            
+  		    TotalMujer=parseInt(e['F_0a5'])+parseInt(e['F_6a12'])+parseInt(e['F_13a17'])+parseInt(e['F_18a26'])+parseInt(e['F_27a59'])+parseInt(e['F_60']);
+  		    TotalHombre=parseInt(e['M_0a5'])+parseInt(e['M_6a12'])+parseInt(e['M_13a17'])+parseInt(e['M_18a26'])+parseInt(e['M_27a59'])+parseInt(e['M_60']);
+			TotalParcial=TotalMujer+TotalHombre;
+			T_F_0a5+=parseInt(e['F_0a5']);
+			T_M_0a5+=parseInt(e['M_0a5']);
+			T_F_6a12+=parseInt(e['F_6a12']);
+			T_M_6a12+=parseInt(e['M_6a12']);
+			T_F_13a17+=parseInt(e['F_13a17']);
+			T_M_13a17+=parseInt(e['M_13a17']);
+			T_F_18a26+=parseInt(e['F_18a26']);
+			T_M_18a26+=parseInt(e['M_18a26']);
+			T_F_27a59+=parseInt(e['F_27a59']);
+			T_M_27a59+=parseInt(e['M_27a59']);
+			T_F_60+=parseInt(e['F_60']);
+			T_M_60+=parseInt(e['M_60']);
+			fila +="<tr><th scope='row'>"+num+"</th><td>"+e['Comunidad']+"</td><td>"+e.localidad['Nombre_Localidad']+"</td><td>"+e.tipo_entidad['Nombre']+"</td><td>"+e.tipo_persona['Nombre']+"</td><td>"+e.condicion['Nombre']+"</td><td>"+e.situacion['Nombre']+"</td><td>"+e['F_0a5']+"</td><td>"+e['M_0a5']+"</td><td>"+e['F_6a12']+"</td><td>"+e['M_6a12']+"</td><td>"+e['F_13a17']+"</td><td>"+e['M_13a17']+"</td><td>"+e['F_18a26']+"</td><td>"+e['M_18a26']+"</td><td>"+e['F_27a59']+"</td><td>"+e['M_27a59']+"</td><td>"+e['F_60']+"</td><td>"+e['M_60']+"</td><td>"+TotalMujer+"</td><td>"+TotalHombre+"</td><td>"+TotalParcial+"</td></tr>";								            
+	        TotalMujerT+=TotalMujer;
+	        TotalHombreT+=TotalHombre;
 	        num++;
 		});
+  		 Total=TotalHombreT+TotalMujerT;
+		 fila +="<tr><th scope='row'></th><td></td><td></td><td></td><td></td><td></td><td></td><td>"+T_F_0a5+"</td><td>"+T_M_0a5+"</td><td>"+T_F_6a12+"</td><td>"+T_M_6a12+"</td><td>"+T_F_13a17+"</td><td>"+T_M_13a17+"</td><td>"+T_F_18a26+"</td><td>"+T_M_18a26+"</td><td>"+T_F_27a59+"</td><td>"+T_M_27a59+"</td><td>"+T_F_60+"</td><td>"+T_M_60+"</td><td>"+TotalMujerT+"</td><td>"+TotalHombreT+"</td><td>"+Total+"</td></tr>";
 		 $('#tablaEjecucion').html(fila);	
+
+		 var num1=1;
+		 var fila1="";
+		 $.each(datos.Novedad, function(i, e){		
+			fila1 +="<tr><th scope='row'>"+num1+"</th><td>"+e['Id_novedad']+"</td><td>"+e['Causa']+"</td><td>"+e['Accion']+"</td></tr>";								            
+	        num1++;
+		 });
+		 $('#tablaNovedad').html(fila1);	
+
+		
+		 $('input[name="nombreRepresentante"]').val(datos.datosActividad.calificaciom_servicio[0]['Nombre_Representante']);
+		 $('input[name="telefonoRepresentante"]').val(datos.datosActividad.calificaciom_servicio[0]['Telefono']);
+		 $('select[name="puntualidad"]').val(datos.datosActividad.calificaciom_servicio[0]['Id_Puntualidad']);//Manejo del tema
+		 $('select[name="divulgacion"]').val(datos.datosActividad.calificaciom_servicio[0]['Id_Divulgacion']);//Material Utulizado
+		 $('select[name="escenarioMontaje"]').val(datos.datosActividad.calificaciom_servicio[0]['Id_Montaje']);//Conocimiento adquirido
+		 $('#imagenVer1').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen1']);//Conocimiento adquirido attr
+		 $('#imagenVer2').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen2']);//Conocimiento adquirido attr
+		 $('#imagenVer3').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen3']);//Conocimiento adquirido attr
+		 $('#imagenVer4').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen4']);//Conocimiento adquirido attr
+		 $('#file1').attr('href','public/Img/EvidenciaArchivo/'+datos.datosActividad.calificaciom_servicio[0]['Url_Acta']);//Conocimiento adquirido attr
+		 $('#file2').attr('href','public/Img/EvidenciaArchivo/'+datos.datosActividad.calificaciom_servicio[0]['Url_Asistencia']);//Conocimiento adquirido attr
 		 $('#modal_ejecucion').modal('show');
     };
 
@@ -227,8 +285,7 @@ $(function()
                             } else {
 
                             	$('#form_actividad_mm .form-group').removeClass('has-error');
-								$('#mensajeModifica').html('<div class="alert alert-dismissible alert-success" ><strong>Exito!</strong> Dato modificado de la actividad con exito. </div>');
-								$('#modalMensaj').modal('show');
+								$('#mensajeModifica').html('<div class="alert alert-dismissible alert-success" ><strong>Exito!</strong> Dato modificado de la actividad con exito. </div>');								$('#modalMensaj').modal('show');
 								setTimeout(function(){
 									$('#modal_form_act_eje').modal('hide');
 									$('#modalMensaj').modal('hide');
@@ -267,29 +324,25 @@ $(function()
 													$.each(data, function(i, e){
 														if(e['Estado']==2){
 															estado_programacion="<center><span class='glyphicon glyphicon-ok' aria-hidden='true'></span><center>";
-															dehabilitar="";
 														}
 														if(e['Estado']==1){
 															estado_programacion="<center><span class='glyphicon glyphicon-remove aria-hidden='true'></span><center>";
-															dehabilitar="disabled";
 														}
-
-
 														if(e['Estado_Ejecucion']==4){ //Cancelado
 															estado_ejecucion="<center><span class='glyphicon glyphicon-remove aria-hidden='true'></span><center>";
-															
+															dehabilitar="";
 														}
 														if(e['Estado_Ejecucion']==3){ //Aprobado
 															estado_ejecucion="<center><span class='glyphicon glyphicon-ok aria-hidden='true'></span><center>";
-															
+															dehabilitar="";
 														}
 														if(e['Estado_Ejecucion']==2){  //Hay informacion
 															estado_ejecucion="<center><span class='glyphicon glyphicon-star' aria-hidden='true'></span><center>";
-															
+															dehabilitar="";
 														}
 														if(e['Estado_Ejecucion']==1){  //No hay informacion
 															estado_ejecucion="<center><span class='glyphicon glyphicon-star-empty aria-hidden='true'></span><center>";
-														
+															dehabilitar="disabled";
 														}
 														if(e.parque==null){  //No hay informacion
 															Nomparque="Otro: "+e['Otro'];
@@ -775,9 +828,7 @@ $(function()
 		        	case 'puntualidad':
 		        	case 'divulgacion':
 		        	case 'escenarioMontaje':
-		        	case 'cumplimiento':
-		        	case 'variedadCreatividad':
-		        	case 'seguridad':
+
 		        		selector = 'select';
 		        	break;
 
