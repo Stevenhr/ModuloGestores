@@ -61,6 +61,7 @@ Route::post('/aprobar/service/misActividadesGestor/', 'aprobacion_actividades@pr
 Route::get('/aprobar/service/obtener/{id_actividad}', 'aprobacion_actividades@obtenerEjecucion');
 Route::post('/aprobar/service/ModificarActividad/', 'aprobacion_actividades@procesarModificacionValidacion');
 Route::get('/aprobar/service/activar/{id_actividad}', 'aprobacion_actividades@activarProgramacion');
+Route::get('/aprobar/service/aprobarEjecucion/{id_actividad}', 'aprobacion_actividades@aprobarEjecucion');
 Route::get('/aprobar/service/cancelar/{id_actividad}', 'aprobacion_actividades@cancelarProgramacion');
 
 Route::group(['middleware' => ['web']], function () {

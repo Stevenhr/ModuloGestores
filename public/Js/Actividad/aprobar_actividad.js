@@ -28,29 +28,42 @@ $(function()
 									t.clear().draw();
 									$.each(data, function(i, e){
 										
-										if(e['Estado']==2){
-											estado_programacion="<center><span class='glyphicon glyphicon-ok' aria-hidden='true'></span><center>";
+										
+										
+										//Estado Programación: 
+										if(e['Estado']==2){//APROBADO PROGRAMACION
+											estado_programacion="<center><span class='glyphicon glyphicon-ok' aria-hidden='true'></span><br>Aprobado<center>";
 										}
-										if(e['Estado']==1){
-											estado_programacion="<center><span class='glyphicon glyphicon-remove aria-hidden='true'></span><center>";
+										if(e['Estado']==1){//EN ESPERA PROGRAMACION
+											estado_programacion="<center><span class='glyphicon glyphicon-eye-close' aria-hidden='true'></span><br>Por revisar<center>";
 										}
-										if(e['Estado_Ejecucion']==4){ //Cancelado
-											estado_ejecucion="<center><span class='glyphicon glyphicon-remove aria-hidden='true'></span><center>";
+										if(e['Estado']==3){ // COMPLETO: Cierra los botones
+											estado_programacion="<center><span class='glyphicon glyphicon-list-alt' aria-hidden='true'></span><br>Completo<center>";
+										}
+										if(e['Estado']==4){ // CANCELADO
+											estado_programacion="<center><span class='glyphicon glyphicon-remove' aria-hidden='true'></span><br>Cancelado<center>";
+										}
+
+										//Estado Ejecución: 										
+										if(e['Estado_Ejecucion']==1){  //No hay informacion
+											estado_ejecucion="<center><span class='glyphicon glyphicon-star-empty' aria-hidden='true'></span>Sin información<center>";
+											dehabilitar="disabled";
+										}
+										if(e['Estado_Ejecucion']==2){  //Hay informacion
+											estado_ejecucion="<center><span class='glyphicon glyphicon-star' aria-hidden='true'></span>Con información<center>";
 											dehabilitar="";
 										}
 										if(e['Estado_Ejecucion']==3){ //Aprobado
-											estado_ejecucion="<center><span class='glyphicon glyphicon-ok aria-hidden='true'></span><center>";
+											estado_ejecucion="<center><span class='glyphicon glyphicon-list-alt' aria-hidden='true'></span><br>Completo<center>";
 											dehabilitar="";
 										}
-										if(e['Estado_Ejecucion']==2){  //Hay informacion
-											estado_ejecucion="<center><span class='glyphicon glyphicon-star' aria-hidden='true'></span><center>";
+										if(e['Estado_Ejecucion']==4){ //Cancelado
+											estado_ejecucion="<center><span class='glyphicon glyphicon-remove' aria-hidden='true'></span>Cancelado<center>";
 											dehabilitar="";
 										}
-										if(e['Estado_Ejecucion']==1){  //No hay informacion
-											estado_ejecucion="<center><span class='glyphicon glyphicon-star-empty aria-hidden='true'></span><center>";
-											dehabilitar="disabled";
-										}
-										if(jQuery.isEmptyObject(e.parque)){  //No hay informacion
+
+
+										if(jQuery.isEmptyObject(e.parque)){  //No hay informacion parque
 											Nomparque="Otro: "+e['Otro'];
 										}else{
 											Nomparque=e.parque['Nombre'];
@@ -69,7 +82,7 @@ $(function()
 								            '<td style="text-align:center "><center><button type="button" data-rel="'+e['Id_Actividad_Gestor']+'" data-funcion="ver_inf" class="btn btn-primary btn-sm" ><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> ver</button><div id="espera'+e['Id_Actividad_Gestor']+'"></div></td>',
 								            '<td>'+estado_programacion+'</td>',
 								            '<td style="text-align:center"><center><button type="button" data-rel="'+e['Id_Actividad_Gestor']+'" data-funcion="ejec_ver" class="btn btn-primary btn-sm" '+dehabilitar+'><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> ver</button><div id="espera_eje'+e['Id_Actividad_Gestor']+'"></div></td>',
-								            '<td>'+estado_ejecucion+'</td>'
+								            '<td>'+estado_ejecucion+' '+'</td>'
 								        ] ).draw( false );
 
 										num++;
@@ -136,6 +149,17 @@ $(function()
     {
  
         //console.log(datos);
+
+        if(datos.datosActividad['Estado']==3){ // Aprobar Ejecución
+				$('#Cancelar_').hide(); 	//Ejecucion
+				$('#Aprobar_').hide();		//Ejecucion
+				$('#Modificar_').hide();	//Ejecucion
+		}else{
+				$('#Cancelar_').show(); 	//Ejecucion
+				$('#Aprobar_').show();		//Ejecucion
+				$('#Modificar_').show();	//Ejecucion
+		}
+
         $("#titulo_id").text(datos.datosActividad['Id_Actividad_Gestor']);
         $('input[name="Id_Actividad"]').val(datos.datosActividad['Id_Actividad_Gestor']);
         $('select[name="Id_Localidad"]').val(datos.datosActividad['Localidad']);
@@ -202,6 +226,17 @@ $(function()
     	$('input[name="Id_Actividad_ejecucion"]').val(datos.datosActividad['Id_Actividad_Gestor']);
   		$('#titulo').text(datos.datosActividad['Id_Actividad_Gestor']);
   		$('#FechaRegistro').text(datos.datosActividad['Fecha_Registro_Ejecución']);
+
+  		if(datos.datosActividad['Estado']==3){ // Aprobar Ejecución
+				$('#Cancelar_e').hide(); 	//Ejecucion
+				$('#Aprobar_e').hide();		//Ejecucion
+				$('#Modificar_e').hide();	//Ejecucion
+		}else{
+				$('#Cancelar_e').show(); 	//Ejecucion
+				$('#Aprobar_e').show();		//Ejecucion
+				$('#Modificar_e').show();	//Ejecucion
+		}
+  		
 
 		var num=1;
 		$('.tablaEjecucion').empty();
@@ -315,59 +350,74 @@ $(function()
 												var counter = 1;
 													
 												if(data.length > 0)
-												{
-													
-													var num=1;
-													var html="";
-													var Nomparque="";
-													t.clear().draw();
-													$.each(data, function(i, e){
-														if(e['Estado']==2){
-															estado_programacion="<center><span class='glyphicon glyphicon-ok' aria-hidden='true'></span><center>";
-														}
-														if(e['Estado']==1){
-															estado_programacion="<center><span class='glyphicon glyphicon-remove aria-hidden='true'></span><center>";
-														}
-														if(e['Estado_Ejecucion']==4){ //Cancelado
-															estado_ejecucion="<center><span class='glyphicon glyphicon-remove aria-hidden='true'></span><center>";
-															dehabilitar="";
-														}
-														if(e['Estado_Ejecucion']==3){ //Aprobado
-															estado_ejecucion="<center><span class='glyphicon glyphicon-ok aria-hidden='true'></span><center>";
-															dehabilitar="";
-														}
-														if(e['Estado_Ejecucion']==2){  //Hay informacion
-															estado_ejecucion="<center><span class='glyphicon glyphicon-star' aria-hidden='true'></span><center>";
-															dehabilitar="";
-														}
-														if(e['Estado_Ejecucion']==1){  //No hay informacion
-															estado_ejecucion="<center><span class='glyphicon glyphicon-star-empty aria-hidden='true'></span><center>";
-															dehabilitar="disabled";
-														}
-														if(e.parque==null){  //No hay informacion
-															Nomparque="Otro: "+e['Otro'];
-														}else{
-															Nomparque=e.parque['Nombre'];
-														}
+													{
+														
+														var num=1;
+														var html="";
+														var Nomparque="";
+														t.clear().draw();
+														$.each(data, function(i, e){
+															
+															
+															
+															//Estado Programación: 
+															if(e['Estado']==2){//APROBADO PROGRAMACION
+																estado_programacion="<center><span class='glyphicon glyphicon-ok' aria-hidden='true'></span><br>Aprobado<center>";
+															}
+															if(e['Estado']==1){//EN ESPERA PROGRAMACION
+																estado_programacion="<center><span class='glyphicon glyphicon-eye-close' aria-hidden='true'></span><br>Por revisar<center>";
+															}
+															if(e['Estado']==3){ // COMPLETO: Cierra los botones
+																estado_programacion="<center><span class='glyphicon glyphicon-list-alt' aria-hidden='true'></span><br>Completo<center>";
+															}
+															if(e['Estado']==4){ // CANCELADO
+																estado_programacion="<center><span class='glyphicon glyphicon-remove' aria-hidden='true'></span><br>Cancelado<center>";
+															}
 
-														t.row.add( [
-												            '<th scope="row" class="text-center">'+num+'</th>',
-												            '<td class="text-center"><h4>'+e['Id_Actividad_Gestor']+'<h4></td>',
-												            '<td>'+e.persona_programador['Primer_Apellido']+' '+e.persona_programador['Segundo_Apellido']+' '+e.persona_programador['Primer_Nombre']+' '+e.persona_programador['Segundo_Nombre']+'</td>',
-												            '<td>'+e.persona['Primer_Apellido']+' '+e.persona['Segundo_Apellido']+' '+e.persona['Primer_Nombre']+' '+e.persona['Segundo_Nombre']+'</td>',
-												            '<td>'+e['Fecha_Ejecucion']+'</td>',
-												            '<td>'+e.localidad['Nombre_Localidad']+'</td>',
-												            '<td>'+e['Hora_Incial']+'</td>',
-												            '<td>'+Nomparque+'</td>',
-												            '<td style="text-align:center "><center><button type="button" data-rel="'+e['Id_Actividad_Gestor']+'" data-funcion="ver_inf" class="btn btn-primary btn-sm" ><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> ver</button><div id="espera'+e['Id_Actividad_Gestor']+'"></div></td>',
-												            '<td>'+estado_programacion+'</td>',
-												            '<td style="text-align:center"><center><button type="button" data-rel="'+e['Id_Actividad_Gestor']+'" data-funcion="ejec_ver" class="btn btn-primary btn-sm" '+dehabilitar+'><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> ver</button><div id="espera_eje'+e['Id_Actividad_Gestor']+'"></div></td>',
-												            '<td>Espera</td>'
-												        ] ).draw( false );
+															//Estado Ejecución: 										
+															if(e['Estado_Ejecucion']==1){  //No hay informacion
+																estado_ejecucion="<center><span class='glyphicon glyphicon-star-empty' aria-hidden='true'></span>Sin información<center>";
+																dehabilitar="disabled";
+															}
+															if(e['Estado_Ejecucion']==2){  //Hay informacion
+																estado_ejecucion="<center><span class='glyphicon glyphicon-star' aria-hidden='true'></span>Con información<center>";
+																dehabilitar="";
+															}
+															if(e['Estado_Ejecucion']==3){ //Aprobado
+																estado_ejecucion="<center><span class='glyphicon glyphicon-list-alt' aria-hidden='true'></span><br>Completo<center>";
+																dehabilitar="";
+															}
+															if(e['Estado_Ejecucion']==4){ //Cancelado
+																estado_ejecucion="<center><span class='glyphicon glyphicon-remove' aria-hidden='true'></span>Cancelado<center>";
+																dehabilitar="";
+															}
 
-														num++;
-													});
-												}
+
+															if(jQuery.isEmptyObject(e.parque)){  //No hay informacion parque
+																Nomparque="Otro: "+e['Otro'];
+															}else{
+																Nomparque=e.parque['Nombre'];
+															}
+
+
+															t.row.add( [
+													            '<th scope="row" class="text-center">'+num+'</th>',
+													            '<td class="text-center"><h4>'+e['Id_Actividad_Gestor']+'<h4></td>',
+													            '<td>'+e.persona_programador['Primer_Apellido']+' '+e.persona_programador['Segundo_Apellido']+' '+e.persona_programador['Primer_Nombre']+' '+e.persona_programador['Segundo_Nombre']+'</td>',
+													            '<td>'+e.persona['Primer_Apellido']+' '+e.persona['Segundo_Apellido']+' '+e.persona['Primer_Nombre']+' '+e.persona['Segundo_Nombre']+'</td>',
+													            '<td>'+e['Fecha_Ejecucion']+'</td>',
+													            '<td>'+e.localidad['Nombre_Localidad']+'</td>',
+													            '<td>'+e['Hora_Incial']+'</td>',
+													            '<td>'+Nomparque+'</td>',
+													            '<td style="text-align:center "><center><button type="button" data-rel="'+e['Id_Actividad_Gestor']+'" data-funcion="ver_inf" class="btn btn-primary btn-sm" ><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> ver</button><div id="espera'+e['Id_Actividad_Gestor']+'"></div></td>',
+													            '<td>'+estado_programacion+'</td>',
+													            '<td style="text-align:center"><center><button type="button" data-rel="'+e['Id_Actividad_Gestor']+'" data-funcion="ejec_ver" class="btn btn-primary btn-sm" '+dehabilitar+'><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> ver</button><div id="espera_eje'+e['Id_Actividad_Gestor']+'"></div></td>',
+													            '<td>'+estado_ejecucion+' '+'</td>'
+													        ] ).draw( false );
+
+															num++;
+														});
+													}
 											}
 											$("#espera1").html("");
 									},
@@ -468,23 +518,21 @@ $(function()
     });
 
     $('#Aprobar_e').on('click', function(e){
-    			var id= $('input[name="Id_Actividad"]').val();
-    			alert(id);
-
-    			/*$.get(
-		            URL+'/service/activar/'+id,
+    			var id= $('input[name="Id_Actividad_ejecucion"]').val();
+    			$.get(
+		            URL+'/service/aprobarEjecucion/'+id,
 		            {},
 		            function(data)
 		            {   	
-		               			$('#mensajeModifica').html("<div class='alert alert-success' role='alert'> <strong>Bien!</strong> La actividad ha sido aprobada.. </div>");
-								$('#modalMensaj').modal('show');
+		               			$('#mensajeModificaEjecu').html("<div class='alert alert-success' role='alert'> <strong>Bien!</strong> La ejecución ha sido aprobada.. </div>");
+								$('#modalMensajEjecucion').modal('show');
 								setTimeout(function(){
-									$('#modal_form_act_eje').modal('hide');
-									$('#modalMensaj').modal('hide');
+									$('#modal_ejecucion').modal('hide');
+									$('#modalMensajEjecucion').modal('hide');
 								}, 3000)
 								actulaizarTabla();
 		            }
-		        );*/
+		        );
 
 		        e.preventDefault();
     });

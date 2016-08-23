@@ -82,8 +82,6 @@ class aprobacion_actividades extends Controller
 
 
     public function obtenerEjecucion(Request $request, $id_actividad){
-    	
- 
 		$Ejecucion = Ejecucion::where('Id_Actividad_Gestor',$id_actividad)->with('tipoEntidad','tipoPersona','condicion','situacion','localidad')->get();
     	$Novedad = Novedad::where('Id_Actividad_Gestor',$id_actividad)->get();
 		$datosActividad = ActividadGestor::with('calificaciomServicio')->find($id_actividad);
@@ -95,6 +93,12 @@ class aprobacion_actividades extends Controller
     public function activarProgramacion(Request $request, $id_actividad){
 
 		ActividadGestor::where('Id_Actividad_Gestor', $id_actividad)->update(array('Estado' => 2));
+    	return  "ok";
+    }
+
+    public function aprobarEjecucion(Request $request, $id_actividad){
+    	//aprobar Ejecucion y programación, desactiva la modificación de la programacion y la ejecución.
+		ActividadGestor::where('Id_Actividad_Gestor', $id_actividad)->update(array('Estado_Ejecucion' => 3,'Estado' => 3)); 
     	return  "ok";
     }
 

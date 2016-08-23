@@ -19,7 +19,7 @@
 
 		<div class="panel panel-primary">
 			  <div class="panel-heading">
-			    <h3 class="panel-title">AUTORIZACIÓN DE ACTIVIDADES: Aprobación de actividadesd.</h3>
+			    <h3 class="panel-title">AUTORIZACIÓN DE ACTIVIDADES: Aprobación de actividades.</h3>
 			  </div>
 			  <div class="panel-body">
 										<fieldset>
@@ -614,7 +614,7 @@
 										        				<br><br>
 										        			</div>
 										        		</div>
-													    <div class="col-xs-12 col-md-12">
+													    <div class="col-xs-12 col-md-12" >
 													    <input type="hidden" name="Id_Actividad_E" class="form-control" value="1">
 													         <button type="submit" id="Cancelar_e" class="btn btn-danger">Cancelar</button>
 													       <!-- <button type="submit" id="Modificar_e" class="btn btn-primary">Modificar</button>-->
@@ -631,6 +631,15 @@
 						</div>   
 			</div>
 	  </div>
+  	</div>
+</div> 
+
+
+<div class="modal fade bs-example-modal-lg" id="modalMensajEjecucion" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+	<div class="modal-dialog modal-lg" role="document">
+	   <div class="modal-content">
+	   		<div id="mensajeModificaEjecu"></div>
+		</div>
   	</div>
 </div> 
 @stop
