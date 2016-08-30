@@ -28,6 +28,7 @@ Route::post('/personas/service/procesar/', '\Idrd\Usuarios\Controllers\PersonaCo
 
 
 Route::get('/asignarLocalidad', 'ConfiguracionActividadController@asignarLocalidad');
+Route::get('/asignarTipoPersona', 'ConfiguracionActividadController@asignarTipoPersona');
 Route::get('/CrearActividad', 'Actividadcontroller@index');
 Route::get('/Modificar', 'Actividadcontroller@index');
 Route::get('/MisProgramaciones', 'Actividadcontroller@MiActividad');
