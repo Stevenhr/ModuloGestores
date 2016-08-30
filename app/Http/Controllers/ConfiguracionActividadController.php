@@ -194,6 +194,17 @@ class ConfiguracionActividadController extends Controller
         return view('perosona_localidad', $datos);
     }
 
+    public function asignarTipoPersona(){
+        $Tipo = app()->make('App\Tipo');
+        $Localidad = app()->make('App\Localidad');
+        $datos = [
+            'Tipo' => $Tipo->find(50),
+            'localidad' => $Localidad->all()
+        ];
+        return view('persona_tipoPersona', $datos);
+    }
+
+
     public function procesarValidacionPersonaLocalidad(Request $request)
 	{
 		$validator = Validator::make($request->all(),
