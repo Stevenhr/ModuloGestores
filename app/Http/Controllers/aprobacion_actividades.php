@@ -95,20 +95,25 @@ class aprobacion_actividades extends Controller
 		ActividadGestor::where('Id_Actividad_Gestor', $id_actividad)->update(array('Estado' => 2));
     	return  "ok";
     }
-
-    public function aprobarEjecucion(Request $request, $id_actividad){
-    	//aprobar Ejecucion y programación, desactiva la modificación de la programacion y la ejecución.
-		ActividadGestor::where('Id_Actividad_Gestor', $id_actividad)->update(array('Estado_Ejecucion' => 3,'Estado' => 3)); 
-    	return  "ok";
-    }
-
-
     public function cancelarProgramacion(Request $request, $id_actividad){
 
-		ActividadGestor::where('Id_Actividad_Gestor', $id_actividad)->update(array('Estado' => 1));
+		ActividadGestor::where('Id_Actividad_Gestor', $id_actividad)->update(array('Estado' => 3));
     	return  "ok";
     }
 
+
+
+    public function aprobarEjecucion(Request $request, $id_actividad){
+    	//aprobar Ejecucion , desactiva la modificación de la programacion y la ejecución.
+		ActividadGestor::where('Id_Actividad_Gestor', $id_actividad)->update(array('Estado_Ejecucion' => 3)); 
+    	return  "ok";
+    }
+
+     public function cancelarEjecucion(Request $request, $id_actividad){
+    	//Cancelar Ejecucion , desactiva la modificación de la programacion y la ejecución.
+		ActividadGestor::where('Id_Actividad_Gestor', $id_actividad)->update(array('Estado_Ejecucion' => 4)); 
+    	return  "ok";
+    }
 
 
     public function procesarModificacionValidacion(Request $request)

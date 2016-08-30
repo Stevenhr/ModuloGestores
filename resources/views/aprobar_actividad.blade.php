@@ -81,7 +81,6 @@
 								                <th>Responsable</th>
 								                <th>Fecha Ejecución</th>
 								                <th>Localidad</th>
-								                <th>Hora</th>
 								                <th>Parque / Otro</th>
 								                <th>Programación</th>
 								                <th>Estado P</th>
@@ -97,7 +96,6 @@
 								                <th>Responsable</th>
 								                <th>Fecha Ejecución</th>
 								                <th>Localidad</th>
-								                <th>Hora</th>
 								                <th>Parque / Otro</th>
 								                <th>Programación</th>
 								                <th>Estado P</th>
@@ -560,7 +558,7 @@
 										        		<div class="col-xs-12 col-md-6">
 										        			<div class="form-group">
 															    <label for="exampleInputFile">Imagen 1</label>
-															    <input type="file" name="imagen1">
+															    <!--<input type="file" name="imagen1">-->
 															    <p class="help-block">Imagen en formato jpeg,jpg,png,bmp.</p>
 															    <img id="imagenVer1" src="" alt="" class="img-thumbnail">
 															 </div>
@@ -568,7 +566,7 @@
 										        		<div class="col-xs-12 col-md-6">
 										        			<div class="form-group">
 															    <label for="exampleInputFile">Imagen 2</label>
-															    <input type="file" name="imagen2">
+															    <!--<input type="file" name="imagen2">-->
 															    <p class="help-block">Imagen en formato jpeg,jpg,png,bmp.</p>
 															    <img id="imagenVer2" src="" alt="" class="img-thumbnail">
 															 </div>
@@ -576,7 +574,7 @@
 										        		<div class="col-xs-12 col-md-6">
 										        			<div class="form-group">
 															    <label for="exampleInputFile">Imagen 3</label>
-															    <input type="file" name="imagen3">
+															    <!--<input type="file" name="imagen3">-->
 															    <p class="help-block">Imagen en formato jpeg,jpg,png,bmp.</p>
 															    <img id="imagenVer3" src="" alt="" class="img-thumbnail">
 															 </div>
@@ -584,7 +582,7 @@
 										        		<div class="col-xs-12 col-md-6">
 										        			<div class="form-group">
 															    <label for="exampleInputFile">Imagen 4</label>
-															    <input type="file" name="imagen4">
+															    <!--<input type="file" name="imagen4">-->
 															    <p class="help-block">Imagen en formato jpeg,jpg,png,bmp.</p>
 															    <img id="imagenVer4" src="" alt="" class="img-thumbnail">
 															 </div>
@@ -592,7 +590,7 @@
 										        		<div class="col-xs-12 col-md-6">
 										        			<div class="form-group">
 															    <label for="exampleInputFile">Formato Evaluación</label>
-															    <input type="file" name="listaAsistencia">
+															    <!--<input type="file" name="listaAsistencia">-->
 															    <p class="help-block">Archivo en formato pdf</p>
 															    <a id="file1" href="" download>
 																  <img border="0" src="public/Img/downloadicon.gif" alt="W3Schools" >
@@ -602,7 +600,7 @@
 										        		<div class="col-xs-12 col-md-6">
 										        			<div class="form-group">
 															    <label for="exampleInputFile">Listado Entraga de Kits</label>
-															    <input type="file" name="acta">
+															    <!--<input type="file" name="acta">-->
 															    <p class="help-block">Archivo en formato pdf</p>
 															    <a id="file2" href="" download>
 																  <img border="0" src="public/Img/downloadicon.gif" alt="W3Schools" >

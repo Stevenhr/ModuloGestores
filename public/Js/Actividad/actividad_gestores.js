@@ -36,22 +36,109 @@ $(function()
                                         var tmp = e['Fecha_Ejecucion'].split('-');
                                         var F_ejecucion = new Date(tmp[0]+ "," + tmp[1]+ "," + tmp[2]);
 
-                                        if(e['Estado']==2 && F_ejecucion<fechaActual){  //No hay informacion
-                                            clase="btn btn-success";
-                                        }else{
-                                            clase="btn btn-default";
-                                        }
+
+                                        dehabilitar_P="";
+                                        dehabilitar_E="";
+                                        clase_P="";
+                                        clase_E="";
+                                        //Estado Programación: 
+										if(e['Estado']==1){//EN ESPERA PROGRAMACION
+											estado_programacion="<center><span class='glyphicon glyphicon-eye-close' aria-hidden='true'></span><br>Por revisar<center>";
+											clase_P="btn btn-info";
+										}
+										if(e['Estado']==2){//APROBADO PROGRAMACION
+											estado_programacion="<center><span class='glyphicon glyphicon-ok' aria-hidden='true'></span><br>Aprobado<center>";
+											clase_P="btn btn-success";
+										}
+										if(e['Estado']==3){ // CANCELADO
+											estado_programacion="<center><span class='glyphicon glyphicon-remove' aria-hidden='true'></span><br>Cancelado<center>";
+											clase_P="btn btn-danger";
+										}
+
+
+										//Estado Ejecución: 										
+										if(e['Estado_Ejecucion']==1){  //No hay informacion
+											estado_ejecucion="<center><span class='glyphicon glyphicon-star-empty' aria-hidden='true'></span><br>Sin información<center>";
+											clase_E="btn btn-info";
+										}
+										if(e['Estado_Ejecucion']==2){  //Hay informacion
+											estado_ejecucion="<center><span class='glyphicon glyphicon-star' aria-hidden='true'></span><br>Con información<center>";
+											clase_E="btn btn-primary";
+										}
+										if(e['Estado_Ejecucion']==3){ //Aprobado
+											estado_ejecucion="<center><span class='glyphicon glyphicon-ok' aria-hidden='true'></span><br>Aprobado<center>";
+											clase_E="btn btn-success";
+										}
+										if(e['Estado_Ejecucion']==4){ //Cancelado
+											estado_ejecucion="<center><span class='glyphicon glyphicon-remove' aria-hidden='true'></span><br>Cancelado<center>";											
+											clase_E="btn btn-danger";
+										}
+
+										if(e['Estado']==1 && e['Estado_Ejecucion']==1){ 
+											dehabilitar_P="";
+                                        	dehabilitar_E="disabled";											
+										}
+										if(e['Estado']==1 && e['Estado_Ejecucion']==2){ 
+											dehabilitar_P="";
+                                        	dehabilitar_E="disabled";											
+										}
+										if(e['Estado']==1 && e['Estado_Ejecucion']==3){ 
+											dehabilitar_P="";
+                                        	dehabilitar_E="disabled";											
+										}
+										if(e['Estado']==1 && e['Estado_Ejecucion']==4){ 
+											dehabilitar_P="";
+                                        	dehabilitar_E="disabled";											
+										}
+
+										if(e['Estado']==2 && e['Estado_Ejecucion']==1){ 
+											dehabilitar_P="";
+                                        	dehabilitar_E="disabled";											
+										}
+										if(e['Estado']==2 && e['Estado_Ejecucion']==2){ 
+											dehabilitar_P="";
+                                        	dehabilitar_E="";											
+										}
+										if(e['Estado']==2 && e['Estado_Ejecucion']==3){ 
+											dehabilitar_P="";
+                                        	dehabilitar_E="";											
+										}
+										if(e['Estado']==2 && e['Estado_Ejecucion']==4){ 
+											dehabilitar_P="";
+                                        	dehabilitar_E="";											
+										}
+
+
+										if(e['Estado']==3 && e['Estado_Ejecucion']==1){ 
+											dehabilitar_P="";
+                                        	dehabilitar_E="disabled";											
+										}
+										if(e['Estado']==3 && e['Estado_Ejecucion']==2){ 
+											dehabilitar_P="";
+                                        	dehabilitar_E="";											
+										}
+										if(e['Estado']==3 && e['Estado_Ejecucion']==3){ 
+											dehabilitar_P="";
+                                        	dehabilitar_E="";											
+										}
+										if(e['Estado']==3 && e['Estado_Ejecucion']==4){ 
+											dehabilitar_P="";
+                                        	dehabilitar_E="";											
+										}
+
+
 
 										t.row.add( [
 								            '<th scope="row" class="text-center">'+num+'</th>',
 								            '<td class="text-center"><h4>'+e['Id_Actividad_Gestor']+'<h4></td>',
 								            '<td>'+e.persona['Primer_Apellido']+' '+e.persona['Segundo_Apellido']+' '+e.persona['Primer_Nombre']+' '+e.persona['Segundo_Nombre']+'</td>',
-								            '<td>'+e['Fecha_Ejecucion']+'</td>',
-								            '<td>'+e.localidad['Nombre_Localidad']+'</td>',
-								            '<td>'+e['Hora_Incial']+'</td>',
+								            '<td>'+e['Fecha_Ejecucion']+'<br>Hora: '+e['Hora_Incial']+'</td>',
+								            '<td>'+e.localidad['Nombre_Localidad']+' '+e['Estado']+' - '+e['Estado_Ejecucion']+'</td>',
 								            '<td>'+Nomparque+'</td>',
-								            '<td style="text-align:center "><center><button type="button" data-rel="'+e['Id_Actividad_Gestor']+'" data-funcion="ver_inf" class="btn btn-primary btn-sm '+clase+'" ><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> ver</button><div id="espera'+e['Id_Actividad_Gestor']+'"></div></td>',
-								            '<td style="text-align:center"><center><button type="button" data-rel="'+e['Id_Actividad_Gestor']+'" data-funcion="ejec_ver" class="btn btn-primary btn-sm '+clase+'" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> ver</button><div id="espera_eje'+e['Id_Actividad_Gestor']+'"></div></td>'
+								            '<td style="text-align:center "><center><button type="button" data-rel="'+e['Id_Actividad_Gestor']+'" data-funcion="ver_inf" class="'+clase_P+' btn-sm" ><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> ver</button><div id="espera'+e['Id_Actividad_Gestor']+'"></div></td>',
+								            '<td>'+estado_programacion+'</td>',
+								            '<td style="text-align:center"><center><button type="button" data-rel="'+e['Id_Actividad_Gestor']+'" data-funcion="ejec_ver" class="'+clase_E+' btn-sm" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> ver</button><div id="espera_eje'+e['Id_Actividad_Gestor']+'"></div></td>',
+								            '<td>'+estado_ejecucion+' '+'</td>'
 								        ] ).draw( false );
 
 										num++;
@@ -324,17 +411,69 @@ $(function()
 			var html = '';
 					if(vector_datos_ejecucion.length > 0)
 					{
-						var num=1;
-						$.each(vector_datos_ejecucion, function(i, e){
-							html += '<tr><th scope="row" class="text-center">'+num+'</th><td>'+e['Inst_grupo_comu']+'</td><td>'+e['M_0_5']+'</td><td>'+e['F_0_5']+'</td><td class="text-center"><button type="button" data-rel="'+i+'" data-funcion="crear" class="eliminar_dato_actividad"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td></tr>';
-							num++;
-						});
+							console.log(vector_datos_ejecucion);
+							var num=1;
+							$('.tablaEjecucion').empty();
+							//console.log(datos);
+					  		var fila="";
+					  		var TotalMujer=0;
+					  		var TotalHombre=0;
+					  		var TotalParcial=0;
+					  		var T_F_0a5=0;
+					  		var T_M_0a5=0;
+					  		var T_F_6a12=0;
+					  		var T_M_6a12=0;
+					  		var T_F_13a17=0;
+					  		var T_M_13a17=0;
+					  		var T_F_18a26=0;
+					  		var T_M_18a26=0;
+					  		var T_F_27a59=0;
+					  		var T_M_27a59=0;
+					  		var T_F_60=0;
+					  		var T_M_60=0;
+					  		var TotalMujerT=0;
+					  		var TotalHombreT=0;
+					  		var Total=0;
+
+					  		$.each(vector_datos_ejecucion, function(i, e){		
+					  		    TotalMujer=parseInt(e['F_0a5'])+parseInt(e['F_6a12'])+parseInt(e['F_13a17'])+parseInt(e['F_18a26'])+parseInt(e['F_27a59'])+parseInt(e['F_60']);
+					  		    TotalHombre=parseInt(e['M_0a5'])+parseInt(e['M_6a12'])+parseInt(e['M_13a17'])+parseInt(e['M_18a26'])+parseInt(e['M_27a59'])+parseInt(e['M_60']);
+								TotalParcial=TotalMujer+TotalHombre;
+								T_F_0a5+=parseInt(e['F_0a5']);
+								T_M_0a5+=parseInt(e['M_0a5']);
+								T_F_6a12+=parseInt(e['F_6a12']);
+								T_M_6a12+=parseInt(e['M_6a12']);
+								T_F_13a17+=parseInt(e['F_13a17']);
+								T_M_13a17+=parseInt(e['M_13a17']);
+								T_F_18a26+=parseInt(e['F_18a26']);
+								T_M_18a26+=parseInt(e['M_18a26']);
+								T_F_27a59+=parseInt(e['F_27a59']);
+								T_M_27a59+=parseInt(e['M_27a59']);
+								T_F_60+=parseInt(e['F_60']);
+								T_M_60+=parseInt(e['M_60']);
+								fila +="<tr><th scope='row'>"+num+"</th><td>"+e['Comunidad']+"</td><td>"+e.localidad['Nombre_Localidad']+"</td><td>"+e.tipo_entidad['Nombre']+"</td><td>"+e.tipo_persona['Nombre']+"</td><td>"+e.condicion['Nombre']+"</td><td>"+e.situacion['Nombre']+"</td><td>"+e['F_0a5']+"</td><td>"+e['M_0a5']+"</td><td>"+e['F_6a12']+"</td><td>"+e['M_6a12']+"</td><td>"+e['F_13a17']+"</td><td>"+e['M_13a17']+"</td><td>"+e['F_18a26']+"</td><td>"+e['M_18a26']+"</td><td>"+e['F_27a59']+"</td><td>"+e['M_27a59']+"</td><td>"+e['F_60']+"</td><td>"+e['M_60']+"</td><td>"+TotalMujer+"</td><td>"+TotalHombre+"</td><td>"+TotalParcial+"</td></tr>";								            
+						        TotalMujerT+=TotalMujer;
+						        TotalHombreT+=TotalHombre;
+						        num++;
+							});
+					  		 Total=TotalHombreT+TotalMujerT;
+							 fila +="<tr><th scope='row'></th><td></td><td></td><td></td><td></td><td></td><td></td><td>"+T_F_0a5+"</td><td>"+T_M_0a5+"</td><td>"+T_F_6a12+"</td><td>"+T_M_6a12+"</td><td>"+T_F_13a17+"</td><td>"+T_M_13a17+"</td><td>"+T_F_18a26+"</td><td>"+T_M_18a26+"</td><td>"+T_F_27a59+"</td><td>"+T_M_27a59+"</td><td>"+T_F_60+"</td><td>"+T_M_60+"</td><td>"+TotalMujerT+"</td><td>"+TotalHombreT+"</td><td>"+Total+"</td></tr>";
+							 $('#tablaEjecucion').html(fila);	
+
+							 var num1=1;
+							 var fila1="";
+							 $.each(datos.Novedad, function(i, e){		
+								fila1 +="<tr><th scope='row'>"+num1+"</th><td>"+e['Id_novedad']+"</td><td>"+e['Causa']+"</td><td>"+e['Accion']+"</td></tr>";								            
+						        num1++;
+							 });
+							 $('#tablaNovedad').html(fila1);
 					}
 					$('#registros_ejecucion').html(html);
 
 			$('#table_ejecucion_agregada').show();
 			return false;	
 	});
+
 
 	$('#datos_ejecucion_tabla').delegate('button[data-funcion="crear"]','click',function (e) {   
 		var id = $(this).data('rel'); 

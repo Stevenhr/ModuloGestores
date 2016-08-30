@@ -28,39 +28,95 @@ $(function()
 									t.clear().draw();
 									$.each(data, function(i, e){
 										
-										
-										
-										//Estado Programación: 
-										if(e['Estado']==2){//APROBADO PROGRAMACION
-											estado_programacion="<center><span class='glyphicon glyphicon-ok' aria-hidden='true'></span><br>Aprobado<center>";
-										}
+										dehabilitar_P="";
+                                        dehabilitar_E="";
+                                        clase_P="";
+                                        clase_E="";
+                                        //Estado Programación: 
 										if(e['Estado']==1){//EN ESPERA PROGRAMACION
 											estado_programacion="<center><span class='glyphicon glyphicon-eye-close' aria-hidden='true'></span><br>Por revisar<center>";
+											clase_P="btn btn-info";
 										}
-										if(e['Estado']==3){ // COMPLETO: Cierra los botones
-											estado_programacion="<center><span class='glyphicon glyphicon-list-alt' aria-hidden='true'></span><br>Completo<center>";
+										if(e['Estado']==2){//APROBADO PROGRAMACION
+											estado_programacion="<center><span class='glyphicon glyphicon-ok' aria-hidden='true'></span><br>Aprobado<center>";
+											clase_P="btn btn-success";
 										}
-										if(e['Estado']==4){ // CANCELADO
+										if(e['Estado']==3){ // CANCELADO
 											estado_programacion="<center><span class='glyphicon glyphicon-remove' aria-hidden='true'></span><br>Cancelado<center>";
+											clase_P="btn btn-danger";
 										}
+
 
 										//Estado Ejecución: 										
 										if(e['Estado_Ejecucion']==1){  //No hay informacion
-											estado_ejecucion="<center><span class='glyphicon glyphicon-star-empty' aria-hidden='true'></span>Sin información<center>";
-											dehabilitar="disabled";
+											estado_ejecucion="<center><span class='glyphicon glyphicon-star-empty' aria-hidden='true'></span><br>Sin información<center>";
+											clase_E="btn btn-info";
 										}
 										if(e['Estado_Ejecucion']==2){  //Hay informacion
-											estado_ejecucion="<center><span class='glyphicon glyphicon-star' aria-hidden='true'></span>Con información<center>";
-											dehabilitar="";
+											estado_ejecucion="<center><span class='glyphicon glyphicon-star' aria-hidden='true'></span><br>Con información<center>";
+											clase_E="btn btn-primary";
 										}
 										if(e['Estado_Ejecucion']==3){ //Aprobado
-											estado_ejecucion="<center><span class='glyphicon glyphicon-list-alt' aria-hidden='true'></span><br>Completo<center>";
-											dehabilitar="";
+											estado_ejecucion="<center><span class='glyphicon glyphicon-ok' aria-hidden='true'></span><br>Aprobado<center>";
+											clase_E="btn btn-success";
 										}
 										if(e['Estado_Ejecucion']==4){ //Cancelado
-											estado_ejecucion="<center><span class='glyphicon glyphicon-remove' aria-hidden='true'></span>Cancelado<center>";
-											dehabilitar="";
+											estado_ejecucion="<center><span class='glyphicon glyphicon-remove' aria-hidden='true'></span><br>Cancelado<center>";											
+											clase_E="btn btn-danger";
 										}
+
+										if(e['Estado']==1 && e['Estado_Ejecucion']==1){ 
+											dehabilitar_P="";
+                                        	dehabilitar_E="disabled";											
+										}
+										if(e['Estado']==1 && e['Estado_Ejecucion']==2){ 
+											dehabilitar_P="";
+                                        	dehabilitar_E="disabled";											
+										}
+										if(e['Estado']==1 && e['Estado_Ejecucion']==3){ 
+											dehabilitar_P="";
+                                        	dehabilitar_E="disabled";											
+										}
+										if(e['Estado']==1 && e['Estado_Ejecucion']==4){ 
+											dehabilitar_P="";
+                                        	dehabilitar_E="disabled";											
+										}
+
+										if(e['Estado']==2 && e['Estado_Ejecucion']==1){ 
+											dehabilitar_P="";
+                                        	dehabilitar_E="disabled";											
+										}
+										if(e['Estado']==2 && e['Estado_Ejecucion']==2){ 
+											dehabilitar_P="";
+                                        	dehabilitar_E="";											
+										}
+										if(e['Estado']==2 && e['Estado_Ejecucion']==3){ 
+											dehabilitar_P="";
+                                        	dehabilitar_E="";											
+										}
+										if(e['Estado']==2 && e['Estado_Ejecucion']==4){ 
+											dehabilitar_P="";
+                                        	dehabilitar_E="";											
+										}
+
+
+										if(e['Estado']==3 && e['Estado_Ejecucion']==1){ 
+											dehabilitar_P="";
+                                        	dehabilitar_E="disabled";											
+										}
+										if(e['Estado']==3 && e['Estado_Ejecucion']==2){ 
+											dehabilitar_P="";
+                                        	dehabilitar_E="";											
+										}
+										if(e['Estado']==3 && e['Estado_Ejecucion']==3){ 
+											dehabilitar_P="";
+                                        	dehabilitar_E="";											
+										}
+										if(e['Estado']==3 && e['Estado_Ejecucion']==4){ 
+											dehabilitar_P="";
+                                        	dehabilitar_E="";											
+										}
+
 
 
 										if(jQuery.isEmptyObject(e.parque)){  //No hay informacion parque
@@ -75,13 +131,12 @@ $(function()
 								            '<td class="text-center"><h4>'+e['Id_Actividad_Gestor']+'<h4></td>',
 								            '<td>'+e.persona_programador['Primer_Apellido']+' '+e.persona_programador['Segundo_Apellido']+' '+e.persona_programador['Primer_Nombre']+' '+e.persona_programador['Segundo_Nombre']+'</td>',
 								            '<td>'+e.persona['Primer_Apellido']+' '+e.persona['Segundo_Apellido']+' '+e.persona['Primer_Nombre']+' '+e.persona['Segundo_Nombre']+'</td>',
-								            '<td>'+e['Fecha_Ejecucion']+'</td>',
+								            '<td>'+e['Fecha_Ejecucion']+'<br>Hora: '+e['Hora_Incial']+'</td>',
 								            '<td>'+e.localidad['Nombre_Localidad']+'</td>',
-								            '<td>'+e['Hora_Incial']+'</td>',
 								            '<td>'+Nomparque+'</td>',
-								            '<td style="text-align:center "><center><button type="button" data-rel="'+e['Id_Actividad_Gestor']+'" data-funcion="ver_inf" class="btn btn-primary btn-sm" ><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> ver</button><div id="espera'+e['Id_Actividad_Gestor']+'"></div></td>',
+								            '<td style="text-align:center "><center><button type="button" data-rel="'+e['Id_Actividad_Gestor']+'" data-funcion="ver_inf" class="'+clase_P+' btn-sm" '+dehabilitar_P+'><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> ver</button><div id="espera'+e['Id_Actividad_Gestor']+'"></div></td>',
 								            '<td>'+estado_programacion+'</td>',
-								            '<td style="text-align:center"><center><button type="button" data-rel="'+e['Id_Actividad_Gestor']+'" data-funcion="ejec_ver" class="btn btn-primary btn-sm" '+dehabilitar+'><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> ver</button><div id="espera_eje'+e['Id_Actividad_Gestor']+'"></div></td>',
+								            '<td style="text-align:center"><center><button type="button" data-rel="'+e['Id_Actividad_Gestor']+'" data-funcion="ejec_ver" class="'+clase_E+' btn-sm" '+dehabilitar_E+'><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> ver</button><div id="espera_eje'+e['Id_Actividad_Gestor']+'"></div></td>',
 								            '<td>'+estado_ejecucion+' '+'</td>'
 								        ] ).draw( false );
 
@@ -150,8 +205,8 @@ $(function()
  
         //console.log(datos);
 
-        if(datos.datosActividad['Estado']==3){ // Aprobar Ejecución
-				$('#Cancelar_').hide(); 	//Ejecucion
+        if(datos.datosActividad['Estado']==3 || datos.datosActividad['Estado_Ejecucion']==3){ // Cancelar Prpgramación
+				$('#Cancelar_').show(); 	//Ejecucion
 				$('#Aprobar_').hide();		//Ejecucion
 				$('#Modificar_').hide();	//Ejecucion
 		}else{
@@ -227,7 +282,7 @@ $(function()
   		$('#titulo').text(datos.datosActividad['Id_Actividad_Gestor']);
   		$('#FechaRegistro').text(datos.datosActividad['Fecha_Registro_Ejecución']);
 
-  		if(datos.datosActividad['Estado']==3){ // Aprobar Ejecución
+  		if(datos.datosActividad['Estado_Ejecucion']==4 || datos.datosActividad['Estado_Ejecucion']==3){ // Aprobado o cancelado 
 				$('#Cancelar_e').hide(); 	//Ejecucion
 				$('#Aprobar_e').hide();		//Ejecucion
 				$('#Modificar_e').hide();	//Ejecucion
@@ -240,7 +295,7 @@ $(function()
 
 		var num=1;
 		$('.tablaEjecucion').empty();
-		console.log(datos);
+		//console.log(datos);
   		var fila="";
   		var TotalMujer=0;
   		var TotalHombre=0;
@@ -360,37 +415,95 @@ $(function()
 															
 															
 															
-															//Estado Programación: 
-															if(e['Estado']==2){//APROBADO PROGRAMACION
-																estado_programacion="<center><span class='glyphicon glyphicon-ok' aria-hidden='true'></span><br>Aprobado<center>";
-															}
+															dehabilitar_P="";
+					                                        dehabilitar_E="";
+					                                        clase_P="";
+					                                        clase_E="";
+					                                        //Estado Programación: 
 															if(e['Estado']==1){//EN ESPERA PROGRAMACION
 																estado_programacion="<center><span class='glyphicon glyphicon-eye-close' aria-hidden='true'></span><br>Por revisar<center>";
+																clase_P="btn btn-info";
 															}
-															if(e['Estado']==3){ // COMPLETO: Cierra los botones
-																estado_programacion="<center><span class='glyphicon glyphicon-list-alt' aria-hidden='true'></span><br>Completo<center>";
+															if(e['Estado']==2){//APROBADO PROGRAMACION
+																estado_programacion="<center><span class='glyphicon glyphicon-ok' aria-hidden='true'></span><br>Aprobado<center>";
+																clase_P="btn btn-success";
 															}
-															if(e['Estado']==4){ // CANCELADO
+															if(e['Estado']==3){ // CANCELADO
 																estado_programacion="<center><span class='glyphicon glyphicon-remove' aria-hidden='true'></span><br>Cancelado<center>";
+																clase_P="btn btn-danger";
 															}
+
 
 															//Estado Ejecución: 										
 															if(e['Estado_Ejecucion']==1){  //No hay informacion
-																estado_ejecucion="<center><span class='glyphicon glyphicon-star-empty' aria-hidden='true'></span>Sin información<center>";
-																dehabilitar="disabled";
+																estado_ejecucion="<center><span class='glyphicon glyphicon-star-empty' aria-hidden='true'></span><br>Sin información<center>";
+																clase_E="btn btn-info";
 															}
 															if(e['Estado_Ejecucion']==2){  //Hay informacion
-																estado_ejecucion="<center><span class='glyphicon glyphicon-star' aria-hidden='true'></span>Con información<center>";
-																dehabilitar="";
+																estado_ejecucion="<center><span class='glyphicon glyphicon-star' aria-hidden='true'></span><br>Con información<center>";
+																clase_E="btn btn-primary";
 															}
 															if(e['Estado_Ejecucion']==3){ //Aprobado
-																estado_ejecucion="<center><span class='glyphicon glyphicon-list-alt' aria-hidden='true'></span><br>Completo<center>";
-																dehabilitar="";
+																estado_ejecucion="<center><span class='glyphicon glyphicon-ok' aria-hidden='true'></span><br>Aprobado<center>";
+																clase_E="btn btn-success";
 															}
 															if(e['Estado_Ejecucion']==4){ //Cancelado
-																estado_ejecucion="<center><span class='glyphicon glyphicon-remove' aria-hidden='true'></span>Cancelado<center>";
-																dehabilitar="";
+																estado_ejecucion="<center><span class='glyphicon glyphicon-remove' aria-hidden='true'></span><br>Cancelado<center>";											
+																clase_E="btn btn-danger";
 															}
+
+															if(e['Estado']==1 && e['Estado_Ejecucion']==1){ 
+																dehabilitar_P="";
+					                                        	dehabilitar_E="disabled";											
+															}
+															if(e['Estado']==1 && e['Estado_Ejecucion']==2){ 
+																dehabilitar_P="";
+					                                        	dehabilitar_E="disabled";											
+															}
+															if(e['Estado']==1 && e['Estado_Ejecucion']==3){ 
+																dehabilitar_P="";
+					                                        	dehabilitar_E="disabled";											
+															}
+															if(e['Estado']==1 && e['Estado_Ejecucion']==4){ 
+																dehabilitar_P="";
+					                                        	dehabilitar_E="disabled";											
+															}
+
+															if(e['Estado']==2 && e['Estado_Ejecucion']==1){ 
+																dehabilitar_P="";
+					                                        	dehabilitar_E="disabled";											
+															}
+															if(e['Estado']==2 && e['Estado_Ejecucion']==2){ 
+																dehabilitar_P="";
+					                                        	dehabilitar_E="";											
+															}
+															if(e['Estado']==2 && e['Estado_Ejecucion']==3){ 
+																dehabilitar_P="";
+					                                        	dehabilitar_E="";											
+															}
+															if(e['Estado']==2 && e['Estado_Ejecucion']==4){ 
+																dehabilitar_P="";
+					                                        	dehabilitar_E="";											
+															}
+
+
+															if(e['Estado']==3 && e['Estado_Ejecucion']==1){ 
+																dehabilitar_P="";
+					                                        	dehabilitar_E="disabled";											
+															}
+															if(e['Estado']==3 && e['Estado_Ejecucion']==2){ 
+																dehabilitar_P="";
+					                                        	dehabilitar_E="";											
+															}
+															if(e['Estado']==3 && e['Estado_Ejecucion']==3){ 
+																dehabilitar_P="";
+					                                        	dehabilitar_E="";											
+															}
+															if(e['Estado']==3 && e['Estado_Ejecucion']==4){ 
+																dehabilitar_P="";
+					                                        	dehabilitar_E="";											
+															}
+
 
 
 															if(jQuery.isEmptyObject(e.parque)){  //No hay informacion parque
@@ -405,13 +518,12 @@ $(function()
 													            '<td class="text-center"><h4>'+e['Id_Actividad_Gestor']+'<h4></td>',
 													            '<td>'+e.persona_programador['Primer_Apellido']+' '+e.persona_programador['Segundo_Apellido']+' '+e.persona_programador['Primer_Nombre']+' '+e.persona_programador['Segundo_Nombre']+'</td>',
 													            '<td>'+e.persona['Primer_Apellido']+' '+e.persona['Segundo_Apellido']+' '+e.persona['Primer_Nombre']+' '+e.persona['Segundo_Nombre']+'</td>',
-													            '<td>'+e['Fecha_Ejecucion']+'</td>',
+													            '<td>'+e['Fecha_Ejecucion']+'<br>Hora: '+e['Hora_Incial']+'</td>',
 													            '<td>'+e.localidad['Nombre_Localidad']+'</td>',
-													            '<td>'+e['Hora_Incial']+'</td>',
 													            '<td>'+Nomparque+'</td>',
-													            '<td style="text-align:center "><center><button type="button" data-rel="'+e['Id_Actividad_Gestor']+'" data-funcion="ver_inf" class="btn btn-primary btn-sm" ><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> ver</button><div id="espera'+e['Id_Actividad_Gestor']+'"></div></td>',
+													            '<td style="text-align:center "><center><button type="button" data-rel="'+e['Id_Actividad_Gestor']+'" data-funcion="ver_inf" class="'+clase_P+' btn-sm" '+dehabilitar_P+'><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> ver</button><div id="espera'+e['Id_Actividad_Gestor']+'"></div></td>',
 													            '<td>'+estado_programacion+'</td>',
-													            '<td style="text-align:center"><center><button type="button" data-rel="'+e['Id_Actividad_Gestor']+'" data-funcion="ejec_ver" class="btn btn-primary btn-sm" '+dehabilitar+'><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> ver</button><div id="espera_eje'+e['Id_Actividad_Gestor']+'"></div></td>',
+													            '<td style="text-align:center"><center><button type="button" data-rel="'+e['Id_Actividad_Gestor']+'" data-funcion="ejec_ver" class="'+clase_E+' btn-sm" '+dehabilitar_E+'><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> ver</button><div id="espera_eje'+e['Id_Actividad_Gestor']+'"></div></td>',
 													            '<td>'+estado_ejecucion+' '+'</td>'
 													        ] ).draw( false );
 
@@ -496,7 +608,7 @@ $(function()
 		            {},
 		            function(data)
 		            {   
-		               			$('#mensajeModifica').html("<div class='alert alert-success' role='alert'> <strong>Bien!</strong> La actividad ha sido cancelada.. </div>");
+		               			$('#mensajeModifica').html("<div class='alert alert-danger' role='alert'> <strong>Bien!</strong> La actividad ha sido cancelada.. </div>");
 								$('#modalMensaj').modal('show');
 								setTimeout(function(){
 									$('#modal_form_act_eje').modal('hide');
@@ -525,6 +637,27 @@ $(function()
 		            function(data)
 		            {   	
 		               			$('#mensajeModificaEjecu').html("<div class='alert alert-success' role='alert'> <strong>Bien!</strong> La ejecución ha sido aprobada.. </div>");
+								$('#modalMensajEjecucion').modal('show');
+								setTimeout(function(){
+									$('#modal_ejecucion').modal('hide');
+									$('#modalMensajEjecucion').modal('hide');
+								}, 3000)
+								actulaizarTabla();
+		            }
+		        );
+
+		        e.preventDefault();
+    });
+
+
+    $('#Cancelar_e').on('click', function(e){
+    			var id= $('input[name="Id_Actividad_ejecucion"]').val();
+    			$.get(
+		            URL+'/service/cancelarEjecucion/'+id,
+		            {},
+		            function(data)
+		            {   	
+		               			$('#mensajeModificaEjecu').html("<div class='alert alert-danger' role='alert'> <strong>Bien!</strong> La ejecución ha sido cancelada.. </div>");
 								$('#modalMensajEjecucion').modal('show');
 								setTimeout(function(){
 									$('#modal_ejecucion').modal('hide');

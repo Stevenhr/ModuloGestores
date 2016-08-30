@@ -81,10 +81,11 @@
 								                <th>Responsable</th>
 								                <th>Fecha Ejecución</th>
 								                <th>Localidad</th>
-								                <th>Hora</th>
 								                <th>Parque / Otro</th>
 								                <th>Programación</th>
+								                <th>Estado Programación</th>
 								                <th>Ejecución</th>
+								                <th>Estado Ejecución</th>
 								            </tr>
 								        </thead>
 								        <tfoot>
@@ -94,10 +95,11 @@
 								                <th>Responsable</th>
 								                <th>Fecha Ejecución</th>
 								                <th>Localidad</th>
-								                <th>Hora</th>
 								                <th>Parque / Otro</th>
 								                <th>Programación</th>
+								                <th>Estado Programación</th>
 								                <th>Ejecución</th>
+								                <th>Estado Ejecución</th>
 								            </tr>
 								        </tfoot>
 								        <tbody id="registros_actividades_responsable">
