@@ -14,7 +14,8 @@ use App\Condicion;
 use App\Situacion;
 use App\Localidad;
 use App\ListaNovedad;
-
+use App\Ejecucion;
+use App\Novedad;
 
 
 class mis_actividades_promotores extends Controller
@@ -87,6 +88,15 @@ class mis_actividades_promotores extends Controller
 		$datosActividad = ActividadGestor::with('localidad','persona','parque','ejecucion')->find($id_actividad);
 		$datos = ['datosActividad' => $datosActividad];
     	return  $datos;
+    }
+
+     public function obtenerEjecucion(Request $request, $id_actividad){
+        $Ejecucion = Ejecucion::where('Id_Actividad_Gestor',$id_actividad)->with('tipoEntidad','tipoPersona','condicion','situacion','localidad')->get();
+        $Novedad = Novedad::where('Id_Actividad_Gestor',$id_actividad)->get();
+        $datosActividad = ActividadGestor::with('calificaciomServicio')->find($id_actividad);
+        
+        $datos = ['datosActividad' => $datosActividad,'Ejecucion'=>$Ejecucion,'Novedad'=>$Novedad];
+        return  response()->json($datos);
     }
 
     public function procesarValidacionDatosEjecucion(Request $request)

@@ -228,13 +228,21 @@ $(function()
     $('#Tabla2').delegate('button[data-funcion="ejec_ver"]','click',function (e) {  
         var id = $(this).data('rel'); 
         $("#espera_eje"+id).html("<img src='public/Img/loading.gif'/>");
+        
+        //Limpiar form
         vector_datos_ejecucion.length=0;
         vector_novedades.length=0;
-        $('input[name="Id_Actividad_E"]').val(id);
+        $('#registros_ejecucion_tabla').html('');
+        $('#registros_novedad').html('');
+        $("#form_ejecucion_datos_actividad")[0].reset();
+        $("#form_ejecucion_novedades")[0].reset();
+        $("#form_ejecucion_servicio")[0].reset();
 
+
+        $('input[name="Id_Actividad_E"]').val(id);
 		$('#table_ejecucion_agregada').hide();
         $.get(
-            URL+'/service/obtener/'+id,
+            URL+'/service/obtenerEjecucion/'+id,
             {},
             function(data)
             {   
@@ -250,17 +258,14 @@ $(function()
 
     var actividad_ejecucion = function(datos)
     {
-    	console.log(datos);
+    	//console.log(datos);
     	$('input[name="Id_Actividad_ejecucion"]').val(datos.datosActividad['Id_Actividad_Gestor']);
   		$('#titulo').text(datos.datosActividad['Id_Actividad_Gestor']);
-
-  		
 
   		var f = new Date();
         var fechaActual = new Date(f.getFullYear()+ "," + (f.getMonth() +1) + "," + f.getDate());
         var tmp = datos.datosActividad['Fecha_Ejecucion'].split('-');
         var F_ejecucion = new Date(tmp[0]+ "," + tmp[1]+ "," + tmp[2]);
-
 
         if(datos.datosActividad['Estado']==2 && F_ejecucion<fechaActual){
             $("#agregar_datos_ejecucion").show();
@@ -273,16 +278,83 @@ $(function()
             $("#agregar_ejecucion").hide();
         }
 
-        $('#modal_ejecucion').modal('show');
+        if(datos.datosActividad['Estado_Ejecucion']==4 || datos.datosActividad['Estado_Ejecucion']==3){
+			$("#agregar_datos_ejecucion").hide();
+            $("#agregar_datos_novedades").hide();
+            $("#agregar_ejecucion").hide();	
+		}
+
+		$('#table_ejecucion_agregada').show();
+		var num=1;
+		//$('#datos_ejecucion_tabla').empty();
+  		var fila="";
+  		var TotalMujer=0;
+  		var TotalHombre=0;
+  		var TotalParcial=0;
+  		var T_F_0a5=0;
+  		var T_M_0a5=0;
+  		var T_F_6a12=0;
+  		var T_M_6a12=0;
+  		var T_F_13a17=0;
+  		var T_M_13a17=0;
+  		var T_F_18a26=0;
+  		var T_M_18a26=0;
+  		var T_F_27a59=0;
+  		var T_M_27a59=0;
+  		var T_F_60=0;
+  		var T_M_60=0;
+  		var TotalMujerT=0;
+  		var TotalHombreT=0;
+  		var Total=0;
+
+  		$.each(datos.Ejecucion, function(i, e){		
+  		    TotalMujer=parseInt(e['F_0a5'])+parseInt(e['F_6a12'])+parseInt(e['F_13a17'])+parseInt(e['F_18a26'])+parseInt(e['F_27a59'])+parseInt(e['F_60']);
+  		    TotalHombre=parseInt(e['M_0a5'])+parseInt(e['M_6a12'])+parseInt(e['M_13a17'])+parseInt(e['M_18a26'])+parseInt(e['M_27a59'])+parseInt(e['M_60']);
+			TotalParcial=TotalMujer+TotalHombre;
+			T_F_0a5+=parseInt(e['F_0a5']);
+			T_M_0a5+=parseInt(e['M_0a5']);
+			T_F_6a12+=parseInt(e['F_6a12']);
+			T_M_6a12+=parseInt(e['M_6a12']);
+			T_F_13a17+=parseInt(e['F_13a17']);
+			T_M_13a17+=parseInt(e['M_13a17']);
+			T_F_18a26+=parseInt(e['F_18a26']);
+			T_M_18a26+=parseInt(e['M_18a26']);
+			T_F_27a59+=parseInt(e['F_27a59']);
+			T_M_27a59+=parseInt(e['M_27a59']);
+			T_F_60+=parseInt(e['F_60']);
+			T_M_60+=parseInt(e['M_60']);
+			fila +="<tr><th scope='row'>"+num+"</th><td>"+e['Comunidad']+"</td><td>"+e.localidad['Nombre_Localidad']+"</td><td>"+e.tipo_entidad['Nombre']+"</td><td>"+e.tipo_persona['Nombre']+"</td><td>"+e.condicion['Nombre']+"</td><td>"+e.situacion['Nombre']+"</td><td>"+e['F_0a5']+"</td><td>"+e['M_0a5']+"</td><td>"+e['F_6a12']+"</td><td>"+e['M_6a12']+"</td><td>"+e['F_13a17']+"</td><td>"+e['M_13a17']+"</td><td>"+e['F_18a26']+"</td><td>"+e['M_18a26']+"</td><td>"+e['F_27a59']+"</td><td>"+e['M_27a59']+"</td><td>"+e['F_60']+"</td><td>"+e['M_60']+"</td><td>"+TotalMujer+"</td><td>"+TotalHombre+"</td><td>"+TotalParcial+"</td></tr>";								            
+	        TotalMujerT+=TotalMujer;
+	        TotalHombreT+=TotalHombre;
+	        num++;
+		});
+  		 Total=TotalHombreT+TotalMujerT;
+		 fila +="<tr><th scope='row'></th><td></td><td></td><td></td><td></td><td></td><td></td><td>"+T_F_0a5+"</td><td>"+T_M_0a5+"</td><td>"+T_F_6a12+"</td><td>"+T_M_6a12+"</td><td>"+T_F_13a17+"</td><td>"+T_M_13a17+"</td><td>"+T_F_18a26+"</td><td>"+T_M_18a26+"</td><td>"+T_F_27a59+"</td><td>"+T_M_27a59+"</td><td>"+T_F_60+"</td><td>"+T_M_60+"</td><td>"+TotalMujerT+"</td><td>"+TotalHombreT+"</td><td>"+Total+"</td></tr>";
+		 $('#registros_ejecucion_tabla').html(fila);	
+
+		 $('#table_novedad_agregada').show();
+		 var num1=1;
+		 var fila1="";
+		 $.each(datos.Novedad, function(i, e){		
+			fila1 +="<tr><th scope='row'>"+num1+"</th><td>"+e['Id_novedad']+"</td><td>"+e['Causa']+"</td><td>"+e['Accion']+"</td></tr>";								            
+	        num1++;
+		 });
+		 $('#registros_novedad').html(fila1);
+
+
+		 $('input[name="nombreRepresentante"]').val(datos.datosActividad.calificaciom_servicio[0]['Nombre_Representante']);
+		 $('input[name="telefonoRepresentante"]').val(datos.datosActividad.calificaciom_servicio[0]['Telefono']);
+		 $('select[name="puntualidad"]').val(datos.datosActividad.calificaciom_servicio[0]['Id_Puntualidad']);//Manejo del tema
+		 $('select[name="divulgacion"]').val(datos.datosActividad.calificaciom_servicio[0]['Id_Divulgacion']);//Material Utulizado
+		 $('select[name="escenarioMontaje"]').val(datos.datosActividad.calificaciom_servicio[0]['Id_Montaje']);//Conocimiento adquirido
+		 $('#imagenVer1').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen1']);//Conocimiento adquirido attr
+		 $('#imagenVer2').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen2']);//Conocimiento adquirido attr
+		 $('#imagenVer3').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen3']);//Conocimiento adquirido attr
+		 $('#imagenVer4').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen4']);//Conocimiento adquirido attr
+		 $('#file1').attr('href','public/Img/EvidenciaArchivo/'+datos.datosActividad.calificaciom_servicio[0]['Url_Acta']);//Conocimiento adquirido attr
+		 $('#file2').attr('href','public/Img/EvidenciaArchivo/'+datos.datosActividad.calificaciom_servicio[0]['Url_Asistencia']);//Conocimiento adquirido attr
+		 $('#modal_ejecucion').modal('show');
     };
-
-
-
-
-
-
-
-
 
 
 
@@ -411,7 +483,7 @@ $(function()
 			var html = '';
 					if(vector_datos_ejecucion.length > 0)
 					{
-							console.log(vector_datos_ejecucion);
+							//console.log(vector_datos_ejecucion);
 							var num=1;
 							$('.tablaEjecucion').empty();
 							//console.log(datos);
@@ -435,38 +507,43 @@ $(function()
 					  		var TotalHombreT=0;
 					  		var Total=0;
 
-					  		$.each(vector_datos_ejecucion, function(i, e){		
-					  		    TotalMujer=parseInt(e['F_0a5'])+parseInt(e['F_6a12'])+parseInt(e['F_13a17'])+parseInt(e['F_18a26'])+parseInt(e['F_27a59'])+parseInt(e['F_60']);
-					  		    TotalHombre=parseInt(e['M_0a5'])+parseInt(e['M_6a12'])+parseInt(e['M_13a17'])+parseInt(e['M_18a26'])+parseInt(e['M_27a59'])+parseInt(e['M_60']);
-								TotalParcial=TotalMujer+TotalHombre;
-								T_F_0a5+=parseInt(e['F_0a5']);
-								T_M_0a5+=parseInt(e['M_0a5']);
-								T_F_6a12+=parseInt(e['F_6a12']);
-								T_M_6a12+=parseInt(e['M_6a12']);
-								T_F_13a17+=parseInt(e['F_13a17']);
-								T_M_13a17+=parseInt(e['M_13a17']);
-								T_F_18a26+=parseInt(e['F_18a26']);
-								T_M_18a26+=parseInt(e['M_18a26']);
-								T_F_27a59+=parseInt(e['F_27a59']);
-								T_M_27a59+=parseInt(e['M_27a59']);
+					  		$.each(vector_datos_ejecucion, function(i, e){	
+					  			if(e['F_0_5']==''){e['F_0_5']=0;}
+					  			if(e['M_0_5']==''){e['M_0_5']=0;}
+					  			if(e['F_6_12']==''){e['F_6_12']=0;}
+					  			if(e['M_6_12']==''){e['M_6_12']=0;}
+					  			if(e['F_13_17']==''){e['F_13_17']=0;}
+					  			if(e['M_13_17']==''){e['M_13_17']=0;}
+					  			if(e['F_18_26']==''){e['F_18_26']=0;}
+					  			if(e['M_18_26']==''){e['M_18_26']=0;}
+					  			if(e['F_27_59']==''){e['F_27_59']=0;}
+					  			if(e['M_27_59']==''){e['M_27_59']=0;}
+					  			if(e['F_60']==''){e['F_60']=0;}
+					  			if(e['M_60']==''){e['M_60']=0;}
+
+					  		    TotalMujer=parseInt(e['F_0_5'])+parseInt(e['F_6_12'])+parseInt(e['F_13_17'])+parseInt(e['F_18_26'])+parseInt(e['F_27_59'])+parseInt(e['F_60']);
+					  		    TotalHombre=parseInt(e['M_0_5'])+parseInt(e['M_6_12'])+parseInt(e['M_13_17'])+parseInt(e['M_18_26'])+parseInt(e['M_27_59'])+parseInt(e['M_60']);
+								TotalParcial=parseInt(TotalMujer)+parseInt(TotalHombre);
+								T_F_0a5+=parseInt(e['F_0_5']);
+								T_M_0a5+=parseInt(e['M_0_5']);
+								T_F_6a12+=parseInt(e['F_6_12']);
+								T_M_6a12+=parseInt(e['M_6_12']);
+								T_F_13a17+=parseInt(e['F_13_17']);
+								T_M_13a17+=parseInt(e['M_13_17']);
+								T_F_18a26+=parseInt(e['F_18_26']);
+								T_M_18a26+=parseInt(e['M_18_26']);
+								T_F_27a59+=parseInt(e['F_27_59']);
+								T_M_27a59+=parseInt(e['M_27_59']);
 								T_F_60+=parseInt(e['F_60']);
 								T_M_60+=parseInt(e['M_60']);
-								fila +="<tr><th scope='row'>"+num+"</th><td>"+e['Comunidad']+"</td><td>"+e.localidad['Nombre_Localidad']+"</td><td>"+e.tipo_entidad['Nombre']+"</td><td>"+e.tipo_persona['Nombre']+"</td><td>"+e.condicion['Nombre']+"</td><td>"+e.situacion['Nombre']+"</td><td>"+e['F_0a5']+"</td><td>"+e['M_0a5']+"</td><td>"+e['F_6a12']+"</td><td>"+e['M_6a12']+"</td><td>"+e['F_13a17']+"</td><td>"+e['M_13a17']+"</td><td>"+e['F_18a26']+"</td><td>"+e['M_18a26']+"</td><td>"+e['F_27a59']+"</td><td>"+e['M_27a59']+"</td><td>"+e['F_60']+"</td><td>"+e['M_60']+"</td><td>"+TotalMujer+"</td><td>"+TotalHombre+"</td><td>"+TotalParcial+"</td></tr>";								            
-						        TotalMujerT+=TotalMujer;
-						        TotalHombreT+=TotalHombre;
+								fila +="<tr><th scope='row'>"+num+"</th><td>"+e['Inst_grupo_comu']+"</td><td>"+e['Localidad_eje']+"</td><td>"+e['Tipo_entidad']+"</td><td>"+e['Tipo_eje']+"</td><td>"+e['Condicion']+"</td><td>"+e['Situacion']+"</td><td>"+e['F_0_5']+"</td><td>"+e['M_0_5']+"</td><td>"+e['F_6_12']+"</td><td>"+e['M_6_12']+"</td><td>"+e['F_13_17']+"</td><td>"+e['M_13_17']+"</td><td>"+e['F_18_26']+"</td><td>"+e['M_18_26']+"</td><td>"+e['F_27_59']+"</td><td>"+e['M_27_59']+"</td><td>"+e['F_60']+"</td><td>"+e['M_60']+"</td><td>"+TotalMujer+"</td><td>"+TotalHombre+"</td><td>"+TotalParcial+"</td><td class='text-center'><button type='button' data-rel="+i+" data-funcion='eliminar_conteo' class='eliminar_dato_actividad'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></td></tr>";								            
+						        TotalMujerT+=parseInt(TotalMujer);
+						        TotalHombreT+=parseInt(TotalHombre);
 						        num++;
 							});
-					  		 Total=TotalHombreT+TotalMujerT;
+					  		 Total=parseInt(TotalHombreT)+parseInt(TotalMujerT);
 							 fila +="<tr><th scope='row'></th><td></td><td></td><td></td><td></td><td></td><td></td><td>"+T_F_0a5+"</td><td>"+T_M_0a5+"</td><td>"+T_F_6a12+"</td><td>"+T_M_6a12+"</td><td>"+T_F_13a17+"</td><td>"+T_M_13a17+"</td><td>"+T_F_18a26+"</td><td>"+T_M_18a26+"</td><td>"+T_F_27a59+"</td><td>"+T_M_27a59+"</td><td>"+T_F_60+"</td><td>"+T_M_60+"</td><td>"+TotalMujerT+"</td><td>"+TotalHombreT+"</td><td>"+Total+"</td></tr>";
-							 $('#tablaEjecucion').html(fila);	
-
-							 var num1=1;
-							 var fila1="";
-							 $.each(datos.Novedad, function(i, e){		
-								fila1 +="<tr><th scope='row'>"+num1+"</th><td>"+e['Id_novedad']+"</td><td>"+e['Causa']+"</td><td>"+e['Accion']+"</td></tr>";								            
-						        num1++;
-							 });
-							 $('#tablaNovedad').html(fila1);
+							 $('#registros_ejecucion_tabla').html(fila);	
 					}
 					$('#registros_ejecucion').html(html);
 
@@ -487,6 +564,79 @@ $(function()
 							html += '<tr><th scope="row" class="text-center">'+num+'</th><td>'+e['Inst_grupo_comu']+'</td><td>'+e['M_0_5']+'</td><td>'+e['F_0_5']+'</td><td class="text-center"><button type="button" data-rel="'+i+'" data-funcion="crear" class="eliminar_dato_actividad"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td></tr>';
 							num++;
 						});
+					}
+					$('#registros_ejecucion').html(html);
+
+     }); 
+
+	$('#datos_ejecucion_tabla').delegate('button[data-funcion="eliminar_conteo"]','click',function (e) {   
+		var id = $(this).data('rel'); 
+	    vector_datos_ejecucion.splice(id, 1);
+	        
+	        var html = '';
+					if(vector_datos_ejecucion.length > 0)
+					{
+						//console.log(vector_datos_ejecucion);
+							var num=1;
+							$('.tablaEjecucion').empty();
+							//console.log(datos);
+					  		var fila="";
+					  		var TotalMujer=0;
+					  		var TotalHombre=0;
+					  		var TotalParcial=0;
+					  		var T_F_0a5=0;
+					  		var T_M_0a5=0;
+					  		var T_F_6a12=0;
+					  		var T_M_6a12=0;
+					  		var T_F_13a17=0;
+					  		var T_M_13a17=0;
+					  		var T_F_18a26=0;
+					  		var T_M_18a26=0;
+					  		var T_F_27a59=0;
+					  		var T_M_27a59=0;
+					  		var T_F_60=0;
+					  		var T_M_60=0;
+					  		var TotalMujerT=0;
+					  		var TotalHombreT=0;
+					  		var Total=0;
+
+					  		$.each(vector_datos_ejecucion, function(i, e){	
+					  			if(e['F_0_5']==''){e['F_0_5']=0;}
+					  			if(e['M_0_5']==''){e['M_0_5']=0;}
+					  			if(e['F_6_12']==''){e['F_6_12']=0;}
+					  			if(e['M_6_12']==''){e['M_6_12']=0;}
+					  			if(e['F_13_17']==''){e['F_13_17']=0;}
+					  			if(e['M_13_17']==''){e['M_13_17']=0;}
+					  			if(e['F_18_26']==''){e['F_18_26']=0;}
+					  			if(e['M_18_26']==''){e['M_18_26']=0;}
+					  			if(e['F_27_59']==''){e['F_27_59']=0;}
+					  			if(e['M_27_59']==''){e['M_27_59']=0;}
+					  			if(e['F_60']==''){e['F_60']=0;}
+					  			if(e['M_60']==''){e['M_60']=0;}
+
+					  		    TotalMujer=parseInt(e['F_0_5'])+parseInt(e['F_6_12'])+parseInt(e['F_13_17'])+parseInt(e['F_18_26'])+parseInt(e['F_27_59'])+parseInt(e['F_60']);
+					  		    TotalHombre=parseInt(e['M_0_5'])+parseInt(e['M_6_12'])+parseInt(e['M_13_17'])+parseInt(e['M_18_26'])+parseInt(e['M_27_59'])+parseInt(e['M_60']);
+								TotalParcial=parseInt(TotalMujer)+parseInt(TotalHombre);
+								T_F_0a5+=parseInt(e['F_0_5']);
+								T_M_0a5+=parseInt(e['M_0_5']);
+								T_F_6a12+=parseInt(e['F_6_12']);
+								T_M_6a12+=parseInt(e['M_6_12']);
+								T_F_13a17+=parseInt(e['F_13_17']);
+								T_M_13a17+=parseInt(e['M_13_17']);
+								T_F_18a26+=parseInt(e['F_18_26']);
+								T_M_18a26+=parseInt(e['M_18_26']);
+								T_F_27a59+=parseInt(e['F_27_59']);
+								T_M_27a59+=parseInt(e['M_27_59']);
+								T_F_60+=parseInt(e['F_60']);
+								T_M_60+=parseInt(e['M_60']);
+								fila +="<tr><th scope='row'>"+num+"</th><td>"+e['Inst_grupo_comu']+"</td><td>"+e['Localidad_eje']+"</td><td>"+e['Tipo_entidad']+"</td><td>"+e['Tipo_eje']+"</td><td>"+e['Condicion']+"</td><td>"+e['Situacion']+"</td><td>"+e['F_0_5']+"</td><td>"+e['M_0_5']+"</td><td>"+e['F_6_12']+"</td><td>"+e['M_6_12']+"</td><td>"+e['F_13_17']+"</td><td>"+e['M_13_17']+"</td><td>"+e['F_18_26']+"</td><td>"+e['M_18_26']+"</td><td>"+e['F_27_59']+"</td><td>"+e['M_27_59']+"</td><td>"+e['F_60']+"</td><td>"+e['M_60']+"</td><td>"+TotalMujer+"</td><td>"+TotalHombre+"</td><td>"+TotalParcial+"</td><td class='text-center'><button type='button' data-rel="+i+" data-funcion='eliminar_conteo' class='eliminar_dato_actividad'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></td></tr>";								            
+						        TotalMujerT+=parseInt(TotalMujer);
+						        TotalHombreT+=parseInt(TotalHombre);
+						        num++;
+							});
+					  		 Total=parseInt(TotalHombreT)+parseInt(TotalMujerT);
+							 fila +="<tr><th scope='row'></th><td></td><td></td><td></td><td></td><td></td><td></td><td>"+T_F_0a5+"</td><td>"+T_M_0a5+"</td><td>"+T_F_6a12+"</td><td>"+T_M_6a12+"</td><td>"+T_F_13a17+"</td><td>"+T_M_13a17+"</td><td>"+T_F_18a26+"</td><td>"+T_M_18a26+"</td><td>"+T_F_27a59+"</td><td>"+T_M_27a59+"</td><td>"+T_F_60+"</td><td>"+T_M_60+"</td><td>"+TotalMujerT+"</td><td>"+TotalHombreT+"</td><td>"+Total+"</td></tr>";
+							 $('#registros_ejecucion_tabla').html(fila);	
 					}
 					$('#registros_ejecucion').html(html);
 
@@ -573,13 +723,15 @@ $(function()
 			var html = '';
 					if(vector_novedades.length > 0)
 					{
+						//console.log(vector_novedades);
 						var num=1;
 						$.each(vector_novedades, function(i, e){
 							html += '<tr><th scope="row" class="text-center">'+num+'</th><td>'+e['Id_Requisito']+'</td><td>'+e['accion']+'</td><td>'+e['causa']+'</td><td class="text-center"><button type="button" data-rel="'+i+'" data-funcion="eliminar_novedad" class="eliminar_dato_actividad"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td></tr>';
 							num++;
 						});
+						$('#registros_novedad').html(html);
 					}
-					$('#registros_novedad').html(html);
+					
 
 			$('#table_novedad_agregada').show();
 			return false;	

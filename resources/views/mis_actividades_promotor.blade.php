@@ -301,7 +301,7 @@
 						    <h3 class="panel-title">PASO 1: EJECUCIÓN DE ACTIVIDADES CAMPAÑA MASIVA</h3>
 						  </div>
 						  <div class="panel-body">
-										      		<fieldset>
+										      	
 										      		<form action="" id="form_ejecucion_datos_actividad" name="form_ejecucion_datos_actividad">
 										      			<div class="col-xs-12 col-md-12">
 										        			<div class="form-group">
@@ -431,19 +431,52 @@
 
 															<div class="col-xs-12 col-md-12">
 																<div class="alert alert-info alert-dismissible" role="alert" style="display:none;" id="table_ejecucion_agregada">
-																			<table class="table table-bordered" id="datos_ejecucion_tabla"> 
-																			<thead>
-																			<tr>
-																			<th>#</th>
-																			<th>Eje</th>
-																			<th>Tematica</th>
-																			<th>Actividad</th>
-																			<th>Eliminar</th>
-																			</tr>
-																			</thead>
-																			<tbody id="registros_ejecucion"> 
-																			</tbody> 
-																			</table>
+																			
+																			<div class="table-responsive">
+																			  <table class="table table-bordered" id="datos_ejecucion_tabla">
+																			  <thead> 
+																	            <tr> 
+																	            <th rowspan="2">#</th> 
+																	            <th rowspan="2">INSTITUCIÓN/ GRUPO/ COMUNIDAD</th> 
+																	            <th rowspan="2">Localidad</th> 
+																	            <th rowspan="2">Entidad</th> 
+																	            <th rowspan="2">Tipo</th> 
+																	            <th rowspan="2">Condición</th> 
+																	            <th rowspan="2">Situación</th>
+																	            <th colspan="2">0 a 5</th> 
+																	            <th colspan="2">6 a 12</th>
+																	            <th colspan="2">13 a 17</th>
+																	            <th colspan="2">18 a 26</th>
+																	            <th colspan="2">27 a 59</th>
+																	            <th colspan="2">60 a más</th>
+																	            <th colspan="2">Total Genero</th>
+																	            <th colspan="1" rowspan="2">TOTAL</th>
+																	            <th colspan="2" rowspan="2">Eliminar</th>
+																	            </tr> 
+
+																	            </tr><tr>
+																				<td>F</td>
+																				<td>M</td>
+																				<td>F</td>
+																				<td>M</td>
+																				<td>F</td>
+																				<td>M</td>
+																				<td>F</td>
+																				<td>M</td>
+																				<td>F</td>
+																				<td>M</td>
+																				<td>F</td>
+																				<td>M</td>
+																				<td><center>Total F</center></td>
+																				<td><center>Total M</center></td>
+																				</tr>
+
+																	            </thead> 
+																	            <tbody id="registros_ejecucion_tabla"> 
+
+																	            </tbody> 
+																			  </table>
+																			</div>
 																			<div id="mensaje_eliminar"></div>
 																			<button type="button" class="btn btn-default" id="cerrar_tabla_ejecu">Cerrar</button>
 																</div>
@@ -451,7 +484,7 @@
 
 
 										        	</form>
-										       		</fieldset>
+										       		
 						  </div>
 						</div>
 
@@ -506,19 +539,23 @@
 
 															<div class="col-xs-12 col-md-12">
 																<div class="alert alert-info alert-dismissible" role="alert" style="display:none;" id="table_novedad_agregada">
+
+																			
+																			<div class="table-responsive">
 																			<table class="table table-bordered" id="datos_novedad_tabla"> 
 																			<thead>
 																			<tr>
 																			<th>#</th>
-																			<th>Eje</th>
-																			<th>Tematica</th>
-																			<th>Actividad</th>
+																			<th>Requisitos que se incumplen</th>
+																			<th>Causas o el porque</th>
+																			<th>Acciones Tomadas</th>
 																			<th>Eliminar</th>
 																			</tr>
 																			</thead>
 																			<tbody id="registros_novedad"> 
 																			</tbody> 
 																			</table>
+																			</div>
 																			<div id="mensaje_eliminar"></div>
 																			<button type="button" class="btn btn-default" id="cerrar_tabla_novedad">Cerrar</button>
 																</div>
@@ -644,6 +681,7 @@
 															    <label for="exampleInputFile">Imagen 1</label>
 															    <input type="file" name="imagen1">
 															    <p class="help-block">Imagen en formato jpeg,jpg,png,bmp.</p>
+															    <img id="imagenVer1" src="" alt="" class="img-thumbnail">
 															 </div>
 										        		</div>
 										        		<div class="col-xs-12 col-md-6">
@@ -651,6 +689,7 @@
 															    <label for="exampleInputFile">Imagen 2</label>
 															    <input type="file" name="imagen2">
 															    <p class="help-block">Imagen en formato jpeg,jpg,png,bmp.</p>
+															    <img id="imagenVer2" src="" alt="" class="img-thumbnail">
 															 </div>
 										        		</div>
 										        		<div class="col-xs-12 col-md-6">
@@ -658,6 +697,7 @@
 															    <label for="exampleInputFile">Imagen 3</label>
 															    <input type="file" name="imagen3">
 															    <p class="help-block">Imagen en formato jpeg,jpg,png,bmp.</p>
+															    <img id="imagenVer3" src="" alt="" class="img-thumbnail">
 															 </div>
 										        		</div>
 										        		<div class="col-xs-12 col-md-6">
@@ -665,6 +705,7 @@
 															    <label for="exampleInputFile">Imagen 4</label>
 															    <input type="file" name="imagen4">
 															    <p class="help-block">Imagen en formato jpeg,jpg,png,bmp.</p>
+															    <img id="imagenVer4" src="" alt="" class="img-thumbnail">
 															 </div>
 										        		</div>
 										        		<div class="col-xs-12 col-md-6">
@@ -672,6 +713,9 @@
 															    <label for="exampleInputFile">Formato Evaluación</label>
 															    <input type="file" name="listaAsistencia">
 															    <p class="help-block">Archivo en formato pdf</p>
+															    <a id="file1" href="" download>
+																  <img border="0" src="public/Img/downloadicon.gif" alt="W3Schools" >
+																</a>
 															 </div>
 										        		</div>
 										        		<div class="col-xs-12 col-md-6">
@@ -679,6 +723,9 @@
 															    <label for="exampleInputFile">Listado Entraga de Kits</label>
 															    <input type="file" name="acta">
 															    <p class="help-block">Archivo en formato pdf</p>
+															    <a id="file2" href="" download>
+																  <img border="0" src="public/Img/downloadicon.gif" alt="W3Schools" >
+																</a>
 															 </div>
 										        		</div>
 										        		<div class="col-xs-12 col-md-12">
