@@ -79,7 +79,10 @@
                   @if($_SESSION['Usuario'][2] == 1) 
                       <li class=”{{ Request::is( 'asignarLocalidad') ? 'active' : '' }}”><a href="{{ URL::to( 'asignarLocalidad') }}">Asignar Localidad</a></li>
                   @endif
+
                   <li class=”{{ Request::is( 'asignarTipoPersona') ? 'active' : '' }}”><a href="{{ URL::to( 'asignarTipoPersona') }}">Asignar Tipo Persona</a></li>
+
+                  <li class=”{{ Request::is( 'asignarActividades') ? 'active' : '' }}”><a href="{{ URL::to( 'asignarActividades') }}">Asignar Actividades</a></li>
 
                 </ul>
               </li>

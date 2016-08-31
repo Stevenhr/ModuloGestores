@@ -28,7 +28,6 @@ Route::post('/personas/service/procesar/', '\Idrd\Usuarios\Controllers\PersonaCo
 
 
 Route::get('/asignarLocalidad', 'ConfiguracionActividadController@asignarLocalidad');
-Route::get('/asignarTipoPersona', 'ConfiguracionActividadController@asignarTipoPersona');
 Route::get('/CrearActividad', 'Actividadcontroller@index');
 Route::get('/Modificar', 'Actividadcontroller@index');
 Route::get('/MisProgramaciones', 'Actividadcontroller@MiActividad');
@@ -66,6 +65,14 @@ Route::get('/aprobar/service/activar/{id_actividad}', 'aprobacion_actividades@ac
 Route::get('/aprobar/service/aprobarEjecucion/{id_actividad}', 'aprobacion_actividades@aprobarEjecucion');
 Route::get('/aprobar/service/cancelarEjecucion/{id_actividad}', 'aprobacion_actividades@cancelarEjecucion');
 Route::get('/aprobar/service/cancelar/{id_actividad}', 'aprobacion_actividades@cancelarProgramacion');
+
+Route::get('/asignarTipoPersona', 'ConfiguracionActividadController@asignarTipoPersona');
+Route::get('tipo_modulo', 'ConfiguracionActividadController@tipoModulo');
+Route::post('ProcesoTipoPersona', 'ConfiguracionActividadController@AdicionTipoPersona');
+Route::get('/asignarActividades', 'ConfiguracionActividadController@asignarActividades');
+Route::get('/actividadesModulo', 'ConfiguracionActividadController@moduloActividades');
+
+
 
 Route::group(['middleware' => ['web']], function () {
 
