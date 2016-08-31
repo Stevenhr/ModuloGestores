@@ -1,18 +1,18 @@
 @extends('master')
 @section('script')
 @parent
-    <script src="{{ asset('public/Js/Actividad/persona_tipoPersona.js') }}"></script>	
+    <script src="{{ asset('public/Js/Actividad/persona_actividades.js') }}"></script>	
 @stop
 @section('content')         
 	<input type="hidden" name="_token" value="{{csrf_token()}}" id="token"/>
     <div id="main_tipoPersona" class="row" data-url="{{ url(config('usuarios.prefijo_ruta')) }}"></div>          
 	<div class="content" id="TipoPersona" class="row" data-url="TipoPersona">
         <br>
-	    <h3 id="navbar">ASIGNAR TIPO PERSONA</h3>
+	    <h3 id="navbar">ASIGNAR ACTIVIDADES</h3>
         <br><br>
 		<div class="panel panel-primary">
 			  <div class="panel-heading">
-			    <h3 class="panel-title">ASIGNACIÓN TIPO PERSONA: Asignación tipo persona.</h3>
+			    <h3 class="panel-title">ASIGNACIÓN ACTIVIDADES: Asignación actividades a una persona.</h3>
 			  </div>
 			  <div class="panel-body">
 					<fieldset>

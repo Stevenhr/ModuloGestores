@@ -9,7 +9,8 @@ use App\DatosActividad;
 use App\Persona;
 use Validator;
 
-
+use App\Tipo;
+use App\ActividadesSim;
 
 
 class ConfiguracionActividadController extends Controller
@@ -194,17 +195,6 @@ class ConfiguracionActividadController extends Controller
         return view('perosona_localidad', $datos);
     }
 
-    public function asignarTipoPersona(){
-        $Tipo = app()->make('App\Tipo');
-        $Localidad = app()->make('App\Localidad');
-        $datos = [
-            'Tipo' => $Tipo->find(50),
-            'localidad' => $Localidad->all()
-        ];
-        return view('persona_tipoPersona', $datos);
-    }
-
-
     public function procesarValidacionPersonaLocalidad(Request $request)
 	{
 		$validator = Validator::make($request->all(),
@@ -311,5 +301,45 @@ class ConfiguracionActividadController extends Controller
     
     return $model;
   }
+
+
+    public function asignarTipoPersona(){
+        return view('persona_tipoPersona');
+    }
+
+	public function tipoModulo(){
+		$Tipo_Modulo = Tipo::join('modulo', 'tipo.Id_Modulo', '=', 'modulo.Id_Modulo')
+					    	->where('tipo.Id_Modulo', '=', 30)
+					    	->select('tipo.*')
+					    	->get();
+        return $Tipo_Modulo;
+	}
+
+	public function AdicionTipoPersona(Request $request){
+		 $validator = Validator:: make($request->all(),[
+            'Id' => 'required',
+            'Id_Tipo' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(["Bandera" => 0, "Mensaje" => ", pero ocurrio un error en la validación de la imagen o su tamaño."]);
+        }else{        
+			$Persona = Persona::find($request->Id);
+			$Persona->tipo()->sync([$request->Id_Tipo]);
+	        return response()->json(["Bandera" => 1, "Mensaje" => "Perfil añadido con éxito."]);
+    	}
+	}
+
+
+	public function asignarActividades(){
+        return view('persona_actividades');
+    }
+
+    public function moduloActividades(){
+    	$Actividades = ActividadesSim::join('modulo', 'actividades.Id_Modulo', '=', 'modulo.Id_Modulo')
+					    	->where('actividades.Id_Modulo', '=', 30)
+					    	->select('actividades.*')
+					    	->get();
+    	return $Actividades;
+	}
 	
 }
