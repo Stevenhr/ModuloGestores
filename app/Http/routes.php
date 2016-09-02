@@ -62,6 +62,8 @@ Route::get('/tipo_modulo', 'ConfiguracionActividadController@tipoModulo');
 Route::post('ProcesoTipoPersona', 'ConfiguracionActividadController@AdicionTipoPersona');
 Route::get('/asignarActividades', 'ConfiguracionActividadController@asignarActividades');
 Route::get('/actividadesModulo', 'ConfiguracionActividadController@moduloActividades');
+Route::get('/actividadesPersona/{id}', 'ConfiguracionActividadController@personaActividades');
+Route::post('PersonasActividadesProceso', 'ConfiguracionActividadController@PersonasActividadesProceso');
 
 
 

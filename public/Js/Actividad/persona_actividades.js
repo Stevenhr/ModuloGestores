@@ -11,26 +11,23 @@ $(function(){
                     var html = '';
                     $.each(data, function(i, e){
                     	document.getElementById("resultado").style.display = "block";
-                            html +='<div class="list-group-item"> <h5 class="list-group-item-heading">'+
-                            			e['Primer_Apellido'].toUpperCase()+' '+e['Segundo_Apellido'].toUpperCase()+' '+e['Primer_Nombre'].toUpperCase()+' '+e['Segundo_Nombre'].toUpperCase()+''+
-                            		'</h5>'+
-                                    '<div class="row">'+	                                   
-                                        '<div class="col-xs-12 col-md-4">'+
-                                            '<div class="row">'+
-                    	                        '<div class="col-xs-12 col-sm-6 col-md-3"><small>Identificación: '+e.tipo_documento['Nombre_TipoDocumento']+' '+e['Cedula']+'</small></div>'+
-                                            '</div>'+
+                            html +='<div class="list-group-item">'+
+                                        '<h5 class="list-group-item-heading">'+
+                            			     e['Primer_Apellido'].toUpperCase()+' '+e['Segundo_Apellido'].toUpperCase()+' '+e['Primer_Nombre'].toUpperCase()+' '+e['Segundo_Nombre'].toUpperCase()+
+                                        '</h5>'+
+                                        '<div class="row">'+
+                	                        '<div class="col-xs-12 col-sm-6 col-md-3"><small>Identificación: '+e.tipo_documento['Nombre_TipoDocumento']+' '+e['Cedula']+'</small></div>'+
                                         '</div>'+
-                                        '<div class="col-xs-12 col-md-4">'+
-                                            '<div class="row">'+
-                	                        	CBActividades +
-                                            '</div>'+
+                                        '<div class="row" style="margin-left:10px;" id="actividadesCheck'+e.Id_Persona+'">'+
                                         '</div>'+
-                                        '<div class="col-xs-12 col-md-4">'+
-				        					'<div class="form-group text-center">'+
-				        						'<button type="button" class="btn btn-primary" onclick="Agregar('+e.Id_Persona+');">Asignar</button>'+
-				        					'</div>'+
-				        				'</div>'+
-                                    '</div></div><br>';
+                                        '<div class="row">'+
+    			        					'<div class="form-group text-center">'+
+    			        						'<button disabled type="button" class="btn btn-primary" id="Agregar'+e.Id_Persona+'" onclick="Agregar('+e.Id_Persona+');">Asignar</button>'+
+    			        					'</div>'+
+    			        				'</div>'+
+                                    '</div>'+
+                                    '<br><br>';
+                            actividadesCheck(e.Id_Persona);
                     });
                     $('#personas').html(html);
                     $('#paginador').fadeOut();
@@ -48,10 +45,35 @@ $(function(){
                 document.getElementById("buscar").disabled = false;
             });
     }
+    function actividadesCheck(id){        
+        $.get('actividadesModulo', function(Stipo){
+            CBActividades = '';     
+            ActividadesMod = [];
+            i=0;
+            $.each(Stipo, function(i, e){
+                CBActividades +='<input type="checkbox" name="CB'+e.Id_Actividad+'" id="CB'+e.Id_Actividad+'" value="'+e.Id_Actividad+'"/><small>'+e.Nombre_Actividad+'</small><br>';
+                ActividadesMod[i] = {'id' : e.Id_Actividad, 'Nombre': e.Nombre_Actividad};
+                i=i+1;
+            });     
+            $('#actividadesCheck'+id).append(CBActividades);            
+                    
+        }).done(function(){
+            $.get('actividadesPersona/'+id, function(act_Per){
+                $.each(act_Per, function(i, e){
+                    $("#CB"+e.Id_Actividad).prop('checked', true);
+                });
+                $("#Agregar"+id).prop('disabled', false);
+            });      
+        });
+        
+    }
 
 	$('#buscar').on('click', function(e){
+
         $("#mensajeIncorrectoB").empty();
         $("#mensaje-incorrectoB").fadeOut();
+        $("#mensajecorrectoB").empty();
+        $("#mensaje-correctoB").fadeOut();
         $("#buscador").css({ 'border-color': '#CCCCCC' });    
         $("#buscar").css({ 'border-color': '#CCCCCC' });    
         var key = $('input[name="buscador"]').val();
@@ -74,19 +96,7 @@ $(function(){
                 document.getElementById("buscar").disabled = true;
                 document.getElementById("buscador").disabled = true;
                 $(this).data('role', 'reset');
-                CBActividades = '';     
-                ActividadesMod = [];
-		    	$.get('/ModuloGestores/actividadesModulo', function(Stipo){
-                    i=0;
-					$.each(Stipo, function(i, e){
-						CBActividades +='<input type="checkbox" name="CB'+e.Id_Actividad+'" id="CB'+e.Id_Actividad+'" value="'+e.Id_Actividad+'"/><small>'+e.Nombre_Actividad+'</small><br>';
-                        ActividadesMod[i] = {'nombre' : e.Id_Actividad};
-                        i=i+1;
-					});		
-							
-				}).done(function(){
-					buscar(e);          
-				});
+                buscar(e);  
 
                 
             break;
@@ -121,28 +131,44 @@ $(function(){
 	}
 
 	function Agregar(id){
-        console.log(ActividadesMod);
-		/*Id = id;
-		Id_Tipo = $("#Id_Tipo"+id).val()
-		var token = $("#token").val();
-	    var datos = {
-            Id: Id,
-            Id_Tipo: Id_Tipo,
+        var ArrayActividades = [];
+        for(i=0;i<ActividadesMod.length;i++){
+            nombre = '#CB'+ActividadesMod[i].id;
+            if($(nombre).is(":checked") == true){                
+                ArrayActividades[(ArrayActividades.length)] = {'id_actividad':ActividadesMod[i].id, 'estado': 1};
+            }else{
+                ArrayActividades[(ArrayActividades.length)] = {'id_actividad':ActividadesMod[i].id, 'estado': 0};
+            }
         }
-		$.ajax({
+        var token = $("#token").val();
+        var datos = {Datos: ArrayActividades, Id: id}
+        $.ajax({
             type: 'POST',
-            url: 'ProcesoTipoPersona',
+            url: 'PersonasActividadesProceso',
             headers: {'X-CSRF-TOKEN': token},
             dataType: 'json',
-            data: datos,        
+            data: datos,
             success: function (xhr) {  
-            	if(xhr.Bandera == 0){
-            		$("#Id_Tipo"+id).css({ 'border-color': '#B94A48' });    
-            		return false;
-            	}else{
-            		$("#Id_Tipo"+id).css({ 'border-color': '#CCCCCC' });    
-            	}
-            	alert(xhr.Mensaje);
+                $("#mensajeIncorrectoB").empty();
+                $("#mensaje-incorrectoB").fadeOut();
+                $("#mensajecorrectoB").empty();
+                $("#mensaje-correctoB").fadeOut();
+                if(xhr.Bandera == 1){//OK
+                    $("#Id_Tipo"+id).css({ 'border-color': '#B94A48' });    
+                    $("#mensajecorrectoB").html(xhr.Mensaje);
+                    $("#mensaje-correctoB").fadeIn();
+                    $('#mensaje-correctoB').focus();            
+                    return false;
+                }else{
+                    $("#Id_Tipo"+id).css({ 'border-color': '#CCCCCC' });    
+                    $("#mensajeIncorrectoB").html(xhr.Mensaje);
+                    $("#mensaje-incorrectoB").fadeIn();
+                    $('#mensaje-incorrectoB').focus();            
+                }
+            },
+            error:function(xhr){
+                console.log('err')
+                console.log(xhr);
             }
-        });*/
-	}
+        });
+    }

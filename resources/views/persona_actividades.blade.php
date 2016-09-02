@@ -30,6 +30,9 @@
                                 <div tabindex="-1" id="mensaje-incorrectoB" class=" text-left alert alert-success alert-danger" role="alert" style="display: none; margin-top: 10px;">
                                     <strong>Error </strong> <span id="mensajeIncorrectoB"></span>
                                 </div>
+                                <div tabindex="-1" id="mensaje-correctoB" class=" text-left alert alert-success alert-success" role="alert" style="display: none; margin-top: 10px;">
+                                    <strong>Error </strong> <span id="mensajecorrectoB"></span>
+                                </div>
                             </div>                            
 			        		<br><br><br><br>
 				        	<div class="list-group-item  col-xs-12" id="resultado" style="display: none;">

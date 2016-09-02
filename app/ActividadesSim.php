@@ -17,4 +17,14 @@ class ActividadesSim extends Model
     {
         $this->connection = 'db_principal';
     }
+
+    public function persona()
+	{
+		return $this->belongsToMany('App\Persona', 'actividad_acceso', 'Id_Actividad', 'Id_Persona');
+	}
+
+	public function modulo()
+	{
+		return $this->belongsTo('App\Modulo', 'Id_Modulo');
+	}
 }
