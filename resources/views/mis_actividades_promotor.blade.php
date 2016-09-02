@@ -12,7 +12,9 @@
               
 <div class="content" id="mis_actividad_gestores" class="row" data-url="gestores">
             <br>
-              <h3 id="navbar">MIS ACTIVIDADES</h3>
+            	<blockquote>
+              		<h3 id="navbar">MIS ACTIVIDADES</h3>
+              	</blockquote>
             <br><br>
            
 

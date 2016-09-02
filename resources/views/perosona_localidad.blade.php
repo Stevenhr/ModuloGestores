@@ -12,7 +12,9 @@
               
 <div class="content" id="PersonaLocalidad" class="row" data-url="PersonaLocalidad">
             <br>
+            <blockquote>
               <h3 id="navbar">MIS ACTIVIDADES</h3>
+            </blockquote>
             <br><br>
 		<div class="panel panel-primary">
 			  <div class="panel-heading">

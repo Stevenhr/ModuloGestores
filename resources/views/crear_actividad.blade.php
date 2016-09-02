@@ -12,7 +12,9 @@
               
 <div class="content" id="main_actividad" class="row" data-url="actividad">
             <br>
-              <h3 id="navbar">PROGRAMACIÓN DE ACTIVIDADES</h3>
+            	<blockquote>
+              	<h3 id="navbar">PROGRAMACIÓN DE ACTIVIDADES</h3>
+              	</blockquote>
             <br><br>
            
 <form action="" id="form_actividad">

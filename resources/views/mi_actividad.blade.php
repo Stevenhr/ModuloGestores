@@ -11,7 +11,9 @@
               
 <div class="content" id="main_mis_actividad" class="row" data-url="actividad">
             <br>
-              <h3 id="navbar">MI ACTIVIDAD</h3>
+              <blockquote>
+              <h3 id="navbar">MIS PROGRAMACIONES</h3>
+              </blockquote>
               <div id="espera_3"></div>
             <br><br>
            
@@ -19,7 +21,7 @@
 
 			<div class="panel panel-primary">
 			  <div class="panel-heading">
-			    <h3 class="panel-title">ACTIVIDAD: Registro del estado de las actividades.</h3>
+			    <h3 class="panel-title">MIS PROGRAMACIONES: Registro histórico de mis programaciones.</h3>
 			  </div>
 			  <div class="panel-body">
 			    				

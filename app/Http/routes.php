@@ -10,15 +10,10 @@ session_start();
 | and give it the controller to call when that URI is requested.
 |
 */
-
 Route::any('/', 'Actividadcontroller@show');
-
 Route::any('uno', function () {                
     return 'welcome';
 });
-
- 
-
 
 Route::get('/personas', '\Idrd\Usuarios\Controllers\PersonaController@index');
 Route::get('/personas/service/obtener/{id}', '\Idrd\Usuarios\Controllers\PersonaController@obtener');
@@ -26,14 +21,12 @@ Route::get('/personas/service/buscar/{key}', '\Idrd\Usuarios\Controllers\Persona
 Route::get('/personas/service/ciudad/{id_pais}', '\Idrd\Usuarios\Controllers\LocalizacionController@buscarCiudades');
 Route::post('/personas/service/procesar/', '\Idrd\Usuarios\Controllers\PersonaController@procesar');
 
-
 Route::get('/asignarLocalidad', 'ConfiguracionActividadController@asignarLocalidad');
 Route::get('/CrearActividad', 'Actividadcontroller@index');
 Route::get('/Modificar', 'Actividadcontroller@index');
 Route::get('/MisProgramaciones', 'Actividadcontroller@MiActividad');
 Route::get('/MisActividades', 'mis_actividades_promotores@Mis_Actividad');
 Route::get('/ActividadesAprobar', 'aprobacion_actividades@Mis_Actividad');
-
 
 Route::get('/actividad/service/obtener/{id_actividad}', 'Actividadcontroller@obtenerActividad');
 Route::post('/actividad/service/crearActividad/', 'ConfiguracionActividadController@procesarValidacion');
@@ -49,14 +42,12 @@ Route::post('/PersonaLocalidad/service/eliminaPersonaLocalidad/', 'Configuracion
 Route::post('/PersonaLocalidad/service/verPersonaLocalidad/', 'ConfiguracionActividadController@verPersonaLocalidad');
 Route::post('/actividad/service/ModificarActividad/', 'ConfiguracionActividadController@procesarModificacionValidacion');
 
-
 Route::post('/gestores/service/misActividadesGestor/', 'mis_actividades_promotores@procesarValidacionGestor');
 Route::get('/gestores/service/obtener/{id_actividad}', 'mis_actividades_promotores@obtenerActividad');
 Route::get('/gestores/service/obtenerEjecucion/{id_actividad}', 'mis_actividades_promotores@obtenerEjecucion');
 Route::post('/gestores/service/datos_actividades/', 'mis_actividades_promotores@procesarValidacionDatosEjecucion');
 Route::post('/gestores/service/datos_novedades/', 'mis_actividades_promotores@procesarValidacionDatosNovedades');
 Route::post('/gestores/service/registro_ejecucion/', 'mis_actividades_promotores@procesarValidacionRegistroEjecucion');
-
 
 Route::post('/aprobar/service/misActividadesGestor/', 'aprobacion_actividades@procesarValidacionGestor');
 Route::get('/aprobar/service/obtener/{id_actividad}', 'aprobacion_actividades@obtenerEjecucion');
@@ -67,7 +58,7 @@ Route::get('/aprobar/service/cancelarEjecucion/{id_actividad}', 'aprobacion_acti
 Route::get('/aprobar/service/cancelar/{id_actividad}', 'aprobacion_actividades@cancelarProgramacion');
 
 Route::get('/asignarTipoPersona', 'ConfiguracionActividadController@asignarTipoPersona');
-Route::get('tipo_modulo', 'ConfiguracionActividadController@tipoModulo');
+Route::get('/tipo_modulo', 'ConfiguracionActividadController@tipoModulo');
 Route::post('ProcesoTipoPersona', 'ConfiguracionActividadController@AdicionTipoPersona');
 Route::get('/asignarActividades', 'ConfiguracionActividadController@asignarActividades');
 Route::get('/actividadesModulo', 'ConfiguracionActividadController@moduloActividades');
