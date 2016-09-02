@@ -11,6 +11,7 @@ use Validator;
 
 use App\Tipo;
 use App\ActividadesSim;
+use App\ActividadAcceso;
 
 
 class ConfiguracionActividadController extends Controller
@@ -341,5 +342,38 @@ class ConfiguracionActividadController extends Controller
 					    	->get();
     	return $Actividades;
 	}
-	
+
+	public function personaActividades(Request $request, $id){
+		$personaActividades = Persona::with('Actividades')->find($id);
+		$actividades = $personaActividades->Actividades()->where('Id_Modulo', 30)->where('Estado', 1)->get();
+		return $actividades;
+	}
+
+	public function PersonasActividadesProceso(Request $request){
+
+		$accesoPersona = Persona::with('acceso')->find($request->Id);
+		$i=0;
+		if(isset($accesoPersona->acceso)){
+			$persona = Persona::find($request->Id);
+			foreach ($request->Datos as $datos) {
+				if($datos['estado'] == 1){
+					$aprobadas[$datos['id_actividad']] = array('estado' =>  1);
+					$eliminar[$i] = $datos['id_actividad'];
+				}else{
+					$aprobadas[$datos['id_actividad']] = array('estado' =>  0);
+					$eliminar[$i] = $datos['id_actividad'];
+				}
+				$i++;
+			
+			}
+			$persona->Actividades()->detach($eliminar);
+			$persona->Actividades()->attach($aprobadas);
+				$Mensaje = 'Las acticvidades de '.$accesoPersona['Primer_Nombre'].' '.$accesoPersona['Segundo_Nombre'].' '.$accesoPersona['Primer_Apellido'].' '.$accesoPersona['Segundo_Apellido'].' han sido asignadas correctamente.';
+				$Bandera = 1;
+		}else{
+			$Mensaje = 'Para asignar actividades a '.$accesoPersona['Primer_Nombre'].' '.$accesoPersona['Segundo_Nombre'].' '.$accesoPersona['Primer_Apellido'].' '.$accesoPersona['Segundo_Apellido'].', primero debe contar con acceso al SIM.';
+			$Bandera = 0;
+		}		
+		return response()->json(["Mensaje" => $Mensaje, "Bandera" => $Bandera]);
+	}
 }

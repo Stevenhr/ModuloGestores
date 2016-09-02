@@ -20,4 +20,14 @@ class Persona extends MPersona
     {
        return $this->belongsToMany('App\Localidad',config('database.connections.mysql.database').'.persona_localidad','id_persona','id_localidad');
     }
+
+    public function Actividades()
+	{
+		return $this->belongsToMany('App\ActividadesSim', 'actividad_acceso', 'Id_Persona', 'Id_Actividad');
+	}
+
+    public function acceso()
+    {
+        return $this->belongsTo('App\Acceso', 'Id_Persona');
+    }
 }

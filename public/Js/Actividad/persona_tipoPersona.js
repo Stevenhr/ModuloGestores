@@ -79,7 +79,7 @@ $(function(){
                 $(this).data('role', 'reset');
                 SelecTipo = '';
                 
-		    	$.get('/ModuloGestores/tipo_modulo', function(Stipo){
+		    	$.get('tipo_modulo', function(Stipo){
 					SelecTipo += '<option value="">Seleccionar</option>';
 					$.each(Stipo, function(i, e){
 						SelecTipo +='<option value="'+e.Id_Tipo+'">'+e.Nombre+'</option>';
