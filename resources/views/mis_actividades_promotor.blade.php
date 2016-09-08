@@ -12,9 +12,7 @@
               
 <div class="content" id="mis_actividad_gestores" class="row" data-url="gestores">
             <br>
-            	<blockquote>
-              		<h3 id="navbar">MIS ACTIVIDADES</h3>
-              	</blockquote>
+              <h3 id="navbar">MIS ACTIVIDADES</h3>
             <br><br>
            
 
@@ -722,7 +720,7 @@
 										        		</div>
 										        		<div class="col-xs-12 col-md-6">
 										        			<div class="form-group">
-															    <label for="exampleInputFile">Listado Entrega de Kits</label>
+															    <label for="exampleInputFile">Listado Entraga de Kits</label>
 															    <input type="file" name="acta">
 															    <p class="help-block">Archivo en formato pdf</p>
 															    <a id="file2" href="" download>
