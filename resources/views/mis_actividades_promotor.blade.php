@@ -722,7 +722,7 @@
 										        		</div>
 										        		<div class="col-xs-12 col-md-6">
 										        			<div class="form-group">
-															    <label for="exampleInputFile">Listado Entraga de Kits</label>
+															    <label for="exampleInputFile">Listado Entrega de Kits</label>
 															    <input type="file" name="acta">
 															    <p class="help-block">Archivo en formato pdf</p>
 															    <a id="file2" href="" download>

@@ -265,7 +265,7 @@ $(function()
         var fechaActual = new Date(f.getFullYear()+ "," + (f.getMonth() +1) + "," + f.getDate());
         var tmp = datos.datosActividad['Fecha_Ejecucion'].split('-');
         var F_ejecucion = new Date(tmp[0]+ "," + tmp[1]+ "," + tmp[2]);
-
+//console.log(F_ejecucion+" - "+fechaActual);
         if(datos.datosActividad['Estado']==2 && F_ejecucion<=fechaActual){
             $("#agregar_datos_ejecucion").show();
             $("#agregar_datos_novedades").show();
