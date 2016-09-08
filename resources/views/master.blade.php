@@ -123,7 +123,7 @@
               </li>
 
               <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Ejecución<span class="caret"></span></a>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Mis Actividades(Ejecución)<span class="caret"></span></a>
                 <ul class="dropdown-menu" aria-labelledby="download">
                   <li><a href="#" style="color:#1995dc">EJECUCIÓN ACTIVIDADES</a></li>
                   <li class="divider"></li>

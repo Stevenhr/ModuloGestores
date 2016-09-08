@@ -205,6 +205,9 @@ $(function()
  
         //console.log(datos);
 
+        $('textarea[name="Observacion_Cancela"]').css({ 'border-color': '#CCCCCC' });    
+        $("#Observacion_CancelaL").css({ 'color': '#555555' });    
+
         if(datos.datosActividad['Estado']==3 || datos.datosActividad['Estado_Ejecucion']==3){ // Cancelar Prpgramación
 				$('#Cancelar_').show(); 	//Ejecucion
 				$('#Aprobar_').hide();		//Ejecucion
@@ -228,6 +231,7 @@ $(function()
         $('input[name="Caracteristica_Lugar"]').val(datos.datosActividad['Caracteristica_Lugar']);
         $('textarea[name="Caracteristica_poblacion"]').val(datos.datosActividad['Caracteristica_Poblacion']);
         $('textarea[name="Caracteristica_Lugar"]').val(datos.datosActividad['Caracteristica_Lugar']);
+        $('textarea[name="Observacion_Cancela"]').val(datos.datosActividad['Observacion_Cancela']);
         $('input[name="Institucion_Grupo"]').val(datos.datosActividad['Instit_Grupo_Comun']);
         $('input[name="Numero_Asistentes"]').val(datos.datosActividad['Numero_Asistente']);
         $('input[name="Hora_Implementacion"]').val(datos.datosActividad['Hora_Implementacion']);
@@ -349,18 +353,19 @@ $(function()
 		 });
 		 $('#tablaNovedad').html(fila1);	
 
-		
-		 $('input[name="nombreRepresentante"]').val(datos.datosActividad.calificaciom_servicio[0]['Nombre_Representante']);
-		 $('input[name="telefonoRepresentante"]').val(datos.datosActividad.calificaciom_servicio[0]['Telefono']);
-		 $('select[name="puntualidad"]').val(datos.datosActividad.calificaciom_servicio[0]['Id_Puntualidad']);//Manejo del tema
-		 $('select[name="divulgacion"]').val(datos.datosActividad.calificaciom_servicio[0]['Id_Divulgacion']);//Material Utulizado
-		 $('select[name="escenarioMontaje"]').val(datos.datosActividad.calificaciom_servicio[0]['Id_Montaje']);//Conocimiento adquirido
-		 $('#imagenVer1').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen1']);//Conocimiento adquirido attr
-		 $('#imagenVer2').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen2']);//Conocimiento adquirido attr
-		 $('#imagenVer3').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen3']);//Conocimiento adquirido attr
-		 $('#imagenVer4').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen4']);//Conocimiento adquirido attr
-		 $('#file1').attr('href','public/Img/EvidenciaArchivo/'+datos.datosActividad.calificaciom_servicio[0]['Url_Acta']);//Conocimiento adquirido attr
-		 $('#file2').attr('href','public/Img/EvidenciaArchivo/'+datos.datosActividad.calificaciom_servicio[0]['Url_Asistencia']);//Conocimiento adquirido attr
+	//	 if(datos.datosActividad.calificaciom_servicio.length>0){
+			 $('input[name="nombreRepresentante"]').val(datos.datosActividad.calificaciom_servicio[0]['Nombre_Representante']);
+			 $('input[name="telefonoRepresentante"]').val(datos.datosActividad.calificaciom_servicio[0]['Telefono']);
+			 $('select[name="puntualidad"]').val(datos.datosActividad.calificaciom_servicio[0]['Id_Puntualidad']);//Manejo del tema
+			 $('select[name="divulgacion"]').val(datos.datosActividad.calificaciom_servicio[0]['Id_Divulgacion']);//Material Utulizado
+			 $('select[name="escenarioMontaje"]').val(datos.datosActividad.calificaciom_servicio[0]['Id_Montaje']);//Conocimiento adquirido
+			 $('#imagenVer1').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen1']);//Conocimiento adquirido attr
+			 $('#imagenVer2').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen2']);//Conocimiento adquirido attr
+			 $('#imagenVer3').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen3']);//Conocimiento adquirido attr
+			 $('#imagenVer4').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen4']);//Conocimiento adquirido attr
+			 $('#file1').attr('href','public/Img/EvidenciaArchivo/'+datos.datosActividad.calificaciom_servicio[0]['Url_Acta']);//Conocimiento adquirido attr
+			 $('#file2').attr('href','public/Img/EvidenciaArchivo/'+datos.datosActividad.calificaciom_servicio[0]['Url_Asistencia']);//Conocimiento adquirido attr
+	//	 }
 		 $('#modal_ejecucion').modal('show');
     };
 
@@ -601,10 +606,18 @@ $(function()
 
 
 
-    $('#Cancelar_').on('click', function(e){
-                var id= $('input[name="Id_Actividad"]').val();
+    $('#Cancelar_').on('click', function(e){    	
+    	Observacion = $('textarea[name="Observacion_Cancela"]').val();
+    	if(!Observacion || Observacion.length <= 0){
+    		$('textarea[name="Observacion_Cancela"]').css({ 'border-color': '#B94A48' });    
+        	$("#Observacion_CancelaL").css({ 'color': '#B94A48' });    
+        	$("#Observacion_Cancela").focus();
+    		return false;
+
+    	}else{
+    		var id= $('input[name="Id_Actividad"]').val();
     			$.get(
-		            URL+'/service/cancelar/'+id,
+		            URL+'/service/cancelar/'+id+'/'+Observacion,
 		            {},
 		            function(data)
 		            {   
@@ -619,6 +632,7 @@ $(function()
 		        );
 
 		        e.preventDefault();
+	    }	                
     });
 
 

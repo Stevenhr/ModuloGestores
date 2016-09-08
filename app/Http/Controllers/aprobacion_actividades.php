@@ -95,9 +95,10 @@ class aprobacion_actividades extends Controller
 		ActividadGestor::where('Id_Actividad_Gestor', $id_actividad)->update(array('Estado' => 2));
     	return  "ok";
     }
-    public function cancelarProgramacion(Request $request, $id_actividad){
+    public function cancelarProgramacion(Request $request, $id_actividad, $Observacion_Cancela){
 
 		ActividadGestor::where('Id_Actividad_Gestor', $id_actividad)->update(array('Estado' => 3));
+		ActividadGestor::where('Id_Actividad_Gestor', $id_actividad)->update(array('Observacion_Cancela' => $Observacion_Cancela));
     	return  "ok";
     }
 

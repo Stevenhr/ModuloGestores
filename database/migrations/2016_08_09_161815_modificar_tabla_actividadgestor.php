@@ -15,6 +15,7 @@ class ModificarTablaActividadgestor extends Migration
         //
         Schema::table('actividad_gestor', function (Blueprint $table) {
             $table->string('Otro');
+            $table->string('Observacion_Cancela');
         });
 
     }
@@ -29,6 +30,7 @@ class ModificarTablaActividadgestor extends Migration
         //
         Schema::table('actividad_gestor', function (Blueprint $table) {
             $table->dropColum('Otro');
+            $table->dropColum('Observacion_Cancela');
         });
     }
 }

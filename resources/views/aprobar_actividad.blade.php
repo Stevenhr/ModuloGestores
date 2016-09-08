@@ -290,7 +290,22 @@
 						  </div>
 						</div>
 						<br>
-						
+						<div class="panel panel-primary">
+						  <div class="panel-heading">
+						    <h3 class="panel-title">PASO 5: Cancelación</h3>
+						  </div>
+						  <div class="panel-body">						    				
+					      		<fieldset>
+					        		<div class="col-xs-12 col-md-6">
+					        			<div class="form-group">
+					        				<label class="control-label" id="Observacion_CancelaL">* Observación de la cancelación</label>
+					        				<textarea class="form-control" rows="3" name="Observacion_Cancela"></textarea>
+					        			</div>
+					        		</div>					        		
+					       		</fieldset>										    
+						  </div>
+						</div>
+						<br>
 						<div class="form-group">
 							<div id="alerta_actividad_error" class="col-xs-12" style="display:none;">
 								<div class="alert alert-danger alert-dismissible" role="alert">

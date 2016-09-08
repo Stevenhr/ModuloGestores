@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Idrd\Usuarios\Repo\PersonaInterface;
 use App\ActividadGestor;
+use Illuminate\Support\Facades\DB;
+use App\Parque;
 
 class Actividadcontroller extends Controller
 {
@@ -43,7 +45,7 @@ class Actividadcontroller extends Controller
         $deportista = $_SESSION['Usuario']['Persona'];*/
 
             //$vectorArreglaso="a%3A7%3A%7Bi%3A0%3Bs%3A4%3A%221046%22%3Bi%3A1%3Bs%3A1%3A%221%22%3Bi%3A2%3Bs%3A1%3A%221%22%3Bi%3A3%3Bs%3A1%3A%221%22%3Bi%3A4%3Bs%3A1%3A%221%22%3Bi%3A5%3Bs%3A1%3A%221%22%3Bi%3A6%3Bs%3A1%3A%221%22%3B%7D";
-            $vectorArreglaso = "a%3A7%3A%7Bi%3A0%3Bs%3A4%3A%221307%22%3Bi%3A1%3Bs%3A1%3A%221%22%3Bi%3A2%3Bs%3A1%3A%221%22%3Bi%3A3%3Bs%3A1%3A%221%22%3Bi%3A4%3Bs%3A1%3A%221%22%3Bi%3A5%3Bs%3A1%3A%221%22%3Bi%3A6%3Bs%3A1%3A%221%22%3B%7D";
+            $vectorArreglaso = "a%3A9%3A%7Bi%3A0%3Bs%3A4%3A%221307%22%3Bi%3A1%3Bs%3A1%3A%221%22%3Bi%3A2%3Bs%3A1%3A%221%22%3Bi%3A3%3Bs%3A1%3A%221%22%3Bi%3A4%3Bs%3A1%3A%221%22%3Bi%3A5%3Bs%3A1%3A%221%22%3Bi%3A6%3Bs%3A1%3A%221%22%3Bi%3A7%3Bs%3A1%3A%221%22%3Bi%3A8%3Bs%3A1%3A%221%22%3B%7D";
             $vector = urldecode($vectorArreglaso);
             $user_array = unserialize($vector);       
             $_SESSION['Usuario'] = $user_array;
@@ -64,7 +66,7 @@ class Actividadcontroller extends Controller
 		$Localidad = app()->make('App\Localidad');
 		$Tipo = app()->make('App\Tipo');
 		//$Parque = app()->make('App\Parque');
-		$TipoParque = app()->make('App\TipoParque');
+		//$TipoParque = app()->make('App\TipoParque');
 
 		$datos = [
 	        'eje' => $eje->all(),
@@ -72,7 +74,7 @@ class Actividadcontroller extends Controller
 	        'actividad' => $actividad->all(),
 	        'localidad' => $Localidad->all(),
 	        'Tipo' => $Tipo->find(50),
-	        'tipoparques' => $TipoParque->find(3),
+	       // 'tipoparques' => $TipoParque->find(3),
 			'status' => session('status')
 		];
 
@@ -101,19 +103,22 @@ class Actividadcontroller extends Controller
       return response()->json($consulta);
     }
 
-    public function obtenerActividad(Request $request, $id_actividad){
-      
-    $datosActividad = ActividadGestor::find($id_actividad);
-    
-    $datos = ['datosActividad' => $datosActividad];
-
+    public function obtenerActividad(Request $request, $id_actividad){      
+      $datosActividad = ActividadGestor::find($id_actividad);
+      $datosActividadGestor = DB::select('select * from actividadgestor_actividad_eje_tematica
+                                      inner join eje on eje.Id_Eje = actividadgestor_actividad_eje_tematica.eje_id
+                                      inner join tematica on tematica.Id_Tematica = actividadgestor_actividad_eje_tematica.tematica_id
+                                      inner join actividad on actividad.Id_Actividad = actividadgestor_actividad_eje_tematica.actividad_id
+                                      where actividadgestor_actividad_eje_tematica.actividad_gestor_id = '.$id_actividad
+                                    );
+      $datosActividad['datosActividadGestor'] = $datosActividadGestor;      
+      $datos = ['datosActividad' => $datosActividad];
     	return  $datos;
     }
 
-
-
-
-     
-
-}
-
+    public function GetParques(Request $request, $id_localidad){
+       $Parque = Parque::with('localidad')->where('Id_Localidad', '=', $id_localidad)->get();
+       return $Parque;
+    }
+    
+  }

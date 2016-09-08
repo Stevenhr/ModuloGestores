@@ -12,6 +12,7 @@ $(function()
     });
 
     $('#example').delegate('button[data-funcion="ver"]','click',function (e) {  
+        $("#actividadGestor").empty();
         var id = $(this).data('rel'); 
         $("#espera_3_"+id).html("<img src='public/Img/loading.gif'/>");
         $.get(
@@ -42,16 +43,35 @@ $(function()
 
     var actividad_datos = function(datos)
     {
-        //console.log(datos);
+        tabla = '';
+        $.each (datos.datosActividad.datosActividadGestor, function(i, e){
+            if(e.Kit == 1){kit = 'SI';}else if(e.Kit == 0){kit = 'NO';}
+            if(e.Nombre_Actividad == 'OTRO'){Actividad = e.Otro}else{ Actividad=e.Nombre_Actividad;}
+            tabla +='<tr>'+
+                    '<td>'+e.Nombre_Eje+'</td>'+
+                    '<td>'+e.Nombre_Tematica+'</td>'+
+                    '<td>'+Actividad+'</td>'+
+                    '<td>'+kit+'</td>'+
+                    '<td>'+e.Cantidad_Kit+'</td>'+
+                    '</tr>';
+
+        });
+        $("#actividadGestor").append('');
+        $("#actividadGestor").append(tabla);
+
+        $('input[name="IdLocalidad"]').val(datos.datosActividad['Localidad']);
+
         $("#titulo_id").text(datos.datosActividad['Id_Actividad_Gestor']);
         $('input[name="Id_Actividad"]').val(datos.datosActividad['Id_Actividad_Gestor']);
-        $('select[name="Id_Localidad"]').val(datos.datosActividad['Localidad']);
+        $('select[name="Id_Localidad"]').val(datos.datosActividad['Localidad']).change();
+        
         $('select[name="Id_Responsable"]').val(datos.datosActividad['Id_Responsable']);
         $('input[name="Hora_Inicio"]').val(datos.datosActividad['Hora_Incial']);
         $('input[name="Hora_Fin"]').val(datos.datosActividad['Hora_Final']);
         $('input[name="Fecha_Ejecucion"]').val(datos.datosActividad['Fecha_Ejecucion']);
+        
         if(datos.datosActividad['Parque']==0){$parque="Otro"}else{$parque=datos.datosActividad['Parque'];}
-        $('select[name="Parque"]').selectpicker('val',$parque);
+        $('input[name="ParqueX"]').val($parque);
         $('input[name="otro_Parque"]').val(datos.datosActividad['Otro']);
         $('input[name="Caracteristica_Lugar"]').val(datos.datosActividad['Caracteristica_Lugar']);
         $('textarea[name="Caracteristica_poblacion"]').val(datos.datosActividad['Caracteristica_Poblacion']);
@@ -62,6 +82,7 @@ $(function()
         $('input[name="Persona_Contacto"]').val(datos.datosActividad['Nombre_Contacto']);
         $('input[name="Roll_Comunidad"]').val(datos.datosActividad['Rool_Comunidad']);
         $('input[name="Telefono"]').val(datos.datosActividad['Telefono']);
+
 
         var f = new Date();
         var fechaActual = new Date(f.getFullYear()+ "," + (f.getMonth() +1) + "," + f.getDate());
@@ -103,8 +124,7 @@ $(function()
         e.preventDefault();
     });
 
-    $('#Cerrar_modal').on('click', function(e){
-      
+    $('#Cerrar_modal').on('click', function(e){                
                $('#modal_form_actividades').modal('hide');
 
         e.preventDefault();
@@ -148,8 +168,6 @@ $(function()
             }
         }
     }
-
-
 
 
         $('#datetimepicker1_m').datetimepicker({
@@ -236,17 +254,28 @@ $(function()
         });
 
         $('#Cerrar_Act').on('click', function(e){
-                $('#modal_form_actividades').modal('hide');
-                e.preventDefault();
+            $('#modal_form_actividades').modal('hide');
+            e.preventDefault();
         });
 
+        function ChangeLocalidad(id_localidad, seleccion){
+            html = '';            
+            html += '<option value="">Seleccionar</option>';
+            html += '<option value="Otro">OTRO</option>';
+            $("#Parque").append('<option value="Otro">Otro</option>');
+            $.get(URL+'/service/getParques/'+id_localidad, {}, function(data){ 
+                console.log(data);
+                $.each(data,  function(i, e){
+                    html += '<option value="'+e.Id+'"">'+e.Nombre+' '+e['Id_IDRD']+'</option>';
+                });         
+                $("#Parque").html(html).selectpicker('refresh');
+            }).done(function(){
+                $('select[name="Parque"]').selectpicker('val',$('input[name="ParqueX"]').val());
+            });
+        }
 
-         
 
-
+    $("#Id_Localidad").on('change', function(e){
+       ChangeLocalidad($("#Id_Localidad").val(), $("#IdLocalidad").val()); 
+    });
 });
-
-
-
-
-

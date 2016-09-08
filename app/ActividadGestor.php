@@ -28,7 +28,7 @@ class ActividadGestor extends Model
     }
     public function actividadgestorActividadEjeTematica()
     {
-        return $this->belongsToMany('App\ActividadGestor','actividadgestor_actividad_eje_tematica','actividad_gestor_id','eje_id','tematica_id','actividad_id','Otro');
+        return $this->belongsToMany('App\ActividadGestor','actividadgestor_actividad_eje_tematica','actividad_gestor_id','eje_id','tematica_id','actividad_id','Otro', 'Kit', 'Cantidad_Kit');
     }
     public function localidad() 
     {

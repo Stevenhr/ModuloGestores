@@ -15,6 +15,8 @@ class ModificarTablaActividadgestorActividadEjeTematica extends Migration
         //
        Schema::table('actividadgestor_actividad_eje_tematica', function (Blueprint $table) {
             $table->string('Otro');
+            $table->integer('Kit');
+            $table->integer('Cantidad_kit');
         });
     }
 
@@ -28,6 +30,8 @@ class ModificarTablaActividadgestorActividadEjeTematica extends Migration
         //
         Schema::table('actividadgestor_actividad_eje_tematica', function (Blueprint $table) {
             $table->dropColum('Otro');
+            $table->dropColum('Kit');
+            $table->dropColum('Cantidad_kit');
         });
     }
 }

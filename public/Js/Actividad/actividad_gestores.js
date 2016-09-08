@@ -340,20 +340,21 @@ $(function()
 	        num1++;
 		 });
 		 $('#registros_novedad').html(fila1);
-
-
-		 $('input[name="nombreRepresentante"]').val(datos.datosActividad.calificaciom_servicio[0]['Nombre_Representante']);
-		 $('input[name="telefonoRepresentante"]').val(datos.datosActividad.calificaciom_servicio[0]['Telefono']);
-		 $('select[name="puntualidad"]').val(datos.datosActividad.calificaciom_servicio[0]['Id_Puntualidad']);//Manejo del tema
-		 $('select[name="divulgacion"]').val(datos.datosActividad.calificaciom_servicio[0]['Id_Divulgacion']);//Material Utulizado
-		 $('select[name="escenarioMontaje"]').val(datos.datosActividad.calificaciom_servicio[0]['Id_Montaje']);//Conocimiento adquirido
-		 $('#imagenVer1').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen1']);//Conocimiento adquirido attr
-		 $('#imagenVer2').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen2']);//Conocimiento adquirido attr
-		 $('#imagenVer3').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen3']);//Conocimiento adquirido attr
-		 $('#imagenVer4').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen4']);//Conocimiento adquirido attr
-		 $('#file1').attr('href','public/Img/EvidenciaArchivo/'+datos.datosActividad.calificaciom_servicio[0]['Url_Acta']);//Conocimiento adquirido attr
-		 $('#file2').attr('href','public/Img/EvidenciaArchivo/'+datos.datosActividad.calificaciom_servicio[0]['Url_Asistencia']);//Conocimiento adquirido attr
-		 $('#modal_ejecucion').modal('show');
+		 
+		 if(datos.datosActividad.calificaciom_servicio.length>0){
+			 $('input[name="nombreRepresentante"]').val(datos.datosActividad.calificaciom_servicio[0]['Nombre_Representante']);
+			 $('input[name="telefonoRepresentante"]').val(datos.datosActividad.calificaciom_servicio[0]['Telefono']);
+			 $('select[name="puntualidad"]').val(datos.datosActividad.calificaciom_servicio[0]['Id_Puntualidad']);//Manejo del tema
+			 $('select[name="divulgacion"]').val(datos.datosActividad.calificaciom_servicio[0]['Id_Divulgacion']);//Material Utulizado
+			 $('select[name="escenarioMontaje"]').val(datos.datosActividad.calificaciom_servicio[0]['Id_Montaje']);//Conocimiento adquirido
+			 $('#imagenVer1').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen1']);//Conocimiento adquirido attr
+			 $('#imagenVer2').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen2']);//Conocimiento adquirido attr
+			 $('#imagenVer3').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen3']);//Conocimiento adquirido attr
+			 $('#imagenVer4').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen4']);//Conocimiento adquirido attr
+			 $('#file1').attr('href','public/Img/EvidenciaArchivo/'+datos.datosActividad.calificaciom_servicio[0]['Url_Acta']);//Conocimiento adquirido attr
+			 $('#file2').attr('href','public/Img/EvidenciaArchivo/'+datos.datosActividad.calificaciom_servicio[0]['Url_Asistencia']);//Conocimiento adquirido attr			 
+		}
+		$('#modal_ejecucion').modal('show');
     };
 
 
