@@ -20,7 +20,7 @@
 			<input type="hidden" name="Id_Actividad" value="0"></input>
 			<div class="panel panel-primary">
 			  <div class="panel-heading">
-			    <h3 class="panel-title">PASO 1: Datos basicos de la actividad</h3>
+			    <h3 class="panel-title">PASO 1: Datos básicos de la actividad</h3>
 			  </div>
 			  <div class="panel-body">
 							      		<fieldset>
@@ -56,6 +56,30 @@
 							        				<label class="control-label" for="d_Actividad">* Otro</label>
 							        				<input type="text" name="otro_Actividad" value="" class="form-control">
 							        			</div>
+						        			</div>
+						        			<div class="col-xs-12 col-md-12">
+						        				<label class="control-label" for="d_Actividad">* Entrega de kit´s </label>							        				
+						        			</div>
+
+						        			<div class="col-xs-12 col-md-6">
+                                    
+						        			<div class="col-xs-12 col-md-12">
+			                                    <div class="form-group col-md-6">				                                    				                                        
+			                                        <div id="radio_kit" class="btn-group" data-toggle="buttons">
+			                                            <label class="btn btn-default">
+			                                                <input type="radio" name="Kit" value="1" autocomplete="off"> <span class="text-success">SI</span>
+			                                            </label>
+			                                            <label class="btn btn-default">
+			                                                <input type="radio" name="Kit" value="2" autocomplete="off"> <span class="text-danger">NO</span>
+			                                            </label>
+			                                        </div>
+			                                    </div>
+			                                    <div class="col-md-6">							        				
+						        				<label class="control-label" for="d_Actividad">Cantidad </label>
+						        				<input type="text" name="Cantidad_Kit" id="Cantidad_Kit" class="form-control">
+						        			</div>
+
+							        										        		
 							        		</div>
 							        		<div class="col-xs-12 col-md-12">
 							        			<div class="form-group">
@@ -223,7 +247,7 @@
 							        		<div class="col-xs-12 col-md-6">
 							        			<div class="form-group">
 							        				<label class="control-label" for="Id_TipoDocumento">* Localidad</label>
-							        				<select name="Id_Localidad" id="" class="form-control">
+							        				<select name="Id_Localidad" id="Id_Localidad" class="form-control">
 							        					<option value="">Seleccionar</option>
 							        					@foreach($localidad as $localidad)
 							        						<option value="{{ $localidad['Id_Localidad'] }}">{{ $localidad['Nombre_Localidad'] }}</option>
@@ -234,12 +258,9 @@
 							        		<div class="col-xs-12 col-md-6">
 							        			<div class="form-group">
 							        				<label class="control-label" for="Cedula">* Parque </label>
-							        				<select name="Parque" id="" class="selectpicker form-control" data-live-search="true">
+							        				<select name="Parque" id="Parque" class="selectpicker form-control" data-live-search="true">
 							        					<option value="">Seleccionar</option>
-							        					<option value="Otro">OTRO</option>
-							        					@foreach($tipoparques->parques as $tipoparques)
-							        						<option value="{{ $tipoparques['Id'] }}">{{ $tipoparques['Nombre'].'   '.$tipoparques['Id_IDRD'] }}</option>
-							        					@endforeach
+							        					
 							        				</select>
 							        			</div>
 							        		</div>

@@ -15,6 +15,4 @@ class Localidad extends MLocalidad
 	{
 		return $this->hasMany('App\Ejecucion', 'id_localidad');
 	}
-
-
 }

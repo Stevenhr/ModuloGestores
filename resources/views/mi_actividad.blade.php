@@ -95,7 +95,31 @@
 
 			<form action="" id="form_actividad_m" name="form_actividad_m">
 						
-						<h3>ACTIVIDAD N° <label class="control-label" for="Id_TipoDocumento" id="titulo_id"></label></h3><br>
+						<h3>ACTIVIDAD N° <label class="control-label" for="Id_TipoDocumento" id="titulo_id"></label></h3><br>						
+						<!--<button type="button" data-rel="ver_registros_{{ $actividad['Id_Actividad_Gestor'] }}" data-funcion="ver_registros" class="{{ $clase }} eliminar_dato_actividad">Ver Registros </button>-->
+						<div class="panel panel-primary">
+						  <div class="panel-heading">
+						    <h3 class="panel-title">Datos básicos</h3>
+						  </div>
+						  <div class="panel-body">
+					      		<fieldset>
+					      			<table id="ver_registros" class="display dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="example_info" style="width: 100%;">
+					      			
+								        <thead>
+								            <tr>
+								                <th>Eje</th>
+								                <th>Componente</th>
+								                <th>Estrategia</th>
+								                <th>Kit</th>
+								                <th>Cantidad de kits</th>
+								            </tr>
+								        </thead>
+								        <tbody id="actividadGestor" name="actividadGestor">
+								        </tbody>
+								    </table>
+					       		</fieldset>
+						  </div>
+						</div>
 						<div class="panel panel-primary">
 						  <div class="panel-heading">
 						    <h3 class="panel-title">Datos de asignación y configuración horaria</h3>
@@ -114,7 +138,6 @@
 										        				<label class="control-label" for="Id_TipoDocumento">* Responsable </label>
 										        				<select name="Id_Responsable" id="" class="form-control">
 										        					<option value="">Seleccionar</option>
-
 										        					@foreach($Tipo->personas as $Tipo)
 										        						<option value="{{ $Tipo['Id_Persona'] }}">{{ $Tipo['Primer_Apellido'].' '.$Tipo['Segundo_Apellido'].' '.$Tipo['Primer_Nombre'].' '.$Tipo['Segundo_Nombre'] }}</option>
 										        					@endforeach
@@ -157,7 +180,8 @@
 										        		<div class="col-xs-12 col-md-6">
 										        			<div class="form-group">
 										        				<label class="control-label" for="Id_TipoDocumento">* Localidad</label>
-										        				<select name="Id_Localidad" id="" class="form-control">
+										        				<input type="hidden" name="IdLocalidad" id="IdLocalidad" value="">
+										        				<select name="Id_Localidad" id="Id_Localidad" class="form-control">
 										        					<option value="">Seleccionar</option>
 										        					@foreach($localidad as $localidad)
 										        						<option value="{{ $localidad['Id_Localidad'] }}">{{ $localidad['Nombre_Localidad'] }}</option>
@@ -167,13 +191,10 @@
 										        		</div>
 										        		<div class="col-xs-12 col-md-6">
 										        			<div class="form-group">
+										        				<input type="hidden" name="ParqueX" id="ParqueX" value="">
 										        				<label class="control-label" for="Cedula">* Parque </label>
-										        				<select name="Parque" id="" class="selectpicker form-control" data-live-search="true">
+										        				<select name="Parque" id="Parque" class="selectpicker form-control" data-live-search="true">
 										        					<option value="">Seleccionar</option>
-										        					<option value="Otro">OTRO</option>
-										        					@foreach($tipoparque->parques as $parque)
-										        						<option value="{{ $parque['Id'] }}">{{ $parque['Nombre'].'   '.$parque['Id_IDRD'] }}</option>
-										        					@endforeach
 										        				</select>
 										        			</div>
 										        		</div>
@@ -319,5 +340,6 @@
 												    </div>
 												  </div>
 												</div>
+												<br><br>
 
 @stop

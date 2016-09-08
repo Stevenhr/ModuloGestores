@@ -205,6 +205,9 @@ $(function()
  
         //console.log(datos);
 
+        $('textarea[name="Observacion_Cancela"]').css({ 'border-color': '#CCCCCC' });    
+        $("#Observacion_CancelaL").css({ 'color': '#555555' });    
+
         if(datos.datosActividad['Estado']==3 || datos.datosActividad['Estado_Ejecucion']==3){ // Cancelar Prpgramación
 				$('#Cancelar_').show(); 	//Ejecucion
 				$('#Aprobar_').hide();		//Ejecucion
@@ -214,20 +217,23 @@ $(function()
 				$('#Aprobar_').show();		//Ejecucion
 				$('#Modificar_').show();	//Ejecucion
 		}
+		$('input[name="IdLocalidad"]').val(datos.datosActividad['Localidad']);
 
         $("#titulo_id").text(datos.datosActividad['Id_Actividad_Gestor']);
         $('input[name="Id_Actividad"]').val(datos.datosActividad['Id_Actividad_Gestor']);
-        $('select[name="Id_Localidad"]').val(datos.datosActividad['Localidad']);
+        $('select[name="Id_Localidad"]').val(datos.datosActividad['Localidad']).change();
         $('select[name="Id_Responsable"]').val(datos.datosActividad['Id_Responsable']);
         $('input[name="Hora_Inicio"]').val(datos.datosActividad['Hora_Incial']);
         $('input[name="Hora_Fin"]').val(datos.datosActividad['Hora_Final']);
         $('input[name="Fecha_Ejecucion"]').val(datos.datosActividad['Fecha_Ejecucion']);
         if(datos.datosActividad['Parque']==0){$parque="Otro"}else{$parque=datos.datosActividad['Parque'];}
-        $('select[name="Parque"]').selectpicker('val',$parque);
+        //$('select[name="Parque"]').selectpicker('val',$parque);
+        $('input[name="ParqueX"]').val($parque);
         $('input[name="otro_Parque"]').val(datos.datosActividad['Otro']);
         $('input[name="Caracteristica_Lugar"]').val(datos.datosActividad['Caracteristica_Lugar']);
         $('textarea[name="Caracteristica_poblacion"]').val(datos.datosActividad['Caracteristica_Poblacion']);
         $('textarea[name="Caracteristica_Lugar"]').val(datos.datosActividad['Caracteristica_Lugar']);
+        $('textarea[name="Observacion_Cancela"]').val(datos.datosActividad['Observacion_Cancela']);
         $('input[name="Institucion_Grupo"]').val(datos.datosActividad['Instit_Grupo_Comun']);
         $('input[name="Numero_Asistentes"]').val(datos.datosActividad['Numero_Asistente']);
         $('input[name="Hora_Implementacion"]').val(datos.datosActividad['Hora_Implementacion']);
@@ -349,18 +355,19 @@ $(function()
 		 });
 		 $('#tablaNovedad').html(fila1);	
 
-		
-		 $('input[name="nombreRepresentante"]').val(datos.datosActividad.calificaciom_servicio[0]['Nombre_Representante']);
-		 $('input[name="telefonoRepresentante"]').val(datos.datosActividad.calificaciom_servicio[0]['Telefono']);
-		 $('select[name="puntualidad"]').val(datos.datosActividad.calificaciom_servicio[0]['Id_Puntualidad']);//Manejo del tema
-		 $('select[name="divulgacion"]').val(datos.datosActividad.calificaciom_servicio[0]['Id_Divulgacion']);//Material Utulizado
-		 $('select[name="escenarioMontaje"]').val(datos.datosActividad.calificaciom_servicio[0]['Id_Montaje']);//Conocimiento adquirido
-		 $('#imagenVer1').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen1']);//Conocimiento adquirido attr
-		 $('#imagenVer2').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen2']);//Conocimiento adquirido attr
-		 $('#imagenVer3').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen3']);//Conocimiento adquirido attr
-		 $('#imagenVer4').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen4']);//Conocimiento adquirido attr
-		 $('#file1').attr('href','public/Img/EvidenciaArchivo/'+datos.datosActividad.calificaciom_servicio[0]['Url_Acta']);//Conocimiento adquirido attr
-		 $('#file2').attr('href','public/Img/EvidenciaArchivo/'+datos.datosActividad.calificaciom_servicio[0]['Url_Asistencia']);//Conocimiento adquirido attr
+	//	 if(datos.datosActividad.calificaciom_servicio.length>0){
+			 $('input[name="nombreRepresentante"]').val(datos.datosActividad.calificaciom_servicio[0]['Nombre_Representante']);
+			 $('input[name="telefonoRepresentante"]').val(datos.datosActividad.calificaciom_servicio[0]['Telefono']);
+			 $('select[name="puntualidad"]').val(datos.datosActividad.calificaciom_servicio[0]['Id_Puntualidad']);//Manejo del tema
+			 $('select[name="divulgacion"]').val(datos.datosActividad.calificaciom_servicio[0]['Id_Divulgacion']);//Material Utulizado
+			 $('select[name="escenarioMontaje"]').val(datos.datosActividad.calificaciom_servicio[0]['Id_Montaje']);//Conocimiento adquirido
+			 $('#imagenVer1').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen1']);//Conocimiento adquirido attr
+			 $('#imagenVer2').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen2']);//Conocimiento adquirido attr
+			 $('#imagenVer3').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen3']);//Conocimiento adquirido attr
+			 $('#imagenVer4').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen4']);//Conocimiento adquirido attr
+			 $('#file1').attr('href','public/Img/EvidenciaArchivo/'+datos.datosActividad.calificaciom_servicio[0]['Url_Acta']);//Conocimiento adquirido attr
+			 $('#file2').attr('href','public/Img/EvidenciaArchivo/'+datos.datosActividad.calificaciom_servicio[0]['Url_Asistencia']);//Conocimiento adquirido attr
+	//	 }
 		 $('#modal_ejecucion').modal('show');
     };
 
@@ -601,10 +608,18 @@ $(function()
 
 
 
-    $('#Cancelar_').on('click', function(e){
-                var id= $('input[name="Id_Actividad"]').val();
+    $('#Cancelar_').on('click', function(e){    	
+    	Observacion = $('textarea[name="Observacion_Cancela"]').val();
+    	if(!Observacion || Observacion.length <= 0){
+    		$('textarea[name="Observacion_Cancela"]').css({ 'border-color': '#B94A48' });    
+        	$("#Observacion_CancelaL").css({ 'color': '#B94A48' });    
+        	$("#Observacion_Cancela").focus();
+    		return false;
+
+    	}else{
+    		var id= $('input[name="Id_Actividad"]').val();
     			$.get(
-		            URL+'/service/cancelar/'+id,
+		            URL+'/service/cancelar/'+id+'/'+Observacion,
 		            {},
 		            function(data)
 		            {   
@@ -619,6 +634,7 @@ $(function()
 		        );
 
 		        e.preventDefault();
+	    }	                
     });
 
 
@@ -1031,6 +1047,26 @@ $(function()
 		    }
 		}
 	}
+
+	function ChangeLocalidad(id_localidad, seleccion){
+            html = '';            
+            html += '<option value="">Seleccionar</option>';
+            html += '<option value="Otro">OTRO</option>';
+            $("#Parque").append('<option value="Otro">Otro</option>');
+            $.get(URL+'/service/getParques/'+id_localidad, {}, function(data){ 
+                $.each(data,  function(i, e){
+                    html += '<option value="'+e.Id+'"">'+e.Nombre+' '+e['Id_IDRD']+'</option>';
+                });         
+                $("#Parque").html(html).selectpicker('refresh');
+            }).done(function(){
+                $('select[name="Parque"]').selectpicker('val',$('input[name="ParqueX"]').val());
+            });
+        }
+
+
+    $("#Id_Localidad").on('change', function(e){
+       ChangeLocalidad($("#Id_Localidad").val(), $("#IdLocalidad").val()); 
+    });
 
 
 

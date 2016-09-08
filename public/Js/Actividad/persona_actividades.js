@@ -165,10 +165,6 @@ $(function(){
                     $("#mensaje-incorrectoB").fadeIn();
                     $('#mensaje-incorrectoB').focus();            
                 }
-            },
-            error:function(xhr){
-                console.log('err')
-                console.log(xhr);
             }
         });
     }

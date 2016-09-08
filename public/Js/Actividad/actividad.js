@@ -1,29 +1,55 @@
 $(function()
 {
+
 	var URL = $('#main_actividad').data('url');
 	var $personas_actuales = $('#personas').html();
 
 
 vector_datos_actividades = new Array();
 vector_acompañantes = new Array();
-	
+	$('#radio_kit .btn').on('click', function(e)
+	{
+		$('input[name="Kit"]').removeAttr('checked');
+		$(this).find('input[name="Kit"]').attr('checked', 'checked');
+	});
+
 	$('#agregar_actividad').on('click', function(e)
 	{
 			var id_eje=$('select[name="Id_Eje"]').val();
 			var id_tematica=$('select[name="Id_Tematica"]').val();
 			var id_act = $('select[name="d_Actividad"]').val();
 			var otro_actividad = $('input[name="otro_Actividad"]').val();
-			
+			var Kit = $('input[name="Kit"]:checked').val();
+
+			var Cantidad_Kit = $('input[name="Cantidad_Kit"]').val();	
+
+
 			if(id_eje===''){
 				$('#alert_actividad').html('<div class="alert alert-dismissible alert-danger" ><strong>Error!</strong> Debe seleccionar un eje para poder realizar el registro.</div>');
 				$('#mensaje_actividad').show(60);
 				$('#mensaje_actividad').delay(2500).hide(600);
 
 			}else{
-				$('#alert_actividad').html('<div class="alert alert-dismissible alert-success" ><strong>Exito!</strong> Dato de la actividad registrado con exito. </div>');
+				if(Kit==='' || !Kit){
+					$('#alert_actividad').html('<div class="alert alert-dismissible alert-danger" ><strong>Error!</strong> Debe seleccionar una opción de entrega de Kit para realizar el registro.</div>');
+					$('#mensaje_actividad').show(60);
+					$('#mensaje_actividad').delay(2500).hide(600);
+					return false;
+				}	
+				if(Kit === 0){
+					Cantidad_Kit = 0;
+				}			
+				if( Kit==1 && Cantidad_Kit === ''){
+					$('#alert_actividad').html('<div class="alert alert-dismissible alert-danger" ><strong>Error!</strong> Debe agregar una cantidad de Kit´s para realizar el registro.</div>');
+					$('#mensaje_actividad').show(60);
+					$('#mensaje_actividad').delay(2500).hide(600);
+					return false;
+				}
+				
+				$('#alert_actividad').html('<div class="alert alert-dismissible alert-success" ><strong>Exito!</strong> Dato de la actividad registrado con éxito. </div>');
 				$('#mensaje_actividad').show(60);
 				$('#mensaje_actividad').delay(1500).hide(600);
-				vector_datos_actividades.push({"id_eje": id_eje, "id_tematica": id_tematica, "id_act": id_act,"otro_actividad":otro_actividad});
+				vector_datos_actividades.push({"id_eje": id_eje, "id_tematica": id_tematica, "id_act": id_act,"otro_actividad":otro_actividad, 'Kit':Kit, 'Cantidad_Kit':Cantidad_Kit});
 			}
 			return false;
 	});
@@ -33,7 +59,6 @@ vector_acompañantes = new Array();
 	$('#ver_datos_actividad').on('click', function(e)
 	{
 			var html = '';
-			//console.log(vector_datos_actividades);
 					if(vector_datos_actividades.length > 0)
 					{
 						var num=1;
@@ -349,6 +374,8 @@ vector_acompañantes = new Array();
 		        	case 'Persona_Contacto':
 		        	case 'Roll_Comunidad':
 		        	case 'Telefono':
+		        	/*case 'Kit':
+		        	case 'Cantidad_Kit':*/
 		        		selector = 'input';
 		        	break;
 
@@ -371,8 +398,22 @@ vector_acompañantes = new Array();
      }); 
 
 
-	
+	 function ChangeLocalidad(id_localidad, seleccion){
+
+            html = '';            
+            html += '<option value="">Seleccionar</option>';
+            html += '<option value="Otro">OTRO</option>';
+            $("#Parque").append('<option value="Otro">Otro</option>');
+            $.get(URL+'/service/getParques/'+id_localidad, {}, function(data){ 
+                $.each(data,  function(i, e){
+                    html += '<option value="'+e.Id+'"">'+e.Nombre+' '+e['Id_IDRD']+'</option>';
+                });         
+                $("#Parque").html(html).selectpicker('refresh');
+            });
+        }
 
 
-
+    $("#Id_Localidad").on('change', function(e){
+       ChangeLocalidad($("#Id_Localidad").val(), $("#IdLocalidad").val()); 
+    });
 });
