@@ -55,7 +55,7 @@ Route::post('/aprobar/service/ModificarActividad/', 'aprobacion_actividades@proc
 Route::get('/aprobar/service/activar/{id_actividad}', 'aprobacion_actividades@activarProgramacion');
 Route::get('/aprobar/service/aprobarEjecucion/{id_actividad}', 'aprobacion_actividades@aprobarEjecucion');
 Route::get('/aprobar/service/cancelarEjecucion/{id_actividad}', 'aprobacion_actividades@cancelarEjecucion');
-Route::get('/aprobar/service/cancelar/{id_actividad}', 'aprobacion_actividades@cancelarProgramacion');
+Route::get('/aprobar/service/cancelar/{id_actividad}/{Observacion_Cancela}', 'aprobacion_actividades@cancelarProgramacion');
 
 Route::get('/asignarTipoPersona', 'ConfiguracionActividadController@asignarTipoPersona');
 Route::get('/tipo_modulo', 'ConfiguracionActividadController@tipoModulo');
@@ -65,7 +65,8 @@ Route::get('/actividadesModulo', 'ConfiguracionActividadController@moduloActivid
 Route::get('/actividadesPersona/{id}', 'ConfiguracionActividadController@personaActividades');
 Route::post('PersonasActividadesProceso', 'ConfiguracionActividadController@PersonasActividadesProceso');
 
-
+Route::get('/actividad/service/getParques/{id_localidad}', 'Actividadcontroller@GetParques');
+Route::get('/aprobar/service/getParques/{id_localidad}', 'Actividadcontroller@GetParques');
 
 Route::group(['middleware' => ['web']], function () {
 

@@ -133,7 +133,7 @@ $(function()
 								            '<td class="text-center"><h4>'+e['Id_Actividad_Gestor']+'<h4></td>',
 								            '<td>'+e.persona['Primer_Apellido']+' '+e.persona['Segundo_Apellido']+' '+e.persona['Primer_Nombre']+' '+e.persona['Segundo_Nombre']+'</td>',
 								            '<td>'+e['Fecha_Ejecucion']+'<br>Hora: '+e['Hora_Incial']+'</td>',
-								            '<td>'+e.localidad['Nombre_Localidad']+' '+e['Estado']+' - '+e['Estado_Ejecucion']+'</td>',
+								            '<td>'+e.localidad['Nombre_Localidad']+'</td>',
 								            '<td>'+Nomparque+'</td>',
 								            '<td style="text-align:center "><center><button type="button" data-rel="'+e['Id_Actividad_Gestor']+'" data-funcion="ver_inf" class="'+clase_P+' btn-sm" ><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> ver</button><div id="espera'+e['Id_Actividad_Gestor']+'"></div></td>',
 								            '<td>'+estado_programacion+'</td>',
@@ -146,6 +146,7 @@ $(function()
 								}
 							}
 							$("#espera").html("");
+
 					},
 					'json'
 				);
@@ -204,7 +205,6 @@ $(function()
 
     var actividad_datos_eje = function(datos)
     {
-        //console.log(datos);
         $('input[name="Id_Actividad"]').val(datos.datosActividad['Id_Actividad_Gestor']);
         $('input[name="Id_Localidad"]').val(datos.datosActividad.localidad['Nombre_Localidad']);
         $('input[name="Id_Responsable"]').val(datos.datosActividad.persona['Primer_Apellido']+" "+datos.datosActividad.persona['Segundo_Apellido']+" "+datos.datosActividad.persona['Primer_Nombre']+" "+datos.datosActividad.persona['Segundo_Nombre']);
@@ -229,7 +229,6 @@ $(function()
         var id = $(this).data('rel'); 
         $("#espera_eje"+id).html("<img src='public/Img/loading.gif'/>");
         
-        //Limpiar form
         vector_datos_ejecucion.length=0;
         vector_novedades.length=0;
         $('#registros_ejecucion_tabla').html('');
@@ -258,7 +257,7 @@ $(function()
 
     var actividad_ejecucion = function(datos)
     {
-    	//console.log(datos);
+    	
     	$('input[name="Id_Actividad_ejecucion"]').val(datos.datosActividad['Id_Actividad_Gestor']);
   		$('#titulo').text(datos.datosActividad['Id_Actividad_Gestor']);
 
@@ -266,7 +265,10 @@ $(function()
         var fechaActual = new Date(f.getFullYear()+ "," + (f.getMonth() +1) + "," + f.getDate());
         var tmp = datos.datosActividad['Fecha_Ejecucion'].split('-');
         var F_ejecucion = new Date(tmp[0]+ "," + tmp[1]+ "," + tmp[2]);
+<<<<<<< HEAD
 
+=======
+>>>>>>> CarolinaRojas
         if(datos.datosActividad['Estado']==2 && F_ejecucion<=fechaActual){
             $("#agregar_datos_ejecucion").show();
             $("#agregar_datos_novedades").show();
@@ -340,6 +342,7 @@ $(function()
 	        num1++;
 		 });
 		 $('#registros_novedad').html(fila1);
+<<<<<<< HEAD
 
 		 
 		if(datos.datosActividad.calificaciom_servicio.length>0){
@@ -357,6 +360,23 @@ $(function()
 		}
 		 $('#modal_ejecucion').modal('show');
 
+=======
+		 
+		 if(datos.datosActividad.calificaciom_servicio.length>0){
+			 $('input[name="nombreRepresentante"]').val(datos.datosActividad.calificaciom_servicio[0]['Nombre_Representante']);
+			 $('input[name="telefonoRepresentante"]').val(datos.datosActividad.calificaciom_servicio[0]['Telefono']);
+			 $('select[name="puntualidad"]').val(datos.datosActividad.calificaciom_servicio[0]['Id_Puntualidad']);//Manejo del tema
+			 $('select[name="divulgacion"]').val(datos.datosActividad.calificaciom_servicio[0]['Id_Divulgacion']);//Material Utulizado
+			 $('select[name="escenarioMontaje"]').val(datos.datosActividad.calificaciom_servicio[0]['Id_Montaje']);//Conocimiento adquirido
+			 $('#imagenVer1').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen1']);//Conocimiento adquirido attr
+			 $('#imagenVer2').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen2']);//Conocimiento adquirido attr
+			 $('#imagenVer3').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen3']);//Conocimiento adquirido attr
+			 $('#imagenVer4').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen4']);//Conocimiento adquirido attr
+			 $('#file1').attr('href','public/Img/EvidenciaArchivo/'+datos.datosActividad.calificaciom_servicio[0]['Url_Acta']);//Conocimiento adquirido attr
+			 $('#file2').attr('href','public/Img/EvidenciaArchivo/'+datos.datosActividad.calificaciom_servicio[0]['Url_Asistencia']);//Conocimiento adquirido attr			 
+		}
+		$('#modal_ejecucion').modal('show');
+>>>>>>> CarolinaRojas
     };
 
 

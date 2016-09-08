@@ -142,7 +142,10 @@ class ConfiguracionActividadController extends Controller
 				'eje_id'=>$obj->id_eje,
 				'tematica_id'=>$obj->id_tematica,
 				'actividad_id'=>$obj->id_act,
-				'Otro'=>$obj->otro_actividad]);
+				'Otro'=>$obj->otro_actividad,
+				'Kit'=>$obj->Kit,
+				'Cantidad_Kit'=>$obj->Cantidad_Kit,
+				]);
 		}
 
 		

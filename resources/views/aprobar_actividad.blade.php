@@ -185,8 +185,9 @@
 										      		<fieldset>
 										        		<div class="col-xs-12 col-md-6">
 										        			<div class="form-group">
+										        				<input type="hidden" name="IdLocalidad" id="IdLocalidad" value="">
 										        				<label class="control-label" for="Id_TipoDocumento">* Localidad</label>
-										        				<select name="Id_Localidad" id="" class="form-control">
+										        				<select name="Id_Localidad" id="Id_Localidad" class="form-control">
 										        					<option value="">Seleccionar</option>
 										        					@foreach($localidad as $localidad)
 										        						<option value="{{ $localidad['Id_Localidad'] }}">{{ $localidad['Nombre_Localidad'] }}</option>
@@ -196,13 +197,11 @@
 										        		</div>
 										        		<div class="col-xs-12 col-md-6">
 										        			<div class="form-group">
+										        				<input type="hidden" name="ParqueX" id="ParqueX" value="">
 										        				<label class="control-label" for="Cedula">* Parque </label>
-										        				<select name="Parque" id="" class="selectpicker form-control" data-live-search="true">
+										        				<select name="Parque" id="Parque" class="selectpicker form-control" data-live-search="true">
 										        					<option value="">Seleccionar</option>
-										        					<option value="Otro">OTRO</option>
-										        					@foreach($tipoparque->parques as $parque)
-										        						<option value="{{ $parque['Id'] }}">{{ $parque['Nombre'].'   '.$parque['Id_IDRD'] }}</option>
-										        					@endforeach
+										        					
 										        				</select>
 										        			</div>
 										        		</div>
@@ -292,7 +291,22 @@
 						  </div>
 						</div>
 						<br>
-						
+						<div class="panel panel-primary">
+						  <div class="panel-heading">
+						    <h3 class="panel-title">PASO 5: Cancelación</h3>
+						  </div>
+						  <div class="panel-body">						    				
+					      		<fieldset>
+					        		<div class="col-xs-12 col-md-6">
+					        			<div class="form-group">
+					        				<label class="control-label" id="Observacion_CancelaL">* Observación de la cancelación</label>
+					        				<textarea class="form-control" rows="3" name="Observacion_Cancela"></textarea>
+					        			</div>
+					        		</div>					        		
+					       		</fieldset>										    
+						  </div>
+						</div>
+						<br>
 						<div class="form-group">
 							<div id="alerta_actividad_error" class="col-xs-12" style="display:none;">
 								<div class="alert alert-danger alert-dismissible" role="alert">
