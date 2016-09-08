@@ -217,16 +217,18 @@ $(function()
 				$('#Aprobar_').show();		//Ejecucion
 				$('#Modificar_').show();	//Ejecucion
 		}
+		$('input[name="IdLocalidad"]').val(datos.datosActividad['Localidad']);
 
         $("#titulo_id").text(datos.datosActividad['Id_Actividad_Gestor']);
         $('input[name="Id_Actividad"]').val(datos.datosActividad['Id_Actividad_Gestor']);
-        $('select[name="Id_Localidad"]').val(datos.datosActividad['Localidad']);
+        $('select[name="Id_Localidad"]').val(datos.datosActividad['Localidad']).change();
         $('select[name="Id_Responsable"]').val(datos.datosActividad['Id_Responsable']);
         $('input[name="Hora_Inicio"]').val(datos.datosActividad['Hora_Incial']);
         $('input[name="Hora_Fin"]').val(datos.datosActividad['Hora_Final']);
         $('input[name="Fecha_Ejecucion"]').val(datos.datosActividad['Fecha_Ejecucion']);
         if(datos.datosActividad['Parque']==0){$parque="Otro"}else{$parque=datos.datosActividad['Parque'];}
-        $('select[name="Parque"]').selectpicker('val',$parque);
+        //$('select[name="Parque"]').selectpicker('val',$parque);
+        $('input[name="ParqueX"]').val($parque);
         $('input[name="otro_Parque"]').val(datos.datosActividad['Otro']);
         $('input[name="Caracteristica_Lugar"]').val(datos.datosActividad['Caracteristica_Lugar']);
         $('textarea[name="Caracteristica_poblacion"]').val(datos.datosActividad['Caracteristica_Poblacion']);
@@ -1045,6 +1047,26 @@ $(function()
 		    }
 		}
 	}
+
+	function ChangeLocalidad(id_localidad, seleccion){
+            html = '';            
+            html += '<option value="">Seleccionar</option>';
+            html += '<option value="Otro">OTRO</option>';
+            $("#Parque").append('<option value="Otro">Otro</option>');
+            $.get(URL+'/service/getParques/'+id_localidad, {}, function(data){ 
+                $.each(data,  function(i, e){
+                    html += '<option value="'+e.Id+'"">'+e.Nombre+' '+e['Id_IDRD']+'</option>';
+                });         
+                $("#Parque").html(html).selectpicker('refresh');
+            }).done(function(){
+                $('select[name="Parque"]').selectpicker('val',$('input[name="ParqueX"]').val());
+            });
+        }
+
+
+    $("#Id_Localidad").on('change', function(e){
+       ChangeLocalidad($("#Id_Localidad").val(), $("#IdLocalidad").val()); 
+    });
 
 
 

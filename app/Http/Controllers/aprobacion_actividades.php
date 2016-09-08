@@ -10,6 +10,7 @@ use App\ActividadGestor;
 use App\Ejecucion;
 use App\Novedad;
 
+
 class aprobacion_actividades extends Controller
 {
     //
@@ -178,4 +179,6 @@ class aprobacion_actividades extends Controller
 		
 		return $model;
 	}
+
+	
 }

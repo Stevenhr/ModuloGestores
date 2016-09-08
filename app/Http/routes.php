@@ -74,6 +74,7 @@ Route::get('/actividadesPersona/{id}', 'ConfiguracionActividadController@persona
 Route::post('PersonasActividadesProceso', 'ConfiguracionActividadController@PersonasActividadesProceso');
 
 Route::get('/actividad/service/getParques/{id_localidad}', 'Actividadcontroller@GetParques');
+Route::get('/aprobar/service/getParques/{id_localidad}', 'Actividadcontroller@GetParques');
 
 Route::group(['middleware' => ['web']], function () {
 

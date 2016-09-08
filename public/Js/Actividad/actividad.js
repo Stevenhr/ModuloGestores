@@ -45,7 +45,7 @@ vector_acompañantes = new Array();
 					$('#mensaje_actividad').delay(2500).hide(600);
 					return false;
 				}
-				console.log(Kit +'----'+Cantidad_Kit);
+				
 				$('#alert_actividad').html('<div class="alert alert-dismissible alert-success" ><strong>Exito!</strong> Dato de la actividad registrado con éxito. </div>');
 				$('#mensaje_actividad').show(60);
 				$('#mensaje_actividad').delay(1500).hide(600);

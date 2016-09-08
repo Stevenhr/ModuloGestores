@@ -16,7 +16,7 @@
           <link rel="stylesheet" href="{{ asset('public/Css/jquery-ui.css') }}" media="screen">    
           <link rel="stylesheet" href="{{ asset('public/Css/bootstrap.min.css') }}" media="screen">    
           <link rel="stylesheet" href="{{ asset('public/Css/sticky-footer.css') }}" media="screen">   
-          <link rel="icon" type="image/png" href="{{ asset('public/Img/Icono.png') }}" /> 
+          <link rel="icon" type="image/png" href="{{ asset('public/Img/Icono.png') }}" />
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
           <!-- Data Table-->
           <link rel="stylesheet" href="{{ asset('public/Css/css_datatable/jquery.dataTables.min.css') }}" media="screen">

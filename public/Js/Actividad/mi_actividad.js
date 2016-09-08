@@ -264,7 +264,6 @@ $(function()
             html += '<option value="Otro">OTRO</option>';
             $("#Parque").append('<option value="Otro">Otro</option>');
             $.get(URL+'/service/getParques/'+id_localidad, {}, function(data){ 
-                console.log(data);
                 $.each(data,  function(i, e){
                     html += '<option value="'+e.Id+'"">'+e.Nombre+' '+e['Id_IDRD']+'</option>';
                 });         
