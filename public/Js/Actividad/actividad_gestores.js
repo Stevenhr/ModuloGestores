@@ -146,6 +146,7 @@ $(function()
 								}
 							}
 							$("#espera").html("");
+
 					},
 					'json'
 				);
@@ -246,7 +247,7 @@ $(function()
             {   
                 if(data)
                 {
-                	$("#espera_eje"+id).html("fkdñfksñdlkfñlsdklñfksñdkflñk");
+                	$("#espera_eje"+id).html("");
                     actividad_ejecucion(data);
                 }
             },
