@@ -17,7 +17,6 @@ use App\ListaNovedad;
 use App\Ejecucion;
 use App\Novedad;
 
-
 class mis_actividades_promotores extends Controller
 {
     //
