@@ -97,7 +97,7 @@ vector_acompañantes = new Array();
 	$('#asignar_acompañante').on('click', function(e)
 	{
 			var html = '';
-			var id=50;
+			var id=46;
 			var check="";
 
 			$.get(
