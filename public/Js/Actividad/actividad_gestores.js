@@ -269,6 +269,7 @@ $(function()
             $("#agregar_datos_ejecucion").show();
             $("#agregar_datos_novedades").show();
             $("#agregar_ejecucion").show();
+            $("#Cancelar_E").show();
             //$( "#Cerrar_Act" ).removeClass( "btn btn-success" ).addClass( "btn btn-default" );            
         }else{
             $("#agregar_datos_ejecucion").hide();
@@ -280,6 +281,7 @@ $(function()
 			$("#agregar_datos_ejecucion").hide();
             $("#agregar_datos_novedades").hide();
             $("#agregar_ejecucion").hide();	
+            $("#Cancelar_E").hide();
 		}
 
 		$('#table_ejecucion_agregada').show();
@@ -305,38 +307,91 @@ $(function()
   		var TotalHombreT=0;
   		var Total=0;
 
-  		$.each(datos.Ejecucion, function(i, e){		
-  		    TotalMujer=parseInt(e['F_0a5'])+parseInt(e['F_6a12'])+parseInt(e['F_13a17'])+parseInt(e['F_18a26'])+parseInt(e['F_27a59'])+parseInt(e['F_60']);
-  		    TotalHombre=parseInt(e['M_0a5'])+parseInt(e['M_6a12'])+parseInt(e['M_13a17'])+parseInt(e['M_18a26'])+parseInt(e['M_27a59'])+parseInt(e['M_60']);
-			TotalParcial=TotalMujer+TotalHombre;
-			T_F_0a5+=parseInt(e['F_0a5']);
-			T_M_0a5+=parseInt(e['M_0a5']);
-			T_F_6a12+=parseInt(e['F_6a12']);
-			T_M_6a12+=parseInt(e['M_6a12']);
-			T_F_13a17+=parseInt(e['F_13a17']);
-			T_M_13a17+=parseInt(e['M_13a17']);
-			T_F_18a26+=parseInt(e['F_18a26']);
-			T_M_18a26+=parseInt(e['M_18a26']);
-			T_F_27a59+=parseInt(e['F_27a59']);
-			T_M_27a59+=parseInt(e['M_27a59']);
-			T_F_60+=parseInt(e['F_60']);
-			T_M_60+=parseInt(e['M_60']);
-			fila +="<tr><th scope='row'>"+num+"</th><td>"+e['Comunidad']+"</td><td>"+e.localidad['Nombre_Localidad']+"</td><td>"+e.tipo_entidad['Nombre']+"</td><td>"+e.tipo_persona['Nombre']+"</td><td>"+e.condicion['Nombre']+"</td><td>"+e.situacion['Nombre']+"</td><td>"+e['F_0a5']+"</td><td>"+e['M_0a5']+"</td><td>"+e['F_6a12']+"</td><td>"+e['M_6a12']+"</td><td>"+e['F_13a17']+"</td><td>"+e['M_13a17']+"</td><td>"+e['F_18a26']+"</td><td>"+e['M_18a26']+"</td><td>"+e['F_27a59']+"</td><td>"+e['M_27a59']+"</td><td>"+e['F_60']+"</td><td>"+e['M_60']+"</td><td>"+TotalMujer+"</td><td>"+TotalHombre+"</td><td>"+TotalParcial+"</td></tr>";								            
-	        TotalMujerT+=TotalMujer;
-	        TotalHombreT+=TotalHombre;
-	        num++;
-		});
-  		 Total=TotalHombreT+TotalMujerT;
-		 fila +="<tr><th scope='row'></th><td></td><td></td><td></td><td></td><td></td><td></td><td>"+T_F_0a5+"</td><td>"+T_M_0a5+"</td><td>"+T_F_6a12+"</td><td>"+T_M_6a12+"</td><td>"+T_F_13a17+"</td><td>"+T_M_13a17+"</td><td>"+T_F_18a26+"</td><td>"+T_M_18a26+"</td><td>"+T_F_27a59+"</td><td>"+T_M_27a59+"</td><td>"+T_F_60+"</td><td>"+T_M_60+"</td><td>"+TotalMujerT+"</td><td>"+TotalHombreT+"</td><td>"+Total+"</td></tr>";
-		 $('#registros_ejecucion_tabla').html(fila);	
+  		$('textarea[name="Observacion_Cancela"]').val(datos.datosActividad['Observacion_Cancela_Ejecucion']);
 
-		 $('#table_novedad_agregada').show();
-		 var num1=1;
-		 var fila1="";
-		 $.each(datos.Novedad, function(i, e){		
-			fila1 +="<tr><th scope='row'>"+num1+"</th><td>"+e['Id_novedad']+"</td><td>"+e['Causa']+"</td><td>"+e['Accion']+"</td></tr>";								            
-	        num1++;
-		 });
+		if(datos.Ejecucion.length > 0){
+			$.each(datos.Ejecucion, function(i, e){
+
+	  		    TotalMujer=parseInt(e['F_0a5'])+parseInt(e['F_6a12'])+parseInt(e['F_13a17'])+parseInt(e['F_18a26'])+parseInt(e['F_27a59'])+parseInt(e['F_60']);
+	  		    TotalHombre=parseInt(e['M_0a5'])+parseInt(e['M_6a12'])+parseInt(e['M_13a17'])+parseInt(e['M_18a26'])+parseInt(e['M_27a59'])+parseInt(e['M_60']);
+				TotalParcial=TotalMujer+TotalHombre;
+				T_F_0a5+=parseInt(e['F_0a5']);
+				T_M_0a5+=parseInt(e['M_0a5']);
+				T_F_6a12+=parseInt(e['F_6a12']);
+				T_M_6a12+=parseInt(e['M_6a12']);
+				T_F_13a17+=parseInt(e['F_13a17']);
+				T_M_13a17+=parseInt(e['M_13a17']);
+				T_F_18a26+=parseInt(e['F_18a26']);
+				T_M_18a26+=parseInt(e['M_18a26']);
+				T_F_27a59+=parseInt(e['F_27a59']);
+				T_M_27a59+=parseInt(e['M_27a59']);
+				T_F_60+=parseInt(e['F_60']);
+				T_M_60+=parseInt(e['M_60']);
+				fila +="<tr><th scope='row'>"+num+"</th><td>"+e['Comunidad']+"</td><td>"+e.localidad['Nombre_Localidad']+"</td><td>"+e.tipo_entidad['Nombre']+"</td><td>"+e.tipo_persona['Nombre']+"</td><td>"+e.condicion['Nombre']+"</td><td>"+e.situacion['Nombre']+"</td><td>"+e['F_0a5']+"</td><td>"+e['M_0a5']+"</td><td>"+e['F_6a12']+"</td><td>"+e['M_6a12']+"</td><td>"+e['F_13a17']+"</td><td>"+e['M_13a17']+"</td><td>"+e['F_18a26']+"</td><td>"+e['M_18a26']+"</td><td>"+e['F_27a59']+"</td><td>"+e['M_27a59']+"</td><td>"+e['F_60']+"</td><td>"+e['M_60']+"</td><td>"+TotalMujer+"</td><td>"+TotalHombre+"</td><td>"+TotalParcial+"</td><td class='text-center'><button type='button' data-rel="+e["id"]+" data-funcion='eliminar_conteo' class='eliminar_dato_actividad'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></td></tr>";								            
+		        TotalMujerT+=TotalMujer;
+		        TotalHombreT+=TotalHombre;
+		        num++;
+
+		        /************************/
+		        vector_datos_ejecucion.push({
+					"Id_Actividad_ejecucion": e["id"],
+					"Inst_grupo_comu": e["Comunidad"],
+					"Localidad_eje": e['Localidad'],
+					"Tipo_entidad": e['TipoEntidad'],
+					"Tipo_eje": e['Tipo'],
+					"Condicion": e['Condicion'],
+					"Situacion": e['Situacion'],
+					"M_0_5": e['M_0a5'],
+					"F_0_5": e["F_0a5"],
+					"M_6_12": e['M_6a12'],
+					"F_6_12": e['F_6a12'],
+					"M_13_17": e["M_13a17"],
+					"F_13_17": e["F_13a17"],
+					"M_18_26": e['M_18a26'],
+					"F_18_26": e['F_18a26'],
+					"M_27_59": e['M_27a59'],
+					"F_27_59": e['F_27a59'],
+					"M_60": e["M_60"],
+					"F_60": e["F_60"],
+					"N_Localidad_eje": e.localidad['Nombre_Localidad'],
+					"N_Tipo_entidad": e.tipo_entidad['Nombre'],
+					"N_Tipo_eje": e.tipo_persona['Nombre'],
+					"N_Condicion": e.condicion['Nombre'],
+					"N_Situacion": e.situacion['Nombre'],
+				});
+		        /************************/
+
+			});
+
+	  		 Total=TotalHombreT+TotalMujerT;
+			 fila +="<tr><th scope='row'></th><td></td><td></td><td></td><td></td><td></td><td></td><td>"+T_F_0a5+"</td><td>"+T_M_0a5+"</td><td>"+T_F_6a12+"</td><td>"+T_M_6a12+"</td><td>"+T_F_13a17+"</td><td>"+T_M_13a17+"</td><td>"+T_F_18a26+"</td><td>"+T_M_18a26+"</td><td>"+T_F_27a59+"</td><td>"+T_M_27a59+"</td><td>"+T_F_60+"</td><td>"+T_M_60+"</td><td>"+TotalMujerT+"</td><td>"+TotalHombreT+"</td><td>"+Total+"</td></tr>";
+			 $('#registros_ejecucion_tabla').html(fila);	
+
+			 $('#table_novedad_agregada').show();
+			 var num1=1;
+			 var fila1="";
+			 var Id_Actividad_ejecucion=$('input[name="Id_Actividad_ejecucion"]').val();
+			 //console.log(datos.Novedad);
+			 $.each(datos.Novedad, function(i, e){		
+				fila1 +="<tr><th scope='row'>"+num1+"</th><td>"+e.lista_novedad['Nombre']+"</td><td>"+e['Causa']+"</td><td>"+e['Accion']+"</td><td class='text-center'><button type='button' data-rel='"+e["Id"]+"' data-funcion='eliminar_novedad' class='eliminar_dato_actividad'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></td></tr>";								            
+		        num1++;
+
+		        /**************************/
+		        vector_novedades.push({
+					"Id_Actividad_ejecucion": Id_Actividad_ejecucion,
+					"Id_Requisito": e["Id_novedad"],
+					"causa": e["Causa"],
+					"accion": e["Accion"],
+					"N_Requisito": e.lista_novedad['Nombre'],
+				});
+		        /**************************/
+			 });
+		}
+		else{
+			 $('#table_ejecucion_agregada').hide();
+		}
+console.log(vector_novedades);
+  		
 		 $('#registros_novedad').html(fila1);
 		 
 		 if(datos.datosActividad.calificaciom_servicio.length>0){
@@ -415,10 +470,13 @@ $(function()
 									"M_27_59": M_27_59,
 									"F_27_59": F_27_59,
 									"M_60": M_60,
-									"F_60": F_60
+									"F_60": F_60,
+									"N_Localidad_eje": $("#Localidad_eje option:selected").text(),
+									"N_Tipo_entidad": $("#Tipo_entidad option:selected").text(),
+									"N_Tipo_eje": $("#Tipo_eje option:selected").text(),
+									"N_Condicion": $("#Condicion option:selected").text(),
+									"N_Situacion": $("#Situacion option:selected").text(),
 								});
-
-								//console.log(vector_datos_ejecucion);
 
 								$('#ejecucion_agregada').show();
 								$('#ejecucion_agregada').html('Se registro los datos de la ejecución.');
@@ -430,7 +488,6 @@ $(function()
 					},
 					'json'
 				);
-
             
 			return false;
 		
@@ -482,10 +539,8 @@ $(function()
 			var html = '';
 					if(vector_datos_ejecucion.length > 0)
 					{
-							//console.log(vector_datos_ejecucion);
 							var num=1;
 							$('.tablaEjecucion').empty();
-							//console.log(datos);
 					  		var fila="";
 					  		var TotalMujer=0;
 					  		var TotalHombre=0;
@@ -535,14 +590,17 @@ $(function()
 								T_M_27a59+=parseInt(e['M_27_59']);
 								T_F_60+=parseInt(e['F_60']);
 								T_M_60+=parseInt(e['M_60']);
-								fila +="<tr><th scope='row'>"+num+"</th><td>"+e['Inst_grupo_comu']+"</td><td>"+e['Localidad_eje']+"</td><td>"+e['Tipo_entidad']+"</td><td>"+e['Tipo_eje']+"</td><td>"+e['Condicion']+"</td><td>"+e['Situacion']+"</td><td>"+e['F_0_5']+"</td><td>"+e['M_0_5']+"</td><td>"+e['F_6_12']+"</td><td>"+e['M_6_12']+"</td><td>"+e['F_13_17']+"</td><td>"+e['M_13_17']+"</td><td>"+e['F_18_26']+"</td><td>"+e['M_18_26']+"</td><td>"+e['F_27_59']+"</td><td>"+e['M_27_59']+"</td><td>"+e['F_60']+"</td><td>"+e['M_60']+"</td><td>"+TotalMujer+"</td><td>"+TotalHombre+"</td><td>"+TotalParcial+"</td><td class='text-center'><button type='button' data-rel="+i+" data-funcion='eliminar_conteo' class='eliminar_dato_actividad'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></td></tr>";								            
+								fila +="<tr><th scope='row'>"+num+"</th><td>"+e['Inst_grupo_comu']+"</td><td>"+e['N_Localidad_eje']+"</td><td>"+e['N_Tipo_entidad']+"</td><td>"+e['N_Tipo_eje']+"</td><td>"+e['N_Condicion']+"</td><td>"+e['N_Situacion']+"</td><td>"+e['F_0_5']+"</td><td>"+e['M_0_5']+"</td><td>"+e['F_6_12']+"</td><td>"+e['M_6_12']+"</td><td>"+e['F_13_17']+"</td><td>"+e['M_13_17']+"</td><td>"+e['F_18_26']+"</td><td>"+e['M_18_26']+"</td><td>"+e['F_27_59']+"</td><td>"+e['M_27_59']+"</td><td>"+e['F_60']+"</td><td>"+e['M_60']+"</td><td>"+TotalMujer+"</td><td>"+TotalHombre+"</td><td>"+TotalParcial+"</td><td class='text-center'><button type='button' data-rel="+i+" data-funcion='eliminar_conteo' class='eliminar_dato_actividad'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></td></tr>";								            
 						        TotalMujerT+=parseInt(TotalMujer);
 						        TotalHombreT+=parseInt(TotalHombre);
 						        num++;
 							});
+
 					  		 Total=parseInt(TotalHombreT)+parseInt(TotalMujerT);
 							 fila +="<tr><th scope='row'></th><td></td><td></td><td></td><td></td><td></td><td></td><td>"+T_F_0a5+"</td><td>"+T_M_0a5+"</td><td>"+T_F_6a12+"</td><td>"+T_M_6a12+"</td><td>"+T_F_13a17+"</td><td>"+T_M_13a17+"</td><td>"+T_F_18a26+"</td><td>"+T_M_18a26+"</td><td>"+T_F_27a59+"</td><td>"+T_M_27a59+"</td><td>"+T_F_60+"</td><td>"+T_M_60+"</td><td>"+TotalMujerT+"</td><td>"+TotalHombreT+"</td><td>"+Total+"</td></tr>";
 							 $('#registros_ejecucion_tabla').html(fila);	
+					}else{
+						 $('#registros_ejecucion_tabla').html("<tr><th scope='row'></th><td>No hay registros.</td></tr>");
 					}
 					$('#registros_ejecucion').html(html);
 
@@ -575,10 +633,8 @@ $(function()
 	        var html = '';
 					if(vector_datos_ejecucion.length > 0)
 					{
-						//console.log(vector_datos_ejecucion);
 							var num=1;
 							$('.tablaEjecucion').empty();
-							//console.log(datos);
 					  		var fila="";
 					  		var TotalMujer=0;
 					  		var TotalHombre=0;
@@ -636,6 +692,8 @@ $(function()
 					  		 Total=parseInt(TotalHombreT)+parseInt(TotalMujerT);
 							 fila +="<tr><th scope='row'></th><td></td><td></td><td></td><td></td><td></td><td></td><td>"+T_F_0a5+"</td><td>"+T_M_0a5+"</td><td>"+T_F_6a12+"</td><td>"+T_M_6a12+"</td><td>"+T_F_13a17+"</td><td>"+T_M_13a17+"</td><td>"+T_F_18a26+"</td><td>"+T_M_18a26+"</td><td>"+T_F_27a59+"</td><td>"+T_M_27a59+"</td><td>"+T_F_60+"</td><td>"+T_M_60+"</td><td>"+TotalMujerT+"</td><td>"+TotalHombreT+"</td><td>"+Total+"</td></tr>";
 							 $('#registros_ejecucion_tabla').html(fila);	
+					}else{
+						$('#registros_ejecucion_tabla').html("<tr><th scope='row'></th><td>No hay registros.</td></tr>");	
 					}
 					$('#registros_ejecucion').html(html);
 
@@ -722,10 +780,9 @@ $(function()
 			var html = '';
 					if(vector_novedades.length > 0)
 					{
-						//console.log(vector_novedades);
 						var num=1;
 						$.each(vector_novedades, function(i, e){
-							html += '<tr><th scope="row" class="text-center">'+num+'</th><td>'+e['Id_Requisito']+'</td><td>'+e['accion']+'</td><td>'+e['causa']+'</td><td class="text-center"><button type="button" data-rel="'+i+'" data-funcion="eliminar_novedad" class="eliminar_dato_actividad"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td></tr>';
+							html += '<tr><th scope="row" class="text-center">'+num+'</th><td>'+e['N_Requisito']+'</td><td>'+e['accion']+'</td><td>'+e['causa']+'</td><td class="text-center"><button type="button" data-rel="'+i+'" data-funcion="eliminar_novedad" class="eliminar_dato_actividad"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td></tr>';
 							num++;
 						});
 						$('#registros_novedad').html(html);
@@ -748,8 +805,11 @@ $(function()
 							html += '<tr><th scope="row" class="text-center">'+num+'</th><td>'+e['Id_Requisito']+'</td><td>'+e['accion']+'</td><td>'+e['causa']+'</td><td class="text-center"><button type="button" data-rel="'+i+'" data-funcion="eliminar_novedad" class="eliminar_dato_actividad"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td></tr>';
 							num++;
 						});
-					}
-					$('#registros_novedad').html(html);
+						$('#registros_novedad').html(html);
+					}else{
+						$('#registros_novedad').html('');
+					}					
+					
 
      }); 
 
@@ -765,7 +825,6 @@ $(function()
     
 	$('#agregar_ejecucion').on('click', function(e)
 	{		
-
 			$("#espera_eje").html("<img src='public/Img/loading.gif'/>");
 			if(vector_novedades.length > 0 && vector_datos_ejecucion.length > 0 )
 			{
@@ -775,7 +834,6 @@ $(function()
 
 				var json_vector_datos_ejecucion = JSON.stringify(vector_datos_ejecucion);
 				formData.append("vector_datos_ejecucion",json_vector_datos_ejecucion);
-				//console.log(formData);
 		        $.ajax({
 		            url: URL+'/service/registro_ejecucion',  
 		            type: 'POST',
@@ -867,6 +925,94 @@ $(function()
 
 
 
+	$('#Cancelar_E').on('click', function(e){    	
+    	Observacion = $('textarea[name="Observacion_Cancela"]').val();
+    	if(!Observacion || Observacion.length <= 0){
+    		$('textarea[name="Observacion_Cancela"]').css({ 'border-color': '#B94A48' });    
+        	$("#Observacion_CancelaL").css({ 'color': '#B94A48' });    
+        	$("#Observacion_Cancela").focus();
+    		return false;
+
+    	}else{
+    		var id= $('input[name="Id_Actividad_E"]').val();
+    			$.get(
+		            URL+'/service/cancelarE/'+id+'/'+Observacion,
+		            {},
+		            function(data)
+		            {   
+               			$('#mensajeModifica').html("<div class='alert alert-success' role='alert'> <strong>Bien!</strong> La ejecución ha sido cancelada.</div>");
+						$('#modalMensaj').modal('show');
+						setTimeout(function(){
+							$('#modal_form_act_eje').modal('hide');
+							$('#modalMensaj').modal('hide');
+						}, 3000)
+		            }
+		        );
+
+		        e.preventDefault();
+	    }
+    });
 
 
+    $('#modificar_ejecucion').on('click', function(e)
+	{		
+		//alert("Modificar"); return false;
+			$("#espera_eje").html("<img src='public/Img/loading.gif'/>");
+			if(vector_novedades.length > 0 && vector_datos_ejecucion.length > 0 )
+			{
+			/*	var formData = new FormData($("#form_ejecucion_servicio")[0]);
+				var json_vector_novedades = JSON.stringify(vector_novedades);
+				formData.append("vector_novedades",json_vector_novedades);
+
+				var json_vector_datos_ejecucion = JSON.stringify(vector_datos_ejecucion);
+				formData.append("vector_datos_ejecucion",json_vector_datos_ejecucion);
+		        $.ajax({
+		            url: URL+'/service/registro_ejecucion',  
+		            type: 'POST',
+		            data: formData,
+		            contentType: false,
+		            processData: false,
+		            dataType: "json",
+		            success: function(data){
+						    if(data.status == 'error')
+							{
+								validador_errores_registroEjecucion(data.errors);
+								$("#espera_eje").html("");
+							}
+							else 
+							{
+								validador_errores_registroEjecucion(data.errors);
+								$('#form_ejecucion_datos_actividad')[0].reset();
+								$('#form_ejecucion_novedades')[0].reset();
+								$('#form_ejecucion_servicio')[0].reset();
+								
+								$("#espera_eje").html("");
+								$('#registro_agregada_eje_b').show();
+								$('#registro_agregada_eje_b').html('Se registro las ejecución con exito!.');
+								setTimeout(function(){
+									$('#registro_agregada_eje_b').hide();
+									$('#modal_ejecucion').modal('hide');
+								}, 2000)
+							}
+		            }
+		        });*/
+			}
+			else
+			{
+				$("#espera_eje").html("");
+				$('#registro_agregada_eje').show();
+				$('#registro_agregada_eje').html('Los pasos 1 y 2 son obligatorios, por favor ingresar los datos.');
+					setTimeout(function(){
+							$('#registro_agregada_eje').hide();
+					}, 2000)
+
+			}           
+			return false;
+	});
+
+	$('#Cerrar_eje').on('click', function(e)
+	{	
+		$('#modal_ejecucion').modal('hide');
+		return false;
+	});
 });

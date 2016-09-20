@@ -8,7 +8,9 @@
     <div id="main_tipoPersona" class="row" data-url="{{ url(config('usuarios.prefijo_ruta')) }}"></div>          
 	<div class="content" id="TipoPersona" class="row" data-url="TipoPersona">
         <br>
-	    <h3 id="navbar">ASIGNAR ACTIVIDADES</h3>
+	        <blockquote>
+		    <h3 id="navbar">ASIGNAR ACTIVIDADES</h3>
+		    </blockquote>
         <br><br>
 		<div class="panel panel-primary">
 			  <div class="panel-heading">

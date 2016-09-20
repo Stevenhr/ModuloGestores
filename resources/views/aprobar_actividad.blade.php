@@ -12,7 +12,9 @@
               
 <div class="content" id="mis_actividad_aprobar" class="row" data-url="aprobar">
             <br>
-              <h3 id="navbar">MIS ACTIVIDADES</h3>
+            <blockquote>
+              <h3 id="navbar">APROBAR ACTIVIDADES </h3>
+            </blockquote>
             <br><br>
            
 

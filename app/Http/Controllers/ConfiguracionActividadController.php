@@ -196,6 +196,7 @@ class ConfiguracionActividadController extends Controller
             'Tipo' => $Tipo->find(50),
             'localidad' => $Localidad->all()
         ];
+       
         return view('perosona_localidad', $datos);
     }
 

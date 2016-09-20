@@ -65,7 +65,6 @@ class aprobacion_actividades extends Controller
     		foreach ($persona->localidades as $localidad) 
     			$localidades_persona[] = $localidad->Id_Localidad;
 
-    		//dd($localidades_persona); exit();
     		$consulta=ActividadGestor::with('localidad','persona','parque','personaProgramador')->whereIn('Localidad',$localidades_persona)->whereBetween('Fecha_Ejecucion',array($Fecha_Inicio, $Fecha_Fin))->get();
 
 

@@ -10,15 +10,10 @@ session_start();
 | and give it the controller to call when that URI is requested.
 |
 */
-
 Route::any('/', 'Actividadcontroller@show');
-
 Route::any('uno', function () {                
     return 'welcome';
 });
-
- 
-
 
 Route::get('/personas', '\Idrd\Usuarios\Controllers\PersonaController@index');
 Route::get('/personas/service/obtener/{id}', '\Idrd\Usuarios\Controllers\PersonaController@obtener');
@@ -26,14 +21,12 @@ Route::get('/personas/service/buscar/{key}', '\Idrd\Usuarios\Controllers\Persona
 Route::get('/personas/service/ciudad/{id_pais}', '\Idrd\Usuarios\Controllers\LocalizacionController@buscarCiudades');
 Route::post('/personas/service/procesar/', '\Idrd\Usuarios\Controllers\PersonaController@procesar');
 
-
 Route::get('/asignarLocalidad', 'ConfiguracionActividadController@asignarLocalidad');
 Route::get('/CrearActividad', 'Actividadcontroller@index');
 Route::get('/Modificar', 'Actividadcontroller@index');
 Route::get('/MisProgramaciones', 'Actividadcontroller@MiActividad');
 Route::get('/MisActividades', 'mis_actividades_promotores@Mis_Actividad');
 Route::get('/ActividadesAprobar', 'aprobacion_actividades@Mis_Actividad');
-
 
 Route::get('/actividad/service/obtener/{id_actividad}', 'Actividadcontroller@obtenerActividad');
 Route::post('/actividad/service/crearActividad/', 'ConfiguracionActividadController@procesarValidacion');
@@ -55,7 +48,7 @@ Route::get('/gestores/service/obtenerEjecucion/{id_actividad}', 'mis_actividades
 Route::post('/gestores/service/datos_actividades/', 'mis_actividades_promotores@procesarValidacionDatosEjecucion');
 Route::post('/gestores/service/datos_novedades/', 'mis_actividades_promotores@procesarValidacionDatosNovedades');
 Route::post('/gestores/service/registro_ejecucion/', 'mis_actividades_promotores@procesarValidacionRegistroEjecucion');
-
+Route::get('/gestores/service/cancelarE/{id_actividad}/{Observacion_Cancela}', 'mis_actividades_promotores@cancelarEjecucion');
 
 Route::post('/aprobar/service/misActividadesGestor/', 'aprobacion_actividades@procesarValidacionGestor');
 Route::get('/aprobar/service/obtener/{id_actividad}', 'aprobacion_actividades@obtenerEjecucion');

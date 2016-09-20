@@ -90,8 +90,8 @@ class mis_actividades_promotores extends Controller
     }
 
      public function obtenerEjecucion(Request $request, $id_actividad){
-        $Ejecucion = Ejecucion::where('Id_Actividad_Gestor',$id_actividad)->with('tipoEntidad','tipoPersona','condicion','situacion','localidad')->get();
-        $Novedad = Novedad::where('Id_Actividad_Gestor',$id_actividad)->get();
+        $Ejecucion = Ejecucion::where('Id_Actividad_Gestor',$id_actividad)->with('tipoEntidad','tipoPersona','condicion','situacion','localidad')->get();        
+        $Novedad = Novedad::where('Id_Actividad_Gestor',$id_actividad)->with('listaNovedad')->get();
         $datosActividad = ActividadGestor::with('calificaciomServicio')->find($id_actividad);
         
         $datos = ['datosActividad' => $datosActividad,'Ejecucion'=>$Ejecucion,'Novedad'=>$Novedad];
@@ -177,19 +177,19 @@ class mis_actividades_promotores extends Controller
             $file1=$request->file('imagen1');
             $extension1=$file1->getClientOriginalExtension();
             $Nom_imagen1 = date('Y-m-d-H:i:s')."-imagen1-".$id_act.'.'.$extension1;
-            $file1->move(public_path().'/Img/EvidenciaFotografica/', $Nom_imagen1);
+            //$file1->move(public_path().'/Img/EvidenciaFotografica/', $Nom_imagen1);
 
             $file2=$request->file('imagen2');
             $extension2=$file2->getClientOriginalExtension();
             $Nom_imagen2 = date('Y-m-d-H:i:s')."-imagen2-".$id_act.'.'.$extension2;
-            $file2->move(public_path().'/Img/EvidenciaFotografica/', $Nom_imagen2);
+            //$file2->move(public_path().'/Img/EvidenciaFotografica/', $Nom_imagen2);
 
 
             if ($request->hasFile('imagen3')) {
                 $file3=$request->file('imagen3');
                 $extension3=$file3->getClientOriginalExtension();
                 $Nom_imagen3 = date('Y-m-d-H:i:s')."-imagen3-".$id_act.'.'.$extension3;
-                $file3->move(public_path().'/Img/EvidenciaFotografica/', $Nom_imagen3);
+                //$file3->move(public_path().'/Img/EvidenciaFotografica/', $Nom_imagen3);
 
             }else{
                 $Nom_imagen3="";
@@ -199,7 +199,7 @@ class mis_actividades_promotores extends Controller
                 $file4=$request->file('imagen4');
                 $extension4=$file4->getClientOriginalExtension();
                 $Nom_imagen4 = date('Y-m-d-H:i:s')."-imagen4-".$id_act.'.'.$extension4;
-                $file4->move(public_path().'/Img/EvidenciaFotografica/', $Nom_imagen4);
+                //$file4->move(public_path().'/Img/EvidenciaFotografica/', $Nom_imagen4);
 
             }else{
                 $Nom_imagen4="";
@@ -207,14 +207,14 @@ class mis_actividades_promotores extends Controller
             $file_listaAsistencia=$request->file('listaAsistencia');
             $extensionFile1=$file_listaAsistencia->getClientOriginalExtension();
             $Nom_listaAsistencia = date('Y-m-d-H:i:s')."-listaAsistencia-".$id_act.'.'.$extensionFile1;
-            $file_listaAsistencia->move(public_path().'/Img/EvidenciaArchivo/', $Nom_listaAsistencia);
+            //$file_listaAsistencia->move(public_path().'/Img/EvidenciaArchivo/', $Nom_listaAsistencia);
 
 
             if ($request->hasFile('acta')) {
                 $file_acta=$request->file('acta');
                 $extensionFile2=$file_acta->getClientOriginalExtension();
                 $Nom_Acta = date('Y-m-d-H:i:s')."-"."-acta-".$id_act.'.'.$extensionFile2;
-                $file_acta->move(public_path().'/Img/EvidenciaArchivo/',$Nom_Acta);
+                //$file_acta->move(public_path().'/Img/EvidenciaArchivo/',$Nom_Acta);
             }else{
                 $Nom_Acta="";
             }
@@ -230,7 +230,6 @@ class mis_actividades_promotores extends Controller
                 'acta'=> $Nom_Acta);
 
 
-         //   dd($request->all());
             $this->guardar($request->all(),$nomarchivos);
         }
 
@@ -247,8 +246,7 @@ class mis_actividades_promotores extends Controller
 
     public function crear_ejecucion($model, $input,$nomarchivos)
     {
-        $model['Id_Actividad_Gestor'] = $input['Id_Actividad_E'];
-       
+        $model['Id_Actividad_Gestor'] = $input['Id_Actividad_E'];       
 
 
         $model['Id_Puntualidad'] = $input['puntualidad'];
@@ -266,9 +264,7 @@ class mis_actividades_promotores extends Controller
         $model['Url_Asistencia'] = $nomarchivos['listaAsistencia'];
         $model['Url_Acta'] = $nomarchivos['acta'];
         $model->save();
-        
-        //dd($input['vector_novedades']);
-        
+                
         $id_Activi= $input['Id_Actividad_E'];
         $model_A = ActividadGestor::find($id_Activi);
 
@@ -317,5 +313,9 @@ class mis_actividades_promotores extends Controller
         return $model;
     }
 
+    function cancelarEjecucion (Request $request, $id_actividad, $Observacion_Cancela){
+        ActividadGestor::where('Id_Actividad_Gestor', $id_actividad)->update(array('Estado_Ejecucion' => 4, "Observacion_Cancela_Ejecucion" => $Observacion_Cancela)); 
+        return  "Cancelación de la ejecucion realizada con éxito";
+    }
 
 }

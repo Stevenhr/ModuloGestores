@@ -1,5 +1,6 @@
 $(function()
 {
+	
 	var URL = $('#mis_actividad_aprobar').data('url');
 	vector_datos_ejecucion = new Array();
     vector_novedades = new Array();

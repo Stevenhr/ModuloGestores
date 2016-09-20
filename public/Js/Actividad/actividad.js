@@ -51,7 +51,7 @@ vector_acompañantes = new Array();
 				$('#mensaje_actividad').delay(1500).hide(600);
 				vector_datos_actividades.push({"id_eje": id_eje, "id_tematica": id_tematica, "id_act": id_act,"otro_actividad":otro_actividad, 'Kit':Kit, 'Cantidad_Kit':Cantidad_Kit});
 			}
-			return false;
+			//return false;
 	});
 
 
@@ -97,7 +97,7 @@ vector_acompañantes = new Array();
 	$('#asignar_acompañante').on('click', function(e)
 	{
 			var html = '';
-			var id=50;
+			var id=46;
 			var check="";
 
 			$.get(
