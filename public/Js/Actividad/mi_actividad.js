@@ -19,7 +19,7 @@ $(function()
             URL+'/service/obtener/'+id,
             {},
             function(data)
-            {   
+            {
                 if(data)
                 {
                     actividad_datos(data);
@@ -45,13 +45,13 @@ $(function()
     {
         tabla = '';
         $.each (datos.datosActividad.datosActividadGestor, function(i, e){
-            if(e.Kit == 1){kit = 'SI';}else if(e.Kit == 0){kit = 'NO';}
+            if(e.Kit == 1){Kit = 'SI';}else if(e.Kit == 2){Kit = 'NO';}
             if(e.Nombre_Actividad == 'OTRO'){Actividad = e.Otro}else{ Actividad=e.Nombre_Actividad;}
             tabla +='<tr>'+
                     '<td>'+e.Nombre_Eje+'</td>'+
                     '<td>'+e.Nombre_Tematica+'</td>'+
                     '<td>'+Actividad+'</td>'+
-                    '<td>'+kit+'</td>'+
+                    '<td>'+Kit+'</td>'+
                     '<td>'+e.Cantidad_Kit+'</td>'+
                     '</tr>';
 
@@ -210,7 +210,6 @@ $(function()
                                                 var clase="";
                                                 t.clear().draw();
                                                 $.each(data,  function(i, e){
-                                                        //console.log(e);
                                                         if(e.parque==null){  //No hay informacion
                                                             Nomparque="Otro: "+e['Otro'];
                                                         }else{

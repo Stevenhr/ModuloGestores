@@ -48,6 +48,7 @@ Route::get('/gestores/service/obtenerEjecucion/{id_actividad}', 'mis_actividades
 Route::post('/gestores/service/datos_actividades/', 'mis_actividades_promotores@procesarValidacionDatosEjecucion');
 Route::post('/gestores/service/datos_novedades/', 'mis_actividades_promotores@procesarValidacionDatosNovedades');
 Route::post('/gestores/service/registro_ejecucion/', 'mis_actividades_promotores@procesarValidacionRegistroEjecucion');
+Route::get('/gestores/service/cancelarE/{id_actividad}/{Observacion_Cancela}', 'mis_actividades_promotores@cancelarEjecucion');
 
 Route::post('/aprobar/service/misActividadesGestor/', 'aprobacion_actividades@procesarValidacionGestor');
 Route::get('/aprobar/service/obtener/{id_actividad}', 'aprobacion_actividades@obtenerEjecucion');

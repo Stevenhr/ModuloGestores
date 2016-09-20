@@ -19,5 +19,9 @@ class Novedad extends Model
 	}
 	public function actividad_gestor() {
         return $this->belongsTo('App\ActividadGestor', 'Id_Actividad_Gestor'); 
-    }         
+    }     
+
+    public function listaNovedad() {
+    	return $this->belongsTo('App\listaNovedad','Id_novedad');
+    }    
 }
