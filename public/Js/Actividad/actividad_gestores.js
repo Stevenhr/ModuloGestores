@@ -268,6 +268,7 @@ $(function()
         var fechaActual = new Date(f.getFullYear()+ "," + (f.getMonth() +1) + "," + f.getDate());
         var tmp = datos.datosActividad['Fecha_Ejecucion'].split('-');
         var F_ejecucion = new Date(tmp[0]+ "," + tmp[1]+ "," + tmp[2]);
+        
         if(datos.datosActividad['Estado']==2 && F_ejecucion<=fechaActual){
             $("#agregar_datos_ejecucion").show();
             $("#agregar_datos_novedades").show();
@@ -285,7 +286,12 @@ $(function()
             $("#agregar_datos_novedades").hide();
             $("#agregar_ejecucion").hide();	
             $("#Cancelar_E").hide();
+            $("#modificar_ejecucion").hide();
 		}
+
+		if(datos.datosActividad['Estado_Ejecucion'] == 1){
+        	$("#modificar_ejecucion").hide();
+        }
 
 		$('#table_ejecucion_agregada').show();
 		var num=1;
@@ -404,13 +410,21 @@ $(function()
 			 $('select[name="puntualidad"]').val(datos.datosActividad.calificaciom_servicio[0]['Id_Puntualidad']);//Manejo del tema
 			 $('select[name="divulgacion"]').val(datos.datosActividad.calificaciom_servicio[0]['Id_Divulgacion']);//Material Utulizado
 			 $('select[name="escenarioMontaje"]').val(datos.datosActividad.calificaciom_servicio[0]['Id_Montaje']);//Conocimiento adquirido
-			 $('#imagenVer1').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen1']);//Conocimiento adquirido attr
-			 $('#imagenVer2').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen2']);//Conocimiento adquirido attr
-			 $('#imagenVer3').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen3']);//Conocimiento adquirido attr
-			 $('#imagenVer4').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen4']);//Conocimiento adquirido attr
+			 $("#imagenVer1").attr('src',$("#imagenVer1").attr('src')+'public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen1']+'?' + (new Date()).getTime());
+			 $("#imagenVer2").attr('src',$("#imagenVer2").attr('src')+'public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen2']+'?' + (new Date()).getTime());
+			 $("#imagenVer3").attr('src',$("#imagenVer3").attr('src')+'public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen3']+'?' + (new Date()).getTime());
+			 $("#imagenVer4").attr('src',$("#imagenVer4").attr('src')+'public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen4']+'?' + (new Date()).getTime());
+
 			 $('#file1').attr('href','public/Img/EvidenciaArchivo/'+datos.datosActividad.calificaciom_servicio[0]['Url_Acta']);//Conocimiento adquirido attr
 			 $('#file2').attr('href','public/Img/EvidenciaArchivo/'+datos.datosActividad.calificaciom_servicio[0]['Url_Asistencia']);//Conocimiento adquirido attr			 
 			 
+		}else{
+			$("#imagenVer1").prop('src','');
+			 $("#imagenVer2").prop('src','');
+			 $("#imagenVer3").prop('src','');
+			 $("#imagenVer4").prop('src','');
+			 $("#file1").prop('href','');
+			 $("#file2").prop('href','');
 		}
 		$('#modal_ejecucion').modal('show');
     };

@@ -390,7 +390,7 @@ class mis_actividades_promotores extends Controller
                 $Nom_imagen4=$model_A['Url_Imagen4'];
             }
 
-            if ($request->hasFile('acta')) {
+            if ($request->hasFile('listaAsistencia')) {
                 $file_listaAsistencia=$request->file('listaAsistencia');
                 $extensionFile1=$file_listaAsistencia->getClientOriginalExtension();
                 $Nom_listaAsistencia = $archivos[4][0].'.'.$extensionFile1;
