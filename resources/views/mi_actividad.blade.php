@@ -104,8 +104,7 @@
 						    <h3 class="panel-title">Datos básicos</h3>
 						  </div>
 						  <div class="panel-body">
-					      		<fieldset>
-					      			<table id="ver_registros" class="display dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="example_info" style="width: 100%;">
+					      			<table id="ver_registros" class="table table-bordered">
 					      			
 								        <thead>
 								            <tr>
@@ -114,12 +113,70 @@
 								                <th>Estrategia</th>
 								                <th>Kit</th>
 								                <th>Cantidad de kits</th>
+								                <th>Modificar</th>
 								            </tr>
 								        </thead>
 								        <tbody id="actividadGestor" name="actividadGestor">
 								        </tbody>
 								    </table>
-					       		</fieldset>
+
+								      <div id="datos_modificar" style="display: none;">
+					        				<div class="col-xs-12 col-md-12">
+										        			<div class="form-group">
+										        				<label class="control-label" for="Id_Eje">* Eje</label>
+										        				<select name="Id_Eje" id="" class="form-control">
+										        					<option value="">Seleccionar</option>
+										        					@foreach($eje as $eje)
+										        						<option value="{{ $eje['Id_Eje'] }}">{{ $eje['Nombre_Eje'] }}</option>
+										        					@endforeach
+										        				</select>
+										        			</div>
+										    </div>
+
+										    <div class="col-xs-12 col-md-12">
+										        			<div class="form-group">
+										        				<label class="control-label" for="Id_Tematica">* Componente </label>
+										        				<select name="Id_Tematica" id="" class="form-control">
+										        					<option value="">Seleccionar</option>¿
+										        				</select>
+										        			</div>
+										     </div>
+
+										     <div class="col-xs-12 col-md-12">
+										        			<div class="form-group">
+										        				<label class="control-label" for="d_Actividad">* Estrategia </label>
+										        				<select name="d_Actividad" id="" class="form-control">
+										        					<option value="">Seleccionar</option>
+										        				</select>
+										        			</div>
+										      </div>
+										      <div class="col-xs-12 col-md-12" style="display: none;" id="div_otro">
+										        			<div class="form-group" >
+										        				<label class="control-label" for="d_Actividad">* Otro</label>
+										        				<input type="text" name="otro_Actividad" value="" class="form-control">
+										        			</div>
+									           </div>
+									           <div class="col-xs-12 col-md-12">
+				                                    <div class="form-group col-md-6">	
+				                                        <div id="radio_kit" class="btn-group" data-toggle="buttons">
+				                                            <label class="btn btn-default">
+				                                                <input type="radio" name="Kit" value="1" autocomplete="off"> <span class="text-success">SI</span>
+				                                            </label>
+				                                            <label class="btn btn-default">
+				                                                <input type="radio" name="Kit" value="2" autocomplete="off"> <span class="text-danger">NO</span>
+				                                            </label>
+				                                        </div>
+				                                    </div>
+				                                    <div class="col-md-6">				
+								        				<label class="control-label" for="d_Actividad">Cantidad </label>
+								        				<input type="text" name="Cantidad_Kit" id="Cantidad_Kit" class="form-control">
+								        			</div>				        		
+							        		</div>
+							  
+									        <button type="button" id="cerrar_datos_modificar" class="btn btn-default">Cerrar</button>
+									        <button type="button" class="btn btn-primary">Modificar</button>
+								
+							     	  </div>
 						  </div>
 						</div>
 						<div class="panel panel-primary">
@@ -321,8 +378,6 @@
 		</div>
   	</div>
 </div> 
-
-
 
 
 												<div class="modal fade bs-example-modal-lg" id="actividad_modificada" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">

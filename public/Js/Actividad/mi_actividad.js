@@ -30,17 +30,6 @@ $(function()
         );
     }); 
 
-    $('select[name="Parque"]').on('change', function(e){
-        var act=$('select[name="Parque"]').val();
-        if(act=='Otro'){
-            $('.div_otro_parque').show(100);
-        }
-        else{
-            $('.div_otro_parque').hide(100);
-            $('input[name="otro_Parque"]').val("");
-        }
-    });
-
     var actividad_datos = function(datos)
     {
         tabla = '';
@@ -53,9 +42,10 @@ $(function()
                     '<td>'+Actividad+'</td>'+
                     '<td>'+Kit+'</td>'+
                     '<td>'+e.Cantidad_Kit+'</td>'+
+                    '<td><button type="button" data-funcion="modificar_datos" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Editar</button></td>'+
                     '</tr>';
-
         });
+
         $("#actividadGestor").append('');
         $("#actividadGestor").append(tabla);
 
@@ -102,6 +92,96 @@ $(function()
     };
 
 
+    $('#ver_registros').delegate('button[data-funcion="modificar_datos"]','click',function (e) {  
+        //$('#Modifica_datos_modal').html('uno');
+        $('#datos_modificar').show();
+    }); 
+    $('#cerrar_datos_modificar').on('click', function(e){
+        $('#datos_modificar').hide();
+    });
+
+    $('select[name="Id_Eje"]').on('change', function(e){
+        select_tematicas($(this).val());
+    });
+    var select_tematicas = function(id)
+    { 
+
+        if(id!=''){
+            $.ajax({
+                url: 'actividad/service/tematica/'+id,
+                data: {},
+                dataType: 'json',
+                success: function(data)
+                {
+
+                    var html = '<option value="">Seleccionar</option>';
+                    if(data.length > 0)
+                    {
+                        $.each(data, function(i, e){
+                            html += '<option value="'+e['Id_Tematica']+'">'+e['Nombre_Tematica']+'</option>';
+                        });
+                    }
+                    $('select[name="Id_Tematica"]').html(html).val($('select[name="Id_Tematica"]').data('value'));
+                }
+            });
+        }else{
+                    var html = '<option value="">Seleccionar</option>';
+                    $('select[name="Id_Tematica"]').html(html).val($('select[name="Id_Tematica"]').data('value'));
+        }
+
+    };
+    $('select[name="Id_Tematica"]').on('change', function(e){
+        select_actividades($(this).val());
+    });
+    var select_actividades = function(id)
+    {
+        if(id!=''){
+            $.ajax({
+                url: 'actividad/service/actividad/'+id,
+                data: {},
+                dataType: 'json',
+                success: function(data)
+                {
+
+                    var html = '<option value="">Seleccionar</option>';
+                    if(data.length > 0)
+                    {
+                        $.each(data, function(i, e){
+                            html += '<option value="'+e['Id_Actividad']+'">'+e['Nombre_Actividad']+'</option>';
+                        });
+                    }
+                    $('select[name="d_Actividad"]').html(html).val($('select[name="d_Actividad"]').data('value'));
+                }
+            });
+        }else{
+                    var html = '<option value="">Seleccionar</option>';
+                    $('select[name="d_Actividad"]').html(html).val($('select[name="d_Actividad"]').data('value'));
+        }
+    };
+
+    $('select[name="d_Actividad"]').on('change', function(e){
+        var act=$('select[name="d_Actividad"]').val();
+        if(act==4 || act==13 || act==19 || act==20){
+            $('#div_otro').show(100);
+        }
+        else{
+            $('#div_otro').hide(100);
+            $('input[name="otro_Actividad"]').val("");
+        }
+    
+    });
+
+
+    $('select[name="Parque"]').on('change', function(e){
+        var act=$('select[name="Parque"]').val();
+        if(act=='Otro'){
+            $('.div_otro_parque').show(100);
+        }
+        else{
+            $('.div_otro_parque').hide(100);
+            $('input[name="otro_Parque"]').val("");
+        }
+    });
 
     $('#form_actividad_m').on('submit', function(e){
       

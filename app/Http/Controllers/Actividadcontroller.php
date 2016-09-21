@@ -83,12 +83,14 @@ class Actividadcontroller extends Controller
     }
 
     public function MiActividad(){
+      $eje = app()->make('App\Eje');
       $datosActividad = app()->make('App\ActividadGestor');
   		$PersonaActividad = app()->make('App\Persona');
   		$Tipo = app()->make('App\Tipo');
   		$Localidad = app()->make('App\Localidad');
   		$TipoParque = app()->make('App\TipoParque');
   		$datos = [
+        'eje' => $eje->all(),
         'datosActividad' => $datosActividad->with('persona')->where('Id_Persona',$_SESSION['Usuario'][0])->get(),
   			'PersonaActividad' => $PersonaActividad->find($_SESSION['Usuario'][0]),
   			'Tipo' => $Tipo->find(50),

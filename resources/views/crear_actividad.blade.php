@@ -47,7 +47,7 @@
 							        		</div>
 							        		<div class="col-xs-12 col-md-12">
 							        			<div class="form-group">
-							        				<label class="control-label" for="d_Actividad">* Estrategia... </label>
+							        				<label class="control-label" for="d_Actividad">* Estrategia </label>
 							        				<select name="d_Actividad" id="" class="form-control">
 							        					<option value="">Seleccionar</option>
 							        				</select>
@@ -60,7 +60,7 @@
 							        			</div>
 						        			</div>
 						        			<div class="col-xs-12 col-md-12">
-						        				<label class="control-label" for="d_Actividad">* Entrega de kit´s </label>							        				
+						        				<label class="control-label" for="d_Actividad">* Entrega de kit´s </label>
 						        			</div>
 
 						        			<div class="col-xs-12 col-md-6">
