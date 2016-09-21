@@ -22,6 +22,6 @@ class Novedad extends Model
     }     
 
     public function listaNovedad() {
-    	return $this->belongsTo('App\listaNovedad','Id_novedad');
+    	return $this->belongsTo('App\ListaNovedad','Id_novedad');
     }    
 }

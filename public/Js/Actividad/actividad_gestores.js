@@ -126,8 +126,6 @@ $(function()
                                         	dehabilitar_E="";											
 										}
 
-
-
 										t.row.add( [
 								            '<th scope="row" class="text-center">'+num+'</th>',
 								            '<td class="text-center"><h4>'+e['Id_Actividad_Gestor']+'<h4></td>',
@@ -225,7 +223,7 @@ $(function()
     };
 
 
-    $('#Tabla2').delegate('button[data-funcion="ejec_ver"]','click',function (e) {  
+    $('#Tabla2').delegate('button[data-funcion="ejec_ver"]','click',function (e) {      	
         var id = $(this).data('rel'); 
         $("#espera_eje"+id).html("<img src='public/Img/loading.gif'/>");
         
@@ -259,12 +257,18 @@ $(function()
     {
     	
     	$('input[name="Id_Actividad_ejecucion"]').val(datos.datosActividad['Id_Actividad_Gestor']);
+    	$('input[name="Id_Actividad_Gestion"]').val(datos.datosActividad['Id_Actividad_Gestor']);
+    	if(datos.datosActividad.calificaciom_servicio.length > 0){
+    		$('input[name="Id_Calificacion_Servicio"]').val(datos.datosActividad.calificaciom_servicio[0]['Id']);
+    	}
+    	
   		$('#titulo').text(datos.datosActividad['Id_Actividad_Gestor']);
 
   		var f = new Date();
         var fechaActual = new Date(f.getFullYear()+ "," + (f.getMonth() +1) + "," + f.getDate());
         var tmp = datos.datosActividad['Fecha_Ejecucion'].split('-');
         var F_ejecucion = new Date(tmp[0]+ "," + tmp[1]+ "," + tmp[2]);
+        
         if(datos.datosActividad['Estado']==2 && F_ejecucion<=fechaActual){
             $("#agregar_datos_ejecucion").show();
             $("#agregar_datos_novedades").show();
@@ -282,7 +286,12 @@ $(function()
             $("#agregar_datos_novedades").hide();
             $("#agregar_ejecucion").hide();	
             $("#Cancelar_E").hide();
+            $("#modificar_ejecucion").hide();
 		}
+
+		if(datos.datosActividad['Estado_Ejecucion'] == 1){
+        	$("#modificar_ejecucion").hide();
+        }
 
 		$('#table_ejecucion_agregada').show();
 		var num=1;
@@ -327,7 +336,7 @@ $(function()
 				T_M_27a59+=parseInt(e['M_27a59']);
 				T_F_60+=parseInt(e['F_60']);
 				T_M_60+=parseInt(e['M_60']);
-				fila +="<tr><th scope='row'>"+num+"</th><td>"+e['Comunidad']+"</td><td>"+e.localidad['Nombre_Localidad']+"</td><td>"+e.tipo_entidad['Nombre']+"</td><td>"+e.tipo_persona['Nombre']+"</td><td>"+e.condicion['Nombre']+"</td><td>"+e.situacion['Nombre']+"</td><td>"+e['F_0a5']+"</td><td>"+e['M_0a5']+"</td><td>"+e['F_6a12']+"</td><td>"+e['M_6a12']+"</td><td>"+e['F_13a17']+"</td><td>"+e['M_13a17']+"</td><td>"+e['F_18a26']+"</td><td>"+e['M_18a26']+"</td><td>"+e['F_27a59']+"</td><td>"+e['M_27a59']+"</td><td>"+e['F_60']+"</td><td>"+e['M_60']+"</td><td>"+TotalMujer+"</td><td>"+TotalHombre+"</td><td>"+TotalParcial+"</td><td class='text-center'><button type='button' data-rel="+e["id"]+" data-funcion='eliminar_conteo' class='eliminar_dato_actividad'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></td></tr>";								            
+				fila +="<tr><th scope='row'>"+num+"</th><td>"+e['Comunidad']+"</td><td>"+e.localidad['Nombre_Localidad']+"</td><td>"+e.tipo_entidad['Nombre']+"</td><td>"+e.tipo_persona['Nombre']+"</td><td>"+e.condicion['Nombre']+"</td><td>"+e.situacion['Nombre']+"</td><td>"+e['F_0a5']+"</td><td>"+e['M_0a5']+"</td><td>"+e['F_6a12']+"</td><td>"+e['M_6a12']+"</td><td>"+e['F_13a17']+"</td><td>"+e['M_13a17']+"</td><td>"+e['F_18a26']+"</td><td>"+e['M_18a26']+"</td><td>"+e['F_27a59']+"</td><td>"+e['M_27a59']+"</td><td>"+e['F_60']+"</td><td>"+e['M_60']+"</td><td>"+TotalMujer+"</td><td>"+TotalHombre+"</td><td>"+TotalParcial+"</td><td class='text-center'><button type='button' data-rel="+i+" data-funcion='eliminar_conteo' class='eliminar_dato_actividad'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></td></tr>";								            
 		        TotalMujerT+=TotalMujer;
 		        TotalHombreT+=TotalHombre;
 		        num++;
@@ -358,6 +367,7 @@ $(function()
 					"N_Tipo_eje": e.tipo_persona['Nombre'],
 					"N_Condicion": e.condicion['Nombre'],
 					"N_Situacion": e.situacion['Nombre'],
+					"Id_Ejecucion": e["id"],
 				});
 		        /************************/
 
@@ -371,9 +381,8 @@ $(function()
 			 var num1=1;
 			 var fila1="";
 			 var Id_Actividad_ejecucion=$('input[name="Id_Actividad_ejecucion"]').val();
-			 //console.log(datos.Novedad);
 			 $.each(datos.Novedad, function(i, e){		
-				fila1 +="<tr><th scope='row'>"+num1+"</th><td>"+e.lista_novedad['Nombre']+"</td><td>"+e['Causa']+"</td><td>"+e['Accion']+"</td><td class='text-center'><button type='button' data-rel='"+e["Id"]+"' data-funcion='eliminar_novedad' class='eliminar_dato_actividad'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></td></tr>";								            
+				fila1 +="<tr><th scope='row'>"+num1+"</th><td>"+e.lista_novedad['Nombre']+"</td><td>"+e['Causa']+"</td><td>"+e['Accion']+"</td><td class='text-center'><button type='button' data-rel='"+i+"' data-funcion='eliminar_novedad' class='eliminar_dato_actividad'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></td></tr>";								            
 		        num1++;
 
 		        /**************************/
@@ -383,14 +392,15 @@ $(function()
 					"causa": e["Causa"],
 					"accion": e["Accion"],
 					"N_Requisito": e.lista_novedad['Nombre'],
+					"Id_novedad": e["Id"],
 				});
 		        /**************************/
 			 });
 		}
 		else{
 			 $('#table_ejecucion_agregada').hide();
+			 $('#table_novedad_agregada').hide();
 		}
-console.log(vector_novedades);
   		
 		 $('#registros_novedad').html(fila1);
 		 
@@ -400,12 +410,21 @@ console.log(vector_novedades);
 			 $('select[name="puntualidad"]').val(datos.datosActividad.calificaciom_servicio[0]['Id_Puntualidad']);//Manejo del tema
 			 $('select[name="divulgacion"]').val(datos.datosActividad.calificaciom_servicio[0]['Id_Divulgacion']);//Material Utulizado
 			 $('select[name="escenarioMontaje"]').val(datos.datosActividad.calificaciom_servicio[0]['Id_Montaje']);//Conocimiento adquirido
-			 $('#imagenVer1').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen1']);//Conocimiento adquirido attr
-			 $('#imagenVer2').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen2']);//Conocimiento adquirido attr
-			 $('#imagenVer3').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen3']);//Conocimiento adquirido attr
-			 $('#imagenVer4').prop('src','public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen4']);//Conocimiento adquirido attr
+			 $("#imagenVer1").attr('src',$("#imagenVer1").attr('src')+'public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen1']+'?' + (new Date()).getTime());
+			 $("#imagenVer2").attr('src',$("#imagenVer2").attr('src')+'public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen2']+'?' + (new Date()).getTime());
+			 $("#imagenVer3").attr('src',$("#imagenVer3").attr('src')+'public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen3']+'?' + (new Date()).getTime());
+			 $("#imagenVer4").attr('src',$("#imagenVer4").attr('src')+'public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen4']+'?' + (new Date()).getTime());
+
 			 $('#file1').attr('href','public/Img/EvidenciaArchivo/'+datos.datosActividad.calificaciom_servicio[0]['Url_Acta']);//Conocimiento adquirido attr
 			 $('#file2').attr('href','public/Img/EvidenciaArchivo/'+datos.datosActividad.calificaciom_servicio[0]['Url_Asistencia']);//Conocimiento adquirido attr			 
+			 
+		}else{
+			$("#imagenVer1").prop('src','');
+			 $("#imagenVer2").prop('src','');
+			 $("#imagenVer3").prop('src','');
+			 $("#imagenVer4").prop('src','');
+			 $("#file1").prop('href','');
+			 $("#file2").prop('href','');
 		}
 		$('#modal_ejecucion').modal('show');
     };
@@ -476,6 +495,7 @@ console.log(vector_novedades);
 									"N_Tipo_eje": $("#Tipo_eje option:selected").text(),
 									"N_Condicion": $("#Condicion option:selected").text(),
 									"N_Situacion": $("#Situacion option:selected").text(),
+									"Id_Ejecucion": null,
 								});
 
 								$('#ejecucion_agregada').show();
@@ -736,6 +756,8 @@ console.log(vector_novedades);
 									"Id_Requisito": Id_Requisito,
 									"causa": causa,
 									"accion": accion,
+									"N_Requisito": $("#Id_Requisito option:selected").text(),
+									"Id_novedad": null,
 								});
 								$('#novedad_agregada').show();
 								$('#novedad_agregada').html('Se registro los datos de la novedad.');
@@ -795,21 +817,20 @@ console.log(vector_novedades);
 
 	$('#datos_novedad_tabla').delegate('button[data-funcion="eliminar_novedad"]','click',function (e) {   
 		var id = $(this).data('rel'); 
-	    vector_novedades.splice(id, 1);
-	        
+	    vector_novedades.splice(id, 1);	        
 	        var html = '';
-					if(vector_novedades.length > 0)
-					{
-						var num=1;
-						$.each(vector_novedades, function(i, e){
-							html += '<tr><th scope="row" class="text-center">'+num+'</th><td>'+e['Id_Requisito']+'</td><td>'+e['accion']+'</td><td>'+e['causa']+'</td><td class="text-center"><button type="button" data-rel="'+i+'" data-funcion="eliminar_novedad" class="eliminar_dato_actividad"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td></tr>';
-							num++;
-						});
-						$('#registros_novedad').html(html);
-					}else{
-						$('#registros_novedad').html('');
-					}					
-					
+				if(vector_novedades.length > 0)
+				{
+					var num=1;
+					$.each(vector_novedades, function(i, e){
+						html += '<tr><th scope="row" class="text-center">'+num+'</th><td>'+e['N_Requisito']+'</td><td>'+e['accion']+'</td><td>'+e['causa']+'</td><td class="text-center"><button type="button" data-rel="'+i+'" data-funcion="eliminar_novedad" class="eliminar_dato_actividad"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td></tr>';
+						num++;
+					});
+					$('#registros_novedad').html(html);
+				}else{
+					$('#registros_novedad').html("<tr><th scope='row'></th><td>No hay registros.</td></tr>");	
+				}
+				
 
      }); 
 
@@ -956,18 +977,17 @@ console.log(vector_novedades);
 
     $('#modificar_ejecucion').on('click', function(e)
 	{		
-		//alert("Modificar"); return false;
 			$("#espera_eje").html("<img src='public/Img/loading.gif'/>");
 			if(vector_novedades.length > 0 && vector_datos_ejecucion.length > 0 )
 			{
-			/*	var formData = new FormData($("#form_ejecucion_servicio")[0]);
+				var formData = new FormData($("#form_ejecucion_servicio")[0]);
 				var json_vector_novedades = JSON.stringify(vector_novedades);
 				formData.append("vector_novedades",json_vector_novedades);
 
 				var json_vector_datos_ejecucion = JSON.stringify(vector_datos_ejecucion);
 				formData.append("vector_datos_ejecucion",json_vector_datos_ejecucion);
 		        $.ajax({
-		            url: URL+'/service/registro_ejecucion',  
+		            url: URL+'/service/modifica_ejecucion',  
 		            type: 'POST',
 		            data: formData,
 		            contentType: false,
@@ -995,7 +1015,7 @@ console.log(vector_novedades);
 								}, 2000)
 							}
 		            }
-		        });*/
+		        });
 			}
 			else
 			{
