@@ -455,7 +455,7 @@
 					<div class="col-xs-12 col-md-12">
 	        			<div class="form-group">
 	        				<label class="control-label" for="Id_TipoDocumento">Requisitos  que se incumplen</label>
-	        				<select name="Id_Requisito" id="" class="form-control">
+	        				<select name="Id_Requisito" id="Id_Requisito" class="form-control">
 	        					<option value="">Seleccionar</option>
 	        					@foreach($ListaNovedad as $listaNoveda)
 	        						<option value="{{ $listaNoveda['Id'] }}">{{ $listaNoveda['Nombre'] }}</option>
@@ -711,6 +711,8 @@
 		        		<br><br><br><br><br><br><br><br>
 		        		<div class="col-xs-12 col-md-12">
 				    		<input type="hidden" name="Id_Actividad_E" class="form-control" value="">
+				    		<input type="hidden" name="Id_Actividad_Gestion" class="form-control" value="">				    		
+				    		<input type="hidden" name="Id_Calificacion_Servicio" class="form-control" value="">				    		
 					         <center>						         						         
 						         <button type="submit" class="btn btn-info" id="agregar_ejecucion">Registrar</button>
 						         <button type="submit" class="btn btn-primary" id="modificar_ejecucion">Modificar</button>
