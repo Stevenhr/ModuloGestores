@@ -136,7 +136,6 @@ class ConfiguracionActividadController extends Controller
 		$model->save();
 		$id_act_gest=$model->Id_Actividad_Gestor;
 		$data0 = json_decode($input['Dato_Actividad']);
-		//var_dump($data0);
 		foreach($data0 as $obj){
 			$model->actividadgestorActividadEjeTematica()->attach($id_act_gest,[
 				'eje_id'=>$obj->id_eje,
@@ -247,9 +246,9 @@ class ConfiguracionActividadController extends Controller
 
 	 public function procesarModificacionValidacion(Request $request)
   {
+  //	dd($request->all());
     $validator = Validator::make($request->all(),
-        [
-             
+        [             
         'Fecha_Ejecucion' => 'required',
         'Id_Responsable' => 'required',
         'Hora_Inicio' => 'required',
@@ -304,7 +303,46 @@ class ConfiguracionActividadController extends Controller
 
     $model->save();
     
+	/**********************************/
+	$id_act_gest=$model->Id_Actividad_Gestor;	
+	$model->actividadgestorActividadEjeTematica()->where('actividad_gestor_id', $id_act_gest)->detach();
+
+	$data0 = json_decode($input['Dato_Actividad']);
+
+		foreach($data0 as $obj){
+			if(!isset($obj->Cantidad_Kit)){
+				$objCantidad_Kit = 0;
+			}else{
+				$objCantidad_Kit = $obj->Cantidad_Kit;
+			}
+			$model->actividadgestorActividadEjeTematica()->attach($id_act_gest,[
+				'eje_id'=>$obj->id_eje,
+				'tematica_id'=>$obj->id_tematica,
+				'actividad_id'=>$obj->id_act,
+				'Otro'=>$obj->otro_actividad,
+				'Kit'=>$obj->Kit,
+				'Cantidad_Kit'=>$objCantidad_Kit,
+				]);
+		}
+	/**********************************/
+
     return $model;
+
+    /*$model->save();
+		$id_act_gest=$model->Id_Actividad_Gestor;
+		$data0 = json_decode($input['Dato_Actividad']);
+		//var_dump($data0);
+		foreach($data0 as $obj){
+			$model->actividadgestorActividadEjeTemat8ica()->attach($id_act_gest,[
+				'eje_id'=>$obj->id_eje,
+				'tematica_id'=>$obj->id_tematica,
+				'actividad_id'=>$obj->id_act,
+				'Otro'=>$obj->otro_actividad,
+				'Kit'=>$obj->Kit,
+				'Cantidad_Kit'=>$obj->Cantidad_Kit,
+				]);
+		}
+*/
   }
 
 

@@ -119,7 +119,7 @@
 								        <tbody id="actividadGestor" name="actividadGestor">
 								        </tbody>
 								    </table>
-
+								    <input type="hidden" id="id_T" name="id_T" value=""/>
 								      <div id="datos_modificar" style="display: none;">
 					        				<div class="col-xs-12 col-md-12">
 										        			<div class="form-group">
@@ -174,9 +174,15 @@
 							        		</div>
 							  
 									        <button type="button" id="cerrar_datos_modificar" class="btn btn-default">Cerrar</button>
-									        <button type="button" class="btn btn-primary">Modificar</button>
+									        <button type="button" class="btn btn-primary" id="modificar_eje">Modificar</button>
 								
 							     	  </div>
+							     	  <br>
+										<div class="col-xs-12 col-md-12"  >
+					        				<div class="form-group"  id="mensaje_actividad" style="display: none;">
+						        			<div id="alert_actividad"></div>
+					        			</div>
+
 						  </div>
 						</div>
 						<div class="panel panel-primary">

@@ -1,5 +1,6 @@
 $(function()
 {
+  var vector_datos_actividades = new Array();
    var URL = $('#main_mis_actividad').data('url');
    var t =  $('#example').DataTable({
         dom: 'Bfrtip',
@@ -32,6 +33,7 @@ $(function()
 
     var actividad_datos = function(datos)
     {
+        vector_datos_actividades = new Array();
         tabla = '';
         $.each (datos.datosActividad.datosActividadGestor, function(i, e){
             if(e.Kit == 1){Kit = 'SI';}else if(e.Kit == 2){Kit = 'NO';}
@@ -42,10 +44,10 @@ $(function()
                     '<td>'+Actividad+'</td>'+
                     '<td>'+Kit+'</td>'+
                     '<td>'+e.Cantidad_Kit+'</td>'+
-                    '<td><button type="button" data-funcion="modificar_datos" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Editar</button></td>'+
+                    '<td><button type="button" data-rel="'+e.id+'" data-funcion="modificar_datos" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Editar</button></td>'+
                     '</tr>';
+            vector_datos_actividades.push({"id_T": e.id, "id_eje": e.eje_id, "id_tematica": e.tematica_id, "id_act": e.actividad_id,"otro_actividad":e.Otro, 'Kit':e.Kit, 'Cantidad_Kit':e.Cantidad_Kit888});
         });
-
         $("#actividadGestor").append('');
         $("#actividadGestor").append(tabla);
 
@@ -92,13 +94,74 @@ $(function()
     };
 
 
-    $('#ver_registros').delegate('button[data-funcion="modificar_datos"]','click',function (e) {  
-        //$('#Modifica_datos_modal').html('uno');
-        $('#datos_modificar').show();
+    $('#ver_registros').delegate('button[data-funcion="modificar_datos"]','click',function (e) {    
+        var id_T = $(this).data('rel');
+        $("#id_T").val(id_T);
+        $('select[name="Id_Eje"]').val('');
+        $('select[name="Id_Tematica"]').val('');
+        $('select[name="d_Actividad"]').val('');
+        $('input[name="otro_Actividad"]').val('');
+     //   $('input[name="Kit"]:checked').val();        
+        $('input[name="Cantidad_Kit"]').val('');   
+
+        $('#datos_modificar').hide(60);
+        $('#datos_modificar').delay(500).show(600);
     }); 
     $('#cerrar_datos_modificar').on('click', function(e){
         $('#datos_modificar').hide();
     });
+
+    $('#modificar_eje').on('click', function(e){
+        var id_eje=$('select[name="Id_Eje"]').val();
+        var id_tematica=$('select[name="Id_Tematica"]').val();
+        var id_act = $('select[name="d_Actividad"]').val();
+        var otro_actividad = $('input[name="otro_Actividad"]').val();
+        var Kit = $('input[name="Kit"]:checked').val();        
+
+        var Cantidad_Kit = $('input[name="Cantidad_Kit"]').val();   
+
+
+        if(id_eje===''){
+            $('#alert_actividad').html('<div class="alert alert-dismissible alert-danger" ><strong>Error!</strong> Debe seleccionar un eje para poder realizar el registro.</div>');
+            $('#mensaje_actividad').show(60);
+            $('#mensaje_actividad').delay(2500).hide(600);
+
+        }else{
+            if(Kit==='' || !Kit){
+                $('#alert_actividad').html('<div class="alert alert-dismissible alert-danger" ><strong>Error!</strong> Debe seleccionar una opción de entrega de Kit para realizar el registro.</div>');
+                $('#mensaje_actividad').show(60);
+                $('#mensaje_actividad').delay(2500).hide(600);
+                return false;
+            }   
+            if(Kit === 0){
+                Cantidad_Kit = 0;
+            }           
+            if( Kit==1 && Cantidad_Kit === ''){
+                $('#alert_actividad').html('<div class="alert alert-dismissible alert-danger" ><strong>Error!</strong> Debe agregar una cantidad de Kit´s para realizar el registro.</div>');
+                $('#mensaje_actividad').show(60);
+                $('#mensaje_actividad').delay(2500).hide(600);
+                return false;
+            }
+
+            
+            $('#alert_actividad').html('<div class="alert alert-dismissible alert-success" ><strong>Exito!</strong> Dato de la actividad registrado con éxito. </div>');
+            $('#mensaje_actividad').show(60);
+            $('#mensaje_actividad').delay(1500).hide(600);
+            $('#datos_modificar').hide();
+
+
+            $.each(vector_datos_actividades, function(i, e){
+                if(e['id_T']== $('#id_T').val()){
+                    num = i;
+                }
+            });
+
+            vector_datos_actividades.splice(num, 1);
+            vector_datos_actividades.push({"id_eje": id_eje, "id_tematica": id_tematica, "id_act": id_act,"otro_actividad":otro_actividad, 'Kit':Kit, 'Cantidad_Kit':Cantidad_Kit});
+        }
+
+    });
+    
 
     $('select[name="Id_Eje"]').on('change', function(e){
         select_tematicas($(this).val());
@@ -263,6 +326,8 @@ $(function()
 
         
         $('#Modificar_Act').on('click', function(e){
+            var datos_acti = JSON.stringify(vector_datos_actividades);
+            $('input[name="Dato_Actividad"]').val(datos_acti);
             var num=1;
                 $.post(
                     URL+'/service/ModificarActividad',
