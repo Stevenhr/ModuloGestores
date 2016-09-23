@@ -184,7 +184,7 @@ vector_acompañantes = new Array();
 
 		if(id!=''){
 			$.ajax({
-				url: URL+'/actividad/service/tematica/'+id,
+				url: URL+'/service/tematica/'+id,
 				data: {},
 				dataType: 'json',
 				success: function(data)

@@ -27,7 +27,6 @@ class ConfiguracionActividadController extends Controller
 	{
 		$eje_model = app()->make('App\Eje');
 		$eje = $eje_model->find($id_eje);
-
 		return response()->json($eje->tematica);
 	}
 
@@ -192,7 +191,7 @@ class ConfiguracionActividadController extends Controller
         $Tipo = app()->make('App\Tipo');
         $Localidad = app()->make('App\Localidad');
         $datos = [
-            'Tipo' => $Tipo->find(50),
+            'Tipo' => $Tipo->find(50),            
             'localidad' => $Localidad->all()
         ];
        
@@ -305,10 +304,10 @@ class ConfiguracionActividadController extends Controller
     
 	/**********************************/
 	$id_act_gest=$model->Id_Actividad_Gestor;	
-	$model->actividadgestorActividadEjeTematica()->where('actividad_gestor_id', $id_act_gest)->detach();
+$model->actividadgestorActividadEjeTematica()->where('actividad_gestor_id', $id_act_gest)->detach();
 
 	$data0 = json_decode($input['Dato_Actividad']);
-
+//dd($data0);
 		foreach($data0 as $obj){
 			if(!isset($obj->Cantidad_Kit)){
 				$objCantidad_Kit = 0;

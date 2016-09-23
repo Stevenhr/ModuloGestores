@@ -46,7 +46,8 @@ $(function()
                     '<td>'+e.Cantidad_Kit+'</td>'+
                     '<td><button type="button" data-rel="'+e.id+'" data-funcion="modificar_datos" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Editar</button></td>'+
                     '</tr>';
-            vector_datos_actividades.push({"id_T": e.id, "id_eje": e.eje_id, "id_tematica": e.tematica_id, "id_act": e.actividad_id,"otro_actividad":e.Otro, 'Kit':e.Kit, 'Cantidad_Kit':e.Cantidad_Kit888});
+            vector_datos_actividades.push({"id_T": e.id, "id_eje": e.eje_id, "id_tematica": e.tematica_id, "id_act": e.actividad_id,"otro_actividad":e.Otro, 'Kit':e.Kit, 'Cantidad_Kit':e.Cantidad_Kit});
+
         });
         $("#actividadGestor").append('');
         $("#actividadGestor").append(tabla);
@@ -159,6 +160,7 @@ $(function()
             vector_datos_actividades.splice(num, 1);
             vector_datos_actividades.push({"id_eje": id_eje, "id_tematica": id_tematica, "id_act": id_act,"otro_actividad":otro_actividad, 'Kit':Kit, 'Cantidad_Kit':Cantidad_Kit});
         }
+        
 
     });
     
