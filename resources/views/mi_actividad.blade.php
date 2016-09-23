@@ -98,7 +98,6 @@
 			<form action="" id="form_actividad_m" name="form_actividad_m">
 						
 						<h3>ACTIVIDAD N° <label class="control-label" for="Id_TipoDocumento" id="titulo_id"></label></h3><br>						
-						<!--<button type="button" data-rel="ver_registros_{{ $actividad['Id_Actividad_Gestor'] }}" data-funcion="ver_registros" class="{{ $clase }} eliminar_dato_actividad">Ver Registros </button>-->
 						<div class="panel panel-primary">
 						  <div class="panel-heading">
 						    <h3 class="panel-title">Datos básicos</h3>
