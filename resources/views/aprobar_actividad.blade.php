@@ -16,8 +16,6 @@
               <h3 id="navbar">APROBAR ACTIVIDADES </h3>
             </blockquote>
             <br><br>
-           
-
 
 		<div class="panel panel-primary">
 			  <div class="panel-heading">

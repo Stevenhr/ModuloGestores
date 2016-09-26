@@ -173,7 +173,7 @@
 							        		</div>
 							  
 									        <button type="button" id="cerrar_datos_modificar" class="btn btn-default">Cerrar</button>
-									        <button type="button" class="btn btn-primary" id="modificar_eje">Modificar</button>
+									        <button type="button" class="btn btn-primary" id="modificar_eje">Agregar</button>
 								
 							     	  </div>
 							     	  <br>

@@ -22,10 +22,12 @@ class aprobacion_actividades extends Controller
    }
 
     public function Mis_Actividad(){
+    	$eje = app()->make('App\Eje');
 		$Tipo = app()->make('App\Tipo');
 		$Localidad = app()->make('App\Localidad');
 		$TipoParque = app()->make('App\TipoParque');
 		$datos = [
+			'eje' => $eje->all(),
 			'Tipo' => $Tipo->find(50),
 			'tipoparque' => $TipoParque->with('parques')->find(3),
 			'localidad' => $Localidad->all()
