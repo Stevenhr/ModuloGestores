@@ -119,10 +119,94 @@
 	   <div class="modal-content">
 
 			<form action="" id="form_actividad_mm" name="form_actividad_mm">
-
 					
 
-						<h3>ACTIVIDAD N° <label class="control-label" for="Id_TipoDocumento" id="titulo_id"></label></h3><br>
+						<!-- -*************************************************** -->
+            			<h3>ACTIVIDAD N° <label class="control-label" for="Id_TipoDocumento" id="titulo_id"></label></h3><br>						
+						<div class="panel panel-primary">
+					  	<div class="panel-heading">
+						    <h3 class="panel-title">Datos básicos</h3>
+						  	</div>
+						  	<div class="panel-body">
+				      			<table id="ver_registros" class="table table-bordered">					      			
+							        <thead>
+							            <tr>
+							                <th>Eje</th>
+							                <th>Componente</th>
+							                <th>Estrategia</th>
+							                <th>Kit</th>
+							                <th>Cantidad de kits</th>
+							                <th>Modificar</th>
+							            </tr>
+							        </thead>
+							        <tbody id="actividadGestor" name="actividadGestor">
+							        </tbody>
+							    </table>
+							    <input type="hidden" id="id_T" name="id_T" value=""/>
+						        <div id="datos_modificar" style="display: none;">
+			        				<div class="col-xs-12 col-md-12">
+					        			<div class="form-group">
+					        				<label class="control-label" for="Id_Eje">* Eje</label>
+					        				<select name="Id_Eje" id="" class="form-control">
+					        					<option value="">Seleccionar</option>
+					        					@foreach($eje as $eje)
+					        						<option value="{{ $eje['Id_Eje'] }}">{{ $eje['Nombre_Eje'] }}</option>
+					        					@endforeach
+					        				</select>
+					        			</div>
+								    </div>
+								    <div class="col-xs-12 col-md-12">
+					        			<div class="form-group">
+					        				<label class="control-label" for="Id_Tematica">* Componente </label>
+						        				<select name="Id_Tematica" id="" class="form-control">
+						        					<option value="">Seleccionar</option>¿
+						        				</select>
+					        			</div>
+								    </div>
+							     	<div class="col-xs-12 col-md-12">
+					        			<div class="form-group">
+					        				<label class="control-label" for="d_Actividad">* Estrategia </label>
+						        				<select name="d_Actividad" id="" class="form-control">
+						        					<option value="">Seleccionar</option>
+						        				</select>
+					        			</div>
+ 							        </div>
+							        <div class="col-xs-12 col-md-12" style="display: none;" id="div_otro">
+					        			<div class="form-group" >
+					        				<label class="control-label" for="d_Actividad">* Otro</label>
+					        				<input type="text" name="otro_Actividad" value="" class="form-control">
+					        			</div>
+						            </div>
+						            <div class="col-xs-12 col-md-12">
+	                                    <div class="form-group col-md-6">	
+	                                        <div id="radio_kit" class="btn-group" data-toggle="buttons">
+	                                            <label class="btn btn-default">
+	                                                <input type="radio" name="Kit" value="1" autocomplete="off"> <span class="text-success">SI</span>
+	                                            </label>
+	                                            <label class="btn btn-default">
+	                                                <input type="radio" name="Kit" value="2" autocomplete="off"> <span class="text-danger">NO</span>
+	                                            </label>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-6">				
+					        				<label class="control-label" for="d_Actividad">Cantidad </label>
+					        				<input type="text" name="Cantidad_Kit" id="Cantidad_Kit" class="form-control">
+					        			</div>				        		
+				        			</div>							  
+						        	<button type="button" id="cerrar_datos_modificar" class="btn btn-default">Cerrar</button>
+							        <button type="button" class="btn btn-primary" id="modificar_eje">Agregar</button>								
+				     	    </div>
+				       	    <br>
+							<div class="col-xs-12 col-md-12"  >
+		        				<div class="form-group"  id="mensaje_actividad" style="display: none;">
+			        			<div id="alert_actividad"></div>
+		        			</div>
+						</div>
+					</div>
+				</div>
+            <!-- ***************************************************** -->
+
+
 						<div class="panel panel-primary">
 						  <div class="panel-heading">
 						    <h3 class="panel-title">Datos de asignación y configuración horaria</h3>

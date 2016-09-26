@@ -9,6 +9,7 @@ use Validator;
 use App\ActividadGestor;
 use App\Ejecucion;
 use App\Novedad;
+use Illuminate\Support\Facades\DB;
 
 
 class aprobacion_actividades extends Controller
@@ -84,12 +85,22 @@ class aprobacion_actividades extends Controller
 
 
     public function obtenerEjecucion(Request $request, $id_actividad){
-		$Ejecucion = Ejecucion::where('Id_Actividad_Gestor',$id_actividad)->with('tipoEntidad','tipoPersona','condicion','situacion','localidad')->get();
+    	$datosActividad = ActividadGestor::find($id_actividad);
+      	$datosActividadGestor = DB::select('select * from actividadgestor_actividad_eje_tematica
+                                      inner join eje on eje.Id_Eje = actividadgestor_actividad_eje_tematica.eje_id
+                                      inner join tematica on tematica.Id_Tematica = actividadgestor_actividad_eje_tematica.tematica_id
+                                      inner join actividad on actividad.Id_Actividad = actividadgestor_actividad_eje_tematica.actividad_id
+                                      where actividadgestor_actividad_eje_tematica.actividad_gestor_id = '.$id_actividad
+                                    );
+      $datosActividad['datosActividadGestor'] = $datosActividadGestor;      
+      $datos = ['datosActividad' => $datosActividad];
+    	return  $datos;
+		/*$Ejecucion = Ejecucion::where('Id_Actividad_Gestor',$id_actividad)->with('tipoEntidad','tipoPersona','condicion','situacion','localidad')->get();
     	$Novedad = Novedad::where('Id_Actividad_Gestor',$id_actividad)->get();
 		$datosActividad = ActividadGestor::with('calificaciomServicio')->find($id_actividad);
 		
 		$datos = ['datosActividad' => $datosActividad,'Ejecucion'=>$Ejecucion,'Novedad'=>$Novedad];
-    	return  response()->json($datos);
+    	return  response()->json($datos);*/
     }
 
     public function activarProgramacion(Request $request, $id_actividad){
@@ -121,6 +132,7 @@ class aprobacion_actividades extends Controller
 
     public function procesarModificacionValidacion(Request $request)
 	{
+	//	dd($request->all());
 		$validator = Validator::make($request->all(),
 		    [
 	           
@@ -177,6 +189,29 @@ class aprobacion_actividades extends Controller
 		$model->Telefono= $input['Telefono'];
 
 		$model->save();
+
+		/**********************************/
+		$id_act_gest=$model->Id_Actividad_Gestor;	
+		$model->actividadgestorActividadEjeTematica()->where('actividad_gestor_id', $id_act_gest)->detach();
+
+		$data0 = json_decode($input['Dato_Actividad']);
+		//dd($data0);
+		foreach($data0 as $obj){
+			if(!isset($obj->Cantidad_Kit)){
+				$objCantidad_Kit = 0;
+			}else{
+				$objCantidad_Kit = $obj->Cantidad_Kit;
+			}
+			$model->actividadgestorActividadEjeTematica()->attach($id_act_gest,[
+				'eje_id'=>$obj->id_eje,
+				'tematica_id'=>$obj->id_tematica,
+				'actividad_id'=>$obj->id_act,
+				'Otro'=>$obj->otro_actividad,
+				'Kit'=>$obj->Kit,
+				'Cantidad_Kit'=>$objCantidad_Kit,
+				]);
+		}
+	/**********************************/
 		
 		return $model;
 	}
