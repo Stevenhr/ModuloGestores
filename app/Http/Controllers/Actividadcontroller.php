@@ -74,11 +74,10 @@ class Actividadcontroller extends Controller
 	        'tematica' => $tematica->all(),
 	        'actividad' => $actividad->all(),
 	        'localidad' => $Localidad->all(),
-	        'Tipo' => $Tipo->find(50),
+	        'Tipo' => $Tipo->find(46),
 	       // 'tipoparques' => $TipoParque->find(3),
 			'status' => session('status')
 		];
-
     	return view('crear_actividad', $datos);
     }
 
@@ -93,7 +92,7 @@ class Actividadcontroller extends Controller
         'eje' => $eje->all(),
         'datosActividad' => $datosActividad->with('persona')->where('Id_Persona',$_SESSION['Usuario'][0])->get(),
   			'PersonaActividad' => $PersonaActividad->find($_SESSION['Usuario'][0]),
-  			'Tipo' => $Tipo->find(50),
+  			'Tipo' => $Tipo->find(46),
   			'tipoparque' => $TipoParque->with('parques')->find(3),
   			'localidad' => $Localidad->all()
   		];

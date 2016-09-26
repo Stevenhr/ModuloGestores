@@ -28,7 +28,7 @@ class aprobacion_actividades extends Controller
 		$TipoParque = app()->make('App\TipoParque');
 		$datos = [
 			'eje' => $eje->all(),
-			'Tipo' => $Tipo->find(50),
+			'Tipo' => $Tipo->find(46),
 			'tipoparque' => $TipoParque->with('parques')->find(3),
 			'localidad' => $Localidad->all()
 		];

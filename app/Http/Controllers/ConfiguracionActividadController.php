@@ -191,7 +191,7 @@ class ConfiguracionActividadController extends Controller
         $Tipo = app()->make('App\Tipo');
         $Localidad = app()->make('App\Localidad');
         $datos = [
-            'Tipo' => $Tipo->find(50),            
+            'Tipo' => $Tipo->find(46),            
             'localidad' => $Localidad->all()
         ];
        
