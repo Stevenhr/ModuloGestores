@@ -8,6 +8,8 @@ use Idrd\Usuarios\Repo\PersonaInterface;
 use App\ActividadGestor;
 use Illuminate\Support\Facades\DB;
 use App\Parque;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class Actividadcontroller extends Controller
 {
@@ -79,6 +81,13 @@ class Actividadcontroller extends Controller
 			'status' => session('status')
 		];
     	return view('crear_actividad', $datos);
+    }
+    public function Cerrar(){
+       //Desconctamos al usuario
+        Auth::logout();
+
+        //Redireccionamos al inicio de la app con un mensaje
+        return Redirect::to('../')->with('msg', 'Gracias por visitarnos!.');
     }
 
     public function MiActividad(){
