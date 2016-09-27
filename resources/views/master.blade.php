@@ -140,7 +140,7 @@
                   <li><a href="#" style="color:#1995dc">REPORTES</a></li>
                   <li class="divider"></li>
 
-                  @if($_SESSION['Usuario'][6] == 1) 
+                  @if($_SESSION['Usuario'][9] == 1) 
                       <li class=”{{ Request::is( 'Reporte') ? 'active' : '' }}”><a href="{{ URL::to( 'Reporte') }}">Reporte</a></li>
                   @endif
                 </ul>
