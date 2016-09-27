@@ -27,6 +27,9 @@ Route::get('/Modificar', 'Actividadcontroller@index');
 Route::get('/MisProgramaciones', 'Actividadcontroller@MiActividad');
 Route::get('/MisActividades', 'mis_actividades_promotores@Mis_Actividad');
 Route::get('/ActividadesAprobar', 'aprobacion_actividades@Mis_Actividad');
+Route::get('/Reporte', 'ReporteController@reporte');
+
+Route::post('/Reporte/reporteTipoPoblacional/', 'ReporteController@reportePoblacional');
 
 Route::get('/actividad/service/obtener/{id_actividad}', 'Actividadcontroller@obtenerActividad');
 Route::post('/actividad/service/crearActividad/', 'ConfiguracionActividadController@procesarValidacion');

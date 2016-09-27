@@ -131,8 +131,18 @@
                   @if($_SESSION['Usuario'][6] == 1) 
                       <li class=”{{ Request::is( 'MisActividades') ? 'active' : '' }}”><a href="{{ URL::to( 'MisActividades') }}">Mis actividades</a></li>
                   @endif
+                </ul>
+              </li>
 
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Reporte<span class="caret"></span></a>
+                <ul class="dropdown-menu" aria-labelledby="download">
+                  <li><a href="#" style="color:#1995dc">REPORTES</a></li>
+                  <li class="divider"></li>
 
+                  @if($_SESSION['Usuario'][6] == 1) 
+                      <li class=”{{ Request::is( 'Reporte') ? 'active' : '' }}”><a href="{{ URL::to( 'Reporte') }}">Reporte</a></li>
+                  @endif
                 </ul>
               </li>
 
