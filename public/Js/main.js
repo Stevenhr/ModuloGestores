@@ -1,4 +1,5 @@
 $(function(){
+
 	$('input[data-role="datepicker"]').datepicker({
 	  dateFormat: 'yy-mm-dd',
 	  yearRange: "-100:+0",
@@ -16,4 +17,5 @@ $(function(){
 	      }
 	  }
 	});
+
 });

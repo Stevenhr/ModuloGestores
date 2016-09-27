@@ -28,6 +28,7 @@ Route::get('/MisProgramaciones', 'Actividadcontroller@MiActividad');
 Route::get('/MisActividades', 'mis_actividades_promotores@Mis_Actividad');
 Route::get('/ActividadesAprobar', 'aprobacion_actividades@Mis_Actividad');
 Route::get('/Reporte', 'ReporteController@reporte');
+Route::get('/Cerrar', 'Actividadcontroller@Cerrar');
 
 Route::post('/Reporte/reporteTipoPoblacional/', 'ReporteController@reportePoblacional');
 
