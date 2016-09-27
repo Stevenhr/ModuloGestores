@@ -122,8 +122,8 @@ $(function()
         var Cantidad_Kit = $('input[name="Cantidad_Kit"]').val();   
 
 
-        if(id_eje===''){
-            $('#alert_actividad').html('<div class="alert alert-dismissible alert-danger" ><strong>Error!</strong> Debe seleccionar un eje para poder realizar el registro.</div>');
+        if(id_eje==='' || id_tematica === '' || id_act === '' || id_eje == 0 || id_tematica == 0 || id_act == 0){
+            $('#alert_actividad').html('<div class="alert alert-dismissible alert-danger" ><strong>Error!</strong> Debe seleccionar un eje, un componente y una estrategia para poder realizar el registro.</div>');
             $('#mensaje_actividad').show(60);
             $('#mensaje_actividad').delay(2500).hide(600);
 
@@ -160,7 +160,6 @@ $(function()
             vector_datos_actividades.splice(num, 1);
             vector_datos_actividades.push({"id_eje": id_eje, "id_tematica": id_tematica, "id_act": id_act,"otro_actividad":otro_actividad, 'Kit':Kit, 'Cantidad_Kit':Cantidad_Kit});
         }
-        
 
     });
     
@@ -170,12 +169,14 @@ $(function()
     });
     var select_tematicas = function(id)
     { 
-
         if(id!=''){
             $.ajax({
                 url: 'actividad/service/tematica/'+id,
                 data: {},
                 dataType: 'json',
+                beforeSend:function(data){
+                    $('select[name="Id_Tematica"]').html('<option value="">Cargando......</option>').val('');
+                },
                 success: function(data)
                 {
 
@@ -190,8 +191,8 @@ $(function()
                 }
             });
         }else{
-                    var html = '<option value="">Seleccionar</option>';
-                    $('select[name="Id_Tematica"]').html(html).val($('select[name="Id_Tematica"]').data('value'));
+            var html = '<option value="">Seleccionar</option>';
+            $('select[name="Id_Tematica"]').html(html).val($('select[name="Id_Tematica"]').data('value'));
         }
 
     };
@@ -205,6 +206,9 @@ $(function()
                 url: 'actividad/service/actividad/'+id,
                 data: {},
                 dataType: 'json',
+                beforeSend:function(data){
+                    $('select[name="d_Actividad"]').html('<option value="">Cargando......</option>').val('');
+                },
                 success: function(data)
                 {
 

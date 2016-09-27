@@ -85,22 +85,17 @@ class aprobacion_actividades extends Controller
 
 
     public function obtenerEjecucion(Request $request, $id_actividad){
-    	$datosActividad = ActividadGestor::find($id_actividad);
+    	$datosActividad = ActividadGestor::with('calificaciomServicio')->find($id_actividad);
       	$datosActividadGestor = DB::select('select * from actividadgestor_actividad_eje_tematica
                                       inner join eje on eje.Id_Eje = actividadgestor_actividad_eje_tematica.eje_id
                                       inner join tematica on tematica.Id_Tematica = actividadgestor_actividad_eje_tematica.tematica_id
                                       inner join actividad on actividad.Id_Actividad = actividadgestor_actividad_eje_tematica.actividad_id
                                       where actividadgestor_actividad_eje_tematica.actividad_gestor_id = '.$id_actividad
                                     );
-      $datosActividad['datosActividadGestor'] = $datosActividadGestor;      
+
+      $datosActividad['datosActividadGestor'] = $datosActividadGestor;   
       $datos = ['datosActividad' => $datosActividad];
     	return  $datos;
-		/*$Ejecucion = Ejecucion::where('Id_Actividad_Gestor',$id_actividad)->with('tipoEntidad','tipoPersona','condicion','situacion','localidad')->get();
-    	$Novedad = Novedad::where('Id_Actividad_Gestor',$id_actividad)->get();
-		$datosActividad = ActividadGestor::with('calificaciomServicio')->find($id_actividad);
-		
-		$datos = ['datosActividad' => $datosActividad,'Ejecucion'=>$Ejecucion,'Novedad'=>$Novedad];
-    	return  response()->json($datos);*/
     }
 
     public function activarProgramacion(Request $request, $id_actividad){
