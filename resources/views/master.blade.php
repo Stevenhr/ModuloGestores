@@ -141,7 +141,10 @@
                   <li class="divider"></li>
 
                   @if($_SESSION['Usuario'][9] == 1) 
-                      <li class=”{{ Request::is( 'Reporte') ? 'active' : '' }}”><a href="{{ URL::to( 'Reporte') }}">Reporte</a></li>
+                      <li class=”{{ Request::is( 'Reporte') ? 'active' : '' }}”><a href="{{ URL::to( 'Reporte') }}">Reporte Poblacional</a></li>
+                  @endif
+                  @if($_SESSION['Usuario'][9] == 1) 
+                      <li class=”{{ Request::is( 'Reporte2') ? 'active' : '' }}”><a href="{{ URL::to( 'Reporte2') }}">Reporte Datos Actividad</a></li>
                   @endif
                 </ul>
               </li>
