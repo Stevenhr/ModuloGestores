@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use App\TipoEntidad;
 use App\TipoPersona;
@@ -12,6 +12,10 @@ use App\Situacion;
 use App\Localidad;
 use App\Ejecucion;
 use App\ActividadGestor;
+use App\Eje;
+use App\Tematica;
+use App\Actividad;
+
 
 class ReporteController extends Controller
 {
@@ -33,6 +37,9 @@ class ReporteController extends Controller
 		];
 	    return view('reporte', $datos);
     }
+
+
+    
 
     public function reportePoblacional(Request $request)
     {
@@ -160,5 +167,119 @@ class ReporteController extends Controller
 								</table>";
 
         return  $tabla;
+    }
+
+
+    public function reporte2()
+    {
+		$Eje = new Eje;
+        $Tematica = new Tematica;
+        $Actividad = new Actividad;
+        $Localidad = new Localidad;
+
+		$datos = [
+	        'eje' => $Eje->all(),
+	        'tematica' => $Tematica->all(),
+	        'actividad' => $Actividad->all(),
+	        'Localidad' => $Localidad->all(),
+		];
+		return view('reporte2', $datos);
+    }
+
+
+
+    public function reporteDatosActividades(Request $request)
+    {
+    	
+	    
+	    	$datos =$request->all();
+
+	    	if($datos['Fecha_Inicio']!="" && $datos['Fecha_Fin']!=""){
+
+	    		$cont=0;
+		    	$consulta=ActividadGestor::where('Estado_Ejecucion',3)->where('Estado',2)->whereBetween('Fecha_Ejecucion',array($datos['Fecha_Inicio'], $datos['Fecha_Fin']));
+
+		    		if($datos['Localidad']!="")
+					{
+						$consulta=$consulta->where('Localidad',$datos['Localidad'])->with('localidad');
+						$cont++;
+					}
+					$consulta=$consulta->get();
+													    
+				$Total=0;
+				$eje_nom="";
+				$tematica_nom="";
+				$actividad_nom="";
+				$nom_localidad="";
+						
+			    foreach ($consulta as $item) {
+
+			    	$Ejecucion = DB::table('actividadgestor_actividad_eje_tematica');
+
+					if($datos['Id_Eje']!="")
+					{
+						$Ejecucion=$Ejecucion->where('eje_id',$datos['Id_Eje']);
+						$eje = DB::table('eje')->select('Nombre_Eje')->where('Id_Eje',$datos['Id_Eje'])->first();
+						$eje_nom=$eje->Nombre_Eje;
+					}
+
+					if($datos['Id_Tematica']!="")
+					{
+						$Ejecucion=$Ejecucion->where('tematica_id',$datos['Id_Tematica']);
+						$tematica = DB::table('tematica')->select('Nombre_Tematica')->where('Id_Tematica',$datos['Id_Tematica'])->first();
+						$tematica_nom=$tematica->Nombre_Tematica;
+					}
+
+					if($datos['d_Actividad']!="")
+					{
+						$Ejecucion=$Ejecucion->where('actividad_id',$datos['d_Actividad']);
+						$acividad = DB::table('actividad')->select('Nombre_Actividad')->where('Id_Actividad',$datos['d_Actividad'])->first();
+						$actividad_nom=$acividad->Nombre_Actividad;
+					}
+					$Ejecucion=$Ejecucion->get();
+
+					if($cont!=0){
+						$nom_localidad=$item->localidad['Nombre_Localidad'];
+					}
+					else{
+						$nom_localidad="Todo";
+					}
+				    			    
+				    if(count($Ejecucion)>0){
+					    $Total ++;
+					}
+				}
+
+
+
+		            $tabla="<table id='Tabla_Reporte2'>
+					        <thead>
+					            <tr>
+									<th>Localidad</b></th>
+									<th>Eje</th>
+									<th>Componente</th> 
+									<th>Estrategia</th>
+									<th># Actividades Realizadas</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>".$nom_localidad."</td>
+									<td>".$eje_nom."</td>
+									<td>".$tematica_nom."</td>
+									<td>".$actividad_nom."</td>
+									<td><center><b>".$Total."</b></center></td>
+								</tr>
+							</tbody>
+						</table>";
+												
+
+	        
+	    }else{
+	    	$tabla="<div class='alert alert-danger'>
+			  <strong>ALERTA!</strong> Ingrese fecha inicio y fin.
+			</div>";
+	    }
+	    return  $tabla;
     }
 }

@@ -28,9 +28,11 @@ Route::get('/MisProgramaciones', 'Actividadcontroller@MiActividad');
 Route::get('/MisActividades', 'mis_actividades_promotores@Mis_Actividad');
 Route::get('/ActividadesAprobar', 'aprobacion_actividades@Mis_Actividad');
 Route::get('/Reporte', 'ReporteController@reporte');
+Route::get('/Reporte2', 'ReporteController@reporte2');
 Route::get('/Cerrar', 'Actividadcontroller@Cerrar');
 
 Route::post('/Reporte/reporteTipoPoblacional/', 'ReporteController@reportePoblacional');
+Route::post('/Reporte/reporteDatosActividad/', 'ReporteController@reporteDatosActividades');
 
 Route::get('/actividad/service/obtener/{id_actividad}', 'Actividadcontroller@obtenerActividad');
 Route::post('/actividad/service/crearActividad/', 'ConfiguracionActividadController@procesarValidacion');

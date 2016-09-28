@@ -12,21 +12,21 @@
               
 <div class="content" id="reporte" class="row" data-url="Reporte">
             <br>
-              <h3 id="navbar">Reporte Poblacional</h3>
+              <h3 id="navbar">Reporte Datos Actividad</h3>
             <br><br>
            
 
 
 		<div class="panel panel-primary">
 			    <div class="panel-heading">
-			    		<h3 class="panel-title">BUSCADOR: buscador para el reporte poblacional.</h3>
+			    		<h3 class="panel-title">BUSCADOR: buscador para el reporte de datos de la  actvidad.</h3>
 			    </div>
 			    <div class="panel-body">
 					<fieldset>
-						<form action="" id="form_reporte">
+						<form action="" id="form_reporte2">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
 			        		
-			        		<div class="col-xs-12 col-md-12">
+			        		<div class="col-xs-12 col-md-6">
 			        			<div class="form-group">
 			        				<label class="control-label" for="Id_TipoDocumento">* Localidad </label>
 			        				<select name="Localidad" id="Localidad" class="form-control">
@@ -37,47 +37,30 @@
 			        				</select>
 			        			</div>
 			        		</div>
-			        		<div class="col-xs-12 col-md-6">
+    						<div class="col-xs-12 col-md-6">
 			        			<div class="form-group">
-			        				<label class="control-label" for="Cedula">* Tipo entidad </label>
-									<select name="Tipo_entidad" id="Tipo_entidad" class="form-control">
+			        				<label class="control-label" for="Id_Eje">* Eje</label>
+			        				<select name="Id_Eje" id="" class="form-control">
 			        					<option value="">Seleccionar</option>
-			        					@foreach($TipoEntidad as $tipoEntida)
-			        						<option value="{{ $tipoEntida['Id'] }}">{{ $tipoEntida['Nombre'] }}</option>
+			        					@foreach($eje as $eje)
+			        						<option value="{{ $eje['Id_Eje'] }}">{{ $eje['Nombre_Eje'] }}</option>
 			        					@endforeach
 			        				</select>
 			        			</div>
 			        		</div>
 			        		<div class="col-xs-12 col-md-6">
 			        			<div class="form-group">
-			        				<label class="control-label" for="Cedula">* Tipo </label>
-									<select name="Tipo_eje" id="Tipo_eje" class="form-control">
-			        					<option value="">Seleccionar</option>
-			        					@foreach($TipoPersona as $tipoPerson)
-			        						<option value="{{ $tipoPerson['Id'] }}">{{ $tipoPerson['Nombre'] }}</option>
-			        					@endforeach
+			        				<label class="control-label" for="Id_Tematica">* Componente </label>
+			        				<select name="Id_Tematica" id="" class="form-control">
+			        					<option value="">Seleccionar</option>¿
 			        				</select>
 			        			</div>
 			        		</div>
 			        		<div class="col-xs-12 col-md-6">
 			        			<div class="form-group">
-			        				<label class="control-label" for="Cedula">* Condición </label>
-									<select name="Condicion" id="Condicion" class="form-control">
+			        				<label class="control-label" for="d_Actividad">* Estrategia </label>
+			        				<select name="d_Actividad" id="" class="form-control">
 			        					<option value="">Seleccionar</option>
-			        					@foreach($Condicion as $condicio)
-			        						<option value="{{ $condicio['Id'] }}">{{ $condicio['Nombre'] }}</option>
-			        					@endforeach
-			        				</select>
-			        			</div>
-			        		</div>
-			        		<div class="col-xs-12 col-md-6">
-			        			<div class="form-group">
-			        				<label class="control-label" for="Cedula">* Situación </label>
-									<select name="Situacion" id="Situacion" class="form-control">
-			        					<option value="">Seleccionar</option>
-			        					@foreach($Situacion as $situacio)
-			        						<option value="{{ $situacio['Id'] }}">{{ $situacio['Nombre'] }}</option>
-			        					@endforeach
 			        				</select>
 			        			</div>
 			        		</div>
@@ -114,9 +97,9 @@
 
 		<div class="panel panel-primary">
 		    <div class="panel-heading">
-		    	<h3 class="panel-title">REPORTE:</h3>
+		    	<h3 class="panel-title">REPORTE: Identifica el número total de actividades realizadas de acuerdo al filtro inicial.</h3>
 		    </div>
-		    <div id="contenido_reporte"></div>
+		    <div id="contenido_reporte2"></div>
 		  	
 		</div>
 </div>
