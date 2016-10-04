@@ -269,7 +269,19 @@ $(function()
         var tmp = datos.datosActividad['Fecha_Ejecucion'].split('-');
         var F_ejecucion = new Date(tmp[0]+ "," + tmp[1]+ "," + tmp[2]);
         
-        if(datos.datosActividad['Estado']==2 && F_ejecucion<=fechaActual){
+
+		 var fechaFinal = new Date(); 
+		 fechaFinal.setDate(F_ejecucion.getDate()+parseInt(2));
+		 var anno=fechaFinal.getFullYear();
+		 var mes= fechaFinal.getMonth()+1;
+		 var dia= fechaFinal.getDate();
+		 mes = (mes < 10) ? ("0" + mes) : mes;
+		 dia = (dia < 10) ? ("0" + dia) : dia;
+		 
+		 fechaFinal = new Date(anno+ "," + mes+ "," + dia); 
+
+        console.log(F_ejecucion+" -- "+fechaFinal);
+        if(datos.datosActividad['Estado']==2 && fechaActual>=F_ejecucion && fechaActual<=fechaFinal){
             $("#agregar_datos_ejecucion").show();
             $("#agregar_datos_novedades").show();
             $("#agregar_ejecucion").show();
@@ -1035,4 +1047,22 @@ $(function()
 		$('#modal_ejecucion').modal('hide');
 		return false;
 	});
+
+	sumaFecha = function(d, fecha)
+		{
+		 var Fecha = new Date();
+		 var sFecha = fecha || (Fecha.getDate() + "/" + (Fecha.getMonth() +1) + "/" + Fecha.getFullYear());
+		 var sep = sFecha.indexOf('/') != -1 ? '/' : '-'; 
+		 var aFecha = sFecha.split(sep);
+		 var fecha = aFecha[2]+'/'+aFecha[1]+'/'+aFecha[0];
+		 fecha= new Date(fecha);
+		 fecha.setDate(fecha.getDate()+parseInt(d));
+		 var anno=fecha.getFullYear();
+		 var mes= fecha.getMonth()+1;
+		 var dia= fecha.getDate();
+		 mes = (mes < 10) ? ("0" + mes) : mes;
+		 dia = (dia < 10) ? ("0" + dia) : dia;
+		 var fechaFinal = dia+sep+mes+sep+anno;
+		 return (fechaFinal);
+		 }
 });

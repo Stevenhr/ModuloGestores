@@ -186,7 +186,7 @@ $(function()
         var id = $(this).data('rel'); 
         $("#espera"+id).html("<img src='public/Img/loading.gif'/>");
         $.get(
-            URL+'/service/obtener/'+id,
+            URL+'/service/obtener2/'+id,
             {},
             function(data)
             {   
@@ -205,6 +205,7 @@ $(function()
     {
     	vector_datos_actividades = new Array();
         tabla = '';
+        //console.log(datos);
         $.each (datos.datosActividad.datosActividadGestor, function(i, e){
             if(e.Kit == 1){Kit = 'SI';}else if(e.Kit == 2){Kit = 'NO';}
             if(e.Nombre_Actividad == 'OTRO'){Actividad = e.Otro}else{ Actividad=e.Nombre_Actividad;}
@@ -337,7 +338,7 @@ $(function()
   		var TotalMujerT=0;
   		var TotalHombreT=0;
   		var Total=0;
-  		console.log(datos);
+  	//	console.log(datos);
   		$.each(datos.Ejecucion, function(i, e){		
   		    TotalMujer=parseInt(e['F_0a5'])+parseInt(e['F_6a12'])+parseInt(e['F_13a17'])+parseInt(e['F_18a26'])+parseInt(e['F_27a59'])+parseInt(e['F_60']);
   		    TotalHombre=parseInt(e['M_0a5'])+parseInt(e['M_6a12'])+parseInt(e['M_13a17'])+parseInt(e['M_18a26'])+parseInt(e['M_27a59'])+parseInt(e['M_60']);

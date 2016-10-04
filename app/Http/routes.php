@@ -59,6 +59,7 @@ Route::get('/gestores/service/cancelarE/{id_actividad}/{Observacion_Cancela}', '
 
 Route::post('/aprobar/service/misActividadesGestor/', 'aprobacion_actividades@procesarValidacionGestor');
 Route::get('/aprobar/service/obtener/{id_actividad}', 'aprobacion_actividades@obtenerEjecucion');
+Route::get('/aprobar/service/obtener2/{id_actividad}', 'Actividadcontroller@obtenerActividad');
 Route::post('/aprobar/service/ModificarActividad/', 'aprobacion_actividades@procesarModificacionValidacion');
 Route::get('/aprobar/service/activar/{id_actividad}', 'aprobacion_actividades@activarProgramacion');
 Route::get('/aprobar/service/aprobarEjecucion/{id_actividad}', 'aprobacion_actividades@aprobarEjecucion');

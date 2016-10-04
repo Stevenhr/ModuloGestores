@@ -84,7 +84,7 @@ class mis_actividades_promotores extends Controller
 
 	public function obtenerActividad(Request $request, $id_actividad){
 
-		$datosActividad = ActividadGestor::with('localidad','persona','parque','ejecucion')->find($id_actividad);
+		$datosActividad = ActividadGestor::with('localidad','persona','parque','ejecucion','datosActividad')->find($id_actividad);
 		$datos = ['datosActividad' => $datosActividad];
     	return  $datos;
     }
