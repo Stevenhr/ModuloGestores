@@ -337,7 +337,7 @@ $(function()
   		var TotalMujerT=0;
   		var TotalHombreT=0;
   		var Total=0;
-
+  		console.log(datos);
   		$.each(datos.Ejecucion, function(i, e){		
   		    TotalMujer=parseInt(e['F_0a5'])+parseInt(e['F_6a12'])+parseInt(e['F_13a17'])+parseInt(e['F_18a26'])+parseInt(e['F_27a59'])+parseInt(e['F_60']);
   		    TotalHombre=parseInt(e['M_0a5'])+parseInt(e['M_6a12'])+parseInt(e['M_13a17'])+parseInt(e['M_18a26'])+parseInt(e['M_27a59'])+parseInt(e['M_60']);
@@ -354,7 +354,7 @@ $(function()
 			T_M_27a59+=parseInt(e['M_27a59']);
 			T_F_60+=parseInt(e['F_60']);
 			T_M_60+=parseInt(e['M_60']);
-			fila +="<tr><th scope='row'>"+num+"</th><td>"+e['Comunidad']+"</td><td>"+e.localidad['Nombre_Localidad']+"</td><td>"+e.tipo_entidad['Nombre']+"</td><td>"+e.tipo_persona['Nombre']+"</td><td>"+e.condicion['Nombre']+"</td><td>"+e.situacion['Nombre']+"</td><td>"+e['F_0a5']+"</td><td>"+e['M_0a5']+"</td><td>"+e['F_6a12']+"</td><td>"+e['M_6a12']+"</td><td>"+e['F_13a17']+"</td><td>"+e['M_13a17']+"</td><td>"+e['F_18a26']+"</td><td>"+e['M_18a26']+"</td><td>"+e['F_27a59']+"</td><td>"+e['M_27a59']+"</td><td>"+e['F_60']+"</td><td>"+e['M_60']+"</td><td>"+TotalMujer+"</td><td>"+TotalHombre+"</td><td>"+TotalParcial+"</td></tr>";								            
+			fila +="<tr><th scope='row'>"+num+"</th><td>"+e['Instit_Grupo_Comun']+"</td><td>"+e.localidad['Nombre_Localidad']+"</td><td>"+e.tipo_entidad['Nombre']+"</td><td>"+e.tipo_persona['Nombre']+"</td><td>"+e.condicion['Nombre']+"</td><td>"+e.situacion['Nombre']+"</td><td>"+e['F_0a5']+"</td><td>"+e['M_0a5']+"</td><td>"+e['F_6a12']+"</td><td>"+e['M_6a12']+"</td><td>"+e['F_13a17']+"</td><td>"+e['M_13a17']+"</td><td>"+e['F_18a26']+"</td><td>"+e['M_18a26']+"</td><td>"+e['F_27a59']+"</td><td>"+e['M_27a59']+"</td><td>"+e['F_60']+"</td><td>"+e['M_60']+"</td><td>"+TotalMujer+"</td><td>"+TotalHombre+"</td><td>"+TotalParcial+"</td></tr>";								            
 	        TotalMujerT+=TotalMujer;
 	        TotalHombreT+=TotalHombre;
 	        num++;
@@ -366,7 +366,7 @@ $(function()
 		 var num1=1;
 		 var fila1="";
 		 $.each(datos.Novedad, function(i, e){		
-			fila1 +="<tr><th scope='row'>"+num1+"</th><td>"+e['Id_novedad']+"</td><td>"+e['Causa']+"</td><td>"+e['Accion']+"</td></tr>";								            
+			fila1 +="<tr><th scope='row'>"+num1+"</th><td>"+e.lista_novedad['Nombre']+"</td><td>"+e['Causa']+"</td><td>"+e['Accion']+"</td></tr>";								            
 	        num1++;
 		 });
 		 $('#tablaNovedad').html(fila1);	
