@@ -83,7 +83,7 @@ $(function()
         var F_ejecucion = new Date(tmp[0]+ "," + tmp[1]+ "," + tmp[2]);
 
 
-        if(datos.datosActividad['Estado']==2 || F_ejecucion<fechaActual){
+        if(datos.datosActividad['Estado']==2 || F_ejecucion<fechaActual || datos.datosActividad['Estado']==3 ){
             $("#Modificar_Act").hide();
             //$( "#Cerrar_Act" ).removeClass( "btn btn-default" ).addClass( "btn btn-success" );
         }else{
