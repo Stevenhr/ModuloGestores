@@ -153,7 +153,7 @@
 
             <ul class="nav navbar-nav navbar-right" >
               <li><a href="http://www.idrd.gov.co/sitio/idrd/" target="_blank">I.D.R.D</a></li>
-              <li class=”{{ Request::is( 'Reporte') ? 'Cerrar' : '' }}”><a href="{{ URL::to( 'Cerrar') }}"  >Cerrar Sesión</a></li>
+              <li class=”{{ Request::is( 'Reporte') ? 'Cerrar' : '' }}”><a href="{{ URL::to( 'Cerrar') }}">Cerrar Sesión</a></li>
             </ul>
 
           </div>
