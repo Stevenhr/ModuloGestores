@@ -73,7 +73,7 @@
                   <li class="divider"></li>
 
                   @if($_SESSION['Usuario'][1] == 1) 
-                      <li class=”{{ Request::is( 'personas') ? 'active' : '' }}”><a href="{{ URL::to( 'personas') }}">Crear usuario</a></li>
+                      <li class=”{{ Request::is( 'personas') ? 'active' : '' }}”><a href="{{ URL::to( 'personas') }}">Crear Usuario</a></li>
                   @endif
 
                   @if($_SESSION['Usuario'][2] == 1) 
@@ -98,7 +98,7 @@
                   <li class="divider"></li>
 
                    @if($_SESSION['Usuario'][3] == 1)  
-                      <li class=”{{ Request::is( 'CrearActividad') ? 'active' : '' }}”><a href="{{ URL::to( 'CrearActividad') }}">Registro de actividad</a></li>
+                      <li class=”{{ Request::is( 'CrearActividad') ? 'active' : '' }}”><a href="{{ URL::to( 'CrearActividad') }}">Registro de Actividad</a></li>
                   @endif
 
                   @if($_SESSION['Usuario'][4] == 1) 
@@ -116,7 +116,7 @@
                   <li class="divider"></li>
 
                  @if($_SESSION['Usuario'][5] == 1) 
-                    <li class=”{{ Request::is( 'ActividadesAprobar') ? 'active' : '' }}”><a href="{{ URL::to( 'ActividadesAprobar') }}">Aprobar actividades</a></li>
+                    <li class=”{{ Request::is( 'ActividadesAprobar') ? 'active' : '' }}”><a href="{{ URL::to( 'ActividadesAprobar') }}">Aprobar Actividades</a></li>
                  @endif
 
                 </ul>
@@ -129,7 +129,7 @@
                   <li class="divider"></li>
 
                   @if($_SESSION['Usuario'][6] == 1) 
-                      <li class=”{{ Request::is( 'MisActividades') ? 'active' : '' }}”><a href="{{ URL::to( 'MisActividades') }}">Mis actividades</a></li>
+                      <li class=”{{ Request::is( 'MisActividades') ? 'active' : '' }}”><a href="{{ URL::to( 'MisActividades') }}">Mis Actividades</a></li>
                   @endif
                 </ul>
               </li>
@@ -169,7 +169,7 @@
               <div class="col-lg-8 col-md-7 col-sm-6">
                 <h1>MÓDULO CAMPAÑA CULTURA CIUDADANA 
                 </h1>
-                <p class="lead"><h1>Área de parques</h1></p>
+                <p class="lead"><h1>Área de Parques</h1></p>
               </div>
               <div class="col-lg-4 col-md-5 col-sm-6">
                  <div align="right"> 

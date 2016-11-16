@@ -300,7 +300,7 @@
 
 										        		<div class="col-xs-12 col-md-6">
 										        			<div class="form-group">
-										        				<label class="control-label" for="Id_TipoDocumento">* Caracteristica Lugar </label>
+										        				<label class="control-label" for="Id_TipoDocumento">* Característica Lugar </label>
 										        				<textarea class="form-control" rows="3" name="Caracteristica_Lugar"></textarea>
 										        			</div>
 										        		</div>
@@ -308,7 +308,7 @@
 
 										        		<div class="col-xs-12 col-md-6">
 										        			<div class="form-group">
-										        				<label class="control-label" for="Id_TipoDocumento">* Caracteristica de la población </label>
+										        				<label class="control-label" for="Id_TipoDocumento">* Característica de la población </label>
 										        				<textarea class="form-control" rows="3" name="Caracteristica_poblacion"></textarea>
 										        			</div>
 										        		</div>
@@ -322,7 +322,7 @@
 
 										        		<div class="col-xs-12 col-md-6">
 										        			<div class="form-group">
-										        			    <label class="control-label" for="Id_TipoDocumento">* Numero de asistentes</label>
+										        			    <label class="control-label" for="Id_TipoDocumento">* Número de asistentes</label>
 										        				<input type="text" name="Numero_Asistentes" class="form-control">
 										        			</div>
 										        		</div>
@@ -364,7 +364,7 @@
 										        		</div>
 										        		<div class="col-xs-12 col-md-6">
 										        			<div class="form-group">
-										        				<label class="control-label" for="Id_TipoDocumento">* Telefono</label>
+										        				<label class="control-label" for="Id_TipoDocumento">* Teléfono</label>
 										        				<input type="text" name="Telefono" class="form-control">
 										        			</div>
 										        		</div>

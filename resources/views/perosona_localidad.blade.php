@@ -18,7 +18,7 @@
             <br><br>
 		<div class="panel panel-primary">
 			  <div class="panel-heading">
-			    <h3 class="panel-title">AUTORIZACIÓN DE ACTIVIDADES: Aprobación de actividadesd.</h3>
+			    <h3 class="panel-title">AUTORIZACIÓN DE ACTIVIDADES: Aprobación de Actividades.</h3>
 			  </div>
 			  <div class="panel-body">
 										<fieldset>
