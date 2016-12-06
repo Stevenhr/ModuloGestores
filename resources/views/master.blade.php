@@ -44,6 +44,24 @@
           <script src="{{ asset('public/Js/js_datatable/buttons.html5.min.js') }}"></script>                 
 
           <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+
+          <style type="text/css">
+              .glyphicon-refresh-animate {
+                  -animation: spin .7s infinite linear;
+                  -webkit-animation: spin2 .7s infinite linear;
+              }
+
+              @-webkit-keyframes spin2 {
+                  from { -webkit-transform: rotate(0deg);}
+                  to { -webkit-transform: rotate(360deg);}
+              }
+              .imagen-error{
+                border-radius:5px;
+                border: solid;
+                border-color: #b94a48;
+                border-width: 1px;
+              }
+          </style>
           <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/i18n/defaults-*.min.js"></script>-->
       @show
 
@@ -145,6 +163,12 @@
                   @endif
                   @if($_SESSION['Usuario'][9] == 1) 
                       <li class=”{{ Request::is( 'Reporte2') ? 'active' : '' }}”><a href="{{ URL::to( 'Reporte2') }}">Reporte Datos Actividad</a></li>
+                  @endif
+                  @if($_SESSION['Usuario'][9] == 1) 
+                      <li class=”{{ Request::is( 'Reporte3') ? 'active' : '' }}”><a href="{{ URL::to( 'Reporte3') }}">Reporte de Actividades</a></li>
+                  @endif
+                  @if($_SESSION['Usuario'][9] == 1) 
+                      <li class=”{{ Request::is( 'Reporte4') ? 'active' : '' }}”><a href="{{ URL::to( 'Reporte4') }}">Reporte de las Ejecuciones</a></li>
                   @endif
                 </ul>
               </li>

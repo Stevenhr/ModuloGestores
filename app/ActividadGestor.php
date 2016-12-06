@@ -26,10 +26,10 @@ class ActividadGestor extends Model
     {
         return $this->hasMany('App\DatosActividad','Id_Actividad');
     }
-    public function actividadgestorActividadEjeTematica()
-    {
-        return $this->belongsToMany('App\ActividadGestor','actividadgestor_actividad_eje_tematica','actividad_gestor_id','eje_id','tematica_id','actividad_id','Otro', 'Kit', 'Cantidad_Kit');
-    }
+     public function actividadgestorActividadEjeTematica()
+     {
+         return $this->belongsToMany('App\ActividadGestor','actividadgestor_actividad_eje_tematica','actividad_gestor_id','eje_id','tematica_id','actividad_id','Otro', 'Kit', 'Cantidad_Kit');
+     }
     public function localidad() 
     {
         return $this->belongsTo('App\Localidad', 'Localidad'); 
@@ -61,4 +61,17 @@ class ActividadGestor extends Model
     {
         return $this->hasMany('App\Calificacion_servicio','Id_Actividad_Gestor');
     }     
+
+    public function GestorActividadEjetematica(){
+        return $this->hasMany('App\GestorActividadEjetematica', 'actividad_gestor_id');
+    }
+
+    /*public function actividadPersona() {
+        return $this->belongsToMany('App\Persona', config('idrdgov_sim_gestores').'actividadgestor_persona', 'actividad_gestor_id', 'persona_id');
+    }*/
+
+    public function actividadPersona() {
+      return $this->hasMany('App\ActividadGestorPersona', 'persona_id');
+        //return $this->belongsToMany('App\Persona', config('idrdgov_sim_gestores').'actividadgestor_persona', 'actividad_gestor_id', 'persona_id');
+    }
 }

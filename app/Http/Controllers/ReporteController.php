@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
+use Validator;
+use Exception;
+
 use App\TipoEntidad;
 use App\TipoPersona;
 use App\Condicion;
@@ -15,6 +18,7 @@ use App\ActividadGestor;
 use App\Eje;
 use App\Tematica;
 use App\Actividad;
+use App\Persona;
 
 
 class ReporteController extends Controller
@@ -282,4 +286,36 @@ class ReporteController extends Controller
 	    }
 	    return  $tabla;
     }
+
+
+     public function reporte3()
+    {		
+		return view('reporte3');
+    }
+
+    public function DatosActividadReporte3(Request $request){
+    	if ($request->ajax()) { 
+    		$validator = Validator::make($request->all(), [
+    			'Fecha_Inicio' => 'required',
+    			'Fecha_Fin' => 'required',
+    			]);
+
+	        if ($validator->fails()){
+	            return response()->json(array('status' => 'error', 'errors' => $validator->errors()));
+	        }else{
+	        	$consulta=ActividadGestor::with('localidad','persona','parque','personaProgramador', 'GestorActividadEjetematica', 'GestorActividadEjetematica.eje', 'GestorActividadEjetematica.tematica', 'GestorActividadEjetematica.actividad')->whereBetween('Fecha_Ejecucion',array($request['Fecha_Inicio'], $request['Fecha_Fin']))->get();
+	        	return $consulta;
+			}
+		}else{
+			return response()->json(["Sin acceso"]);
+		}    	
+    }
+
+    public function reporte4()
+    {		
+		return view('reporte4');
+    }
+
 }
+
+

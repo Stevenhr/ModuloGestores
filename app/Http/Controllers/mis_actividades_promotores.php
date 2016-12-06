@@ -16,6 +16,7 @@ use App\Localidad;
 use App\ListaNovedad;
 use App\Ejecucion;
 use App\Novedad;
+use App\ActividadGestorPersona;
 
 class mis_actividades_promotores extends Controller
 {
@@ -73,11 +74,17 @@ class mis_actividades_promotores extends Controller
 		$id_act=$input['Id_Actividad_Promo'];
 		$Fecha_Inicio=$input['Fecha_Inicio'];
 		$Fecha_Fin=$input['Fecha_Fin'];
-    	//echo "Id-> ".$id;
-    	if(empty($id_act)){
-    		$consulta=ActividadGestor::with('localidad','persona','parque')->where('Id_Responsable',$id)->whereBetween('Fecha_Ejecucion',array($Fecha_Inicio, $Fecha_Fin))->get();
+        
+    	if(empty($id_act)){            
+
+            $actividadesInvitado = ActividadGestorPersona::where('actividad_gestor_id', $id)->lists('persona_id');
+            $consulta=ActividadGestor::with('localidad','persona','parque')->whereIn('Id_Actividad_Gestor',$actividadesInvitado)->whereBetween('Fecha_Ejecucion',array($Fecha_Inicio, $Fecha_Fin))->get();
+
     	}else{
-    		$consulta=ActividadGestor::with('localidad','persona','parque')->where('Id_Actividad_Gestor',$id_act)->whereBetween('Fecha_Ejecucion',array($Fecha_Inicio, $Fecha_Fin))->get();
+
+            $actividadesInvitado = ActividadGestorPersona::where('actividad_gestor_id', $id)->lists('persona_id');
+            $consulta=ActividadGestor::with('localidad','persona','parque')->where('Id_Actividad_Gestor',$id_act)->whereIn('Id_Actividad_Gestor',$actividadesInvitado)->whereBetween('Fecha_Ejecucion',array($Fecha_Inicio, $Fecha_Fin))->get();
+
     	}
     	return $consulta;
 	}
@@ -174,11 +181,13 @@ class mis_actividades_promotores extends Controller
             $file1=$request->file('imagen1');
             $extension1=$file1->getClientOriginalExtension();
             $Nom_imagen1 = date('Y-m-d-H:i:s')."-imagen1-".$id_act.'.'.$extension1;
+            //$Nom_imagen1 = 'YmdHis'."-imagen1-".$id_act.'.'.$extension1;
             $file1->move(public_path().'/Img/EvidenciaFotografica/', $Nom_imagen1);
 
             $file2=$request->file('imagen2');
             $extension2=$file2->getClientOriginalExtension();
             $Nom_imagen2 = date('Y-m-d-H:i:s')."-imagen2-".$id_act.'.'.$extension2;
+            //$Nom_imagen2 = 'YmdHis'."-imagen2-".$id_act.'.'.$extension2;
             $file2->move(public_path().'/Img/EvidenciaFotografica/', $Nom_imagen2);
 
 
@@ -186,6 +195,7 @@ class mis_actividades_promotores extends Controller
                 $file3=$request->file('imagen3');
                 $extension3=$file3->getClientOriginalExtension();
                 $Nom_imagen3 = date('Y-m-d-H:i:s')."-imagen3-".$id_act.'.'.$extension3;
+                //$Nom_imagen3 = 'YmdHis'."-imagen3-".$id_act.'.'.$extension3;
                 $file3->move(public_path().'/Img/EvidenciaFotografica/', $Nom_imagen3);
 
             }else{
@@ -196,6 +206,7 @@ class mis_actividades_promotores extends Controller
                 $file4=$request->file('imagen4');
                 $extension4=$file4->getClientOriginalExtension();
                 $Nom_imagen4 = date('Y-m-d-H:i:s')."-imagen4-".$id_act.'.'.$extension4;
+                //$Nom_imagen4 = 'YmdHis'."-imagen4-".$id_act.'.'.$extension4;
                 $file4->move(public_path().'/Img/EvidenciaFotografica/', $Nom_imagen4);
 
             }else{
@@ -204,6 +215,7 @@ class mis_actividades_promotores extends Controller
             $file_listaAsistencia=$request->file('listaAsistencia');
             $extensionFile1=$file_listaAsistencia->getClientOriginalExtension();
             $Nom_listaAsistencia = date('Y-m-d-H:i:s')."-listaAsistencia-".$id_act.'.'.$extensionFile1;
+            //$Nom_listaAsistencia = 'YmdHis'."-listaAsistencia-".$id_act.'.'.$extensionFile1;
             $file_listaAsistencia->move(public_path().'/Img/EvidenciaArchivo/', $Nom_listaAsistencia);
 
 
@@ -211,6 +223,7 @@ class mis_actividades_promotores extends Controller
                 $file_acta=$request->file('acta');
                 $extensionFile2=$file_acta->getClientOriginalExtension();
                 $Nom_Acta = date('Y-m-d-H:i:s')."-"."-acta-".$id_act.'.'.$extensionFile2;
+             //   $Nom_Acta = 'YmdHis'."-"."-acta-".$id_act.'.'.$extensionFile2;
                 $file_acta->move(public_path().'/Img/EvidenciaArchivo/',$Nom_Acta);
             }else{
                 $Nom_Acta="";

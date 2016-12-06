@@ -29,6 +29,9 @@ Route::get('/MisActividades', 'mis_actividades_promotores@Mis_Actividad');
 Route::get('/ActividadesAprobar', 'aprobacion_actividades@Mis_Actividad');
 Route::get('/Reporte', 'ReporteController@reporte');
 Route::get('/Reporte2', 'ReporteController@reporte2');
+Route::get('/Reporte3', 'ReporteController@reporte3');
+Route::get('/Reporte4', 'ReporteController@reporte4');
+Route::post('DatosActividadReporte3/', 'ReporteController@DatosActividadReporte3');
 Route::get('/Cerrar', 'Actividadcontroller@Cerrar');
 
 Route::post('/Reporte/reporteTipoPoblacional/', 'ReporteController@reportePoblacional');

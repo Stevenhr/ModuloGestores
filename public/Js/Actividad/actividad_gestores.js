@@ -10,6 +10,7 @@ $(function()
 					URL+'/service/misActividadesGestor',
 					$(this).serialize(),
 					function(data){
+						console.log(data);
 							if(data.status == 'error')
 							{
 								validador_errores_form(data.errors);
@@ -223,7 +224,9 @@ $(function()
     };
 
 
-    $('#Tabla2').delegate('button[data-funcion="ejec_ver"]','click',function (e) {      	
+    $('#Tabla2').delegate('button[data-funcion="ejec_ver"]','click',function (e) {    
+    	$('#file1').hide('slow');
+		$('#file2').hide('slow');  	
         var id = $(this).data('rel'); 
         $("#espera_eje"+id).html("<img src='public/Img/loading.gif'/>");
         
@@ -266,10 +269,15 @@ $(function()
 
   		var f = new Date();
         var fechaActual = new Date(f.getFullYear()+ "," + (f.getMonth() +1) + "," + f.getDate());
+
         var tmp = datos.datosActividad['Fecha_Ejecucion'].split('-');
         var F_ejecucion = new Date(tmp[0]+ "," + tmp[1]+ "," + tmp[2]);
+
+        var dias = parseInt(tmp[2])+2;
+
+        var F_ejecucionT = new Date(tmp[0]+ "," + tmp[1]+ "," + dias);
         
-        if(datos.datosActividad['Estado']==2 && F_ejecucion<=fechaActual){
+        if(datos.datosActividad['Estado']==2 && F_ejecucion <= fechaActual && F_ejecucionT >= fechaActual){
             $("#agregar_datos_ejecucion").show();
             $("#agregar_datos_novedades").show();
             $("#agregar_ejecucion").show();
@@ -291,6 +299,10 @@ $(function()
 
 		if(datos.datosActividad['Estado_Ejecucion'] == 1){
         	$("#modificar_ejecucion").hide();
+        }
+        
+        if(datos != null){
+        	$("#agregar_ejecucion").hide();
         }
 
 		$('#table_ejecucion_agregada').show();
@@ -414,6 +426,16 @@ $(function()
 			 $("#imagenVer2").attr('src',$("#imagenVer2").attr('src')+'public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen2']+'?' + (new Date()).getTime());
 			 $("#imagenVer3").attr('src',$("#imagenVer3").attr('src')+'public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen3']+'?' + (new Date()).getTime());
 			 $("#imagenVer4").attr('src',$("#imagenVer4").attr('src')+'public/Img/EvidenciaFotografica/'+datos.datosActividad.calificaciom_servicio[0]['Url_Imagen4']+'?' + (new Date()).getTime());
+
+
+			 if(datos.datosActividad.calificaciom_servicio[0]['Url_Asistencia'] != ''){
+			 	$('#file2').show('slow');
+			 }
+			 
+			 if(datos.datosActividad.calificaciom_servicio[0]['Url_Acta'] != ''){
+			 	$('#file1').show('slow');	
+			 }
+			 console.log(datos.datosActividad.calificaciom_servicio[0]['Url_Acta']);
 
 			 $('#file1').attr('href','public/Img/EvidenciaArchivo/'+datos.datosActividad.calificaciom_servicio[0]['Url_Asistencia']);//Conocimiento adquirido attr
 			 $('#file2').attr('href','public/Img/EvidenciaArchivo/'+datos.datosActividad.calificaciom_servicio[0]['Url_Acta']);//Conocimiento adquirido attr			 

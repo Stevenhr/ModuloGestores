@@ -12,6 +12,9 @@ use Validator;
 use App\Tipo;
 use App\ActividadesSim;
 use App\ActividadAcceso;
+use App\GestorActividadEjetematica;
+
+use App\ActividadGestorPersona;
 
 
 class ConfiguracionActividadController extends Controller
@@ -66,8 +69,7 @@ class ConfiguracionActividadController extends Controller
 	 public function procesarValidacion(Request $request)
 	{
 		$validator = Validator::make($request->all(),
-		    [
-	           
+		    [	           
 				'Fecha_Ejecucion' => 'required',
 				'Id_Responsable' => 'required',
 				'Hora_Inicio' => 'required',
@@ -82,6 +84,12 @@ class ConfiguracionActividadController extends Controller
 				'Persona_Contacto' => 'required',
 				'Roll_Comunidad' => 'required',
 				'Telefono' => 'required',
+				'Id_Eje' => 'required',
+				'Id_Tematica' => 'required',
+				'd_Actividad' => 'required',
+				'otro_Actividad' => array('required_if:d_Actividad,4,20,13,19'),
+				'Kit' => 'required',
+				'Cantidad_Kit' => array('required_if:Kit,1'),
         	]
         );
 
@@ -106,7 +114,7 @@ class ConfiguracionActividadController extends Controller
 	{
 		
 		$modelo=ActividadGestor::find($input["Id_Actividad"]);
-		//var_dump($modelo);
+
 		return $this->modificar_actividad($modelo, $input);
 	}
 
@@ -134,29 +142,30 @@ class ConfiguracionActividadController extends Controller
 
 		$model->save();
 		$id_act_gest=$model->Id_Actividad_Gestor;
-		$data0 = json_decode($input['Dato_Actividad']);
-		foreach($data0 as $obj){
-			$model->actividadgestorActividadEjeTematica()->attach($id_act_gest,[
-				'eje_id'=>$obj->id_eje,
-				'tematica_id'=>$obj->id_tematica,
-				'actividad_id'=>$obj->id_act,
-				'Otro'=>$obj->otro_actividad,
-				'Kit'=>$obj->Kit,
-				'Cantidad_Kit'=>$obj->Cantidad_Kit,
-				]);
-		}
+
+		$actividadgestorActividadEjeTematica = new GestorActividadEjetematica;
+		$actividadgestorActividadEjeTematica->actividad_gestor_id = $id_act_gest;
+		$actividadgestorActividadEjeTematica->eje_id = $input['Id_Eje'];
+		$actividadgestorActividadEjeTematica->tematica_id = $input['Id_Tematica'];
+		$actividadgestorActividadEjeTematica->actividad_id = $input['d_Actividad'];
+		$actividadgestorActividadEjeTematica->Otro = $input['otro_Actividad'];
+		$actividadgestorActividadEjeTematica->Kit = $input['Kit'];
+		$actividadgestorActividadEjeTematica->Cantidad_Kit = $input['Cantidad_Kit'];
+		$actividadgestorActividadEjeTematica->save();
 
 		
 		$data1 = json_decode($input['Personas_Acompanates']);
-		//var_dump($data1);
 		foreach($data1 as $obj1){
 			$idPerosna=$obj1->acompa;
 			$model_P = Persona::with('actividadGestor')->find($idPerosna);
 			$model_P->actividadGestor()->attach($id_act_gest);
 		}
+
+		$ActividadGestorPersona = new ActividadGestorPersona;
+		$ActividadGestorPersona->persona_id = $id_act_gest;
+		$ActividadGestorPersona->actividad_gestor_id = $input['Id_Responsable'];
+		$ActividadGestorPersona->save();
 		
-
-
 		return $model;
 	}
 

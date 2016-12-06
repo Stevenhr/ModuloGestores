@@ -5,15 +5,15 @@ $(function()
 	var $personas_actuales = $('#personas').html();
 
 
-vector_datos_actividades = new Array();
-vector_acompañantes = new Array();
+	vector_datos_actividades = new Array();
+	vector_acompañantes = new Array();
 	$('#radio_kit .btn').on('click', function(e)
 	{
 		$('input[name="Kit"]').removeAttr('checked');
 		$(this).find('input[name="Kit"]').attr('checked', 'checked');
 	});
 
-	$('#agregar_actividad').on('click', function(e)
+	/*$('#agregar_actividad').on('click', function(e)
 	{
 			var id_eje=$('select[name="Id_Eje"]').val();
 			var id_tematica=$('select[name="Id_Tematica"]').val();
@@ -52,7 +52,7 @@ vector_acompañantes = new Array();
 				vector_datos_actividades.push({"id_eje": id_eje, "id_tematica": id_tematica, "id_act": id_act,"otro_actividad":otro_actividad, 'Kit':Kit, 'Cantidad_Kit':Cantidad_Kit});
 			}
 			//return false;
-	});
+	});*/
 
 
 
@@ -320,7 +320,7 @@ vector_acompañantes = new Array();
 		$('input[name="Dato_Actividad"]').val(datos_acti);
 		$('input[name="Personas_Acompanates"]').val(datos_acomp);
 
-		if(vector_datos_actividades.length > 0){
+		//if(vector_datos_actividades.length > 0){
 
 				$.post(
 					URL+'/service/crearActividad',
@@ -338,14 +338,14 @@ vector_acompañantes = new Array();
 					'json'
 				);
 
-		}else{
+	/*	}else{
 				
 				$('#alerta_actividad_error').show();
 				$('#mensaje_alerta_final').html('No se ha registrado ningun dato basico de la actividad. Lo puede registrar en el paso 1.');
 				setTimeout(function(){
 					$('#alerta_actividad_error').hide();
 				}, 4000)
-		}
+		}*/
 
 		e.preventDefault();
 	});
@@ -358,10 +358,12 @@ vector_acompañantes = new Array();
 		    if (typeof data[error] !== 'function') {
 		        switch(error)
 		        {
-		        	
 		        	case 'Id_Responsable':
 		        	case 'Id_Localidad':
 		        	case 'Parque':
+		        	case 'Id_Eje':
+		        	case 'Id_Tematica':
+		        	case 'd_Actividad':
 		        		selector = 'select';
 		        	break;
 
@@ -374,8 +376,9 @@ vector_acompañantes = new Array();
 		        	case 'Persona_Contacto':
 		        	case 'Roll_Comunidad':
 		        	case 'Telefono':
-		        	/*case 'Kit':
-		        	case 'Cantidad_Kit':*/
+		        	case 'otro_Actividad':
+		        	case 'Kit':
+		        	case 'Cantidad_Kit':
 		        		selector = 'input';
 		        	break;
 

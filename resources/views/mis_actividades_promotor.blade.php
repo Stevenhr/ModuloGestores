@@ -660,7 +660,7 @@
 						    <label for="exampleInputFile">Formato Evaluación</label>
 						    <input type="file" name="listaAsistencia">
 						    <p class="help-block">Archivo en formato pdf</p>
-						    <a id="file1" href="" download>
+						    <a id="file1" href="" download style="display:none;">
 							  <img border="0" src="public/Img/downloadicon.gif" alt="W3Schools" >
 							</a>
 						 </div>
@@ -670,7 +670,7 @@
 						    <label for="exampleInputFile">Listado Entrega de Kits</label>
 						    <input type="file" name="acta">
 						    <p class="help-block">Archivo en formato pdf</p>
-						    <a id="file2" href="" download>
+						    <a id="file2" href="" download style="display:none;">
 							  <img border="0" src="public/Img/downloadicon.gif" alt="W3Schools" >
 							</a>
 						 </div>
