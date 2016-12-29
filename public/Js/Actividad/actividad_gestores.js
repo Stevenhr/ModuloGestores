@@ -10,7 +10,7 @@ $(function()
 					URL+'/service/misActividadesGestor',
 					$(this).serialize(),
 					function(data){
-						console.log(data);
+					//	console.log(data);
 							if(data.status == 'error')
 							{
 								validador_errores_form(data.errors);
@@ -276,8 +276,10 @@ $(function()
         var dias = parseInt(tmp[2])+2;
 
         var F_ejecucionT = new Date(tmp[0]+ "," + tmp[1]+ "," + dias);
+      
         
-        if(datos.datosActividad['Estado']==2 && F_ejecucion <= fechaActual && F_ejecucionT >= fechaActual){
+        if(datos.datosActividad['Estado']==2 /*&& F_ejecucion <= fechaActual && F_ejecucionT >= fechaActual*/){
+        	//console.log('Entro');
             $("#agregar_datos_ejecucion").show();
             $("#agregar_datos_novedades").show();
             $("#agregar_ejecucion").show();
@@ -288,6 +290,7 @@ $(function()
             $("#agregar_datos_novedades").hide();
             $("#agregar_ejecucion").hide();
         }
+        //return false;
 
         if(datos.datosActividad['Estado_Ejecucion']==4 || datos.datosActividad['Estado_Ejecucion']==3){
 			$("#agregar_datos_ejecucion").hide();
@@ -301,9 +304,9 @@ $(function()
         	$("#modificar_ejecucion").hide();
         }
         
-        if(datos != null){
+        /*if(datos != null){
         	$("#agregar_ejecucion").hide();
-        }
+        }*/
 
 		$('#table_ejecucion_agregada').show();
 		var num=1;
@@ -435,7 +438,7 @@ $(function()
 			 if(datos.datosActividad.calificaciom_servicio[0]['Url_Acta'] != ''){
 			 	$('#file1').show('slow');	
 			 }
-			 console.log(datos.datosActividad.calificaciom_servicio[0]['Url_Acta']);
+			// console.log(datos.datosActividad.calificaciom_servicio[0]['Url_Acta']);
 
 			 $('#file1').attr('href','public/Img/EvidenciaArchivo/'+datos.datosActividad.calificaciom_servicio[0]['Url_Asistencia']);//Conocimiento adquirido attr
 			 $('#file2').attr('href','public/Img/EvidenciaArchivo/'+datos.datosActividad.calificaciom_servicio[0]['Url_Acta']);//Conocimiento adquirido attr			 
@@ -1057,4 +1060,4 @@ $(function()
 		$('#modal_ejecucion').modal('hide');
 		return false;
 	});
-});
+});2

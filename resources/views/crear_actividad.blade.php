@@ -353,7 +353,7 @@
 	      	<input type="hidden" name="Dato_Actividad" class="form-control">
 	      	<input type="hidden" name="Personas_Acompanates" class="form-control">
 	        <button type="reset" class="btn btn-default">Cancel</button>
-	        <button type="submit" class="btn btn-primary">Crear</button>
+	        <button type="submit" class="btn btn-primary" id="BotonCrear">Crear</button>
 	      </div>
 	    </div>
 	    <br><br> 		   
