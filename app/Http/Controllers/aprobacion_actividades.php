@@ -74,6 +74,7 @@ class aprobacion_actividades extends Controller
     	}else{
     		$consulta=ActividadGestor::with('localidad','persona','parque','personaProgramador')->where('Id_Actividad_Gestor',$id_act)->whereBetween('Fecha_Ejecucion',array($Fecha_Inicio, $Fecha_Fin))->get();
     	}
+    	//dd($consulta);
     	return $consulta;
 	}
 	public function obtenerActividad(Request $request, $id_actividad){

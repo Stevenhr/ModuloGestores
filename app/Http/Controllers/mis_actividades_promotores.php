@@ -80,12 +80,15 @@ class mis_actividades_promotores extends Controller
             $actividadesInvitado = ActividadGestorPersona::where('actividad_gestor_id', $id)->lists('persona_id');
             $consulta=ActividadGestor::with('localidad','persona','parque')->whereIn('Id_Actividad_Gestor',$actividadesInvitado)->whereBetween('Fecha_Ejecucion',array($Fecha_Inicio, $Fecha_Fin))->get();
 
+
     	}else{
 
             $actividadesInvitado = ActividadGestorPersona::where('actividad_gestor_id', $id)->lists('persona_id');
             $consulta=ActividadGestor::with('localidad','persona','parque')->where('Id_Actividad_Gestor',$id_act)->whereIn('Id_Actividad_Gestor',$actividadesInvitado)->whereBetween('Fecha_Ejecucion',array($Fecha_Inicio, $Fecha_Fin))->get();
 
     	}
+
+        dd($actividadesInvitado);
     	return $consulta;
 	}
 
@@ -282,11 +285,11 @@ class mis_actividades_promotores extends Controller
         //  $model_P->calificaciomServicio()->attach($id_localidad);
        $data0 = json_decode($input['vector_novedades']);
        foreach($data0 as $obj){
-                 $model_A->novedad()->attach($model_A->Id_Actividad_Gestor,['Id_novedad'=>2,
+                 $model_A->novedad()->attach($model_A->Id_Actividad_Gestor,[
+                'Id_novedad'=>$obj->Id_Requisito,
                 'Causa'=>$obj->causa,
                 'Accion'=>$obj->accion]);
         }
-
 
         $data01 = json_decode($input['vector_datos_ejecucion']);
 
@@ -316,7 +319,7 @@ class mis_actividades_promotores extends Controller
 
         $hoy = date("Y-m-d");  
         $model_A['Estado_Ejecucion'] = 2;
-        $model_A['Fecha_Registro_Ejecución'] = $hoy;
+        $model_A['Fecha_Registro_Ejecucion'] = $hoy;
         $model_A->save();
 
 
@@ -510,7 +513,7 @@ class mis_actividades_promotores extends Controller
 
         $hoy = date("Y-m-d");  
         $model_A['Estado_Ejecucion'] = 2;
-        $model_A['Fecha_Registro_Ejecución'] = $hoy;
+        $model_A['Fecha_Registro_Ejecucion'] = $hoy;
         $model_A->save();
 
 

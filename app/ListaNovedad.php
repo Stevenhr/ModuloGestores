@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ListaNovedad extends Model
 {
     //
-    protected $table = 'listaNovedad';
+    protected $table = 'listanovedad';
 	protected $primaryKey = 'Id';
 	protected $fillable = ['Nombre'];
 	protected $connection = ''; 
